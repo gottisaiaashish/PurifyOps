@@ -181,10 +181,11 @@
 
 .metric-value {
   font-size: var(--text-2xl);
-  font-weight: 700;
+  font-weight: 800;
   color: var(--text-primary);
-  font-family: var(--font-mono);
-  letter-spacing: -0.03em;
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
 }
 
 .metric-meta {
