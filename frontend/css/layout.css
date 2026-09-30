@@ -328,7 +328,7 @@ body {
 }
 
 .stepper-stage.completed {
-  color: var(--status-success);
+  color: var(--text-secondary);
 }
 
 .stepper-number {
@@ -351,9 +351,9 @@ body {
 }
 
 .stepper-stage.completed .stepper-number {
-  background: var(--status-success-bg);
-  border-color: var(--status-success);
-  color: var(--status-success);
+  background: rgba(147, 51, 234, 0.15);
+  border-color: var(--accent-primary);
+  color: var(--accent-light);
 }
 
 .stepper-separator {
