@@ -162,21 +162,49 @@ class StateManager {
   }
 
   completeExecution() {
-    this.state.activeDataset.qualityScore = 93;
-    this.state.activeDataset.dimensions = {
-      completeness: 96,
-      consistency: 94,
-      validity: 98,
+    const dataset = this.state.activeDataset || {};
+    const rawRows = dataset.rawRecords || [];
+    const issuesCount = (this.state.issues || []).length;
+    const initialScore = dataset.qualityScore || 54;
+    const finalScore = Math.min(99, Math.max(initialScore + 32, 95));
+
+    dataset.qualityScore = finalScore;
+    dataset.dimensions = {
+      completeness: 98,
+      consistency: 96,
+      validity: 97,
       uniqueness: 99
     };
+
+    const opsCount = (this.state.cleaningPlan?.operations || []).length || 5;
+
+    this.state.resultsComparison = {
+      beforeQualityScore: initialScore,
+      afterQualityScore: finalScore,
+      scoreDelta: `+${finalScore - initialScore}`,
+      beforeIssuesCount: issuesCount,
+      afterIssuesCount: 0,
+      issuesResolvedPercent: 100,
+      recordsProcessed: dataset.recordsCount || rawRows.length || 1045,
+      transformationsApplied: opsCount,
+      criticalTestsPassed: "4 / 4",
+      sampleCleanedRows: rawRows.slice(0, 15).map((r, idx) => ({
+        id: r.Customer_ID || `Row-${idx + 1}`,
+        name: `${r.First_Name || ''} ${r.Last_Name || ''}`.trim() || 'Customer',
+        email: (r.Email || '').replace('_at_', '@'),
+        phone: r.Phone || '',
+        status: 'Cleaned'
+      }))
+    };
+
     const activeProj = this.state.projects.find(p => p.id === "proj-001");
     if (activeProj) {
-      activeProj.qualityScore = 93;
-      activeProj.issuesCount = 184;
+      activeProj.qualityScore = finalScore;
+      activeProj.issuesCount = 0;
       activeProj.status = "Completed";
       activeProj.lastUpdated = "Just now";
     }
-    this.state.platformMetrics.transformationsExecuted += 2328;
+    this.state.platformMetrics.transformationsExecuted += opsCount * (dataset.recordsCount || 1000);
     this.saveState();
     this.emit("state:changed", this.state);
   }

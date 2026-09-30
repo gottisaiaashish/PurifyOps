@@ -6,9 +6,10 @@
 
 import { stateStore } from "./stateManager.js";
 
-const API_BASE = window.location.port === "5500" || window.location.port === "3000" || window.location.port === "5173"
-  ? "http://localhost:8000/api/v1"
-  : "/api/v1";
+const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+const API_BASE = isLocalhost
+  ? `http://${window.location.hostname}:8000/api/v1`
+  : "https://purifyops.onrender.com/api/v1";
 
 async function request(endpoint, options = {}) {
   try {
@@ -60,8 +61,105 @@ export const ApiService = {
     const formData = new FormData();
     formData.append("file", file);
 
-    if (progressCallback) progressCallback(30);
+    if (progressCallback) progressCallback(25);
 
+    // Read and parse CSV client-side so data is immediately available
+    let parsedRecords = [];
+    let parsedHeaders = [];
+    let detectedIssues = [];
+    try {
+      const text = await file.text();
+      const lines = text.split(/\r?\n/).filter(l => l.trim().length > 0);
+      if (lines.length > 0) {
+        parsedHeaders = lines[0].split(",").map(h => h.trim().replace(/^["']|["']$/g, ""));
+        for (let i = 1; i < lines.length; i++) {
+          const vals = lines[i].split(",");
+          const row = {};
+          parsedHeaders.forEach((h, idx) => {
+            row[h] = vals[idx] ? vals[idx].trim().replace(/^["']|["']$/g, "") : "";
+          });
+          parsedRecords.push(row);
+        }
+
+        // Detect real issues dynamically from rows
+        let invalidEmails = 0;
+        let emptyCells = 0;
+        let negativeAges = 0;
+        let negativeRevenue = 0;
+        const seenNames = new Set();
+        let duplicateRows = 0;
+
+        parsedRecords.forEach(r => {
+          const email = (r.Email || "").toLowerCase();
+          if (email && (!email.includes("@") || email.includes("_at_") || !email.includes("."))) invalidEmails++;
+          const name = `${r.First_Name || ""} ${r.Last_Name || ""}`.trim().toLowerCase();
+          if (name) {
+            if (seenNames.has(name)) duplicateRows++;
+            else seenNames.add(name);
+          }
+          if (r.Age && (parseInt(r.Age) < 0 || parseInt(r.Age) > 120)) negativeAges++;
+          if (r.Annual_Revenue && parseFloat(r.Annual_Revenue) < 0) negativeRevenue++;
+          Object.values(r).forEach(v => {
+            if (!v || v === "N/A" || v === "null" || v === "-") emptyCells++;
+          });
+        });
+
+        if (duplicateRows > 0) {
+          detectedIssues.push({
+            id: "iss-dup-01",
+            category: "Duplicates",
+            type: "Duplicate Records",
+            severity: "High",
+            affectedRecords: duplicateRows,
+            affectedColumns: ["First_Name", "Last_Name", "Phone", "Email"],
+            explanation: `Found ${duplicateRows} customer records with matching names or identical contact info across different formatting variations.`,
+            recommendedAction: "Merge duplicate rows and preserve the most recent complete record."
+          });
+        }
+        if (invalidEmails > 0) {
+          detectedIssues.push({
+            id: "iss-fmt-01",
+            category: "Formatting",
+            type: "Invalid Email Syntax",
+            severity: "High",
+            affectedRecords: invalidEmails,
+            affectedColumns: ["Email"],
+            explanation: `Found ${invalidEmails} email addresses with syntax errors like '_at_gmail.com' or missing domains.`,
+            recommendedAction: "Convert '_at_' to '@' and fix standard domain extensions."
+          });
+        }
+        if (negativeAges > 0 || negativeRevenue > 0) {
+          detectedIssues.push({
+            id: "iss-out-01",
+            category: "Outliers",
+            type: "Negative / Outlier Values",
+            severity: "Medium",
+            affectedRecords: negativeAges + negativeRevenue,
+            affectedColumns: ["Age", "Annual_Revenue"],
+            explanation: `Identified invalid negative values (e.g. Age: -3 or 142, Revenue < 0).`,
+            recommendedAction: "Correct negative signs and clip extreme outlier values to acceptable ranges."
+          });
+        }
+        if (emptyCells > 0) {
+          detectedIssues.push({
+            id: "iss-mis-01",
+            category: "Completeness",
+            type: "Missing / Blank Fields",
+            severity: "Medium",
+            affectedRecords: emptyCells,
+            affectedColumns: ["Phone", "City", "Postal_Code"],
+            explanation: `Identified ${emptyCells} blank cells or 'N/A' placeholders across contact and location fields.`,
+            recommendedAction: "Impute missing fields using standard region defaults or mark as Unknown."
+          });
+        }
+      }
+    } catch (e) {
+      console.warn("Client CSV parsing failed:", e);
+    }
+
+    if (progressCallback) progressCallback(50);
+
+    // Try server API upload
     try {
       const res = await fetch(`${API_BASE}/projects/${projectId}/upload`, {
         method: "POST",
@@ -72,17 +170,66 @@ export const ApiService = {
         const datasetInfo = await res.json();
         if (progressCallback) progressCallback(100);
         stateStore.state.activeDataset = datasetInfo;
+        if (datasetInfo.issues && datasetInfo.issues.length > 0) {
+          stateStore.state.issues = datasetInfo.issues;
+        } else if (detectedIssues.length > 0) {
+          stateStore.state.issues = detectedIssues;
+        }
+        if (datasetInfo.profiles) stateStore.state.columnsProfile = datasetInfo.profiles;
+        // Reset results comparison since new data was imported
+        stateStore.state.resultsComparison = {
+          beforeQualityScore: datasetInfo.qualityScore || 58,
+          afterQualityScore: 0,
+          transformationsApplied: 0,
+          sampleCleanedRows: []
+        };
         stateStore.saveState();
         stateStore.emit("state:changed", stateStore.state);
         return datasetInfo;
       }
     } catch (e) {
-      console.warn("Upload endpoint failed, simulating fallback upload:", e);
+      console.warn("Server upload failed or sleeping, using fast client dataset:", e);
     }
 
+    // Client fallback with real parsed records & issues
     if (progressCallback) progressCallback(100);
-    stateStore.uploadDatasetSimulation({ name: file.name, size: `${(file.size / 1024).toFixed(1)} KB` });
-    return stateStore.getState().activeDataset;
+    const initialScore = Math.max(35, Math.min(75, 100 - (detectedIssues.length * 12)));
+    stateStore.state.activeDataset = {
+      id: `ds-${Date.now()}`,
+      name: file.name,
+      fileSize: `${(file.size / (1024 * 1024)).toFixed(2)} MB`,
+      recordsCount: parsedRecords.length || 1045,
+      columnsCount: parsedHeaders.length || 13,
+      uploadedAt: "Just now",
+      lastAnalyzed: "Just now",
+      qualityScore: initialScore,
+      rawRecords: parsedRecords,
+      cleanedRecords: parsedRecords,
+      dimensions: {
+        completeness: Math.max(40, 90 - detectedIssues.length * 8),
+        consistency: 68,
+        validity: 62,
+        uniqueness: Math.max(50, 95 - detectedIssues.length * 10)
+      }
+    };
+    if (detectedIssues.length > 0) {
+      stateStore.state.issues = detectedIssues;
+    }
+    // Crucial: reset results comparison for new file
+    stateStore.state.resultsComparison = {
+      beforeQualityScore: initialScore,
+      afterQualityScore: 0,
+      scoreDelta: "0",
+      beforeIssuesCount: stateStore.state.issues.length,
+      afterIssuesCount: 0,
+      issuesResolvedPercent: 0,
+      recordsProcessed: 0,
+      transformationsApplied: 0,
+      sampleCleanedRows: []
+    };
+    stateStore.saveState();
+    stateStore.emit("state:changed", stateStore.state);
+    return stateStore.state.activeDataset;
   },
 
   async getDatasetOverview(projectId = "proj-001") {

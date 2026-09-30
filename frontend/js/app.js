@@ -52,6 +52,8 @@ const ROUTES = {
 let currentRoute = "dashboard";
 
 function navigateTo(route) {
+  if (route === "upload") route = "upload-dataset";
+  if (route === "plan") route = "cleaning-plan";
   if (!ROUTES[route]) {
     route = "dashboard";
   }
