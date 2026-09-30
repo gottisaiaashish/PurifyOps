@@ -1,6 +1,6 @@
 /**
  * View 8: Cleaning Plan
- * Simple, human-friendly wording & clean UI (Zero emojis/jargon)
+ * Clean 2-Color UI (Obsidian Slate + Violet Accent, Zero Noisy Badges)
  */
 import { stateStore } from "../services/stateManager.js";
 import { ApiService } from "../services/apiService.js";
@@ -28,7 +28,7 @@ export function renderCleaningPlan(container) {
     <div class="page-header">
       <div class="page-title-group">
         <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: 4px;">
-          <span class="badge ${operations.length > 0 ? 'badge-low' : 'badge-neutral'}">Step 3 of 5</span>
+          <span style="font-size: var(--text-xs); color: var(--text-muted); font-weight: 500;">Step 3 of 5 •</span>
           <span style="font-size: var(--text-xs); color: var(--text-muted); font-family: var(--font-mono);">${dataset.name || 'Dataset'}</span>
         </div>
         <h1>Smart Cleaning Plan</h1>
@@ -50,18 +50,16 @@ export function renderCleaningPlan(container) {
       <div class="metric-card">
         <div class="metric-card-header">
           <span class="metric-label">Fixes Planned</span>
-          <span class="badge badge-neutral">Steps</span>
         </div>
         <div class="metric-value">${operations.length}</div>
         <div class="metric-meta">
-          <span class="metric-indicator positive">100%</span> safe and reversible
+          <span class="metric-indicator neutral">●</span> 100% safe and reversible
         </div>
       </div>
 
       <div class="metric-card">
         <div class="metric-card-header">
           <span class="metric-label">Rows Affected</span>
-          <span class="badge badge-low">Scope</span>
         </div>
         <div class="metric-value">${affected.toLocaleString()}</div>
         <div class="metric-meta">
@@ -72,38 +70,36 @@ export function renderCleaningPlan(container) {
       <div class="metric-card">
         <div class="metric-card-header">
           <span class="metric-label">Processing Speed</span>
-          <span class="badge badge-neutral">Fast</span>
         </div>
         <div class="metric-value">&lt; 1s</div>
         <div class="metric-meta">
-          <span class="metric-indicator positive">Instant</span> clean engine
+          <span class="metric-indicator neutral">●</span> Instant clean engine
         </div>
       </div>
 
       <div class="metric-card">
         <div class="metric-card-header">
           <span class="metric-label">Data Safety</span>
-          <span class="badge badge-success">Protected</span>
         </div>
-        <div class="metric-value" style="color: var(--status-success);">Zero Data Loss</div>
+        <div class="metric-value" style="color: var(--text-primary);">Zero Data Loss</div>
         <div class="metric-meta">
-          <span class="metric-indicator positive">Backup ready</span> before changes
+          <span class="metric-indicator neutral">●</span> Backup ready before changes
         </div>
       </div>
     </div>
 
     <!-- Natural Language AI Prompt Engine Card -->
-    <div class="settings-content-card" style="margin-bottom: var(--space-6); background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.9) 100%); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: var(--radius-md); padding: 20px;">
+    <div class="settings-content-card" style="margin-bottom: var(--space-6); background: rgba(18, 20, 32, 0.6); border: 1px solid rgba(99, 102, 241, 0.2); border-radius: var(--radius-md); padding: 20px; backdrop-filter: blur(20px);">
       <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
         <div style="display: flex; align-items: center; gap: 8px;">
-          <span class="badge badge-high" style="background: rgba(59, 130, 246, 0.2); color: var(--accent-light); border-color: rgba(59, 130, 246, 0.4); font-weight: 600;">
+          <span style="font-size: var(--text-xs); font-weight: 600; color: var(--accent-light);">
             ✨ Natural Language AI Rule Synthesizer
           </span>
           <span style="font-size: var(--text-xs); color: var(--text-muted);">
-            Type custom instructions in plain English/Telugu to dynamically generate DAG cleaning rules.
+            • Type custom instructions in plain English/Telugu to dynamically generate DAG cleaning rules.
           </span>
         </div>
-        <span style="font-size: 11px; font-family: var(--font-mono); color: var(--status-success); font-weight: 600;">
+        <span style="font-size: 11px; font-family: var(--font-mono); color: var(--accent-light); font-weight: 500;">
           ● OpenAI GPT-4o Active
         </span>
       </div>
@@ -162,14 +158,14 @@ export function renderCleaningPlan(container) {
           `}
         </div>
       ` : operations.map(op => `
-        <div class="operation-card" data-step-id="${op.stepId}">
+        <div class="operation-card" data-step-id="${op.stepId}" style="border-left: 3px solid var(--accent-primary);">
           <div class="operation-left">
             <div class="operation-step-badge">${op.stepId}</div>
             <div class="operation-info">
               <h4>${op.title}</h4>
               <p>${op.reason}</p>
               <div style="margin-top: 6px; display: flex; gap: var(--space-2); align-items: center;">
-                <span class="badge badge-neutral">${op.actionType}</span>
+                <span style="font-size: 11px; font-weight: 500; color: var(--text-muted);">${op.actionType} •</span>
                 <span style="font-size: 11px; font-family: var(--font-mono); color: var(--text-muted);">
                   Columns: ${Array.isArray(op.targetColumns) ? op.targetColumns.join(', ') : op.targetColumns}
                 </span>
@@ -186,7 +182,7 @@ export function renderCleaningPlan(container) {
             <div style="display: flex; align-items: center; gap: var(--space-3); margin-left: var(--space-4);">
               <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; user-select: none;">
                 <input type="checkbox" class="op-checkbox" data-step-id="${op.stepId}" ${op.approved ? 'checked' : ''} style="width: 16px; height: 16px; accent-color: var(--accent-primary);" />
-                <span style="font-size: var(--text-xs); font-weight: 500; color: ${op.approved ? 'var(--status-success)' : 'var(--text-muted)'};">
+                <span style="font-size: var(--text-xs); font-weight: 500; color: var(--text-secondary);">
                   ${op.approved ? 'ENABLED' : 'SKIPPED'}
                 </span>
               </label>

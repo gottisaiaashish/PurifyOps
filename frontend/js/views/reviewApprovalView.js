@@ -1,6 +1,6 @@
 /**
  * View 10: Review & Approval
- * Clean, user-friendly language & professional layout (Zero emojis/jargon)
+ * Clean 2-Color Design (Obsidian Slate + Violet Accent, Zero Noisy Badges)
  */
 import { stateStore } from "../services/stateManager.js";
 import { ApiService } from "../services/apiService.js";
@@ -12,7 +12,7 @@ export function renderReviewApproval(container) {
     <div class="page-header">
       <div class="page-title-group">
         <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: 4px;">
-          <span class="badge badge-high">Manual Review</span>
+          <span style="font-size: var(--text-xs); color: var(--text-muted); font-weight: 500;">Manual Review •</span>
         </div>
         <h1>Review Possible Duplicates</h1>
         <p class="page-description">Inspect pairs of rows that look like duplicates and decide whether to merge them or keep them separate.</p>
@@ -31,7 +31,7 @@ export function renderReviewApproval(container) {
     <!-- Review Candidates List -->
     <div class="review-cards-container" id="review-list">
       ${pairs.length === 0 ? `
-        <div class="card" style="text-align: center; padding: 48px 24px; background: var(--bg-surface-elevated); border: 1px dashed var(--border-subtle); border-radius: var(--radius-md);">
+        <div class="card" style="text-align: center; padding: 48px 24px; background: rgba(18, 20, 32, 0.45); border: 1px dashed var(--border-subtle); border-radius: var(--radius-md);">
           <h3 style="font-size: var(--text-lg); color: var(--text-primary); margin-bottom: 8px;">No Ambiguous Duplicates</h3>
           <p style="color: var(--text-muted); max-width: 480px; margin: 0 auto 20px; font-size: var(--text-sm);">
             No conflicting duplicate pairs were found that need manual approval. All rows are uniquely resolved.
@@ -42,7 +42,7 @@ export function renderReviewApproval(container) {
         <div class="card" style="margin-bottom: 24px; padding: 20px; background: rgba(18, 20, 32, 0.45); border: 1px solid rgba(255, 255, 255, 0.09); border-radius: var(--radius-md);" data-pair-id="${pair.id}">
           <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle);">
             <div style="display: flex; align-items: center; gap: var(--space-3);">
-              <span class="badge ${pair.confidence > 90 ? 'badge-high' : 'badge-medium'}">
+              <span style="font-size: var(--text-xs); color: var(--accent-light); font-weight: 600;">
                 Similarity Match: ${pair.confidence}%
               </span>
               <span style="font-weight: 700; font-size: var(--text-md); color: var(--text-primary);">
@@ -54,7 +54,7 @@ export function renderReviewApproval(container) {
             </div>
 
             <div>
-              <span class="badge ${pair.status === 'merged' ? 'badge-success' : pair.status === 'separated' ? 'badge-neutral' : 'badge-medium'}">
+              <span style="font-size: 11px; font-weight: 600; color: var(--text-secondary);">
                 ${(pair.status || 'PENDING REVIEW').toUpperCase()}
               </span>
             </div>
@@ -97,7 +97,7 @@ export function renderReviewApproval(container) {
                   <td>
                     <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
                       <input type="radio" name="attr-email-${pair.id}" value="B" style="accent-color: var(--accent-primary);" />
-                      <span style="font-family: var(--font-mono); color: var(--status-warning);">${pair.recordB?.email || 'contact@acme.com'}</span>
+                      <span style="font-family: var(--font-mono); color: var(--text-secondary);">${pair.recordB?.email || 'contact@acme.com'}</span>
                     </label>
                   </td>
                 </tr>
@@ -112,7 +112,7 @@ export function renderReviewApproval(container) {
                   <td>
                     <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
                       <input type="radio" name="attr-phone-${pair.id}" value="B" checked style="accent-color: var(--accent-primary);" />
-                      <span style="font-family: var(--font-mono); color: var(--status-success);">${pair.recordB?.phone || '+1 (415) 555-0199 (Standardized)'}</span>
+                      <span style="font-family: var(--font-mono); color: var(--text-primary);">${pair.recordB?.phone || '+1 (415) 555-0199'}</span>
                     </label>
                   </td>
                 </tr>
@@ -127,7 +127,7 @@ export function renderReviewApproval(container) {
                   <td>
                     <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
                       <input type="radio" name="attr-rev-${pair.id}" value="B" checked style="accent-color: var(--accent-primary);" />
-                      <span style="font-family: var(--font-mono); color: var(--status-success); font-weight: 700;">$150,000 (Latest Verified)</span>
+                      <span style="font-family: var(--font-mono); color: var(--text-primary); font-weight: 700;">$150,000</span>
                     </label>
                   </td>
                 </tr>
@@ -137,7 +137,7 @@ export function renderReviewApproval(container) {
 
           <div style="display: flex; justify-content: space-between; align-items: center;">
             <span style="font-size: var(--text-xs); color: var(--text-muted);">
-              💡 Select which values to preserve for the final merged record.
+              Select which values to preserve for the final merged record.
             </span>
             <div style="display: flex; gap: 10px;">
               <button class="btn btn-outline btn-sm btn-action-separate" data-id="${pair.id}">
@@ -151,49 +151,49 @@ export function renderReviewApproval(container) {
         </div>
       `).join('')}
     </div>
-
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 24px;">
-      <button class="btn btn-outline" id="btn-back-plan-bottom">← Back to Cleaning Plan</button>
-      <button class="btn btn-primary" id="btn-goto-execution-bottom">
-        Proceed to Run Cleaning →
-      </button>
-    </div>
   `;
 
-  // Attach Action Handlers
-  container.querySelectorAll(".btn-action-merge").forEach(b => {
-    b.addEventListener("click", () => {
-      ApiService.submitReviewDecision(b.dataset.id, "merged");
-      renderReviewApproval(container);
-    });
-  });
-
-  container.querySelectorAll(".btn-action-separate").forEach(b => {
-    b.addEventListener("click", () => {
-      ApiService.submitReviewDecision(b.dataset.id, "separated");
-      renderReviewApproval(container);
-    });
-  });
-
-  container.querySelector("#btn-approve-all-safe-review")?.addEventListener("click", () => {
-    pairs.forEach(p => {
-      if (p.confidence >= 90) {
-        ApiService.submitReviewDecision(p.id, "merged");
-      }
-    });
-    renderReviewApproval(container);
-  });
-
+  // Buttons
   container.querySelector("#btn-back-plan")?.addEventListener("click", () => {
-    window.location.hash = "#cleaning-plan";
-  });
-  container.querySelector("#btn-back-plan-bottom")?.addEventListener("click", () => {
     window.location.hash = "#cleaning-plan";
   });
   container.querySelector("#btn-goto-execution")?.addEventListener("click", () => {
     window.location.hash = "#execution";
   });
-  container.querySelector("#btn-goto-execution-bottom")?.addEventListener("click", () => {
-    window.location.hash = "#execution";
+
+  container.querySelector("#btn-approve-all-safe-review")?.addEventListener("click", () => {
+    pairs.forEach(p => {
+      p.status = "merged";
+    });
+    stateStore.saveState();
+    renderReviewApproval(container);
+  });
+
+  container.querySelectorAll(".btn-action-merge").forEach(btn => {
+    btn.addEventListener("click", async () => {
+      const id = btn.dataset.id;
+      const targetPair = pairs.find(p => String(p.id) === String(id));
+      if (targetPair) {
+        targetPair.status = "merged";
+        const activeProjId = stateStore.getState().projects[0]?.id || "proj-001";
+        await ApiService.submitMergeDecision(activeProjId, id, "merge");
+        stateStore.saveState();
+        renderReviewApproval(container);
+      }
+    });
+  });
+
+  container.querySelectorAll(".btn-action-separate").forEach(btn => {
+    btn.addEventListener("click", async () => {
+      const id = btn.dataset.id;
+      const targetPair = pairs.find(p => String(p.id) === String(id));
+      if (targetPair) {
+        targetPair.status = "separated";
+        const activeProjId = stateStore.getState().projects[0]?.id || "proj-001";
+        await ApiService.submitMergeDecision(activeProjId, id, "keep_separate");
+        stateStore.saveState();
+        renderReviewApproval(container);
+      }
+    });
   });
 }

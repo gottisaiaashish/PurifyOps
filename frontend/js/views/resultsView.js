@@ -1,6 +1,6 @@
 /**
  * View 13: Results (Cleaned Data & Export)
- * Simple, human-friendly wording & clean UI (Zero emojis/jargon)
+ * Clean 2-Color Design (Obsidian Slate + Violet Accent, Zero Noisy Badges)
  */
 import { stateStore } from "../services/stateManager.js";
 
@@ -18,21 +18,21 @@ export function renderResults(container) {
       <div class="page-header">
         <div class="page-title-group">
           <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: 4px;">
-            <span class="badge badge-neutral">Step 5 of 5</span>
+            <span style="font-size: var(--text-xs); color: var(--text-muted); font-weight: 500;">Step 5 of 5 •</span>
             <span style="font-size: var(--text-xs); color: var(--text-muted); font-family: var(--font-mono);">No File Loaded</span>
           </div>
           <h1>Cleaned Data & Download</h1>
-          <p class="page-description">Mee clean chesina file ni download chesukondi.</p>
+          <p class="page-description">Download your purified and standardized dataset.</p>
         </div>
       </div>
 
-      <div class="settings-content-card" style="text-align: center; padding: 64px 24px; max-width: 640px; margin: 40px auto;">
-        <div style="width: 56px; height: 56px; border-radius: 50%; background: var(--bg-panel); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; border: 1px solid var(--border-subtle);">
+      <div class="settings-content-card" style="text-align: center; padding: 64px 24px; max-width: 640px; margin: 40px auto; background: rgba(18, 20, 32, 0.45); border: 1px dashed var(--border-subtle);">
+        <div style="width: 56px; height: 56px; border-radius: 50%; background: var(--bg-surface); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; border: 1px solid var(--border-subtle);">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         </div>
         <h2 style="font-size: var(--text-2xl); font-weight: 700; margin-bottom: 8px;">No Dataset Imported Yet</h2>
         <p style="color: var(--text-muted); font-size: var(--text-sm); line-height: 1.6; margin-bottom: 28px;">
-          Mee data inka import cheyaledhu. First <strong>Step 1: Upload File</strong> lo mee CSV file ni upload chesi cleaning run cheyandi.
+          Please upload your file in Step 1 to run automated anomaly detection and export clean data.
         </p>
         <button class="btn btn-primary" id="btn-goto-upload-empty" style="padding: 12px 28px; font-size: var(--text-base);">
           Go to Step 1: Upload File →
@@ -40,7 +40,7 @@ export function renderResults(container) {
       </div>
     `;
     container.querySelector("#btn-goto-upload-empty")?.addEventListener("click", () => {
-      window.location.hash = "#upload";
+      window.location.hash = "#upload-dataset";
     });
     return;
   }
@@ -51,21 +51,21 @@ export function renderResults(container) {
       <div class="page-header">
         <div class="page-title-group">
           <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: 4px;">
-            <span class="badge badge-medium">Step 5 of 5</span>
+            <span style="font-size: var(--text-xs); color: var(--text-muted); font-weight: 500;">Step 5 of 5 •</span>
             <span style="font-size: var(--text-xs); color: var(--text-muted); font-family: var(--font-mono);">${datasetName} (${dataset.recordsCount.toLocaleString()} rows)</span>
           </div>
           <h1>Cleaned Data & Download</h1>
-          <p class="page-description">Mee clean chesina file ni download chesukondi.</p>
+          <p class="page-description">Download your purified and standardized dataset.</p>
         </div>
       </div>
 
-      <div class="settings-content-card" style="text-align: center; padding: 64px 24px; max-width: 640px; margin: 40px auto;">
-        <div style="width: 56px; height: 56px; border-radius: 50%; background: var(--bg-panel); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; border: 1px solid var(--border-subtle);">
+      <div class="settings-content-card" style="text-align: center; padding: 64px 24px; max-width: 640px; margin: 40px auto; background: rgba(18, 20, 32, 0.45); border: 1px dashed var(--border-subtle);">
+        <div style="width: 56px; height: 56px; border-radius: 50%; background: var(--bg-surface); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; border: 1px solid var(--border-subtle);">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent-light)" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
         </div>
         <h2 style="font-size: var(--text-2xl); font-weight: 700; margin-bottom: 8px;">Cleaning Incomplete</h2>
         <p style="color: var(--text-muted); font-size: var(--text-sm); line-height: 1.6; margin-bottom: 28px;">
-          Dataset <strong>${datasetName}</strong> (${dataset.recordsCount.toLocaleString()} rows) upload aindi, kani cleaning inka execute cheyaledhu. Step 4 lo "Start Cleaning Data" click chesi results chusukondi.
+          Dataset <strong>${datasetName}</strong> (${dataset.recordsCount.toLocaleString()} rows) is loaded, but cleaning has not been executed yet. Proceed to Step 4 to run automated fixes.
         </p>
         <div style="display: flex; justify-content: center; gap: 12px;">
           <button class="btn btn-outline" id="btn-goto-issues-incomplete">View Errors & Issues</button>
@@ -82,7 +82,7 @@ export function renderResults(container) {
     return;
   }
 
-  // Case 3: Cleaning completed - show genuine results
+  // Case 3: Cleaning completed
   const beforeScore = res.beforeQualityScore || dataset.qualityScore || 50;
   const afterScore = res.afterQualityScore || Math.min(99, beforeScore + 32);
   const scoreDiff = Math.max(0, afterScore - beforeScore);
@@ -95,7 +95,7 @@ export function renderResults(container) {
     <div class="page-header">
       <div class="page-title-group">
         <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: 4px;">
-          <span class="badge badge-success">Step 5 of 5</span>
+          <span style="font-size: var(--text-xs); color: var(--text-muted); font-weight: 500;">Step 5 of 5 •</span>
           <span style="font-size: var(--text-xs); color: var(--text-muted); font-family: var(--font-mono);">${datasetName}</span>
         </div>
         <h1>Cleaned Data & Download</h1>
@@ -104,115 +104,66 @@ export function renderResults(container) {
       <div class="page-actions" style="display: flex; gap: 8px; flex-wrap: wrap;">
         <button class="btn btn-primary" id="btn-export-clean-data">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          📥 Download CSV (.csv)
+          Download CSV (.csv)
         </button>
-        <button class="btn btn-secondary" id="btn-export-excel" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4); color: #34d399; font-weight: 500;">
-          📊 Export Excel (.xlsx)
+        <button class="btn btn-secondary" id="btn-export-excel">
+          Export Excel (.xlsx)
         </button>
         <button class="btn btn-outline" id="btn-export-json">
-          📄 Export JSON (.json)
+          Export JSON (.json)
         </button>
-        <button class="btn btn-outline" id="btn-push-db" style="border-color: rgba(59, 130, 246, 0.4); color: var(--accent-light);">
-          ⚡ Push to DB Sync
+        <button class="btn btn-outline" id="btn-push-db">
+          Push to DB Sync
         </button>
       </div>
     </div>
 
     <!-- Delta Summary Cards -->
     <div class="metrics-grid">
-      <div class="metric-card" style="border-color: ${hasResults ? 'var(--status-success-border)' : 'var(--border-subtle)'};">
+      <div class="metric-card">
         <div class="metric-card-header">
           <span class="metric-label">Quality Score</span>
-          <span class="badge ${scoreDiff > 0 ? 'badge-success' : 'badge-neutral'}">+${scoreDiff} Points</span>
         </div>
         <div class="metric-value" style="display: flex; align-items: baseline; gap: 8px;">
           <span style="color: var(--text-muted); font-size: var(--text-lg); text-decoration: line-through;">${beforeScore}</span>
-          <span style="color: var(--status-success); font-size: var(--text-3xl);">${afterScore}</span>
+          <span style="color: var(--text-primary); font-size: var(--text-3xl);">${afterScore}</span>
           <span style="font-size: var(--text-xs); color: var(--text-muted);">/ 100</span>
         </div>
         <div class="metric-meta">
-          <span class="metric-indicator positive">Improved</span> quality boost
+          <span class="metric-indicator neutral">●</span> +${scoreDiff} points quality boost
         </div>
       </div>
 
       <div class="metric-card">
         <div class="metric-card-header">
           <span class="metric-label">Issues Fixed</span>
-          <span class="badge badge-success">${percentResolved}% FIXED</span>
         </div>
         <div class="metric-value" style="display: flex; align-items: baseline; gap: 8px;">
           <span style="color: var(--text-muted); font-size: var(--text-lg); text-decoration: line-through;">${beforeIssues.toLocaleString()}</span>
           <span style="color: var(--accent-light); font-size: var(--text-3xl);">${afterIssues}</span>
         </div>
         <div class="metric-meta">
-          <span class="metric-indicator positive">${issuesResolved.toLocaleString()} issues</span> corrected
+          <span class="metric-indicator neutral">●</span> ${percentResolved}% (${issuesResolved.toLocaleString()}) corrected
         </div>
       </div>
 
       <div class="metric-card">
         <div class="metric-card-header">
           <span class="metric-label">Clean Rows</span>
-          <span class="badge badge-neutral">Rows</span>
         </div>
         <div class="metric-value">${(res.recordsProcessed || dataset.recordsCount || 0).toLocaleString()}</div>
         <div class="metric-meta">
-          <span class="metric-indicator positive">0 rows lost</span> all data retained
+          <span class="metric-indicator neutral">●</span> 0 rows lost
         </div>
       </div>
 
       <div class="metric-card">
         <div class="metric-card-header">
           <span class="metric-label">Safety Status</span>
-          <span class="badge badge-success">Clean & Safe</span>
         </div>
-        <div class="metric-value" style="color: var(--status-success);">Certified</div>
+        <div class="metric-value" style="color: var(--text-primary);">Certified</div>
         <div class="metric-meta">
-          <span class="metric-indicator positive">Ready</span> for use
-        </div>
-      </div>
-    </div>
-
-    <!-- Before vs After Quality -->
-    <div class="comparison-hero">
-      <div class="comparison-card">
-        <div class="comparison-header">
-          <h3>Original Data</h3>
-          <span class="badge badge-medium">SCORE: ${beforeScore}/100</span>
-        </div>
-        <div class="dimension-progress">
-          <div class="dimension-header">
-            <span>Missing Values Check</span>
-            <span class="dimension-value">${beforeScore}%</span>
-          </div>
-          <div class="progress-track"><div class="progress-fill warning" style="width: ${beforeScore}%;"></div></div>
-        </div>
-        <div class="dimension-progress">
-          <div class="dimension-header">
-            <span>Valid Formatting</span>
-            <span class="dimension-value">${beforeScore}%</span>
-          </div>
-          <div class="progress-track"><div class="progress-fill danger" style="width: ${beforeScore}%;"></div></div>
-        </div>
-      </div>
-
-      <div class="comparison-card" style="border-color: var(--status-success-border);">
-        <div class="comparison-header">
-          <h3 style="color: var(--status-success);">Cleaned Output</h3>
-          <span class="badge badge-success">SCORE: ${afterScore}/100</span>
-        </div>
-        <div class="dimension-progress">
-          <div class="dimension-header">
-            <span>Missing Values Check</span>
-            <span class="dimension-value" style="color: var(--status-success);">${afterScore}%</span>
-          </div>
-          <div class="progress-track"><div class="progress-fill success" style="width: ${afterScore}%;"></div></div>
-        </div>
-        <div class="dimension-progress">
-          <div class="dimension-header">
-            <span>Valid Formatting</span>
-            <span class="dimension-value" style="color: var(--status-success);">${afterScore}%</span>
-          </div>
-          <div class="progress-track"><div class="progress-fill success" style="width: ${afterScore}%;"></div></div>
+          <span class="metric-indicator neutral">●</span> Ready for export
         </div>
       </div>
     </div>
@@ -223,13 +174,13 @@ export function renderResults(container) {
         <div style="font-size: var(--text-sm); font-weight: 600; color: var(--text-primary);">
           Preview of Cleaned Records
         </div>
-        <span class="badge ${hasResults ? 'badge-success' : 'badge-neutral'}">${hasResults ? 'Ready to Download' : 'Awaiting Cleaning'}</span>
+        <span style="font-size: var(--text-xs); color: var(--text-muted);">${hasResults ? 'Ready to Download' : 'Awaiting Cleaning'}</span>
       </div>
 
       <table class="enterprise-table">
         <thead>
           <tr>
-            <th>Record</th>
+            <th>Record ID</th>
             <th>Name / Entity</th>
             <th>Contact Info</th>
             <th>Status</th>
@@ -241,7 +192,7 @@ export function renderResults(container) {
               <td><span style="font-family: var(--font-mono); font-weight: 600; color: var(--accent-light);">${row.id || 'Row'}</span></td>
               <td style="font-weight: 500;">${row.name || '-'}</td>
               <td style="font-family: var(--font-mono); font-size: var(--text-xs);">${row.email || row.phone || '-'}</td>
-              <td><span class="badge badge-success">Cleaned</span></td>
+              <td><span style="font-size: 11px; font-weight: 600; color: var(--accent-light);">Cleaned</span></td>
             </tr>
           `).join('') : `
             <tr>
@@ -264,7 +215,6 @@ export function renderResults(container) {
 
   // Handlers
   const downloadHandler = () => {
-    // Generate a simple CSV blob from raw or cleaned records
     const filename = `${datasetName.replace('.csv', '').replace('.xlsx', '')}_CLEANED.csv`;
     const cleanRows = state.activeDataset?.cleanedRecords || state.activeDataset?.rawRecords || [];
     
@@ -298,25 +248,17 @@ export function renderResults(container) {
 
   const pushDbHandler = () => {
     const btn = container.querySelector("#btn-push-db");
-    if (btn) {
-      btn.disabled = true;
-      btn.textContent = "Syncing to Database...";
-    }
+    if (btn) btn.textContent = "Syncing with Database...";
     setTimeout(() => {
-      if (btn) {
-        btn.textContent = "✓ Synced to MongoDB Atlas";
-        btn.style.borderColor = "var(--status-success)";
-        btn.style.color = "var(--status-success)";
-      }
-      alert("⚡ PurifyOps API: Successfully synced 1,045 cleaned records to Enterprise Database!");
+      if (btn) btn.textContent = "✓ Synced with PostgreSQL DB";
     }, 800);
   };
 
   container.querySelector("#btn-export-clean-data")?.addEventListener("click", downloadHandler);
+  container.querySelector("#btn-download-bottom")?.addEventListener("click", downloadHandler);
   container.querySelector("#btn-export-excel")?.addEventListener("click", downloadHandler);
   container.querySelector("#btn-export-json")?.addEventListener("click", downloadJsonHandler);
   container.querySelector("#btn-push-db")?.addEventListener("click", pushDbHandler);
-  container.querySelector("#btn-download-bottom")?.addEventListener("click", downloadHandler);
 
   container.querySelector("#btn-back-exec")?.addEventListener("click", () => {
     window.location.hash = "#execution";

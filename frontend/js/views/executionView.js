@@ -1,6 +1,6 @@
 /**
  * View 12: Pipeline Execution
- * Simple, human-friendly wording & clean UI (Zero emojis/jargon)
+ * Clean 2-Color UI (Obsidian Slate + Violet Accent, Zero Noisy Badges)
  */
 import { stateStore } from "../services/stateManager.js";
 import { ApiService } from "../services/apiService.js";
@@ -16,7 +16,7 @@ export function renderExecution(container) {
     <div class="page-header">
       <div class="page-title-group">
         <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: 4px;">
-          <span class="badge badge-low">Step 4 of 5</span>
+          <span style="font-size: var(--text-xs); color: var(--text-muted); font-weight: 500;">Step 4 of 5 •</span>
           <span style="font-size: var(--text-xs); color: var(--text-muted); font-family: var(--font-mono);">${dataset.name || 'Dataset'}</span>
         </div>
         <h1>Clean Your Data</h1>
@@ -36,44 +36,40 @@ export function renderExecution(container) {
       <div class="metric-card">
         <div class="metric-card-header">
           <span class="metric-label">Status</span>
-          <span class="badge badge-low" id="exec-progress-pct">Ready</span>
         </div>
         <div class="metric-value" id="exec-status-display">Ready</div>
         <div class="metric-meta">
-          <span class="metric-indicator positive">${approvedSteps} fix(es)</span> queued
+          <span class="metric-indicator neutral">●</span> ${approvedSteps} fix(es) queued
         </div>
       </div>
 
       <div class="metric-card">
         <div class="metric-card-header">
           <span class="metric-label">Total Records</span>
-          <span class="badge badge-neutral">Rows</span>
         </div>
         <div class="metric-value">${recordsCount.toLocaleString()}</div>
         <div class="metric-meta">
-          <span class="metric-indicator positive">Safe</span> in-memory processing
+          <span class="metric-indicator neutral">●</span> Safe in-memory processing
         </div>
       </div>
 
       <div class="metric-card">
         <div class="metric-card-header">
           <span class="metric-label">Backup Protection</span>
-          <span class="badge badge-success">Active</span>
         </div>
-        <div class="metric-value" style="color: var(--status-success);">100% Undoable</div>
+        <div class="metric-value" style="color: var(--text-primary);">100% Undoable</div>
         <div class="metric-meta">
-          <span class="metric-indicator positive">Safe</span> original file untouched
+          <span class="metric-indicator neutral">●</span> Original file untouched
         </div>
       </div>
 
       <div class="metric-card">
         <div class="metric-card-header">
           <span class="metric-label">Speed</span>
-          <span class="badge badge-neutral">Fast</span>
         </div>
         <div class="metric-value">&lt; 1s</div>
         <div class="metric-meta">
-          <span class="metric-indicator positive">Instant</span> automated engine
+          <span class="metric-indicator neutral">●</span> Instant automated engine
         </div>
       </div>
     </div>
@@ -118,7 +114,6 @@ export function renderExecution(container) {
 
   const btnRun = container.querySelector("#btn-trigger-run");
   const progressBar = container.querySelector("#exec-progress-bar");
-  const progressPct = container.querySelector("#exec-progress-pct");
   const statusDisplay = container.querySelector("#exec-status-display");
   const substepLabel = container.querySelector("#exec-substep-label");
   const terminal = container.querySelector("#terminal-output");
@@ -128,8 +123,6 @@ export function renderExecution(container) {
     btnRun.disabled = true;
     btnRun.innerHTML = `<span style="display: inline-block; animation: spin 1s infinite linear;">↻</span> Cleaning in progress...`;
     statusDisplay.textContent = "Running";
-    progressPct.className = "badge badge-medium";
-    progressPct.textContent = "In Progress";
 
     let stepIndex = 0;
     const allLogs = [
@@ -157,32 +150,28 @@ export function renderExecution(container) {
 
         const pct = Math.round(((stepIndex + 1) / allLogs.length) * 100);
         progressBar.style.width = `${pct}%`;
-        progressPct.textContent = `${pct}%`;
-        substepLabel.textContent = item.msg;
+        substepLabel.textContent = `Progress: ${pct}% - ${item.msg}`;
 
         stepIndex++;
       } else {
         clearInterval(logInterval);
         statusDisplay.textContent = "Completed";
-        statusDisplay.style.color = "var(--status-success)";
-        progressPct.className = "badge badge-success";
-        progressPct.textContent = "100% DONE";
-        substepLabel.textContent = "Cleaning complete! You can now download your cleaned data.";
-        btnRun.style.display = "none";
+        btnRun.textContent = "✓ Cleaning Completed";
+        substepLabel.textContent = "All fixes applied! Click below to download your clean dataset.";
         btnResults.style.display = "inline-flex";
 
         stateStore.completeExecution();
       }
-    }, 220);
+    }, 600);
   });
 
-  btnResults?.addEventListener("click", () => {
-    window.location.hash = "#results";
-  });
   container.querySelector("#btn-back-plan")?.addEventListener("click", () => {
     window.location.hash = "#cleaning-plan";
   });
   container.querySelector("#btn-back-plan-2")?.addEventListener("click", () => {
     window.location.hash = "#cleaning-plan";
+  });
+  container.querySelector("#btn-goto-results")?.addEventListener("click", () => {
+    window.location.hash = "#results";
   });
 }

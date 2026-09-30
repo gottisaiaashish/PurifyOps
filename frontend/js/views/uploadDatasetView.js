@@ -1,6 +1,6 @@
 /**
  * View 4: Upload Dataset
- * Simple, human, clean upload page (Zero emojis/gimmicks)
+ * Clean 2-Color UI (Obsidian Slate + Violet Accent, Zero Noisy Badges)
  */
 import { stateStore } from "../services/stateManager.js";
 import { ApiService } from "../services/apiService.js";
@@ -12,10 +12,10 @@ export function renderUploadDataset(container) {
     <div class="page-header">
       <div class="page-title-group">
         <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: 4px;">
-          <span class="badge badge-low">Step 1 of 5</span>
+          <span style="font-size: var(--text-xs); color: var(--text-muted); font-weight: 500;">Step 1 of 5 •</span>
         </div>
         <h1>Upload Your Data File</h1>
-        <p class="page-description">Upload your messy CSV, TSV, or Excel spreadsheet to find and fix errors automatically.</p>
+        <p class="page-description">Upload your CSV, TSV, or Excel spreadsheet to find and fix errors automatically.</p>
       </div>
       <div class="page-actions">
         <button class="btn btn-outline" id="btn-browse-file">
@@ -31,34 +31,28 @@ export function renderUploadDataset(container) {
           Drag & Drop your file here, or <span style="color: var(--accent-light); text-decoration: underline;">click to browse</span>
         </h3>
         <p style="font-size: var(--text-sm); color: var(--text-muted); max-width: 460px; margin: 0 auto 16px;" id="dropzone-sub">
-          Works with CSV, Excel (.xlsx), TSV, and JSON files. Your data is analyzed privately on your server.
+          Supported formats: CSV, Excel (.xlsx), TSV, and JSON files.
         </p>
         <input type="file" id="file-input" style="display: none;" accept=".csv,.tsv,.xlsx,.xls,.parquet,.json" />
-        <div style="display: inline-flex; gap: 8px;">
-          <span class="badge badge-neutral">CSV</span>
-          <span class="badge badge-neutral">EXCEL (.XLSX)</span>
-          <span class="badge badge-neutral">TSV</span>
-          <span class="badge badge-neutral">JSON</span>
+        <div style="font-size: var(--text-xs); color: var(--text-muted); font-family: var(--font-mono);">
+          CSV • EXCEL (.XLSX) • TSV • JSON
         </div>
       </div>
 
-      <!-- Quick 1-Click Benchmark Demo Loader -->
-      <div style="margin-top: 16px; padding: 14px 20px; background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.25); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+      <!-- Quick Sample Loader -->
+      <div style="margin-top: 16px; padding: 14px 20px; background: rgba(18, 20, 32, 0.45); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
         <div style="display: flex; align-items: center; gap: 12px;">
-          <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(59, 130, 246, 0.18); display: flex; align-items: center; justify-content: center; color: var(--accent-light);">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-          </div>
           <div>
             <div style="font-weight: 600; font-size: var(--text-sm); color: var(--text-primary);">
-              Enterprise Benchmark: Customer_Master.csv (1,045 rows)
+              Test Sample Dataset
             </div>
             <div style="font-size: var(--text-xs); color: var(--text-muted);">
-              Pre-built test file with duplicate customer clusters, RFC syntax errors, blank cells & boundary anomalies.
+              Load a sample test file with email syntax errors, blank cells & duplicate records for testing.
             </div>
           </div>
         </div>
-        <button class="btn btn-secondary" id="btn-load-sample-csv" style="white-space: nowrap; font-weight: 600; border-color: rgba(59, 130, 246, 0.4);">
-          ⚡ Load Sample Dataset
+        <button class="btn btn-secondary" id="btn-load-sample-csv" style="white-space: nowrap; font-weight: 600;">
+          Load Sample Dataset
         </button>
       </div>
 
@@ -66,7 +60,7 @@ export function renderUploadDataset(container) {
       <div id="upload-progress-card" class="metric-card" style="display: none; margin: 24px 0;">
         <div class="metric-card-header">
           <span class="metric-label" id="upload-filename">Processing File...</span>
-          <span class="badge badge-low" id="upload-pct-badge">0%</span>
+          <span style="font-size: var(--text-xs); color: var(--accent-light); font-weight: 600;" id="upload-pct-badge">0%</span>
         </div>
         <div class="progress-track" style="margin: 8px 0;">
           <div class="progress-fill" id="upload-progress-bar" style="width: 0%;"></div>
@@ -87,7 +81,7 @@ export function renderUploadDataset(container) {
             <label class="form-label">Treated as Blank / Missing</label>
             <input type="text" class="form-input" id="null-tokens" value="NA, N/A, null, NULL, -, None" />
             <span style="font-size: 11px; color: var(--text-muted); margin-top: 4px; display: block;">
-              Words treated as empty cells.
+              Tokens treated as empty cells.
             </span>
           </div>
           <div>
@@ -164,72 +158,60 @@ export function renderUploadDataset(container) {
 
   container.querySelector("#btn-load-sample-csv")?.addEventListener("click", async () => {
     progressCard.style.display = "block";
-    uploadFilename.textContent = "Loading Customer_Master.csv (1,045 rows)";
+    uploadFilename.textContent = "Loading Sample Dataset...";
     progressBar.style.width = "25%";
     pctBadge.textContent = "25%";
-    pctBadge.className = "badge badge-low";
-    statusMsg.textContent = "Fetching 1,045-row benchmark dataset...";
+    statusMsg.textContent = "Fetching benchmark dataset...";
 
     try {
       progressBar.style.width = "50%";
       pctBadge.textContent = "50%";
-      statusMsg.textContent = "Scanning columns, finding empty values, duplicate records, and RFC errors...";
 
-      await ApiService.loadDemoDataset((p) => {
-        progressBar.style.width = `${p}%`;
-        pctBadge.textContent = `${p}%`;
+      const dataset = await ApiService.loadDemoDataset(pct => {
+        progressBar.style.width = `${pct}%`;
+        pctBadge.textContent = `${pct}%`;
       });
 
       progressBar.style.width = "100%";
       pctBadge.textContent = "100%";
-      pctBadge.className = "badge badge-success";
-      statusMsg.textContent = "Dataset loaded and issues profiled successfully!";
+      statusMsg.textContent = "Dataset loaded! Redirecting to Issues...";
 
       setTimeout(() => {
         window.location.hash = "#issues";
       }, 500);
-    } catch (e) {
-      pctBadge.textContent = "Failed";
-      pctBadge.className = "badge badge-critical";
-      statusMsg.textContent = `Error loading demo dataset: ${e.message}`;
+    } catch (err) {
+      console.error("Demo load failed:", err);
+      statusMsg.textContent = "Upload failed. Please pick a file manually.";
     }
-  });
-
-  container.querySelector("#btn-back-projects")?.addEventListener("click", () => {
-    window.location.hash = "#projects";
   });
 
   async function uploadRealFile(file) {
     progressCard.style.display = "block";
-    uploadFilename.textContent = `Uploading ${file.name}`;
-    progressBar.style.width = "20%";
-    pctBadge.textContent = "20%";
-    statusMsg.textContent = "Uploading file...";
+    uploadFilename.textContent = `Uploading ${file.name}...`;
+    progressBar.style.width = "15%";
+    pctBadge.textContent = "15%";
 
     try {
-      progressBar.style.width = "60%";
-      pctBadge.textContent = "60%";
-      statusMsg.textContent = "Scanning columns, finding empty values and duplicate records...";
-
-      const result = await ApiService.uploadDataset(file, (p) => {
-        progressBar.style.width = `${p}%`;
-        pctBadge.textContent = `${p}%`;
+      const activeProjId = stateStore.getState().projects[0]?.id || "proj-001";
+      await ApiService.uploadDatasetFile(activeProjId, file, pct => {
+        progressBar.style.width = `${pct}%`;
+        pctBadge.textContent = `${pct}%`;
       });
 
       progressBar.style.width = "100%";
       pctBadge.textContent = "100%";
-      pctBadge.className = "badge badge-success";
-      statusMsg.textContent = `Done! Scanned ${result?.recordsCount || 0} rows across ${result?.columnsCount || 0} columns.`;
+      statusMsg.textContent = "File analyzed successfully!";
 
       setTimeout(() => {
-        // Go directly to Step 2: Errors & Issues!
         window.location.hash = "#issues";
-      }, 600);
-    } catch (err) {
-      progressBar.style.width = "100%";
-      pctBadge.className = "badge badge-critical";
-      pctBadge.textContent = "Failed";
-      statusMsg.textContent = `Upload error: ${err.message}`;
+      }, 400);
+    } catch (e) {
+      console.error("File upload error:", e);
+      statusMsg.textContent = "Error parsing file. Please check format.";
     }
   }
+
+  container.querySelector("#btn-back-projects")?.addEventListener("click", () => {
+    window.location.hash = "#projects";
+  });
 }

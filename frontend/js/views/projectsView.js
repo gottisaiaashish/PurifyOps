@@ -1,6 +1,6 @@
 /**
  * View 2: Projects Directory
- * Clean, user-friendly language & professional layout (Zero emojis/jargon)
+ * Clean 2-Color UI (Obsidian Slate + Violet Accent, Zero Noisy Badges)
  */
 import { stateStore } from "../services/stateManager.js";
 import { ApiService } from "../services/apiService.js";
@@ -66,22 +66,18 @@ export function renderProjects(container) {
                 <div style="font-weight: 600; color: var(--text-primary);">${p.name}</div>
                 <div style="font-size: var(--text-xs); color: var(--text-muted);">${p.description}</div>
               </td>
-              <td>
-                <span class="badge badge-neutral">${(p.sourceType || 'FILE').toUpperCase()}</span>
+              <td style="font-size: var(--text-xs); color: var(--text-muted);">
+                ${(p.sourceType || 'FILE').toUpperCase()}
               </td>
               <td style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--accent-light);">
                 ${p.datasetName}
               </td>
               <td style="font-family: var(--font-mono);">${(p.recordsCount || 0).toLocaleString()}</td>
-              <td>
-                <span class="badge ${p.qualityScore > 80 ? 'badge-success' : p.qualityScore > 65 ? 'badge-medium' : 'badge-high'}">
-                  ${p.qualityScore || 0} / 100
-                </span>
+              <td style="font-size: var(--text-xs); font-weight: 600; color: var(--text-primary);">
+                ${p.qualityScore || 0} / 100
               </td>
-              <td>
-                <span class="badge ${p.status === 'Completed' ? 'badge-success' : p.status === 'Needs Review' ? 'badge-medium' : 'badge-neutral'}">
-                  ${p.status || 'Active'}
-                </span>
+              <td style="font-size: var(--text-xs); color: var(--text-secondary);">
+                ${p.status || 'Active'}
               </td>
               <td style="color: var(--text-muted); font-size: var(--text-xs);">${p.lastUpdated || 'Recently'}</td>
               <td>
@@ -100,17 +96,6 @@ export function renderProjects(container) {
     </div>
   `;
 
-  // Filter & Search
-  const searchInput = container.querySelector("#project-search-input");
-  searchInput?.addEventListener("input", (e) => {
-    const val = e.target.value.toLowerCase();
-    const rows = container.querySelectorAll("#projects-table tbody tr");
-    rows.forEach(r => {
-      const txt = r.textContent.toLowerCase();
-      r.style.display = txt.includes(val) ? "" : "none";
-    });
-  });
-
   container.querySelector("#btn-projects-new")?.addEventListener("click", () => {
     window.location.hash = "#create-project";
   });
@@ -120,23 +105,17 @@ export function renderProjects(container) {
 
   container.querySelectorAll(".btn-open-project").forEach(btn => {
     btn.addEventListener("click", () => {
-      const id = btn.getAttribute("data-id");
-      if (id) {
-        stateStore.setActiveProject(id);
-        ApiService.syncStateWithBackend(id);
-      }
-      window.location.hash = "#issues";
+      const id = btn.dataset.id;
+      stateStore.setActiveProject(id);
+      window.location.hash = "#upload-dataset";
     });
   });
 
-  // Delete project handler
   container.querySelectorAll(".btn-delete-project").forEach(btn => {
-    btn.addEventListener("click", async (e) => {
-      const id = btn.getAttribute("data-id");
-      const name = btn.getAttribute("data-name");
-      if (confirm(`Are you sure you want to permanently delete project "${name}" from the database?`)) {
-        btn.disabled = true;
-        btn.textContent = "Deleting...";
+    btn.addEventListener("click", async () => {
+      const id = btn.dataset.id;
+      const name = btn.dataset.name;
+      if (confirm(`Are you sure you want to delete project "${name}"? This action cannot be undone.`)) {
         await ApiService.deleteProject(id);
         renderProjects(container);
       }

@@ -1,6 +1,6 @@
 /**
  * View 11: Validation (Test-Driven Cleaning Engine)
- * Zero mock data
+ * Clean 2-Color Design (Obsidian Slate + Violet Accent, Zero Noisy Badges)
  */
 import { stateStore } from "../services/stateManager.js";
 import { ApiService } from "../services/apiService.js";
@@ -20,7 +20,7 @@ export function renderValidation(container) {
     <div class="page-header">
       <div class="page-title-group">
         <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: 4px;">
-          <span class="badge ${failedCount === 0 && rules.length > 0 ? 'badge-success' : 'badge-neutral'}">Pre-Flight Certification</span>
+          <span style="font-size: var(--text-xs); color: var(--text-muted); font-weight: 500;">Pre-Flight Certification •</span>
           <span style="font-size: var(--text-xs); color: var(--text-muted); font-family: var(--font-mono);">${suite.suiteId || 'VAL-INIT'}</span>
         </div>
         <h1>Automated Test-Driven Validation</h1>
@@ -43,46 +43,42 @@ export function renderValidation(container) {
       <div class="metric-card">
         <div class="metric-card-header">
           <span class="metric-label">Passed Tests</span>
-          <span class="badge badge-success">PASSED</span>
         </div>
-        <div class="metric-value" style="color: var(--status-success);">${passedCount}</div>
+        <div class="metric-value" style="color: var(--text-primary);">${passedCount}</div>
         <div class="metric-meta">
-          <span class="metric-indicator positive">${rules.length > 0 ? Math.round((passedCount / rules.length) * 100) : 0}%</span> assertions green
+          <span class="metric-indicator neutral">●</span> ${rules.length > 0 ? Math.round((passedCount / rules.length) * 100) : 0}% assertions green
         </div>
       </div>
 
       <div class="metric-card">
         <div class="metric-card-header">
           <span class="metric-label">Warnings</span>
-          <span class="badge badge-medium">Review</span>
         </div>
-        <div class="metric-value" style="color: var(--status-warning);">${warningCount}</div>
+        <div class="metric-value" style="color: var(--text-primary);">${warningCount}</div>
         <div class="metric-meta">
-          <span class="metric-indicator warning">${warningCount}</span> non-fatal advisory warnings
+          <span class="metric-indicator neutral">●</span> ${warningCount} non-fatal advisory warnings
         </div>
       </div>
 
       <div class="metric-card">
         <div class="metric-card-header">
           <span class="metric-label">Failed Tests</span>
-          <span class="badge ${failedCount > 0 ? 'badge-critical' : 'badge-neutral'}">BLOCKED</span>
         </div>
-        <div class="metric-value" style="color: ${failedCount > 0 ? 'var(--status-danger)' : 'var(--text-primary)'};">${failedCount}</div>
+        <div class="metric-value" style="color: var(--text-primary);">${failedCount}</div>
         <div class="metric-meta">
-          <span class="metric-indicator ${failedCount > 0 ? 'negative' : 'positive'}">${failedCount}</span> blocking defects
+          <span class="metric-indicator neutral">●</span> ${failedCount} blocking defects
         </div>
       </div>
 
       <div class="metric-card">
         <div class="metric-card-header">
           <span class="metric-label">Execution Readiness</span>
-          <span class="badge ${rules.length > 0 && failedCount === 0 ? 'badge-success' : 'badge-neutral'}">STATUS</span>
         </div>
-        <div class="metric-value" style="font-size: var(--text-lg); color: ${rules.length > 0 && failedCount === 0 ? 'var(--status-success)' : 'var(--text-muted)'}; margin-top: 4px;">
+        <div class="metric-value" style="font-size: var(--text-lg); color: var(--accent-light); margin-top: 4px;">
           ${rules.length > 0 && failedCount === 0 ? 'CLEARED FOR RUN' : 'AWAITING TESTS'}
         </div>
         <div class="metric-meta">
-          <span class="metric-indicator ${rules.length > 0 ? 'positive' : 'neutral'}">●</span> Sandboxed container ready
+          <span class="metric-indicator neutral">●</span> Sandboxed container ready
         </div>
       </div>
     </div>
@@ -106,7 +102,7 @@ export function renderValidation(container) {
             <th>Category</th>
             <th>Records Evaluated</th>
             <th>Execution Time</th>
-            <th>Assertion Logic (Polars / Python)</th>
+            <th>Assertion Logic</th>
           </tr>
         </thead>
         <tbody>
@@ -119,7 +115,7 @@ export function renderValidation(container) {
           ` : rules.map(rule => `
             <tr>
               <td>
-                <span class="badge ${rule.status === 'PASS' ? 'badge-success' : rule.status === 'WARNING' ? 'badge-medium' : 'badge-high'}">
+                <span style="font-size: 11px; font-weight: 600; color: var(--accent-light);">
                   ${rule.status}
                 </span>
               </td>
@@ -127,7 +123,7 @@ export function renderValidation(container) {
                 <div style="font-weight: 600; color: var(--text-primary);">${rule.name}</div>
                 <div style="font-size: var(--text-xs); color: var(--text-muted);">${rule.description}</div>
               </td>
-              <td><span class="badge badge-neutral">${rule.category}</span></td>
+              <td><span style="font-size: var(--text-xs); color: var(--text-muted);">${rule.category}</span></td>
               <td style="font-family: var(--font-mono);">${(rule.recordsEvaluated || totalRecords).toLocaleString()}</td>
               <td style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--text-muted);">${rule.executionTime || '< 10ms'}</td>
               <td>
@@ -149,24 +145,6 @@ export function renderValidation(container) {
     </div>
   `;
 
-  // Attach handlers
-  container.querySelector("#btn-re-run-validation")?.addEventListener("click", async () => {
-    const btn = container.querySelector("#btn-re-run-validation");
-    btn.textContent = "Executing Test Suite...";
-    try {
-      const activeProjId = state.projects[0]?.id || "proj-001";
-      const updatedSuite = await ApiService.runValidationSuite(activeProjId);
-      if (updatedSuite) {
-        stateStore.state.validationSuite = updatedSuite;
-        stateStore.saveState();
-      }
-      renderValidation(container);
-    } catch (e) {
-      console.error(e);
-      btn.textContent = "Re-Run Test Suite";
-    }
-  });
-
   container.querySelector("#btn-back-review")?.addEventListener("click", () => {
     window.location.hash = "#review-approval";
   });
@@ -178,5 +156,14 @@ export function renderValidation(container) {
   });
   container.querySelector("#btn-goto-execution-bottom")?.addEventListener("click", () => {
     window.location.hash = "#execution";
+  });
+  container.querySelector("#btn-re-run-validation")?.addEventListener("click", async () => {
+    const activeProjId = state.projects[0]?.id || "proj-001";
+    const res = await ApiService.runValidationSuite(activeProjId);
+    if (res) {
+      stateStore.state.validationSuite = res;
+      stateStore.saveState();
+      renderValidation(container);
+    }
   });
 }
