@@ -1,30 +1,104 @@
 """
-AI Agentic Cleaning Planner (DAG Formulator & Human-in-the-Loop Conflict Generator)
+AI Agentic Cleaning Planner (OpenAI LLM Integration & DAG Formulator)
 """
 
+import os
+import json
 import uuid
+import urllib.request
 from typing import List, Dict, Any
+
+
+def get_openai_api_key() -> str:
+    key = os.environ.get("OPENAI_API_KEY", "")
+    if key:
+        return key
+
+    # Check local .env file
+    env_file = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".env")
+    if os.path.exists(env_file):
+        try:
+            with open(env_file, "r", encoding="utf-8") as f:
+                for line in f:
+                    if line.startswith("OPENAI_API_KEY="):
+                        return line.strip().split("=", 1)[1]
+        except Exception:
+            pass
+    return ""
+
+
+def call_openai_for_dag_insights(issues: List[Dict[str, Any]]) -> Dict[str, str]:
+    """
+    Calls OpenAI GPT-4o to generate deep enterprise semantic reasoning for detected issues.
+    """
+    api_key = get_openai_api_key()
+    if not api_key:
+        return {}
+
+    prompt = (
+        "You are an enterprise AI data engineer for PurifyOps. "
+        "Analyze the following data issues and return a concise JSON map of issue type to an AI reasoning explanation:\n"
+        + json.dumps([{"type": i["type"], "records": i["affectedRecords"], "columns": i["affectedColumns"]} for i in issues])
+        + "\nReturn only valid JSON object: {\"IssueType\": \"AI rationale\"}."
+    )
+
+    req_data = json.dumps({
+        "model": "gpt-4o-mini",
+        "messages": [
+            {"role": "system", "content": "You are PurifyOps AI Planner. Return valid JSON only."},
+            {"role": "user", "content": prompt}
+        ],
+        "temperature": 0.2,
+        "max_tokens": 400
+    }).encode("utf-8")
+
+    req = urllib.request.Request(
+        "https://api.openai.com/v1/chat/completions",
+        data=req_data,
+        headers={
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json"
+        }
+    )
+
+    try:
+        with urllib.request.urlopen(req, timeout=5) as response:
+            res_body = json.loads(response.read().decode("utf-8"))
+            content = res_body["choices"][0]["message"]["content"].strip()
+            # Clean markdown JSON fences if present
+            if content.startswith("```"):
+                content = content.split("\n", 1)[1].rsplit("```", 1)[0].strip()
+            return json.loads(content)
+    except Exception as e:
+        print(f"[PurifyOps AI Planner] OpenAI call fallback to deterministic rules: {e}")
+        return {}
 
 
 def generate_dag_cleaning_plan(issues: List[Dict[str, Any]], dataset_id: str = "ds-cust-001") -> Dict[str, Any]:
     """
     Synthesizes a Directed Acyclic Graph (DAG) cleaning plan from detected issues.
+    Integrates OpenAI GPT-4o reasoning when API key is active.
     """
+    llm_insights = call_openai_for_dag_insights(issues)
+    has_llm = bool(llm_insights)
+
     operations = []
     step_id = 1
     total_affected = 0
     total_entropy = 0.0
 
-    # Map issues to operations
     for iss in issues:
         t = iss["type"]
+        ai_rationale = llm_insights.get(t)
+
         if "Duplicate" in t:
+            reason = ai_rationale or f"Resolves {iss['affectedRecords']} redundant customer records using string similarity + exact email matching."
             operations.append({
                 "stepId": step_id,
                 "title": "Identify & Deduplicate Customer Entities",
                 "actionType": "Entity Resolution Merge",
                 "targetColumns": iss["affectedColumns"],
-                "reason": f"Resolves {iss['affectedRecords']} redundant customer records using string similarity + exact email matching.",
+                "reason": reason,
                 "affectedRecords": iss["affectedRecords"],
                 "confidence": iss["confidence"],
                 "estimatedImpact": "Moderate",
@@ -38,12 +112,13 @@ def generate_dag_cleaning_plan(issues: List[Dict[str, Any]], dataset_id: str = "
             step_id += 1
 
         elif "Phone" in t:
+            reason = ai_rationale or f"Standardizes {iss['affectedRecords']} phone records into clean international format +[prefix][number]."
             operations.append({
                 "stepId": step_id,
                 "title": "Normalize Phone Numbers to ITU E.164",
                 "actionType": "Regex Canonicalization",
                 "targetColumns": iss["affectedColumns"],
-                "reason": f"Standardizes {iss['affectedRecords']} phone records into clean international format +[prefix][number].",
+                "reason": reason,
                 "affectedRecords": iss["affectedRecords"],
                 "confidence": iss["confidence"],
                 "estimatedImpact": "Minimal",
@@ -56,12 +131,13 @@ def generate_dag_cleaning_plan(issues: List[Dict[str, Any]], dataset_id: str = "
             step_id += 1
 
         elif "Email" in t:
+            reason = ai_rationale or f"Trims malformed email delimiters, lowercase normalization, and flags {iss['affectedRecords']} invalid syntax strings."
             operations.append({
                 "stepId": step_id,
                 "title": "Validate & Sanitize Email Addresses",
                 "actionType": "RFC-5322 Cleansing",
                 "targetColumns": iss["affectedColumns"],
-                "reason": f"Trims malformed email delimiters, lowercase normalization, and flags {iss['affectedRecords']} invalid syntax strings.",
+                "reason": reason,
                 "affectedRecords": iss["affectedRecords"],
                 "confidence": iss["confidence"],
                 "estimatedImpact": "Low",
@@ -75,12 +151,13 @@ def generate_dag_cleaning_plan(issues: List[Dict[str, Any]], dataset_id: str = "
             step_id += 1
 
         elif "Missing" in t:
+            reason = ai_rationale or f"Imputes {iss['affectedRecords']} missing values using demographic cohort regression without distorting variance."
             operations.append({
                 "stepId": step_id,
                 "title": "Context-Aware Missing Value Imputation",
                 "actionType": "Cohort Imputation",
                 "targetColumns": iss["affectedColumns"],
-                "reason": f"Imputes {iss['affectedRecords']} missing values using demographic cohort regression without distorting variance.",
+                "reason": reason,
                 "affectedRecords": iss["affectedRecords"],
                 "confidence": iss["confidence"],
                 "estimatedImpact": "Moderate",
@@ -94,29 +171,32 @@ def generate_dag_cleaning_plan(issues: List[Dict[str, Any]], dataset_id: str = "
             step_id += 1
 
         elif "Anomalies" in t or "Outlier" in t:
+            reason = ai_rationale or f"Sanitizes {iss['affectedRecords']} non-physical data points (negative age and negative revenue)."
             operations.append({
                 "stepId": step_id,
                 "title": "Outlier Clamping & Semantic Boundary Shield",
                 "actionType": "Domain Boundary Filtering",
                 "targetColumns": iss["affectedColumns"],
-                "reason": f"Sanitizes {iss['affectedRecords']} non-physical data points (negative age and negative revenue).",
+                "reason": reason,
                 "affectedRecords": iss["affectedRecords"],
                 "confidence": iss["confidence"],
                 "estimatedImpact": "Low",
                 "informationLossLevel": "Low",
                 "entropyDelta": 0.002,
                 "isReversible": True,
-                "approved": False  # requires explicit confirmation
+                "approved": False
             })
             total_affected += iss["affectedRecords"]
             total_entropy += 0.002
             step_id += 1
 
+    model_label = "OpenAI GPT-4o / PurifyOps DAG Planner" if has_llm else "PurifyOps Autonomous DAG Planner"
+
     return {
         "planId": f"plan-agent-{uuid.uuid4().hex[:6]}",
         "datasetId": dataset_id,
         "generatedAt": "Just now",
-        "agentModel": "Claude 3.5 Sonnet / Polars DAG Planner",
+        "agentModel": model_label,
         "totalRecordsAffected": total_affected,
         "estimatedRuntimeSeconds": 2.9,
         "overallEntropyLoss": round(total_entropy, 3),
@@ -125,9 +205,6 @@ def generate_dag_cleaning_plan(issues: List[Dict[str, Any]], dataset_id: str = "
 
 
 def find_duplicate_candidate_pairs(records: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    """
-    Finds real candidate duplicate pairs from the dataset for human-in-the-loop review.
-    """
     seen_emails = {}
     pairs = []
     pair_counter = 101
@@ -166,7 +243,6 @@ def find_duplicate_candidate_pairs(records: List[Dict[str, Any]]) -> List[Dict[s
         else:
             seen_emails[email] = r
 
-    # Return discovered pairs, or fall back to default candidate if none found
     if not pairs and len(records) >= 2:
         pairs.append({
             "id": "pair-101",
