@@ -11,6 +11,16 @@ export function renderCleaningPlan(container) {
   const operations = plan.operations || [];
   const dataset = state.activeDataset || {};
   const totalRecords = dataset.recordsCount || 0;
+
+  // Auto-fetch plan if operations are empty but issues exist
+  if (operations.length === 0 && (state.issues || []).length > 0) {
+    ApiService.getCleaningPlan().then(p => {
+      if (p && p.operations && p.operations.length > 0) {
+        renderCleaningPlan(container);
+      }
+    });
+  }
+
   const affected = plan.totalRecordsAffected || 0;
   const percentAffected = totalRecords > 0 ? ((affected / totalRecords) * 100).toFixed(1) : "0.0";
 
