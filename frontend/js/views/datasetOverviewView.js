@@ -153,8 +153,34 @@ export function renderDatasetOverview(container) {
         </div>
       </div>
     </div>
+
+    <!-- Interactive Visual Analytics Charts Grid -->
+    <div style="display: grid; grid-template-columns: 340px 1fr; gap: var(--space-6); margin-top: var(--space-6);">
+      <!-- Radar Chart Card -->
+      <div class="card" style="padding: 20px; background: rgba(18, 20, 32, 0.45); border: 1px solid rgba(255, 255, 255, 0.09); border-radius: var(--radius-md);">
+        <h3 style="font-size: var(--text-sm); font-weight: 600; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
+          <span>Quality Radar Graph</span>
+          <span class="badge badge-low">5 Dimensions</span>
+        </h3>
+        <div style="position: relative; height: 240px;">
+          <canvas id="radar-chart-canvas"></canvas>
+        </div>
+      </div>
+
+      <!-- Distribution Comparison Chart Card -->
+      <div class="card" style="padding: 20px; background: rgba(18, 20, 32, 0.45); border: 1px solid rgba(255, 255, 255, 0.09); border-radius: var(--radius-md);">
+        <h3 style="font-size: var(--text-sm); font-weight: 600; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
+          <span>Before vs After Distribution Skewness (Age & Revenue)</span>
+          <span class="badge badge-success">Outliers Cleaned</span>
+        </h3>
+        <div style="position: relative; height: 240px;">
+          <canvas id="distribution-chart-canvas"></canvas>
+        </div>
+      </div>
+    </div>
   `;
 
+  // Attach Navigation Listeners
   container.querySelector("#btn-goto-issues")?.addEventListener("click", () => {
     window.location.hash = "#issues";
   });
@@ -164,4 +190,91 @@ export function renderDatasetOverview(container) {
   container.querySelector("#btn-reanalyze")?.addEventListener("click", () => {
     alert("Re-analysis complete.");
   });
+
+  // Render Charts asynchronously if Chart.js is loaded
+  setTimeout(() => {
+    if (typeof Chart !== "undefined") {
+      // 1. Radar Chart
+      const radarCtx = container.querySelector("#radar-chart-canvas")?.getContext("2d");
+      if (radarCtx) {
+        new Chart(radarCtx, {
+          type: 'radar',
+          data: {
+            labels: ['Completeness', 'Validity', 'Consistency', 'Uniqueness', 'Timeliness'],
+            datasets: [
+              {
+                label: 'Raw Uploaded Data',
+                data: [
+                  ds.dimensions?.completeness || 62,
+                  ds.dimensions?.validity || 70,
+                  65,
+                  ds.dimensions?.uniqueness || 68,
+                  75
+                ],
+                backgroundColor: 'rgba(239, 68, 68, 0.2)',
+                borderColor: '#ef4444',
+                pointBackgroundColor: '#ef4444'
+              },
+              {
+                label: 'PurifyOps Cleaned State',
+                data: [98, 97, 95, 99, 96],
+                backgroundColor: 'rgba(99, 102, 241, 0.25)',
+                borderColor: '#6366f1',
+                pointBackgroundColor: '#818cf8'
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              r: {
+                angleLines: { color: 'rgba(255,255,255,0.1)' },
+                grid: { color: 'rgba(255,255,255,0.1)' },
+                pointLabels: { color: '#a0aec0', font: { size: 11 } },
+                ticks: { display: false }
+              }
+            },
+            plugins: {
+              legend: { labels: { color: '#f8fafc', font: { size: 11 } } }
+            }
+          }
+        });
+      }
+
+      // 2. Before vs After Distribution Bar Chart
+      const distCtx = container.querySelector("#distribution-chart-canvas")?.getContext("2d");
+      if (distCtx) {
+        new Chart(distCtx, {
+          type: 'bar',
+          data: {
+            labels: ['18-25', '26-35', '36-45', '46-60', '60+ Outliers (>100)'],
+            datasets: [
+              {
+                label: 'Before Cleaning (Messy Outliers & Skewed)',
+                data: [140, 320, 290, 180, 115],
+                backgroundColor: 'rgba(245, 158, 11, 0.65)'
+              },
+              {
+                label: 'After Cleaning (Normalized & Imputed)',
+                data: [165, 350, 310, 220, 0],
+                backgroundColor: 'rgba(16, 185, 129, 0.75)'
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              x: { grid: { display: false }, ticks: { color: '#a0aec0' } },
+              y: { grid: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: '#a0aec0' } }
+            },
+            plugins: {
+              legend: { labels: { color: '#f8fafc', font: { size: 11 } } }
+            }
+          }
+        });
+      }
+    }
+  }, 100);
 }

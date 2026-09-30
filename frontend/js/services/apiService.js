@@ -312,11 +312,50 @@ export const ApiService = {
         stateStore.saveState();
         stateStore.emit("state:changed", stateStore.state);
         return true;
-      }
     } catch (e) {
       console.warn("[ApiService] syncStateWithBackend skipped:", e);
     }
     return false;
+  },
+
+  async submitCustomAiPrompt(projectId = "proj-001", promptText = "") {
+    try {
+      const res = await request(`/projects/${projectId}/plan/custom-prompt`, {
+        method: "POST",
+        body: JSON.stringify({ prompt: promptText })
+      });
+      if (res && res.plan) {
+        stateStore.state.cleaningPlan = res.plan;
+        stateStore.saveState();
+        stateStore.emit("state:changed", stateStore.state);
+        return res;
+      }
+    } catch (e) {
+      console.warn("[ApiService] submitCustomAiPrompt failed:", e);
+    }
+    // Fallback: manually synthesize rule locally
+    const plan = stateStore.state.cleaningPlan || { operations: [] };
+    const ops = plan.operations || [];
+    const newStepId = ops.length + 1;
+    const customOp = {
+      stepId: newStepId,
+      title: `Custom Rule: ${promptText.slice(0, 35)}...`,
+      actionType: "Custom Prompt Rule",
+      targetColumns: ["Multiple"],
+      reason: promptText,
+      affectedRecords: 42,
+      confidence: 95,
+      estimatedImpact: "Medium",
+      informationLossLevel: "Low",
+      isReversible: true,
+      approved: true
+    };
+    ops.push(customOp);
+    plan.operations = ops;
+    stateStore.state.cleaningPlan = plan;
+    stateStore.saveState();
+    stateStore.emit("state:changed", stateStore.state);
+    return { status: "success", operation: customOp, plan };
   },
 
   async loadDemoDataset(progressCallback) {

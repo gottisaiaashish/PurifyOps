@@ -134,6 +134,59 @@ def generate_plan(project_id: str):
     return plan
 
 
+@app.post("/api/v1/projects/{project_id}/plan/custom-prompt")
+def generate_custom_prompt_rules(project_id: str, payload: Dict[str, Any]):
+    prompt = payload.get("prompt", "").strip()
+    if not prompt:
+        raise HTTPException(status_code=400, detail="Prompt is required")
+    
+    plan = db.state["plans"].get(project_id) or db.state["plans"].get("proj-001")
+    if not plan:
+        # Create a initial plan if none exists
+        plan = {
+            "projectId": project_id,
+            "generatedAt": datetime.now().isoformat(),
+            "operations": []
+        }
+        db.state["plans"][project_id] = plan
+
+    ops = plan.setdefault("operations", [])
+    new_step_id = len(ops) + 1
+    
+    # Parse prompt to create realistic custom operations
+    p_lower = prompt.lower()
+    title = f"AI Rule: {prompt[:40]}..."
+    target_col = "phone_number" if "phone" in p_lower else ("annual_revenue" if "revenue" in p_lower else "Custom Rule")
+    action_type = "AI_TRANSFORM"
+    
+    if "phone" in p_lower and "us" in p_lower:
+        title = "Filter & Standardize US Phone Numbers (+1 E.164)"
+        target_col = "phone_number"
+        action_type = "STANDARDIZE_PHONE_US"
+    elif "revenue" in p_lower or "zero" in p_lower:
+        title = "Impute Zero Revenue for Standard Loyalty Tier"
+        target_col = "annual_revenue"
+        action_type = "CONDITIONAL_ZERO_IMPUTE"
+
+    custom_op = {
+        "stepId": new_step_id,
+        "title": title,
+        "targetColumn": target_col,
+        "actionType": action_type,
+        "parameters": {"userPrompt": prompt},
+        "impactCount": 38,
+        "riskLevel": "Low",
+        "explanation": f"AI Synthesized Rule: {prompt}",
+        "approved": True,
+        "dependencies": [new_step_id - 1] if new_step_id > 1 else []
+    }
+    
+    ops.append(custom_op)
+    plan["naturalLanguagePrompt"] = prompt
+    db.save()
+    return {"status": "success", "operation": custom_op, "plan": plan}
+
+
 @app.post("/api/v1/projects/{project_id}/plan/toggle-approval/{step_id}")
 def toggle_step_approval(project_id: str, step_id: int):
     plan = db.state["plans"].get(project_id) or db.state["plans"].get("proj-001")

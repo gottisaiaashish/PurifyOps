@@ -39,64 +39,114 @@ export function renderReviewApproval(container) {
           <a href="#execution" class="btn btn-primary" style="display: inline-block;">Proceed to Run Cleaning</a>
         </div>
       ` : pairs.map(pair => `
-        <div class="review-card" data-pair-id="${pair.id}">
-          <div class="review-card-header">
+        <div class="card" style="margin-bottom: 24px; padding: 20px; background: rgba(18, 20, 32, 0.45); border: 1px solid rgba(255, 255, 255, 0.09); border-radius: var(--radius-md);" data-pair-id="${pair.id}">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle);">
             <div style="display: flex; align-items: center; gap: var(--space-3);">
               <span class="badge ${pair.confidence > 90 ? 'badge-high' : 'badge-medium'}">
-                Match: ${pair.confidence}%
+                Similarity Match: ${pair.confidence}%
               </span>
-              <span style="font-weight: 600; font-size: var(--text-sm); color: var(--text-primary);">
-                Pair: ${pair.recordA?.id || 'Record 1'} ↔ ${pair.recordB?.id || 'Record 2'}
+              <span style="font-weight: 700; font-size: var(--text-md); color: var(--text-primary);">
+                Duplicate Candidate: ${pair.recordA?.name || 'Record A'} ↔ ${pair.recordB?.name || 'Record B'}
               </span>
-              <span style="font-size: var(--text-xs); color: var(--text-muted);">
-                ${pair.matchReason || 'Similar name and contact info'}
+              <span style="font-size: var(--text-xs); color: var(--text-muted); font-family: var(--font-mono);">
+                Reason: ${pair.matchReason || 'Identical phone & fuzzy email match'}
               </span>
             </div>
 
             <div>
               <span class="badge ${pair.status === 'merged' ? 'badge-success' : pair.status === 'separated' ? 'badge-neutral' : 'badge-medium'}">
-                ${(pair.status || 'PENDING').toUpperCase()}
+                ${(pair.status || 'PENDING REVIEW').toUpperCase()}
               </span>
             </div>
           </div>
 
-          <div class="review-diff-grid">
-            <div class="record-box">
-              <div class="record-title">
-                <span>Record 1</span>
-              </div>
-              <div class="record-field">
-                <span class="field-name">Name</span>
-                <span class="field-val">${pair.recordA?.name || '-'}</span>
-              </div>
-              <div class="record-field">
-                <span class="field-name">Email</span>
-                <span class="field-val">${pair.recordA?.email || '-'}</span>
-              </div>
-            </div>
-
-            <div class="record-box">
-              <div class="record-title">
-                <span>Record 2</span>
-              </div>
-              <div class="record-field">
-                <span class="field-name">Name</span>
-                <span class="field-val">${pair.recordB?.name || '-'}</span>
-              </div>
-              <div class="record-field">
-                <span class="field-name">Email</span>
-                <span class="field-val">${pair.recordB?.email || '-'}</span>
-              </div>
-            </div>
+          <!-- Interactive Side-by-Side Attribute Selection Table -->
+          <div style="overflow-x: auto; margin-bottom: 16px;">
+            <table class="enterprise-table" style="font-size: 13px;">
+              <thead>
+                <tr>
+                  <th style="width: 22%;">Attribute Field</th>
+                  <th style="width: 39%;">Record A (ID: ${pair.recordA?.id || 'Rec-A'})</th>
+                  <th style="width: 39%;">Record B (ID: ${pair.recordB?.id || 'Rec-B'})</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="font-weight: 600; color: var(--text-secondary);">Customer Name</td>
+                  <td>
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                      <input type="radio" name="attr-name-${pair.id}" value="A" checked style="accent-color: var(--accent-primary);" />
+                      <span style="color: var(--text-primary); font-weight: 600;">${pair.recordA?.name || 'Acme Corp'}</span>
+                    </label>
+                  </td>
+                  <td>
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                      <input type="radio" name="attr-name-${pair.id}" value="B" style="accent-color: var(--accent-primary);" />
+                      <span style="color: var(--text-primary); font-weight: 600;">${pair.recordB?.name || 'Acme Corporation'}</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="font-weight: 600; color: var(--text-secondary);">Email Address</td>
+                  <td>
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                      <input type="radio" name="attr-email-${pair.id}" value="A" checked style="accent-color: var(--accent-primary);" />
+                      <span style="font-family: var(--font-mono); color: var(--accent-light);">${pair.recordA?.email || 'support@acme.com'}</span>
+                    </label>
+                  </td>
+                  <td>
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                      <input type="radio" name="attr-email-${pair.id}" value="B" style="accent-color: var(--accent-primary);" />
+                      <span style="font-family: var(--font-mono); color: var(--status-warning);">${pair.recordB?.email || 'contact@acme.com'}</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="font-weight: 600; color: var(--text-secondary);">Phone Number</td>
+                  <td>
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                      <input type="radio" name="attr-phone-${pair.id}" value="A" style="accent-color: var(--accent-primary);" />
+                      <span style="font-family: var(--font-mono); color: var(--text-muted);">${pair.recordA?.phone || '+1 415-555-0199'}</span>
+                    </label>
+                  </td>
+                  <td>
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                      <input type="radio" name="attr-phone-${pair.id}" value="B" checked style="accent-color: var(--accent-primary);" />
+                      <span style="font-family: var(--font-mono); color: var(--status-success);">${pair.recordB?.phone || '+1 (415) 555-0199 (Standardized)'}</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="font-weight: 600; color: var(--text-secondary);">Annual Revenue</td>
+                  <td>
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                      <input type="radio" name="attr-rev-${pair.id}" value="A" style="accent-color: var(--accent-primary);" />
+                      <span style="font-family: var(--font-mono); color: var(--text-primary);">$120,000</span>
+                    </label>
+                  </td>
+                  <td>
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                      <input type="radio" name="attr-rev-${pair.id}" value="B" checked style="accent-color: var(--accent-primary);" />
+                      <span style="font-family: var(--font-mono); color: var(--status-success); font-weight: 700;">$150,000 (Latest Verified)</span>
+                    </label>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
 
-          <div class="review-card-actions">
-            <button class="btn btn-outline btn-sm btn-action-separate" data-id="${pair.id}">
-              Keep Separate
-            </button>
-            <button class="btn btn-primary btn-sm btn-action-merge" data-id="${pair.id}">
-              ✓ Merge Records
-            </button>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: var(--text-xs); color: var(--text-muted);">
+              💡 Select which values to preserve for the final merged record.
+            </span>
+            <div style="display: flex; gap: 10px;">
+              <button class="btn btn-outline btn-sm btn-action-separate" data-id="${pair.id}">
+                Keep as 2 Separate Records
+              </button>
+              <button class="btn btn-primary btn-sm btn-action-merge" data-id="${pair.id}">
+                ✓ Merge Selected Attributes into 1 Clean Record
+              </button>
+            </div>
           </div>
         </div>
       `).join('')}
