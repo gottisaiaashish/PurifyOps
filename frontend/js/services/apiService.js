@@ -312,6 +312,7 @@ export const ApiService = {
         stateStore.saveState();
         stateStore.emit("state:changed", stateStore.state);
         return true;
+      }
     } catch (e) {
       console.warn("[ApiService] syncStateWithBackend skipped:", e);
     }
