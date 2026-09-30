@@ -1,10 +1,14 @@
 /**
  * View 6: Data Profile (Column-Level Profiling)
+ * Zero mock data - Dynamic column telemetry
  */
 import { stateStore } from "../services/stateManager.js";
 
 export function renderDataProfile(container) {
-  const columns = stateStore.getState().columnsProfile;
+  const state = stateStore.getState();
+  const columns = state.columnsProfile || [];
+  const issues = state.issues || [];
+  const issueCount = issues.length;
 
   container.innerHTML = `
     <div class="page-header">
@@ -14,7 +18,7 @@ export function renderDataProfile(container) {
       </div>
       <div class="page-actions">
         <button class="btn btn-outline" id="btn-back-overview">← Dataset Overview</button>
-        <button class="btn btn-primary" id="btn-goto-issues">View Detected Issues (2,512) →</button>
+        <button class="btn btn-primary" id="btn-goto-issues">View Detected Issues (${issueCount.toLocaleString()}) →</button>
       </div>
     </div>
 
@@ -56,34 +60,40 @@ export function renderDataProfile(container) {
           </tr>
         </thead>
         <tbody>
-          ${columns.map(col => `
-            <tr data-name="${col.name.toLowerCase()}" data-role="${col.semanticRole.toLowerCase()}" data-status="${col.status}">
+          ${columns.length === 0 ? `
+            <tr>
+              <td colspan="9" style="text-align: center; padding: var(--space-8); color: var(--text-muted);">
+                No column profile data available. Upload a dataset to automatically compute semantic profiles.
+              </td>
+            </tr>
+          ` : columns.map(col => `
+            <tr data-name="${(col.name || '').toLowerCase()}" data-role="${(col.semanticRole || '').toLowerCase()}" data-status="${col.status}">
               <td>
                 <div style="font-weight: 600; font-family: var(--font-mono); color: var(--text-primary); font-size: var(--text-sm);">
                   ${col.name}
                 </div>
-                <div style="font-size: 11px; color: var(--text-muted);">${col.statusNote}</div>
+                <div style="font-size: 11px; color: var(--text-muted);">${col.statusNote || ''}</div>
               </td>
-              <td><span class="badge badge-neutral">${col.type}</span></td>
-              <td style="color: var(--text-secondary); font-size: var(--text-xs);">${col.semanticRole}</td>
-              <td style="font-family: var(--font-mono); color: ${col.missingPct > 3 ? 'var(--status-warning)' : 'var(--text-primary)'};">
-                ${col.missingPct.toFixed(1)}%
+              <td><span class="badge badge-neutral">${col.type || 'text'}</span></td>
+              <td style="color: var(--text-secondary); font-size: var(--text-xs);">${col.semanticRole || 'Attribute'}</td>
+              <td style="font-family: var(--font-mono); color: ${(col.missingPct || 0) > 3 ? 'var(--status-warning)' : 'var(--text-primary)'};">
+                ${(col.missingPct || 0).toFixed(1)}%
               </td>
-              <td style="font-family: var(--font-mono);">${col.uniquePct.toFixed(1)}%</td>
-              <td style="font-family: var(--font-mono); color: ${col.validityPct < 90 ? 'var(--status-danger)' : col.validityPct < 95 ? 'var(--status-warning)' : 'var(--status-success)'};">
-                ${col.validityPct.toFixed(1)}%
+              <td style="font-family: var(--font-mono);">${(col.uniquePct || 0).toFixed(1)}%</td>
+              <td style="font-family: var(--font-mono); color: ${(col.validityPct || 100) < 90 ? 'var(--status-danger)' : (col.validityPct || 100) < 95 ? 'var(--status-warning)' : 'var(--status-success)'};">
+                ${(col.validityPct || 100).toFixed(1)}%
               </td>
               <td>
                 <span style="font-size: 11px; font-family: var(--font-mono); color: var(--accent-light); background: rgba(56, 189, 248, 0.08); padding: 2px 6px; border-radius: var(--radius-xs);">
-                  ${col.inferredConstraint}
+                  ${col.inferredConstraint || 'None'}
                 </span>
               </td>
-              <td style="font-family: var(--font-mono); font-weight: 600; color: ${col.potentialAnomalies > 50 ? 'var(--status-danger)' : col.potentialAnomalies > 0 ? 'var(--status-warning)' : 'var(--status-success)'};">
-                ${col.potentialAnomalies > 0 ? col.potentialAnomalies : '0'}
+              <td style="font-family: var(--font-mono); font-weight: 600; color: ${(col.potentialAnomalies || 0) > 50 ? 'var(--status-danger)' : (col.potentialAnomalies || 0) > 0 ? 'var(--status-warning)' : 'var(--status-success)'};">
+                ${(col.potentialAnomalies || 0) > 0 ? col.potentialAnomalies : '0'}
               </td>
               <td>
                 <span class="badge ${col.status === 'danger' ? 'badge-high' : col.status === 'warning' ? 'badge-medium' : 'badge-success'}">
-                  ${col.status.toUpperCase()}
+                  ${(col.status || 'CLEAN').toUpperCase()}
                 </span>
               </td>
             </tr>
@@ -98,14 +108,16 @@ export function renderDataProfile(container) {
         <div style="font-size: 24px;">🤖</div>
         <div>
           <div style="font-size: var(--text-sm); font-weight: 600; color: var(--text-primary);">
-            Semantic Constraint Discovery Finished
+            Semantic Profiling Engine
           </div>
           <div style="font-size: var(--text-xs); color: var(--text-secondary);">
-            The agent discovered 5 cross-column functional dependencies and flagged 2,512 actionable issues.
+            ${columns.length > 0 
+              ? `Profiled ${columns.length} columns and identified ${issueCount} actionable quality issues.`
+              : `Ready to profile columns as soon as a dataset is ingested.`}
           </div>
         </div>
       </div>
-      <button class="btn btn-primary" id="btn-goto-issues-bottom">Inspect Issues (2,512) →</button>
+      <button class="btn btn-primary" id="btn-goto-issues-bottom">Inspect Issues (${issueCount.toLocaleString()}) →</button>
     </div>
   `;
 

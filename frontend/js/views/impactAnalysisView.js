@@ -1,16 +1,25 @@
 /**
  * View 9: Impact Analysis & Information Loss
+ * Mathematical estimation of entropy loss and reversibility safeguards
+ * Zero mock data
  */
 import { stateStore } from "../services/stateManager.js";
 
 export function renderImpactAnalysis(container) {
-  const impact = stateStore.getState().impactAnalysis;
+  const state = stateStore.getState();
+  const impact = state.impactAnalysis || { columnImpacts: [] };
+  const dataset = state.activeDataset || {};
+  const totalCols = dataset.columnsCount || 0;
+  const fieldsChanged = impact.fieldsChanged || (impact.columnImpacts ? impact.columnImpacts.length : 0);
+  const untouchedCols = Math.max(0, totalCols - fieldsChanged);
+  const pairs = state.reviewPairs || [];
+  const entropyLoss = (impact.entropyDelta !== undefined && impact.entropyDelta !== null) ? Number(impact.entropyDelta).toFixed(3) : "0.000";
 
   container.innerHTML = `
     <div class="page-header">
       <div class="page-title-group">
         <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: 4px;">
-          <span class="badge badge-success">Safe Risk Profile</span>
+          <span class="badge ${Number(entropyLoss) < 0.15 ? 'badge-success' : 'badge-medium'}">Safe Risk Profile</span>
           <span style="font-size: var(--text-xs); color: var(--text-muted); font-family: var(--font-mono);">Shannon Entropy Metric</span>
         </div>
         <h1>Impact & Information Loss Analysis</h1>
@@ -31,9 +40,9 @@ export function renderImpactAnalysis(container) {
           <span class="metric-label">Records Affected</span>
           <span class="badge badge-neutral">Scope</span>
         </div>
-        <div class="metric-value">${impact.recordsAffected.toLocaleString()}</div>
+        <div class="metric-value">${(impact.recordsAffected || 0).toLocaleString()}</div>
         <div class="metric-meta">
-          <span class="metric-indicator neutral">●</span> ${impact.percentAffected}% of total dataset
+          <span class="metric-indicator neutral">●</span> ${impact.percentAffected || 0}% of total dataset
         </div>
       </div>
 
@@ -42,20 +51,20 @@ export function renderImpactAnalysis(container) {
           <span class="metric-label">Fields Modified</span>
           <span class="badge badge-neutral">Columns</span>
         </div>
-        <div class="metric-value">${impact.fieldsChanged}</div>
+        <div class="metric-value">${fieldsChanged}</div>
         <div class="metric-meta">
-          <span class="metric-indicator positive">Isolated</span> 13 columns completely untouched
+          <span class="metric-indicator positive">Isolated</span> ${untouchedCols} columns completely untouched
         </div>
       </div>
 
       <div class="metric-card">
         <div class="metric-card-header">
           <span class="metric-label">Information Loss (ΔH)</span>
-          <span class="badge badge-success">Low (0.042)</span>
+          <span class="badge ${Number(entropyLoss) < 0.15 ? 'badge-success' : 'badge-medium'}">ΔH: ${entropyLoss}</span>
         </div>
-        <div class="metric-value">0.042</div>
+        <div class="metric-value">${entropyLoss}</div>
         <div class="metric-meta">
-          <span class="metric-indicator positive">Safe Threshold</span> (< 0.150 limit)
+          <span class="metric-indicator positive">Safe Threshold</span> (&lt; 0.150 limit)
         </div>
       </div>
 
@@ -94,22 +103,22 @@ export function renderImpactAnalysis(container) {
           </tr>
         </thead>
         <tbody>
-          ${impact.columnImpacts.map(col => `
+          ${impact.columnImpacts && impact.columnImpacts.length > 0 ? impact.columnImpacts.map(col => `
             <tr>
               <td>
                 <span style="font-family: var(--font-mono); font-weight: 600; color: var(--accent-light);">
                   ${col.column}
                 </span>
               </td>
-              <td style="font-family: var(--font-mono);">${col.changeCount.toLocaleString()}</td>
-              <td style="font-family: var(--font-mono);">${col.entropyLoss}</td>
+              <td style="font-family: var(--font-mono);">${(col.changeCount || 0).toLocaleString()}</td>
+              <td style="font-family: var(--font-mono);">${col.entropyLoss || '0.000'}</td>
               <td>
-                <span class="badge ${parseFloat(col.entropyLoss) > 0.01 ? 'badge-medium' : 'badge-low'}">
-                  ${parseFloat(col.entropyLoss) > 0.01 ? 'Moderate' : 'Negligible'}
+                <span class="badge ${parseFloat(col.entropyLoss || 0) > 0.01 ? 'badge-medium' : 'badge-low'}">
+                  ${parseFloat(col.entropyLoss || 0) > 0.01 ? 'Moderate' : 'Negligible'}
                 </span>
               </td>
               <td>
-                <span class="badge badge-success">${col.reversibility}</span>
+                <span class="badge badge-success">${col.reversibility || 'Snapshot'}</span>
               </td>
               <td>
                 <span style="font-size: 11px; color: var(--status-success); font-weight: 600;">
@@ -117,7 +126,13 @@ export function renderImpactAnalysis(container) {
                 </span>
               </td>
             </tr>
-          `).join('')}
+          `).join('') : `
+            <tr>
+              <td colspan="6" style="text-align: center; padding: var(--space-8); color: var(--text-muted);">
+                No column transformation impact recorded yet. Synthesize a cleaning plan first.
+              </td>
+            </tr>
+          `}
         </tbody>
       </table>
     </div>
@@ -133,7 +148,7 @@ export function renderImpactAnalysis(container) {
         </p>
       </div>
       <button class="btn btn-primary" id="btn-goto-review-bottom">
-        Review Duplicate Candidates (3 Pairs) →
+        Review Duplicate Candidates (${pairs.length} Pairs) →
       </button>
     </div>
   `;

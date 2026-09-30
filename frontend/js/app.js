@@ -96,6 +96,32 @@ function navigateTo(route) {
     }
   });
 
+  // Update topbar project name dynamically
+  const projElem = document.getElementById("current-project-name");
+  const state = stateStore.getState();
+  if (projElem) {
+    const activeDs = state.activeDataset;
+    if (activeDs && activeDs.name && activeDs.name !== "No Dataset Loaded") {
+      projElem.textContent = activeDs.name;
+    } else if (state.projects && state.projects.length > 0) {
+      projElem.textContent = state.projects[0].name;
+    } else {
+      projElem.textContent = "No Active Project";
+    }
+  }
+
+  // Update sidebar issues count badge
+  const issuesBadge = document.getElementById("sidebar-issues-badge");
+  if (issuesBadge) {
+    const count = (state.issues || []).length;
+    if (count > 0) {
+      issuesBadge.textContent = count.toLocaleString();
+      issuesBadge.style.display = "inline-flex";
+    } else {
+      issuesBadge.style.display = "none";
+    }
+  }
+
   // Scroll viewport to top
   const viewport = document.querySelector(".page-viewport");
   if (viewport) viewport.scrollTop = 0;

@@ -35,7 +35,7 @@ export function renderDashboard(container) {
         </div>
         <div class="metric-value">${metrics.totalProjects}</div>
         <div class="metric-meta">
-          <span class="metric-indicator positive">↑ 3 new</span> this month
+          <span class="metric-indicator ${metrics.totalProjects > 0 ? 'positive' : 'neutral'}">●</span> ${metrics.totalProjects} active workspace(s)
         </div>
       </div>
 
@@ -46,25 +46,25 @@ export function renderDashboard(container) {
         </div>
         <div class="metric-value">${metrics.datasetsProcessed}</div>
         <div class="metric-meta">
-          <span class="metric-indicator neutral">●</span> 12.8M total records profiled
+          <span class="metric-indicator ${metrics.datasetsProcessed > 0 ? 'positive' : 'neutral'}">●</span> ${metrics.datasetsProcessed} dataset(s) ingested
         </div>
       </div>
 
       <div class="metric-card">
         <div class="metric-card-header">
           <span class="metric-label">Issues Detected</span>
-          <span class="badge badge-high">Attention</span>
+          <span class="badge ${metrics.issuesDetected > 0 ? 'badge-high' : 'badge-neutral'}">Attention</span>
         </div>
         <div class="metric-value">${metrics.issuesDetected.toLocaleString()}</div>
         <div class="metric-meta">
-          <span class="metric-indicator negative">● 2,512</span> in active review
+          <span class="metric-indicator ${metrics.issuesDetected > 0 ? 'negative' : 'positive'}">● ${metrics.issuesDetected.toLocaleString()}</span> in active review
         </div>
       </div>
 
       <div class="metric-card">
         <div class="metric-card-header">
           <span class="metric-label">Transformations Executed</span>
-          <span class="badge badge-success">Reversible</span>
+          <span class="badge ${metrics.transformationsExecuted > 0 ? 'badge-success' : 'badge-neutral'}">Reversible</span>
         </div>
         <div class="metric-value">${metrics.transformationsExecuted.toLocaleString()}</div>
         <div class="metric-meta">

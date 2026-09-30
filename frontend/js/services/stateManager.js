@@ -7,8 +7,13 @@ import { INITIAL_DATA } from "../data/mockData.js";
 
 class StateManager {
   constructor() {
-    this.storageKey = "purifyops_clean_v1";
+    this.storageKey = "purifyops_clean_v2";
     this.listeners = new Map();
+    // Clear legacy mock caches
+    try {
+      localStorage.removeItem("purifyops_clean_v1");
+      localStorage.removeItem("agentic_cleaner_state");
+    } catch (_) {}
     this.state = this.loadState();
   }
 
@@ -77,20 +82,20 @@ class StateManager {
     const project = {
       id,
       name: newProject.name || "Untitled Data Project",
-      datasetName: newProject.datasetName || "Ingested_Dataset.csv",
+      datasetName: newProject.datasetName || "No Dataset Uploaded",
       description: newProject.description || "Enterprise data cleaning initiative",
       sourceType: newProject.sourceType || "csv",
-      recordsCount: newProject.recordsCount || 12450,
-      columnsCount: newProject.columnsCount || 18,
-      qualityScore: 61,
-      issuesCount: 2512,
-      status: "In Progress",
+      recordsCount: newProject.recordsCount || 0,
+      columnsCount: newProject.columnsCount || 0,
+      qualityScore: 0,
+      issuesCount: 0,
+      status: "New",
       lastUpdated: "Just now",
       dimensions: {
-        completeness: 71,
-        consistency: 58,
-        validity: 74,
-        uniqueness: 61
+        completeness: 0,
+        consistency: 0,
+        validity: 0,
+        uniqueness: 0
       }
     };
     this.state.projects.unshift(project);

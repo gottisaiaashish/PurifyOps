@@ -30,7 +30,16 @@ export function renderReviewApproval(container) {
 
     <!-- Review Candidates List -->
     <div class="review-cards-container" id="review-list">
-      ${pairs.map(pair => `
+      ${pairs.length === 0 ? `
+        <div class="card" style="text-align: center; padding: var(--space-12); background: var(--bg-surface-elevated); border: 1px dashed var(--border-subtle); border-radius: var(--radius-md);">
+          <div style="font-size: 2rem; margin-bottom: var(--space-3); color: var(--text-muted);">👥</div>
+          <h3 style="font-size: var(--text-lg); color: var(--text-primary); margin-bottom: var(--space-2);">No Duplicate Candidates Pending Review</h3>
+          <p style="color: var(--text-muted); max-width: 480px; margin: 0 auto var(--space-5); font-size: var(--text-sm);">
+            No high-ambiguity entity duplicate clusters were detected in this dataset. All records are uniquely identified or auto-resolved.
+          </p>
+          <a href="#validation" class="btn btn-primary" style="display: inline-block;">Proceed to Validation Tests</a>
+        </div>
+      ` : pairs.map(pair => `
         <div class="review-card" data-pair-id="${pair.id}">
           <div class="review-card-header">
             <div style="display: flex; align-items: center; gap: var(--space-3);">

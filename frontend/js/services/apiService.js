@@ -6,9 +6,9 @@
 
 import { stateStore } from "./stateManager.js";
 
-const API_BASE = window.location.origin.includes(":8000") || window.location.origin.includes(":4173")
-  ? "/api/v1"
-  : "http://localhost:8000/api/v1";
+const API_BASE = window.location.port === "5500" || window.location.port === "3000" || window.location.port === "5173"
+  ? "http://localhost:8000/api/v1"
+  : "/api/v1";
 
 async function request(endpoint, options = {}) {
   try {

@@ -55,7 +55,7 @@
         <a href="#issues" class="nav-item" data-route="issues">
           <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
           Issues Detected
-          <span class="nav-badge danger">2,512</span>
+          <span class="nav-badge danger" id="sidebar-issues-badge" style="display: none;">0</span>
         </a>
         <a href="#cleaning-plan" class="nav-item" data-route="cleaning-plan">
           <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
@@ -111,7 +111,7 @@
         <div class="topbar-left">
           <div class="project-selector" id="topbar-project-btn">
             <span class="project-label">Project:</span>
-            <span class="project-name" id="current-project-name">Customer Data Cleanup</span>
+            <span class="project-name" id="current-project-name">No Active Project</span>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </div>
         </div>
