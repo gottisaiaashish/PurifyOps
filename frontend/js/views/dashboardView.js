@@ -6,9 +6,14 @@ import { stateStore } from "../services/stateManager.js";
 import { ApiService } from "../services/apiService.js";
 
 export function renderDashboard(container) {
-  const state = stateStore.getState();
-  const metrics = state.platformMetrics;
-  const recentProjects = state.projects;
+  const state = stateStore.getState() || {};
+  const metrics = state.platformMetrics || {};
+  const recentProjects = state.projects || [];
+
+  const totalProjects = metrics.totalProjects || 0;
+  const datasetsProcessed = metrics.datasetsProcessed || 0;
+  const issuesDetected = metrics.issuesDetected || 0;
+  const transformationsExecuted = metrics.transformationsExecuted || 0;
 
   container.innerHTML = `
     <div class="page-header">
@@ -33,9 +38,9 @@ export function renderDashboard(container) {
           <span class="metric-label">Active Projects</span>
           <span class="badge badge-neutral">Workspaces</span>
         </div>
-        <div class="metric-value">${metrics.totalProjects}</div>
+        <div class="metric-value">${totalProjects}</div>
         <div class="metric-meta">
-          <span class="metric-indicator ${metrics.totalProjects > 0 ? 'positive' : 'neutral'}">●</span> ${metrics.totalProjects} project(s) created
+          <span class="metric-indicator ${totalProjects > 0 ? 'positive' : 'neutral'}">●</span> ${totalProjects} project(s) created
         </div>
       </div>
 
@@ -44,29 +49,29 @@ export function renderDashboard(container) {
           <span class="metric-label">Files Processed</span>
           <span class="badge badge-neutral">Files</span>
         </div>
-        <div class="metric-value">${metrics.datasetsProcessed}</div>
+        <div class="metric-value">${datasetsProcessed}</div>
         <div class="metric-meta">
-          <span class="metric-indicator ${metrics.datasetsProcessed > 0 ? 'positive' : 'neutral'}">●</span> ${metrics.datasetsProcessed} uploaded
+          <span class="metric-indicator ${datasetsProcessed > 0 ? 'positive' : 'neutral'}">●</span> ${datasetsProcessed} uploaded
         </div>
       </div>
 
       <div class="metric-card">
         <div class="metric-card-header">
           <span class="metric-label">Issues Found</span>
-          <span class="badge ${metrics.issuesDetected > 0 ? 'badge-high' : 'badge-neutral'}">Errors</span>
+          <span class="badge ${issuesDetected > 0 ? 'badge-high' : 'badge-neutral'}">Errors</span>
         </div>
-        <div class="metric-value">${metrics.issuesDetected.toLocaleString()}</div>
+        <div class="metric-value">${issuesDetected.toLocaleString()}</div>
         <div class="metric-meta">
-          <span class="metric-indicator ${metrics.issuesDetected > 0 ? 'negative' : 'positive'}">●</span> ${metrics.issuesDetected.toLocaleString()} to resolve
+          <span class="metric-indicator ${issuesDetected > 0 ? 'negative' : 'positive'}">●</span> ${issuesDetected.toLocaleString()} to resolve
         </div>
       </div>
 
       <div class="metric-card">
         <div class="metric-card-header">
           <span class="metric-label">Cleaned Records</span>
-          <span class="badge ${metrics.transformationsExecuted > 0 ? 'badge-success' : 'badge-neutral'}">Safe</span>
+          <span class="badge ${transformationsExecuted > 0 ? 'badge-success' : 'badge-neutral'}">Safe</span>
         </div>
-        <div class="metric-value">${metrics.transformationsExecuted.toLocaleString()}</div>
+        <div class="metric-value">${transformationsExecuted.toLocaleString()}</div>
         <div class="metric-meta">
           <span class="metric-indicator positive">100%</span> undo protection
         </div>
@@ -123,25 +128,25 @@ export function renderDashboard(container) {
           ` : recentProjects.map(p => `
             <tr>
               <td>
-                <div style="font-weight: 600; color: var(--text-primary);">${p.name}</div>
-                <div style="font-size: var(--text-xs); color: var(--text-muted);">${p.description}</div>
+                <div style="font-weight: 600; color: var(--text-primary);">${p.name || 'Untitled Project'}</div>
+                <div style="font-size: var(--text-xs); color: var(--text-muted);">${p.description || ''}</div>
               </td>
-              <td><span style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--accent-light);">${p.datasetName}</span></td>
-              <td style="font-family: var(--font-mono);">${p.recordsCount.toLocaleString()}</td>
+              <td><span style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--accent-light);">${p.datasetName || 'CSV File'}</span></td>
+              <td style="font-family: var(--font-mono);">${(p.recordsCount || 0).toLocaleString()}</td>
               <td>
-                <span class="badge ${p.qualityScore > 80 ? 'badge-success' : p.qualityScore > 65 ? 'badge-medium' : 'badge-high'}">
-                  ${p.qualityScore} / 100
+                <span class="badge ${(p.qualityScore || 0) > 80 ? 'badge-success' : (p.qualityScore || 0) > 65 ? 'badge-medium' : 'badge-high'}">
+                  ${p.qualityScore || 0} / 100
                 </span>
               </td>
-              <td style="font-family: var(--font-mono); color: ${p.issuesCount > 1000 ? 'var(--status-danger)' : 'var(--text-secondary)'};">
-                ${p.issuesCount.toLocaleString()}
+              <td style="font-family: var(--font-mono); color: ${(p.issuesCount || 0) > 1000 ? 'var(--status-danger)' : 'var(--text-secondary)'};">
+                ${(p.issuesCount || 0).toLocaleString()}
               </td>
               <td>
                 <span class="badge ${p.status === 'Completed' ? 'badge-success' : p.status === 'Needs Review' ? 'badge-medium' : 'badge-neutral'}">
-                  ${p.status}
+                  ${p.status || 'Active'}
                 </span>
               </td>
-              <td style="color: var(--text-muted); font-size: var(--text-xs);">${p.lastUpdated}</td>
+              <td style="color: var(--text-muted); font-size: var(--text-xs);">${p.lastUpdated || 'Recently'}</td>
               <td>
                 <div style="display: flex; gap: 6px; align-items: center;">
                   <button class="btn btn-outline btn-sm btn-open-pipeline" data-project-id="${p.id}">

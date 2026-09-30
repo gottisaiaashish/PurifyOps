@@ -70,7 +70,11 @@ function navigateTo(route) {
   const targetElem = document.getElementById(targetConfig.id);
   if (targetElem) {
     targetElem.classList.add("active");
-    targetConfig.render(targetElem);
+    try {
+      targetConfig.render(targetElem);
+    } catch (err) {
+      console.error(`[PurifyOps Router Error] Failed to render view '${route}':`, err);
+    }
   }
 
   // Update Sidebar active state

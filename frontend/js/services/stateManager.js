@@ -28,7 +28,14 @@ class StateManager {
         if (parsed.activeDataset?.name && (!parsed.issues || parsed.issues.length === 0)) {
           return JSON.parse(JSON.stringify(INITIAL_DATA));
         }
-        return parsed;
+        return {
+          ...INITIAL_DATA,
+          ...parsed,
+          platformMetrics: {
+            ...INITIAL_DATA.platformMetrics,
+            ...(parsed.platformMetrics || {})
+          }
+        };
       }
     } catch (e) {
       console.warn("Failed to load local storage state, using mock default.", e);
