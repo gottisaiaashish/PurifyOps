@@ -1,26 +1,41 @@
-"""
-Agentic Data Cleaning Planner (PNG6)
-Production FastAPI Server & Unified Application Host
-"""
-
 import os
+import sys
 import copy
 import shutil
 from typing import List, Dict, Any
+
+# Ensure both current dir and parent dir are on sys.path
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+PARENT_DIR = os.path.dirname(CURRENT_DIR)
+for p in [CURRENT_DIR, PARENT_DIR]:
+    if p not in sys.path:
+        sys.path.insert(0, p)
+
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, JSONResponse
 
-from backend.database import db, UPLOADS_DIR
-from backend.schemas import (
-    Project, ProjectCreate, DatasetOverview, ColumnProfile,
-    DataIssue, CleaningPlan, DecisionRequest, SettingsPayload
-)
-from backend.agent_planner import generate_dag_cleaning_plan
-from backend.validator import run_validation_suite
-from backend.entropy_engine import analyze_dataset_impact
-from backend.executor import execute_pipeline_transformations
+try:
+    from backend.database import db, UPLOADS_DIR
+    from backend.schemas import (
+        Project, ProjectCreate, DatasetOverview, ColumnProfile,
+        DataIssue, CleaningPlan, DecisionRequest, SettingsPayload
+    )
+    from backend.agent_planner import generate_dag_cleaning_plan
+    from backend.validator import run_validation_suite
+    from backend.entropy_engine import analyze_dataset_impact
+    from backend.executor import execute_pipeline_transformations
+except ImportError:
+    from database import db, UPLOADS_DIR
+    from schemas import (
+        Project, ProjectCreate, DatasetOverview, ColumnProfile,
+        DataIssue, CleaningPlan, DecisionRequest, SettingsPayload
+    )
+    from agent_planner import generate_dag_cleaning_plan
+    from validator import run_validation_suite
+    from entropy_engine import analyze_dataset_impact
+    from executor import execute_pipeline_transformations
 
 app = FastAPI(
     title="PurifyOps API",
@@ -270,6 +285,12 @@ def update_settings(payload: SettingsPayload):
 
 
 # Mount static frontend files
-FRONTEND_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "frontend"))
-if os.path.exists(FRONTEND_DIR):
-    app.mount("/", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend")
+potential_frontend_paths = [
+    os.path.abspath(os.path.join(CURRENT_DIR, "..", "frontend")),
+    os.path.abspath(os.path.join(CURRENT_DIR, "frontend")),
+    os.path.abspath("frontend"),
+]
+for f_path in potential_frontend_paths:
+    if os.path.exists(f_path):
+        app.mount("/", StaticFiles(directory=f_path, html=True), name="frontend")
+        break

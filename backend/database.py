@@ -1,18 +1,29 @@
-"""
-Persistent Application Data Store for Projects, Datasets, Plans, and Audit Logs
-"""
-
 import os
+import sys
 import csv
 import json
 import copy
 from typing import Dict, Any, List, Optional
 from datetime import datetime
-from backend.profiler import profile_columns, calculate_quality_dimensions, detect_issues
-from backend.agent_planner import generate_dag_cleaning_plan, find_duplicate_candidate_pairs
-from backend.validator import run_validation_suite
-from backend.entropy_engine import analyze_dataset_impact
-from backend.executor import execute_pipeline_transformations
+
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+PARENT_DIR = os.path.dirname(CURRENT_DIR)
+for p in [CURRENT_DIR, PARENT_DIR]:
+    if p not in sys.path:
+        sys.path.insert(0, p)
+
+try:
+    from backend.profiler import profile_columns, calculate_quality_dimensions, detect_issues
+    from backend.agent_planner import generate_dag_cleaning_plan, find_duplicate_candidate_pairs
+    from backend.validator import run_validation_suite
+    from backend.entropy_engine import analyze_dataset_impact
+    from backend.executor import execute_pipeline_transformations
+except ImportError:
+    from profiler import profile_columns, calculate_quality_dimensions, detect_issues
+    from agent_planner import generate_dag_cleaning_plan, find_duplicate_candidate_pairs
+    from validator import run_validation_suite
+    from entropy_engine import analyze_dataset_impact
+    from executor import execute_pipeline_transformations
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 UPLOADS_DIR = os.path.join(os.path.dirname(__file__), "uploads")
