@@ -1,0 +1,21 @@
+Customer_ID,First_Name,Last_Name,Email,Phone,Age,Annual_Revenue,Country_Code,Postal_Code,Account_Status,Signup_Date
+10001,Rahul,Kumar,rahul@gmail.com,+91 98765 43210,28,48500.00,IN,110001,Active,2023-01-15
+10002,RAHUL,Kumar,rahul@gmail.com,9876543210,28,,IN,110001,Active,2023-01-15
+10003,Sarah,Jenkins,s.jenkins@acmecorp.com,+1 (555) 234-8901,34,110000.00,US,94105,Active,2022-11-20
+10004,Sara M.,Jenkins,s.jenkins@acmecorp.com,555-234-8901,34,110000.00,US,94105,Active,2022-11-20
+10005,David,Chen,dchen@innovate.org,+44 20 7946 0991,45,85000.00,GB,EC1A 1BB,Active,2021-08-10
+10006,D.,Chen,dchen@innovate.org,020 7946 0991,45,85000.00,GB,EC1A 1BB,Active,2021-08-10
+10007,Priya,Sharma,priya.sharma@domain.co.in,+91 98111 22334,31,62000.00,IN,400001,Active,2023-03-04
+10008,Michael,Brown,mbrown_invalid_email,5551234567,-2,95000.00,US,10001,Suspended,2020-05-18
+10009,Elena,Rostova,elena.rostova@tech.de,+49 30 123456,29,78000.00,DE,10115,Active,2022-09-12
+10010,Carlos,Santana,carlos@music.es,34 91 123 4567,142,54000.00,ES,28001,Active,2021-12-01
+10011,Amina,Diallo,amina@dakar.sn,+221 33 821 0000,26,,SN,BP 1234,Active,2023-04-19
+10012,John,Doe,johndoe@bad-syntax..com,(555) 999-0000,41,67000.00,US,90210,Active,2019-07-22
+10013,Wei,Zhang,wei.zhang@corp.cn,+86 10 6555 1234,38,125000.00,CN,100000,Active,2022-02-14
+10014,Wei,ZHANG,wei.zhang@corp.cn,10 6555 1234,38,125000.00,CN,100000,Active,2022-02-14
+10015,Fatima,Zahra,fatima@casablanca.ma,+212 522 123456,33,45000.00,MA,20000,Active,2023-06-30
+10016,Lucas,Silva,lucas.silva@brasil.br,+55 11 98765-4321,30,-5000.00,BR,01310-100,Active,2022-08-05
+10017,Emma,Watson,emma.watson@oxford.ac.uk,+44 1865 270000,32,150000.00,GB,OX1 2JD,Active,2021-10-11
+10018,Liam,O'Connor,liam@dublin.ie,+353 1 496 0000,39,88000.00,IE,D02,Active,2020-03-15
+10019,Ananya,Patel,ananya@ahmedabad.in,+91 79 2630 0000,27,51000.00,IN,380009,Active,2023-09-01
+10020,Gabriel,Mendoza,gabriel@bogota.co,+57 1 344 0000,36,63000.00,CO,110111,Active,2022-04-12
