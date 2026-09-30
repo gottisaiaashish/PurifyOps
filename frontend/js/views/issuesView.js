@@ -134,26 +134,25 @@ export function renderIssues(container) {
     </div>
 
     <!-- Executive Business Impact Banner -->
-    <div class="settings-content-card" style="margin-bottom: var(--space-6); background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.85) 100%); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: var(--radius-md); padding: 24px;">
+    <div class="settings-content-card" style="margin-bottom: var(--space-6); background: rgba(18, 20, 32, 0.6); border: 1px solid rgba(99, 102, 241, 0.2); border-radius: var(--radius-md); padding: 24px; backdrop-filter: blur(20px);">
       <div style="display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: 20px; align-items: center;">
         
         <!-- Score & Status -->
         <div style="border-right: 1px solid var(--border-subtle); padding-right: 20px;">
           <div style="font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); font-weight: 600;">Overall Data Health Score</div>
           <div style="display: flex; align-items: baseline; gap: 8px; margin: 6px 0;">
-            <span style="font-size: 32px; font-weight: 800; color: #f59e0b;">58</span>
+            <span style="font-size: 32px; font-weight: 800; color: var(--text-primary);">58</span>
             <span style="font-size: var(--text-base); color: var(--text-muted);">/ 100</span>
-            <span class="badge badge-high" style="margin-left: 8px;">Grade: D+ (High Risk)</span>
           </div>
           <div style="font-size: var(--text-xs); color: var(--text-secondary); line-height: 1.4;">
-            Target after Autonomous Cleaning: <strong style="color: var(--status-success);">98 / 100 (Grade: A+)</strong>
+            Target after Autonomous Cleaning: <strong style="color: var(--accent-light);">98 / 100</strong>
           </div>
         </div>
 
         <!-- Financial & Operational Risk -->
         <div style="border-right: 1px solid var(--border-subtle); padding-right: 20px;">
           <div style="font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); font-weight: 600;">Financial & Operational Risk</div>
-          <div style="font-size: var(--text-lg); font-weight: 700; color: var(--status-danger); margin: 6px 0;">
+          <div style="font-size: var(--text-lg); font-weight: 700; color: var(--text-primary); margin: 6px 0;">
             $38,500 / Quarter
           </div>
           <div style="font-size: var(--text-xs); color: var(--text-muted); line-height: 1.4;">
@@ -178,7 +177,7 @@ export function renderIssues(container) {
           <div style="font-size: var(--text-lg); font-weight: 700; color: var(--accent-light); margin: 6px 0;">
             ~14.5 Engineering Hrs
           </div>
-          <div style="font-size: var(--text-xs); color: var(--status-success); line-height: 1.4;">
+          <div style="font-size: var(--text-xs); color: var(--text-muted); line-height: 1.4;">
             Replaces manual SQL scripts and spreadsheet cleaning.
           </div>
         </div>
@@ -191,44 +190,40 @@ export function renderIssues(container) {
       <div class="metric-card" style="cursor: pointer;" data-filter="duplicates">
         <div class="metric-card-header">
           <span class="metric-label">Duplicate Customer Entities</span>
-          <span class="badge ${duplicateCount > 0 ? 'badge-high' : 'badge-neutral'}">Duplicates</span>
         </div>
         <div class="metric-value">${duplicateCount.toLocaleString()}</div>
         <div class="metric-meta">
-          <span class="metric-indicator ${duplicateCount > 0 ? 'negative' : 'neutral'}">●</span> ${duplicateIssues.length} cluster rule(s) • CRM collision
+          <span class="metric-indicator neutral">●</span> ${duplicateIssues.length} cluster rule(s) • CRM collision
         </div>
       </div>
 
       <div class="metric-card" style="cursor: pointer;" data-filter="emails">
         <div class="metric-card-header">
           <span class="metric-label">RFC Email Syntax Violations</span>
-          <span class="badge ${formatCount > 0 ? 'badge-high' : 'badge-neutral'}">Format Validity</span>
         </div>
         <div class="metric-value">${formatCount.toLocaleString()}</div>
         <div class="metric-meta">
-          <span class="metric-indicator ${formatCount > 0 ? 'negative' : 'neutral'}">●</span> 6.1% bounce rate • ISP blacklist risk
+          <span class="metric-indicator neutral">●</span> 6.1% bounce rate • ISP blacklist risk
         </div>
       </div>
 
       <div class="metric-card" style="cursor: pointer;" data-filter="missing">
         <div class="metric-card-header">
           <span class="metric-label">Blank & Missing Fields</span>
-          <span class="badge ${missingCount > 0 ? 'badge-medium' : 'badge-neutral'}">Completeness</span>
         </div>
         <div class="metric-value">${missingCount.toLocaleString()}</div>
         <div class="metric-meta">
-          <span class="metric-indicator ${missingCount > 0 ? 'warning' : 'neutral'}">●</span> Breaks revenue analytics & postal routing
+          <span class="metric-indicator neutral">●</span> Breaks revenue analytics & postal routing
         </div>
       </div>
 
       <div class="metric-card" style="cursor: pointer;" data-filter="anomalies">
         <div class="metric-card-header">
           <span class="metric-label">Extreme Values & Outliers</span>
-          <span class="badge ${anomalyCount > 0 ? 'badge-critical' : 'badge-neutral'}">Outliers</span>
         </div>
         <div class="metric-value">${anomalyCount.toLocaleString()}</div>
         <div class="metric-meta">
-          <span class="metric-indicator ${anomalyCount > 0 ? 'negative' : 'neutral'}">●</span> Negative revenue & impossible ages (142 yrs)
+          <span class="metric-indicator neutral">●</span> Negative revenue & impossible ages (142 yrs)
         </div>
       </div>
     </div>
@@ -241,7 +236,7 @@ export function renderIssues(container) {
           All Issues (${issues.length})
         </button>
         <button class="btn btn-sm ${currentFilter === 'high' ? 'btn-primary' : 'btn-outline'}" data-filter-btn="high">
-          🚨 Critical / High (3)
+          Critical / High (3)
         </button>
         <button class="btn btn-sm ${currentFilter === 'duplicates' ? 'btn-primary' : 'btn-outline'}" data-filter-btn="duplicates">
           Duplicates (${duplicateCount})
@@ -274,29 +269,21 @@ export function renderIssues(container) {
           dept: "Data Governance",
           businessImpact: "Data Inconsistency & Reporting Discrepancy",
           financialRisk: "Unstandardized entries impact downstream workflows",
-          severityColor: "var(--status-warning)",
+          severityColor: "var(--accent-light)",
           evidence: []
         };
 
-        const isCritical = iss.severity === "Critical";
-        const isHigh = iss.severity === "High";
-        const borderColor = isCritical ? "var(--status-danger)" : isHigh ? "#f97316" : "var(--status-warning)";
-
         return `
-          <div class="metric-card" style="border-left: 4px solid ${borderColor}; padding: 20px 24px;">
+          <div class="metric-card" style="border-left: 3px solid var(--accent-primary); padding: 20px 24px;">
             
             <!-- Issue Top Row -->
             <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
               <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-                <span class="badge ${isCritical ? 'badge-critical' : isHigh ? 'badge-high' : 'badge-medium'}">
-                  ${(iss.severity || 'HIGH').toUpperCase()}
-                </span>
                 <h3 style="font-size: var(--text-md); font-weight: 700; color: var(--text-primary); margin: 0;">
                   ${iss.type}
                 </h3>
-                <span class="badge badge-neutral">${iss.category}</span>
-                <span style="font-size: 11px; padding: 2px 8px; border-radius: 4px; background: rgba(59, 130, 246, 0.1); color: var(--accent-light); font-weight: 500;">
-                  Dept: ${meta.dept}
+                <span style="font-size: var(--text-xs); color: var(--text-muted); font-weight: 500;">
+                  • ${iss.category}
                 </span>
               </div>
               <div style="display: flex; align-items: center; gap: 12px;">
@@ -307,7 +294,7 @@ export function renderIssues(container) {
             </div>
 
             <!-- Business Risk & Problem Explanation Box -->
-            <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 12px 16px; margin: 12px 0;">
+            <div style="background: rgba(18, 20, 32, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 12px 16px; margin: 12px 0;">
               <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
                 <div>
                   <div style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--text-muted); letter-spacing: 0.05em; margin-bottom: 4px;">
@@ -318,10 +305,10 @@ export function renderIssues(container) {
                   </div>
                 </div>
                 <div>
-                  <div style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--status-danger); letter-spacing: 0.05em; margin-bottom: 4px;">
-                    Business & Financial Risk
+                  <div style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--text-muted); letter-spacing: 0.05em; margin-bottom: 4px;">
+                    Business Risk
                   </div>
-                  <div style="font-size: var(--text-sm); color: #f87171; line-height: 1.5; font-weight: 500;">
+                  <div style="font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.5; font-weight: 500;">
                     ${meta.businessImpact}: ${meta.financialRisk}
                   </div>
                 </div>
@@ -333,19 +320,19 @@ export function renderIssues(container) {
               <div style="margin-top: 14px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                   <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; color: var(--accent-light);">
-                    👁️ Concrete Data Evidence (Sample Corrupted Records from ${datasetName}):
+                    Concrete Data Evidence (Sample Records):
                   </span>
-                  <span style="font-size: 11px; color: var(--text-muted);">Demonstrates autonomous fix</span>
+                  <span style="font-size: 11px; color: var(--text-muted);">Autonomous fix preview</span>
                 </div>
 
                 <div style="overflow-x: auto; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); background: var(--bg-surface);">
                   <table style="width: 100%; border-collapse: collapse; font-size: var(--text-xs); text-align: left;">
                     <thead>
-                      <tr style="background: rgba(30, 41, 59, 0.6); border-bottom: 1px solid var(--border-subtle);">
+                      <tr style="background: rgba(30, 41, 59, 0.4); border-bottom: 1px solid var(--border-subtle);">
                         <th style="padding: 8px 12px; color: var(--text-muted); font-weight: 600;">Row ID</th>
                         <th style="padding: 8px 12px; color: var(--text-muted); font-weight: 600;">Customer</th>
-                        <th style="padding: 8px 12px; color: var(--status-danger); font-weight: 600;">Messy / Corrupted Value in CSV</th>
-                        <th style="padding: 8px 12px; color: var(--status-success); font-weight: 600;">Autonomous PurifyOps Cleaned Output</th>
+                        <th style="padding: 8px 12px; color: var(--text-secondary); font-weight: 600;">Current Value in CSV</th>
+                        <th style="padding: 8px 12px; color: var(--accent-light); font-weight: 600;">PurifyOps Cleaned Output</th>
                         <th style="padding: 8px 12px; color: var(--text-muted); font-weight: 600;">Action Rationale</th>
                       </tr>
                     </thead>
@@ -354,17 +341,17 @@ export function renderIssues(container) {
                         <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.03);">
                           <td style="padding: 8px 12px; font-family: var(--font-mono); color: var(--accent-light); font-weight: 600;">#${ev.id}</td>
                           <td style="padding: 8px 12px; font-weight: 500; color: var(--text-primary);">${ev.name}</td>
-                          <td style="padding: 8px 12px; font-family: var(--font-mono); color: #f87171; background: rgba(239, 68, 68, 0.06);">
-                            <span style="display: inline-block; padding: 2px 6px; border-radius: 3px; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3);">
+                          <td style="padding: 8px 12px; font-family: var(--font-mono); color: var(--text-secondary);">
+                            <span style="display: inline-block; padding: 2px 6px; border-radius: 3px; background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border-subtle);">
                               ${ev.original}
                             </span>
                           </td>
-                          <td style="padding: 8px 12px; font-family: var(--font-mono); color: #34d399; background: rgba(16, 185, 129, 0.06);">
-                            <span style="display: inline-block; padding: 2px 6px; border-radius: 3px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3);">
+                          <td style="padding: 8px 12px; font-family: var(--font-mono); color: var(--accent-light);">
+                            <span style="display: inline-block; padding: 2px 6px; border-radius: 3px; background: rgba(99, 102, 241, 0.12); border: 1px solid rgba(99, 102, 241, 0.3);">
                               ${ev.fix}
                             </span>
                           </td>
-                          <td style="padding: 8px 12px; color: var(--text-secondary);">${ev.reason}</td>
+                          <td style="padding: 8px 12px; color: var(--text-muted);">${ev.reason}</td>
                         </tr>
                       `).join('')}
                     </tbody>
@@ -382,9 +369,6 @@ export function renderIssues(container) {
               <div style="display: flex; gap: var(--space-2); align-items: center;">
                 <span style="font-size: 11px; font-family: var(--font-mono); color: var(--text-muted); background: var(--bg-surface-elevated); padding: 2px 8px; border-radius: var(--radius-xs);">
                   Target Columns: ${Array.isArray(iss.affectedColumns) ? iss.affectedColumns.join(', ') : (iss.affectedColumns || '-')}
-                </span>
-                <span style="font-size: 11px; color: var(--status-success); font-weight: 600;">
-                  ✓ 100% Reversible
                 </span>
               </div>
             </div>

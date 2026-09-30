@@ -206,7 +206,7 @@
 .metric-indicator.negative { color: var(--status-danger); }
 .metric-indicator.neutral { color: var(--text-muted); }
 
-/* Badges */
+/* Badges - Sleek 2-Color Monochrome & Violet Glass */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -220,34 +220,15 @@
   white-space: nowrap;
 }
 
-.badge-low {
-  background-color: rgba(56, 189, 248, 0.12);
-  color: var(--accent-light);
-  border: 1px solid rgba(56, 189, 248, 0.25);
-}
-
-.badge-medium {
-  background-color: var(--status-warning-bg);
-  color: var(--status-warning);
-  border: 1px solid var(--status-warning-border);
-}
-
-.badge-high, .badge-critical {
-  background-color: var(--status-danger-bg);
-  color: var(--status-danger);
-  border: 1px solid var(--status-danger-border);
-}
-
-.badge-success {
-  background-color: var(--status-success-bg);
-  color: var(--status-success);
-  border: 1px solid var(--status-success-border);
-}
-
+.badge-low,
+.badge-medium,
+.badge-high,
+.badge-critical,
+.badge-success,
 .badge-neutral {
-  background-color: var(--bg-surface-elevated);
-  color: var(--text-secondary);
-  border: 1px solid var(--border-subtle);
+  background-color: rgba(99, 102, 241, 0.08);
+  color: var(--accent-light);
+  border: 1px solid rgba(99, 102, 241, 0.2);
 }
 
 /* Enterprise Data Table */
