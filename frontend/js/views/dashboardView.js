@@ -178,6 +178,11 @@ export function renderDashboard(container) {
   });
   container.querySelectorAll(".btn-open-pipeline").forEach(btn => {
     btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-project-id");
+      if (id) {
+        stateStore.setActiveProject(id);
+        ApiService.syncStateWithBackend(id);
+      }
       window.location.hash = "#issues";
     });
   });

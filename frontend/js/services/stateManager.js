@@ -84,6 +84,26 @@ class StateManager {
 
   // --- Actions ---
 
+  setActiveProject(projectId) {
+    this.state.activeProjectId = projectId;
+    const proj = (this.state.projects || []).find(p => String(p.id) === String(projectId));
+    if (proj) {
+      if (!this.state.activeDataset || this.state.activeDataset.name === "No Dataset Loaded") {
+        this.state.activeDataset = {
+          id: proj.id,
+          name: proj.datasetName || proj.name,
+          fileSize: "142 KB",
+          recordsCount: proj.recordsCount || 1045,
+          columnsCount: proj.columnsCount || 12,
+          qualityScore: proj.qualityScore || 94,
+          dimensions: proj.dimensions || { completeness: 94, consistency: 92, validity: 94, uniqueness: 96 }
+        };
+      }
+    }
+    this.saveState();
+    this.emit("state:changed", this.state);
+  }
+
   createProject(newProject) {
     const id = `proj-${Date.now().toString().slice(-4)}`;
     const project = {

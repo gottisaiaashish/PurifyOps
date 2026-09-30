@@ -72,18 +72,18 @@ export function renderProjects(container) {
               <td style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--accent-light);">
                 ${p.datasetName}
               </td>
-              <td style="font-family: var(--font-mono);">${p.recordsCount.toLocaleString()}</td>
+              <td style="font-family: var(--font-mono);">${(p.recordsCount || 0).toLocaleString()}</td>
               <td>
                 <span class="badge ${p.qualityScore > 80 ? 'badge-success' : p.qualityScore > 65 ? 'badge-medium' : 'badge-high'}">
-                  ${p.qualityScore} / 100
+                  ${p.qualityScore || 0} / 100
                 </span>
               </td>
               <td>
                 <span class="badge ${p.status === 'Completed' ? 'badge-success' : p.status === 'Needs Review' ? 'badge-medium' : 'badge-neutral'}">
-                  ${p.status}
+                  ${p.status || 'Active'}
                 </span>
               </td>
-              <td style="color: var(--text-muted); font-size: var(--text-xs);">${p.lastUpdated}</td>
+              <td style="color: var(--text-muted); font-size: var(--text-xs);">${p.lastUpdated || 'Recently'}</td>
               <td>
                 <div style="display: flex; gap: 6px; align-items: center;">
                   <button class="btn btn-primary btn-sm btn-open-project" data-id="${p.id}">Open</button>
@@ -120,6 +120,11 @@ export function renderProjects(container) {
 
   container.querySelectorAll(".btn-open-project").forEach(btn => {
     btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-id");
+      if (id) {
+        stateStore.setActiveProject(id);
+        ApiService.syncStateWithBackend(id);
+      }
       window.location.hash = "#issues";
     });
   });
