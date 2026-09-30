@@ -289,6 +289,8 @@ potential_frontend_paths = [
     os.path.abspath(os.path.join(CURRENT_DIR, "..", "frontend")),
     os.path.abspath(os.path.join(CURRENT_DIR, "frontend")),
     os.path.abspath("frontend"),
+    os.path.abspath(os.path.join(PARENT_DIR, "frontend")),
+    "/opt/render/project/src/frontend",
 ]
 for f_path in potential_frontend_paths:
     if os.path.exists(f_path):
