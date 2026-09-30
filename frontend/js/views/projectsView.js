@@ -56,7 +56,16 @@ export function renderProjects(container) {
           </tr>
         </thead>
         <tbody>
-          ${projects.map(p => `
+          ${projects.length === 0 ? `
+            <tr>
+              <td colspan="8" style="text-align: center; padding: 48px 16px;">
+                <div style="font-size: 32px; margin-bottom: 8px;">📁</div>
+                <div style="font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">No Projects Found</div>
+                <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">All dummy records cleared. Create your first real enterprise data project.</div>
+                <button class="btn btn-primary btn-sm" id="btn-empty-new-proj">+ Create Project</button>
+              </td>
+            </tr>
+          ` : projects.map(p => `
             <tr data-status="${p.status}" data-source="${p.sourceType}">
               <td>
                 <div style="font-weight: 600; color: var(--text-primary);">${p.name}</div>
@@ -89,6 +98,11 @@ export function renderProjects(container) {
       </table>
     </div>
   `;
+
+  // Attach Listeners
+  container.querySelector("#btn-empty-new-proj")?.addEventListener("click", () => {
+    window.location.hash = "#create-project";
+  });
 
   // Attach Listeners
   container.querySelector("#btn-projects-new")?.addEventListener("click", () => {

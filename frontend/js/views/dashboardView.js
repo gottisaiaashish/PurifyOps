@@ -162,7 +162,16 @@ export function renderDashboard(container) {
           </tr>
         </thead>
         <tbody>
-          ${recentProjects.map(p => `
+          ${recentProjects.length === 0 ? `
+            <tr>
+              <td colspan="8" style="text-align: center; padding: 48px 16px;">
+                <div style="font-size: 32px; margin-bottom: 8px;">📊</div>
+                <div style="font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Zero Datasets Ingested Yet</div>
+                <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">All dummy records cleared. Create your first real enterprise data project to begin autonomous profiling.</div>
+                <button class="btn btn-primary btn-sm" id="btn-empty-create-proj">+ Create First Project</button>
+              </td>
+            </tr>
+          ` : recentProjects.map(p => `
             <tr>
               <td>
                 <div style="font-weight: 600; color: var(--text-primary);">${p.name}</div>
@@ -195,6 +204,11 @@ export function renderDashboard(container) {
       </table>
     </div>
   `;
+
+  // Attach Event Handlers
+  container.querySelector("#btn-empty-create-proj")?.addEventListener("click", () => {
+    window.location.hash = "#create-project";
+  });
 
   // Attach Event Handlers
   container.querySelector("#btn-dash-create-proj")?.addEventListener("click", () => {

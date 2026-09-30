@@ -7,7 +7,7 @@ import { INITIAL_DATA } from "../data/mockData.js";
 
 class StateManager {
   constructor() {
-    this.storageKey = "agentic_data_cleaning_state_v1";
+    this.storageKey = "purifyops_clean_v1";
     this.listeners = new Map();
     this.state = this.loadState();
   }
