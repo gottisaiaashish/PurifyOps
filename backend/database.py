@@ -258,25 +258,3 @@ class Database:
 
 db = Database()
 
-# Ensure Customer_Master.csv is registered as default benchmark dataset if empty
-if not db.state.get("projects") or "proj-001" not in db.state.get("datasets", {}):
-    master_csv = os.path.join(DATA_DIR, "Customer_Master.csv")
-    if os.path.exists(master_csv):
-        if not db.state.get("projects"):
-            db.state["projects"] = [{
-                "id": "proj-001",
-                "name": "Customer Master Data Quality Audit",
-                "datasetName": "Customer_Master.csv",
-                "description": "Enterprise customer dataset quality audit and autonomous cleaning pipeline",
-                "sourceType": "csv",
-                "recordsCount": 1045,
-                "columnsCount": 13,
-                "qualityScore": 58,
-                "issuesCount": 1321,
-                "status": "Needs Review",
-                "lastUpdated": "Just now",
-                "dimensions": {"completeness": 72, "consistency": 65, "validity": 60, "uniqueness": 75}
-            }]
-        size_mb = f"{round(os.path.getsize(master_csv) / (1024 * 1024), 2)} MB"
-        db.register_uploaded_dataset("proj-001", "Customer_Master.csv", master_csv, size_mb)
-
