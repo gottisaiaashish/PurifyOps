@@ -109,11 +109,12 @@ class Database:
         if self.mongo_db is not None:
             try:
                 projects = list(self.mongo_db.projects.find({}, {"_id": 0}))
-                if projects:
-                    self.state["projects"] = projects
+                projects = [p for p in projects if p.get("id") != "proj-001" and p.get("datasetName") != "Customer_Master.csv"]
+                self.state["projects"] = projects
                 datasets = list(self.mongo_db.datasets.find({}, {"_id": 0}))
                 for d in datasets:
-                    self.state["datasets"][d["id"]] = d
+                    if d.get("id") != "proj-001" and d.get("id") != "ds-proj-001" and d.get("name") != "Customer_Master.csv":
+                        self.state["datasets"][d["id"]] = d
                 return
             except Exception as e:
                 print(f"[PurifyOps Database] MongoDB load error: {e}")
@@ -124,6 +125,10 @@ class Database:
                 with open(DB_FILE, "r", encoding="utf-8") as f:
                     data = json.load(f)
                     if isinstance(data, dict):
+                        data["projects"] = [p for p in data.get("projects", []) if p.get("id") != "proj-001" and p.get("datasetName") != "Customer_Master.csv"]
+                        if "datasets" in data and isinstance(data["datasets"], dict):
+                            data["datasets"].pop("proj-001", None)
+                            data["datasets"].pop("ds-proj-001", None)
                         self.state = data
             except Exception as e:
                 print(f"[PurifyOps Database] Local load error: {e}")

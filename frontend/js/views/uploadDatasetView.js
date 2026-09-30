@@ -39,22 +39,6 @@ export function renderUploadDataset(container) {
         </div>
       </div>
 
-      <!-- Quick Sample Loader -->
-      <div style="margin-top: 16px; padding: 14px 20px; background: rgba(18, 20, 32, 0.45); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <div>
-            <div style="font-weight: 600; font-size: var(--text-sm); color: var(--text-primary);">
-              Test Sample Dataset
-            </div>
-            <div style="font-size: var(--text-xs); color: var(--text-muted);">
-              Load a sample test file with email syntax errors, blank cells & duplicate records for testing.
-            </div>
-          </div>
-        </div>
-        <button class="btn btn-secondary" id="btn-load-sample-csv" style="white-space: nowrap; font-weight: 600;">
-          Load Sample Dataset
-        </button>
-      </div>
 
       <!-- Upload Progress Container (Hidden by default) -->
       <div id="upload-progress-card" class="metric-card" style="display: none; margin: 24px 0;">
@@ -156,34 +140,7 @@ export function renderUploadDataset(container) {
     await uploadRealFile(selectedFile);
   });
 
-  container.querySelector("#btn-load-sample-csv")?.addEventListener("click", async () => {
-    progressCard.style.display = "block";
-    uploadFilename.textContent = "Loading Sample Dataset...";
-    progressBar.style.width = "25%";
-    pctBadge.textContent = "25%";
-    statusMsg.textContent = "Fetching benchmark dataset...";
 
-    try {
-      progressBar.style.width = "50%";
-      pctBadge.textContent = "50%";
-
-      const dataset = await ApiService.loadDemoDataset(pct => {
-        progressBar.style.width = `${pct}%`;
-        pctBadge.textContent = `${pct}%`;
-      });
-
-      progressBar.style.width = "100%";
-      pctBadge.textContent = "100%";
-      statusMsg.textContent = "Dataset loaded! Redirecting to Issues...";
-
-      setTimeout(() => {
-        window.location.hash = "#issues";
-      }, 500);
-    } catch (err) {
-      console.error("Demo load failed:", err);
-      statusMsg.textContent = "Upload failed. Please pick a file manually.";
-    }
-  });
 
   async function uploadRealFile(file) {
     progressCard.style.display = "block";
