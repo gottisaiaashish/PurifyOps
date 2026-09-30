@@ -1,6 +1,6 @@
 /**
  * View 4: Upload Dataset
- * Real file upload pipeline with FastAPI backend ingestion
+ * Simple, human, clean upload page (Zero emojis/gimmicks)
  */
 import { stateStore } from "../services/stateManager.js";
 import { ApiService } from "../services/apiService.js";
@@ -11,8 +11,11 @@ export function renderUploadDataset(container) {
   container.innerHTML = `
     <div class="page-header">
       <div class="page-title-group">
-        <h1>Upload Enterprise Dataset</h1>
-        <p class="page-description">Ingest raw telemetry, tabular schemas, or relational snapshots for automated agentic profiling.</p>
+        <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: 4px;">
+          <span class="badge badge-low">Step 1 of 5</span>
+        </div>
+        <h1>Upload Your Data File</h1>
+        <p class="page-description">Upload your messy CSV, TSV, or Excel spreadsheet to find and fix errors automatically.</p>
       </div>
       <div class="page-actions">
         <button class="btn btn-outline" id="btn-browse-file">
@@ -22,70 +25,68 @@ export function renderUploadDataset(container) {
       </div>
     </div>
 
-    <div style="max-width: 860px; margin: 0 auto;">
-      <div class="dropzone-container" id="dataset-dropzone">
-        <div class="dropzone-icon">☁️</div>
-        <h3 style="font-size: var(--text-lg); font-weight: 600; margin-bottom: var(--space-2);" id="dropzone-title">
-          Drag & Drop your dataset here, or <span style="color: var(--accent-light); text-decoration: underline;">browse files</span>
+    <div style="max-width: 800px; margin: 0 auto;">
+      <div class="dropzone-container" id="dataset-dropzone" style="cursor: pointer; padding: 48px 24px; text-align: center; border: 2px dashed var(--border-medium); border-radius: var(--radius-md); background: var(--bg-surface);">
+        <h3 style="font-size: var(--text-lg); font-weight: 600; margin-bottom: 8px;" id="dropzone-title">
+          Drag & Drop your file here, or <span style="color: var(--accent-light); text-decoration: underline;">click to browse</span>
         </h3>
-        <p style="font-size: var(--text-sm); color: var(--text-muted); max-width: 480px; margin: 0 auto var(--space-4);" id="dropzone-sub">
-          Supports CSV, TSV, Parquet, JSONL, and Excel files up to 2.5 GB. Real column profiling, entropy delta, and zero mock data.
+        <p style="font-size: var(--text-sm); color: var(--text-muted); max-width: 460px; margin: 0 auto 16px;" id="dropzone-sub">
+          Works with CSV, Excel (.xlsx), TSV, and JSON files. Your data is analyzed privately on your server.
         </p>
         <input type="file" id="file-input" style="display: none;" accept=".csv,.tsv,.xlsx,.xls,.parquet,.json" />
-        <div style="display: inline-flex; gap: var(--space-2);">
+        <div style="display: inline-flex; gap: 8px;">
           <span class="badge badge-neutral">CSV</span>
-          <span class="badge badge-neutral">XLSX</span>
-          <span class="badge badge-neutral">PARQUET</span>
+          <span class="badge badge-neutral">EXCEL (.XLSX)</span>
+          <span class="badge badge-neutral">TSV</span>
           <span class="badge badge-neutral">JSON</span>
         </div>
       </div>
 
       <!-- Upload Progress Container (Hidden by default) -->
-      <div id="upload-progress-card" class="metric-card" style="display: none; margin-bottom: var(--space-6);">
+      <div id="upload-progress-card" class="metric-card" style="display: none; margin: 24px 0;">
         <div class="metric-card-header">
-          <span class="metric-label" id="upload-filename">Processing Dataset...</span>
+          <span class="metric-label" id="upload-filename">Processing File...</span>
           <span class="badge badge-low" id="upload-pct-badge">0%</span>
         </div>
-        <div class="progress-track" style="margin: var(--space-2) 0;">
+        <div class="progress-track" style="margin: 8px 0;">
           <div class="progress-fill" id="upload-progress-bar" style="width: 0%;"></div>
         </div>
         <div style="font-size: var(--text-xs); color: var(--text-muted); display: flex; justify-content: space-between;">
           <span id="upload-status-msg">Reading file...</span>
-          <span>Polars Ingestion Engine</span>
+          <span>Fast Analysis</span>
         </div>
       </div>
 
-      <!-- Ingestion Settings Panel -->
-      <div class="settings-content-card" style="margin-bottom: var(--space-6);">
-        <h4 style="font-size: var(--text-sm); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: var(--space-3);">
-          Pre-Scan Profiling Parameters
+      <!-- File Settings -->
+      <div class="settings-content-card" style="margin: 24px 0;">
+        <h4 style="font-size: var(--text-sm); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 12px;">
+          Optional Upload Options
         </h4>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4);">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
           <div>
-            <label class="form-label">Null Value Sentinel Tokens</label>
-            <input type="text" class="form-input" id="null-tokens" value="NA, N/A, null, NULL, -, None, \\N" />
+            <label class="form-label">Treated as Blank / Missing</label>
+            <input type="text" class="form-input" id="null-tokens" value="NA, N/A, null, NULL, -, None" />
             <span style="font-size: 11px; color: var(--text-muted); margin-top: 4px; display: block;">
-              Strings automatically coerced to standard null representation.
+              Words treated as empty cells.
             </span>
           </div>
           <div>
-            <label class="form-label">Sampling Strategy</label>
+            <label class="form-label">Scan Depth</label>
             <select class="form-select" id="sample-strategy">
-              <option value="full">Exhaustive Full Scan (Recommended)</option>
-              <option value="reservoir">Reservoir Sample (100k rows)</option>
-              <option value="head">First 50k rows only</option>
+              <option value="full">Check Every Row (Recommended)</option>
+              <option value="head">Check First 50,000 Rows</option>
             </select>
             <span style="font-size: 11px; color: var(--text-muted); margin-top: 4px; display: block;">
-              Ensures high-accuracy Shannon entropy & statistical distribution estimation.
+              Full scan checks every row for errors and duplicates.
             </span>
           </div>
         </div>
       </div>
 
-      <div style="display: flex; justify-content: flex-end; gap: var(--space-3);">
+      <div style="display: flex; justify-content: flex-end; gap: 12px;">
         <button class="btn btn-outline" id="btn-back-projects">Back to Projects</button>
         <button class="btn btn-primary" id="btn-start-profiling">
-          Initiate Profiling & Overview →
+          Check Data & Find Issues →
         </button>
       </div>
     </div>
@@ -106,16 +107,16 @@ export function renderUploadDataset(container) {
 
   dropzone?.addEventListener("dragover", (e) => {
     e.preventDefault();
-    dropzone.classList.add("dragover");
+    dropzone.style.borderColor = "var(--accent-light)";
   });
 
   dropzone?.addEventListener("dragleave", () => {
-    dropzone.classList.remove("dragover");
+    dropzone.style.borderColor = "var(--border-medium)";
   });
 
   dropzone?.addEventListener("drop", (e) => {
     e.preventDefault();
-    dropzone.classList.remove("dragover");
+    dropzone.style.borderColor = "var(--border-medium)";
     if (e.dataTransfer.files.length) {
       setFile(e.dataTransfer.files[0]);
     }
@@ -130,7 +131,7 @@ export function renderUploadDataset(container) {
   function setFile(file) {
     selectedFile = file;
     dropzoneTitle.innerHTML = `Selected: <span style="color: var(--accent-light);">${file.name}</span>`;
-    dropzoneSub.innerHTML = `File size: <strong>${(file.size / (1024 * 1024)).toFixed(2)} MB</strong>. Click "Initiate Profiling & Overview" to process.`;
+    dropzoneSub.innerHTML = `File size: <strong>${(file.size / (1024 * 1024)).toFixed(2)} MB</strong>. Click "Check Data & Find Issues" below to proceed.`;
   }
 
   container.querySelector("#btn-start-profiling")?.addEventListener("click", async () => {
@@ -150,12 +151,12 @@ export function renderUploadDataset(container) {
     uploadFilename.textContent = `Uploading ${file.name}`;
     progressBar.style.width = "20%";
     pctBadge.textContent = "20%";
-    statusMsg.textContent = "Streaming raw data to backend engine...";
+    statusMsg.textContent = "Uploading file...";
 
     try {
-      progressBar.style.width = "50%";
-      pctBadge.textContent = "50%";
-      statusMsg.textContent = "Parsing schema, null tokens & computing empirical entropy...";
+      progressBar.style.width = "60%";
+      pctBadge.textContent = "60%";
+      statusMsg.textContent = "Scanning columns, finding empty values and duplicate records...";
 
       const result = await ApiService.uploadDataset(file, (p) => {
         progressBar.style.width = `${p}%`;
@@ -165,11 +166,12 @@ export function renderUploadDataset(container) {
       progressBar.style.width = "100%";
       pctBadge.textContent = "100%";
       pctBadge.className = "badge badge-success";
-      statusMsg.textContent = `Success! Parsed ${result?.recordsCount || 0} records across ${result?.columnsCount || 0} columns.`;
+      statusMsg.textContent = `Done! Scanned ${result?.recordsCount || 0} rows across ${result?.columnsCount || 0} columns.`;
 
       setTimeout(() => {
-        window.location.hash = "#dataset-overview";
-      }, 700);
+        // Go directly to Step 2: Errors & Issues!
+        window.location.hash = "#issues";
+      }, 600);
     } catch (err) {
       progressBar.style.width = "100%";
       pctBadge.className = "badge badge-critical";

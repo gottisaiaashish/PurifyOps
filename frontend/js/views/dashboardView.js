@@ -1,5 +1,6 @@
 /**
  * View 1: Dashboard
+ * Clean, user-friendly language & professional layout (Zero emojis/jargon)
  */
 import { stateStore } from "../services/stateManager.js";
 
@@ -11,138 +12,86 @@ export function renderDashboard(container) {
   container.innerHTML = `
     <div class="page-header">
       <div class="page-title-group">
-        <h1>Enterprise Data Quality Overview</h1>
-        <p class="page-description">Autonomous telemetry, semantic anomaly detection, and agentic cleaning pipelines.</p>
+        <h1>Data Cleaning Overview</h1>
+        <p class="page-description">Overview of your active data cleaning workspaces and files.</p>
       </div>
       <div class="page-actions">
-        <button class="btn btn-secondary" id="btn-export-telemetry">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Export Report
+        <button class="btn btn-outline" id="btn-quick-upload">
+          Upload Dataset
         </button>
         <button class="btn btn-primary" id="btn-dash-create-proj">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          Create Data Project
+          + New Project
         </button>
       </div>
     </div>
 
-    <!-- Telemetry Cards -->
+    <!-- Summary Cards -->
     <div class="metrics-grid">
       <div class="metric-card">
         <div class="metric-card-header">
           <span class="metric-label">Active Projects</span>
-          <span class="badge badge-neutral">SaaS Enterprise</span>
+          <span class="badge badge-neutral">Workspaces</span>
         </div>
         <div class="metric-value">${metrics.totalProjects}</div>
         <div class="metric-meta">
-          <span class="metric-indicator ${metrics.totalProjects > 0 ? 'positive' : 'neutral'}">●</span> ${metrics.totalProjects} active workspace(s)
+          <span class="metric-indicator ${metrics.totalProjects > 0 ? 'positive' : 'neutral'}">●</span> ${metrics.totalProjects} project(s) created
         </div>
       </div>
 
       <div class="metric-card">
         <div class="metric-card-header">
-          <span class="metric-label">Datasets Processed</span>
-          <span class="badge badge-neutral">Ingestion</span>
+          <span class="metric-label">Files Processed</span>
+          <span class="badge badge-neutral">Files</span>
         </div>
         <div class="metric-value">${metrics.datasetsProcessed}</div>
         <div class="metric-meta">
-          <span class="metric-indicator ${metrics.datasetsProcessed > 0 ? 'positive' : 'neutral'}">●</span> ${metrics.datasetsProcessed} dataset(s) ingested
+          <span class="metric-indicator ${metrics.datasetsProcessed > 0 ? 'positive' : 'neutral'}">●</span> ${metrics.datasetsProcessed} uploaded
         </div>
       </div>
 
       <div class="metric-card">
         <div class="metric-card-header">
-          <span class="metric-label">Issues Detected</span>
-          <span class="badge ${metrics.issuesDetected > 0 ? 'badge-high' : 'badge-neutral'}">Attention</span>
+          <span class="metric-label">Issues Found</span>
+          <span class="badge ${metrics.issuesDetected > 0 ? 'badge-high' : 'badge-neutral'}">Errors</span>
         </div>
         <div class="metric-value">${metrics.issuesDetected.toLocaleString()}</div>
         <div class="metric-meta">
-          <span class="metric-indicator ${metrics.issuesDetected > 0 ? 'negative' : 'positive'}">● ${metrics.issuesDetected.toLocaleString()}</span> in active review
+          <span class="metric-indicator ${metrics.issuesDetected > 0 ? 'negative' : 'positive'}">●</span> ${metrics.issuesDetected.toLocaleString()} to resolve
         </div>
       </div>
 
       <div class="metric-card">
         <div class="metric-card-header">
-          <span class="metric-label">Transformations Executed</span>
-          <span class="badge ${metrics.transformationsExecuted > 0 ? 'badge-success' : 'badge-neutral'}">Reversible</span>
+          <span class="metric-label">Cleaned Records</span>
+          <span class="badge ${metrics.transformationsExecuted > 0 ? 'badge-success' : 'badge-neutral'}">Safe</span>
         </div>
         <div class="metric-value">${metrics.transformationsExecuted.toLocaleString()}</div>
         <div class="metric-meta">
-          <span class="metric-indicator positive">100%</span> audit delta coverage
+          <span class="metric-indicator positive">100%</span> undo protection
         </div>
       </div>
     </div>
 
-    <!-- Data Quality Overview Hero -->
-    <div class="overview-hero">
-      <div class="quality-score-panel">
-        <div class="score-radial-wrapper">
-          <svg viewBox="0 0 100 100">
-            <circle class="circle-bg" cx="50" cy="50" r="40" />
-            <circle class="circle-bar" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="${251.2 - (251.2 * metrics.averageQualityScore) / 100}" />
-          </svg>
-          <div class="score-radial-text">
-            <span class="score-radial-number">${Math.round(metrics.averageQualityScore)}</span>
-            <span class="score-radial-label">Average Score</span>
-          </div>
-        </div>
-        <p style="font-size: var(--text-xs); color: var(--text-secondary); max-width: 200px;">
-          Weighted composite index across completeness, consistency, validity, and uniqueness.
+    <!-- Quick Start Banner -->
+    <div class="card" style="margin: 24px 0; padding: 24px; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <h3 style="font-size: 16px; font-weight: 600; color: var(--text-primary); margin-bottom: 6px;">
+          Clean your data in 3 simple steps
+        </h3>
+        <p style="font-size: 13px; color: var(--text-muted); margin: 0; max-width: 520px;">
+          1. Upload your CSV or Excel file • 2. Check errors and duplicate rows • 3. Download the clean file with one click.
         </p>
       </div>
-
-      <div class="dimensions-panel">
-        <h3 style="font-size: var(--text-sm); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: var(--space-4);">
-          Quality Dimensions Benchmark
-        </h3>
-
-        <div class="dimension-progress">
-          <div class="dimension-header">
-            <span>Completeness</span>
-            <span class="dimension-value">${metrics.dimensions.completeness}%</span>
-          </div>
-          <div class="progress-track">
-            <div class="progress-fill warning" style="width: ${metrics.dimensions.completeness}%;"></div>
-          </div>
-        </div>
-
-        <div class="dimension-progress">
-          <div class="dimension-header">
-            <span>Consistency</span>
-            <span class="dimension-value">${metrics.dimensions.consistency}%</span>
-          </div>
-          <div class="progress-track">
-            <div class="progress-fill danger" style="width: ${metrics.dimensions.consistency}%;"></div>
-          </div>
-        </div>
-
-        <div class="dimension-progress">
-          <div class="dimension-header">
-            <span>Validity</span>
-            <span class="dimension-value">${metrics.dimensions.validity}%</span>
-          </div>
-          <div class="progress-track">
-            <div class="progress-fill warning" style="width: ${metrics.dimensions.validity}%;"></div>
-          </div>
-        </div>
-
-        <div class="dimension-progress">
-          <div class="dimension-header">
-            <span>Uniqueness</span>
-            <span class="dimension-value">${metrics.dimensions.uniqueness}%</span>
-          </div>
-          <div class="progress-track">
-            <div class="progress-fill danger" style="width: ${metrics.dimensions.uniqueness}%;"></div>
-          </div>
-        </div>
-      </div>
+      <button class="btn btn-primary" id="btn-banner-upload">
+        Upload File Now →
+      </button>
     </div>
 
     <!-- Recent Projects Table -->
     <div class="table-wrapper">
       <div class="table-toolbar">
         <div style="font-size: var(--text-sm); font-weight: 600; color: var(--text-primary);">
-          Recent Cleaning Projects
+          Recent Projects
         </div>
         <div class="table-filters">
           <button class="btn btn-outline btn-sm" id="btn-view-all-projects">View All Projects →</button>
@@ -153,8 +102,8 @@ export function renderDashboard(container) {
           <tr>
             <th>Project Name</th>
             <th>Dataset</th>
-            <th>Records</th>
-            <th>Quality Score</th>
+            <th>Rows</th>
+            <th>Quality</th>
             <th>Issues</th>
             <th>Status</th>
             <th>Last Updated</th>
@@ -165,9 +114,8 @@ export function renderDashboard(container) {
           ${recentProjects.length === 0 ? `
             <tr>
               <td colspan="8" style="text-align: center; padding: 48px 16px;">
-                <div style="font-size: 32px; margin-bottom: 8px;">📊</div>
-                <div style="font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">Zero Datasets Ingested Yet</div>
-                <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">All dummy records cleared. Create your first real enterprise data project to begin autonomous profiling.</div>
+                <div style="font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 6px;">No Projects Yet</div>
+                <div style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">Create your first data project or directly upload a file to begin cleaning.</div>
                 <button class="btn btn-primary btn-sm" id="btn-empty-create-proj">+ Create First Project</button>
               </td>
             </tr>
@@ -195,7 +143,7 @@ export function renderDashboard(container) {
               <td style="color: var(--text-muted); font-size: var(--text-xs);">${p.lastUpdated}</td>
               <td>
                 <button class="btn btn-outline btn-sm btn-open-pipeline" data-project-id="${p.id}">
-                  Open Pipeline →
+                  Open →
                 </button>
               </td>
             </tr>
@@ -209,17 +157,21 @@ export function renderDashboard(container) {
   container.querySelector("#btn-empty-create-proj")?.addEventListener("click", () => {
     window.location.hash = "#create-project";
   });
-
-  // Attach Event Handlers
   container.querySelector("#btn-dash-create-proj")?.addEventListener("click", () => {
     window.location.hash = "#create-project";
+  });
+  container.querySelector("#btn-quick-upload")?.addEventListener("click", () => {
+    window.location.hash = "#upload-dataset";
+  });
+  container.querySelector("#btn-banner-upload")?.addEventListener("click", () => {
+    window.location.hash = "#upload-dataset";
   });
   container.querySelector("#btn-view-all-projects")?.addEventListener("click", () => {
     window.location.hash = "#projects";
   });
   container.querySelectorAll(".btn-open-pipeline").forEach(btn => {
     btn.addEventListener("click", () => {
-      window.location.hash = "#dataset-overview";
+      window.location.hash = "#issues";
     });
   });
 }

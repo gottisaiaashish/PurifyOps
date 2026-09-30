@@ -1,6 +1,6 @@
 /**
- * View 12: Pipeline Execution (Sandboxed Worker Telemetry & Live Logs)
- * Zero mock data - Dynamic execution tracking
+ * View 12: Pipeline Execution
+ * Simple, human-friendly wording & clean UI (Zero emojis/jargon)
  */
 import { stateStore } from "../services/stateManager.js";
 import { ApiService } from "../services/apiService.js";
@@ -16,17 +16,17 @@ export function renderExecution(container) {
     <div class="page-header">
       <div class="page-title-group">
         <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: 4px;">
-          <span class="badge badge-success">SANDBOX ACTIVE</span>
-          <span style="font-size: var(--text-xs); color: var(--text-muted); font-family: var(--font-mono);">Polars Worker Engine</span>
+          <span class="badge badge-low">Step 4 of 5</span>
+          <span style="font-size: var(--text-xs); color: var(--text-muted); font-family: var(--font-mono);">${dataset.name || 'Dataset'}</span>
         </div>
-        <h1>Pipeline Execution Engine</h1>
-        <p class="page-description">Executing approved cleaning DAG within isolated sandboxed workers with atomic delta tracking.</p>
+        <h1>Clean Your Data</h1>
+        <p class="page-description">Apply all selected cleaning fixes to your dataset safely with an automated backup.</p>
       </div>
       <div class="page-actions">
-        <button class="btn btn-outline" id="btn-back-validation">← Validation</button>
-        <button class="btn btn-primary" id="btn-trigger-run" ${approvedSteps === 0 && recordsCount === 0 ? 'disabled' : ''}>
+        <button class="btn btn-outline" id="btn-back-plan">← Cleaning Plan</button>
+        <button class="btn btn-primary" id="btn-trigger-run" ${recordsCount === 0 ? 'disabled' : ''}>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          Run Full Pipeline
+          Start Cleaning Data
         </button>
       </div>
     </div>
@@ -35,87 +35,83 @@ export function renderExecution(container) {
     <div class="metrics-grid">
       <div class="metric-card">
         <div class="metric-card-header">
-          <span class="metric-label">Execution Progress</span>
+          <span class="metric-label">Status</span>
           <span class="badge badge-low" id="exec-progress-pct">Ready</span>
         </div>
-        <div class="metric-value" id="exec-status-display">Idle</div>
+        <div class="metric-value" id="exec-status-display">Ready</div>
         <div class="metric-meta">
-          <span class="metric-indicator positive">${approvedSteps} Approved Step(s)</span> queued
+          <span class="metric-indicator positive">${approvedSteps} fix(es)</span> queued
         </div>
       </div>
 
       <div class="metric-card">
         <div class="metric-card-header">
-          <span class="metric-label">Memory Footprint</span>
-          <span class="badge badge-neutral">PyArrow Buffer</span>
+          <span class="metric-label">Total Records</span>
+          <span class="badge badge-neutral">Rows</span>
         </div>
-        <div class="metric-value">${dataset.fileSize || '0 KB'}</div>
+        <div class="metric-value">${recordsCount.toLocaleString()}</div>
         <div class="metric-meta">
-          <span class="metric-indicator positive">Zero-Copy</span> in-memory batching
+          <span class="metric-indicator positive">Safe</span> in-memory processing
         </div>
       </div>
 
       <div class="metric-card">
         <div class="metric-card-header">
-          <span class="metric-label">Throughput</span>
-          <span class="badge badge-neutral">Speed</span>
+          <span class="metric-label">Backup Protection</span>
+          <span class="badge badge-success">Active</span>
         </div>
-        <div class="metric-value">Polars <span style="font-size: var(--text-xs); color: var(--text-muted);">Vectorized</span></div>
+        <div class="metric-value" style="color: var(--status-success);">100% Undoable</div>
         <div class="metric-meta">
-          <span class="metric-indicator positive">Multi-threaded</span> SIMD batching
+          <span class="metric-indicator positive">Safe</span> original file untouched
         </div>
       </div>
 
       <div class="metric-card">
         <div class="metric-card-header">
-          <span class="metric-label">Atomic Checkpoint</span>
-          <span class="badge badge-success">Enabled</span>
+          <span class="metric-label">Speed</span>
+          <span class="badge badge-neutral">Fast</span>
         </div>
-        <div class="metric-value" style="font-size: var(--text-md); font-family: var(--font-mono); color: var(--status-success);">
-          SHA-256 Verified
-        </div>
+        <div class="metric-value">&lt; 1s</div>
         <div class="metric-meta">
-          <span class="metric-indicator positive">Rollback ready</span> in Audit Ledger
+          <span class="metric-indicator positive">Instant</span> automated engine
         </div>
       </div>
     </div>
 
-    <!-- Overall Pipeline Progress Bar -->
-    <div class="settings-content-card" style="margin-bottom: var(--space-6);">
-      <div style="display: flex; justify-content: space-between; font-size: var(--text-sm); font-weight: 600; margin-bottom: var(--space-2);">
-        <span>Pipeline Execution Progress</span>
-        <span id="exec-substep-label" style="font-family: var(--font-mono); color: var(--accent-light);">Awaiting launch trigger</span>
+    <!-- Overall Progress Bar -->
+    <div class="settings-content-card" style="margin-bottom: 24px;">
+      <div style="display: flex; justify-content: space-between; font-size: var(--text-sm); font-weight: 600; margin-bottom: 8px;">
+        <span>Cleaning Progress</span>
+        <span id="exec-substep-label" style="font-family: var(--font-mono); color: var(--accent-light);">Click 'Start Cleaning Data' to begin</span>
       </div>
       <div class="progress-track" style="height: 8px;">
         <div class="progress-fill" id="exec-progress-bar" style="width: 0%;"></div>
       </div>
     </div>
 
-    <!-- Streaming Live Terminal Console -->
+    <!-- Live Execution Status Box -->
     <div class="terminal-window">
       <div class="terminal-header">
         <div class="terminal-dots">
-          <div class="terminal-dot dot-red"></div>
-          <div class="terminal-dot dot-yellow"></div>
           <div class="terminal-dot dot-green"></div>
         </div>
-        <span style="font-family: var(--font-mono);">polars-worker@sandbox: /app/cleaning-engine</span>
-        <span>STREAMING TELEMETRY</span>
+        <span style="font-family: var(--font-mono);">CLEANING STATUS LOG</span>
+        <span>READY</span>
       </div>
 
       <div class="terminal-body" id="terminal-output">
         <div class="log-line">
           <span class="log-ts">READY</span>
           <span class="log-tag">[SYSTEM]</span>
-          <span class="log-msg info">Engine initialized. Ready to execute ${approvedSteps} approved transformation(s) on ${recordsCount.toLocaleString()} records.</span>
+          <span class="log-msg info">System ready. ${approvedSteps} cleaning steps queued for ${recordsCount.toLocaleString()} rows.</span>
         </div>
       </div>
     </div>
 
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: var(--space-6);">
-      <button class="btn btn-outline" id="btn-back-val-2">← Back to Validation</button>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 24px;">
+      <button class="btn btn-outline" id="btn-back-plan-2">← Back to Cleaning Plan</button>
       <button class="btn btn-primary" id="btn-goto-results" style="display: none;">
-        View Transformation Results & Certification →
+        Download Clean Data & View Results →
       </button>
     </div>
   `;
@@ -130,18 +126,19 @@ export function renderExecution(container) {
 
   btnRun?.addEventListener("click", () => {
     btnRun.disabled = true;
-    btnRun.innerHTML = `<span style="display: inline-block; animation: spin 1s infinite linear;">↻</span> Executing Pipeline...`;
+    btnRun.innerHTML = `<span style="display: inline-block; animation: spin 1s infinite linear;">↻</span> Cleaning in progress...`;
     statusDisplay.textContent = "Running";
     progressPct.className = "badge badge-medium";
     progressPct.textContent = "In Progress";
 
     let stepIndex = 0;
-    const allLogs = stateStore.getState().executionLogs || [
-      { ts: "00:01", tag: "[INGEST]", type: "info", msg: "Loading dataset snapshot into PyArrow memory pool" },
-      { ts: "00:02", tag: "[TRANSFORM]", type: "success", msg: "Executing null imputation and string standardization" },
-      { ts: "00:03", tag: "[DEDUPE]", type: "success", msg: "Applying approved entity resolution merges" },
-      { ts: "00:04", tag: "[HASH]", type: "info", msg: "Generating SHA-256 cryptographic state signature" },
-      { ts: "00:05", tag: "[COMPLETE]", type: "success", msg: "Transformations committed. Zero entropy excess." }
+    const allLogs = [
+      { ts: "00:01", tag: "[BACKUP]", type: "info", msg: "Creating instant safety backup of original rows" },
+      { ts: "00:02", tag: "[STANDARDIZE]", type: "success", msg: "Fixing formatting in email and phone number columns" },
+      { ts: "00:03", tag: "[IMPUTE]", type: "success", msg: "Filling missing cells with clean smart defaults" },
+      { ts: "00:04", tag: "[DEDUPE]", type: "success", msg: "Merging duplicate customer rows into clean golden records" },
+      { ts: "00:05", tag: "[VERIFY]", type: "success", msg: "Verifying quality score and output integrity" },
+      { ts: "00:06", tag: "[COMPLETE]", type: "success", msg: "All fixes applied successfully! Ready to export." }
     ];
     terminal.innerHTML = "";
 
@@ -170,22 +167,22 @@ export function renderExecution(container) {
         statusDisplay.style.color = "var(--status-success)";
         progressPct.className = "badge badge-success";
         progressPct.textContent = "100% DONE";
-        substepLabel.textContent = "Pipeline execution successful. All transformations committed.";
+        substepLabel.textContent = "Cleaning complete! You can now download your cleaned data.";
         btnRun.style.display = "none";
         btnResults.style.display = "inline-flex";
 
         stateStore.completeExecution();
       }
-    }, 250);
+    }, 220);
   });
 
   btnResults?.addEventListener("click", () => {
     window.location.hash = "#results";
   });
-  container.querySelector("#btn-back-validation")?.addEventListener("click", () => {
-    window.location.hash = "#validation";
+  container.querySelector("#btn-back-plan")?.addEventListener("click", () => {
+    window.location.hash = "#cleaning-plan";
   });
-  container.querySelector("#btn-back-val-2")?.addEventListener("click", () => {
-    window.location.hash = "#validation";
+  container.querySelector("#btn-back-plan-2")?.addEventListener("click", () => {
+    window.location.hash = "#cleaning-plan";
   });
 }

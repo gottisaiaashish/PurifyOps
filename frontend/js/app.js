@@ -1,9 +1,10 @@
 /**
- * Agentic Data Cleaning Planner (PNG6)
- * Main Application Router & Controller
+ * PurifyOps - Main Application Router & Controller
+ * Streamlined 5-step workflow & OpenAI Data Assistant Integration
  */
 
 import { stateStore } from "./services/stateManager.js";
+import { ApiService } from "./services/apiService.js";
 import { renderDashboard } from "./views/dashboardView.js";
 import { renderProjects } from "./views/projectsView.js";
 import { renderCreateProject } from "./views/createProjectView.js";
@@ -20,21 +21,13 @@ import { renderResults } from "./views/resultsView.js";
 import { renderAuditHistory } from "./views/auditHistoryView.js";
 import { renderSettings } from "./views/settingsView.js";
 
-// Ordered pipeline stages for progression tracking
+// Streamlined 5 Core Steps for progress tracking
 const PIPELINE_ORDER = [
-  "dashboard",
-  "create-project",
   "upload-dataset",
-  "dataset-overview",
-  "data-profile",
   "issues",
   "cleaning-plan",
-  "impact-analysis",
-  "review-approval",
-  "validation",
   "execution",
-  "results",
-  "audit-history"
+  "results"
 ];
 
 // Map of route hash to view render functions
@@ -134,9 +127,7 @@ export function showToast(message, type = "info") {
 
   const toast = document.createElement("div");
   toast.className = `toast ${type}`;
-  toast.innerHTML = `
-    <span>${message}</span>
-  `;
+  toast.innerHTML = `<span>${message}</span>`;
   container.appendChild(toast);
 
   setTimeout(() => {
@@ -147,15 +138,91 @@ export function showToast(message, type = "info") {
   }, 3500);
 }
 
+// AI Assistant Drawer Controller
+function initAiDrawer() {
+  const btnOpen = document.getElementById("btn-open-ai-helper");
+  const drawer = document.getElementById("ai-drawer");
+  const backdrop = document.getElementById("ai-drawer-backdrop");
+  const btnClose = document.getElementById("ai-drawer-close");
+  const input = document.getElementById("ai-drawer-input");
+  const btnSend = document.getElementById("ai-drawer-send");
+  const messages = document.getElementById("ai-drawer-messages");
+
+  if (!drawer) return;
+
+  const openDrawer = () => {
+    drawer.classList.add("active");
+    backdrop.classList.add("active");
+    input.focus();
+  };
+
+  const closeDrawer = () => {
+    drawer.classList.remove("active");
+    backdrop.classList.remove("active");
+  };
+
+  btnOpen?.addEventListener("click", openDrawer);
+  btnClose?.addEventListener("click", closeDrawer);
+  backdrop?.addEventListener("click", closeDrawer);
+
+  const sendQuestion = async (queryText) => {
+    const text = queryText || input.value.trim();
+    if (!text) return;
+    if (!queryText) input.value = "";
+
+    // User message bubble
+    const userMsg = document.createElement("div");
+    userMsg.className = "ai-message user";
+    userMsg.textContent = text;
+    messages.appendChild(userMsg);
+
+    // Typing bubble
+    const botMsg = document.createElement("div");
+    botMsg.className = "ai-message bot";
+    botMsg.innerHTML = "Thinking...";
+    messages.appendChild(botMsg);
+    messages.scrollTop = messages.scrollHeight;
+
+    // Gather context
+    const state = stateStore.getState();
+    const ds = state.activeDataset || {};
+    const issues = state.issues || [];
+    const context = {
+      datasetName: ds.name || "Untitled Dataset",
+      issuesSummary: issues.map(i => `${i.type} (${i.affectedRecords} records)`).join(", "),
+      columnsSummary: (state.columnsProfile || []).map(c => c.name).join(", ")
+    };
+
+    try {
+      const reply = await ApiService.askAiHelper(text, context);
+      botMsg.textContent = reply;
+    } catch (e) {
+      botMsg.textContent = "Sorry, unable to connect to AI assistant right now. Please try again.";
+    }
+    messages.scrollTop = messages.scrollHeight;
+  };
+
+  btnSend?.addEventListener("click", () => sendQuestion());
+  input?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") sendQuestion();
+  });
+
+  // Quick Chips
+  document.querySelectorAll(".ai-chip").forEach(chip => {
+    chip.addEventListener("click", () => {
+      const p = chip.dataset.prompt;
+      if (p) sendQuestion(p);
+    });
+  });
+}
+
 // Setup Event Listeners
 function initApp() {
-  // Listen for hash changes
   window.addEventListener("hashchange", () => {
     const hash = window.location.hash.replace("#", "") || "dashboard";
     navigateTo(hash);
   });
 
-  // Stepper clicks
   document.querySelectorAll(".pipeline-stepper .stepper-stage").forEach(stage => {
     stage.addEventListener("click", () => {
       const step = stage.dataset.step;
@@ -165,12 +232,10 @@ function initApp() {
     });
   });
 
-  // Topbar project selector
   document.getElementById("topbar-project-btn")?.addEventListener("click", () => {
     window.location.hash = "#projects";
   });
 
-  // Re-render when state changes if on certain views
   stateStore.on("state:changed", () => {
     const activeRouteConfig = ROUTES[currentRoute];
     const activeElem = document.getElementById(activeRouteConfig.id);
@@ -179,12 +244,12 @@ function initApp() {
     }
   });
 
-  // Initial navigation
+  initAiDrawer();
+
   const initialHash = window.location.hash.replace("#", "") || "dashboard";
   navigateTo(initialHash);
 }
 
-// Run on DOM Ready
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initApp);
 } else {

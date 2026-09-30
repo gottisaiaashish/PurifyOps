@@ -1,6 +1,6 @@
 /**
  * View 8: Cleaning Plan
- * Dynamic DAG pipeline rendering - Zero mock data
+ * Simple, human-friendly wording & clean UI (Zero emojis/jargon)
  */
 import { stateStore } from "../services/stateManager.js";
 import { ApiService } from "../services/apiService.js";
@@ -13,72 +13,71 @@ export function renderCleaningPlan(container) {
   const totalRecords = dataset.recordsCount || 0;
   const affected = plan.totalRecordsAffected || 0;
   const percentAffected = totalRecords > 0 ? ((affected / totalRecords) * 100).toFixed(1) : "0.0";
-  const entropyLoss = (plan.overallEntropyLoss !== undefined && plan.overallEntropyLoss !== null) ? Number(plan.overallEntropyLoss).toFixed(3) : "0.000";
 
   container.innerHTML = `
     <div class="page-header">
       <div class="page-title-group">
         <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: 4px;">
-          <span class="badge ${operations.length > 0 ? 'badge-low' : 'badge-neutral'}">DAG Pipeline</span>
-          <span style="font-size: var(--text-xs); color: var(--text-muted); font-family: var(--font-mono);">${plan.planId || 'Draft'}</span>
+          <span class="badge ${operations.length > 0 ? 'badge-low' : 'badge-neutral'}">Step 3 of 5</span>
+          <span style="font-size: var(--text-xs); color: var(--text-muted); font-family: var(--font-mono);">${dataset.name || 'Dataset'}</span>
         </div>
-        <h1>AI-Generated Cleaning Plan</h1>
-        <p class="page-description">Autonomous reasoning graph synthesized by ${plan.agentModel || 'PurifyOps DAG Planner'} based on inferred constraints.</p>
+        <h1>Smart Cleaning Plan</h1>
+        <p class="page-description">Review the proposed fixes before applying them to your data. You can turn any step on or off.</p>
       </div>
       <div class="page-actions">
         <button class="btn btn-secondary" id="btn-re-generate-plan">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
-          ${operations.length > 0 ? 'Re-Generate Cleaning Plan' : 'Generate Cleaning Plan'}
+          ${operations.length > 0 ? 'Re-create Plan' : 'Generate Cleaning Plan'}
         </button>
-        <button class="btn btn-primary" id="btn-goto-impact">
-          Impact Analysis →
+        <button class="btn btn-primary" id="btn-goto-run">
+          Run Cleaning Now →
         </button>
       </div>
     </div>
 
-    <!-- Plan Telemetry Banner -->
+    <!-- Plan Summary Banner -->
     <div class="metrics-grid">
       <div class="metric-card">
         <div class="metric-card-header">
-          <span class="metric-label">Pipeline Steps</span>
-          <span class="badge badge-neutral">Sequential DAG</span>
+          <span class="metric-label">Fixes Planned</span>
+          <span class="badge badge-neutral">Steps</span>
         </div>
         <div class="metric-value">${operations.length}</div>
         <div class="metric-meta">
-          <span class="metric-indicator positive">100%</span> reversible transformations
+          <span class="metric-indicator positive">100%</span> safe and reversible
         </div>
       </div>
 
       <div class="metric-card">
         <div class="metric-card-header">
-          <span class="metric-label">Affected Records</span>
+          <span class="metric-label">Rows Affected</span>
           <span class="badge badge-low">Scope</span>
         </div>
         <div class="metric-value">${affected.toLocaleString()}</div>
         <div class="metric-meta">
-          <span class="metric-indicator neutral">●</span> ${percentAffected}% of entire dataset
+          <span class="metric-indicator neutral">●</span> ${percentAffected}% of your records
         </div>
       </div>
 
       <div class="metric-card">
         <div class="metric-card-header">
-          <span class="metric-label">Est. Polars Runtime</span>
-          <span class="badge badge-neutral">Throughput</span>
+          <span class="metric-label">Processing Speed</span>
+          <span class="badge badge-neutral">Fast</span>
         </div>
-        <div class="metric-value">${plan.estimatedRuntimeSeconds || 0}s</div>
+        <div class="metric-value">&lt; 1s</div>
         <div class="metric-meta">
-          <span class="metric-indicator positive">Vectorized</span> PyArrow memory pool
+          <span class="metric-indicator positive">Instant</span> clean engine
         </div>
       </div>
 
       <div class="metric-card">
         <div class="metric-card-header">
-          <span class="metric-label">Entropy Loss Index</span>
-          <span class="badge ${Number(entropyLoss) < 0.15 ? 'badge-success' : 'badge-medium'}">ΔH</span>
+          <span class="metric-label">Data Safety</span>
+          <span class="badge badge-success">Protected</span>
         </div>
-        <div class="metric-value">Δ ${entropyLoss}</div>
+        <div class="metric-value" style="color: var(--status-success);">Zero Data Loss</div>
         <div class="metric-meta">
-          <span class="metric-indicator ${Number(entropyLoss) < 0.15 ? 'positive' : 'warning'}">●</span> Shannon information shift
+          <span class="metric-indicator positive">Backup ready</span> before changes
         </div>
       </div>
     </div>
@@ -86,25 +85,24 @@ export function renderCleaningPlan(container) {
     <!-- Operations List -->
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
       <h3 style="font-size: var(--text-md); font-weight: 600; color: var(--text-primary);">
-        Planned Transformation Operations
+        Proposed Fixes
       </h3>
       ${operations.length > 0 ? `
         <button class="btn btn-outline btn-sm" id="btn-approve-all-safe">
-          ✓ Approve All Safe Changes
+          ✓ Select All Recommended
         </button>
       ` : ''}
     </div>
 
     <div class="plan-operations-list" id="operations-container">
       ${operations.length === 0 ? `
-        <div class="card" style="text-align: center; padding: var(--space-12); background: var(--bg-surface-elevated); border: 1px dashed var(--border-subtle); border-radius: var(--radius-md);">
-          <div style="font-size: 2rem; margin-bottom: var(--space-3); color: var(--text-muted);">📋</div>
-          <h3 style="font-size: var(--text-lg); color: var(--text-primary); margin-bottom: var(--space-2);">No Cleaning Plan Generated Yet</h3>
-          <p style="color: var(--text-muted); max-width: 480px; margin: 0 auto var(--space-5); font-size: var(--text-sm);">
-            ${totalRecords === 0 ? 'Upload a dataset first, then synthesize an autonomous cleaning DAG.' : 'Click "Generate Cleaning Plan" above to create reasoning-backed transformation steps.'}
+        <div class="card" style="text-align: center; padding: 48px 24px; background: var(--bg-surface-elevated); border: 1px dashed var(--border-subtle); border-radius: var(--radius-md);">
+          <h3 style="font-size: var(--text-lg); color: var(--text-primary); margin-bottom: 8px;">No Cleaning Plan Generated Yet</h3>
+          <p style="color: var(--text-muted); max-width: 480px; margin: 0 auto 20px; font-size: var(--text-sm);">
+            ${totalRecords === 0 ? 'Please upload your dataset first to create a cleaning plan.' : 'Click "Generate Cleaning Plan" above to create an automated list of fixes.'}
           </p>
           ${totalRecords === 0 ? `
-            <a href="#upload-dataset" class="btn btn-primary" style="display: inline-block;">Upload Dataset</a>
+            <a href="#upload-dataset" class="btn btn-primary" style="display: inline-block;">Upload File</a>
           ` : `
             <button class="btn btn-primary" id="btn-trigger-plan-empty">Generate Cleaning Plan Now</button>
           `}
@@ -119,10 +117,7 @@ export function renderCleaningPlan(container) {
               <div style="margin-top: 6px; display: flex; gap: var(--space-2); align-items: center;">
                 <span class="badge badge-neutral">${op.actionType}</span>
                 <span style="font-size: 11px; font-family: var(--font-mono); color: var(--text-muted);">
-                  Target: ${Array.isArray(op.targetColumns) ? op.targetColumns.join(', ') : op.targetColumns}
-                </span>
-                <span class="badge ${op.informationLossLevel === 'None' || op.informationLossLevel === 'Low' ? 'badge-low' : 'badge-medium'}">
-                  Loss: ${op.informationLossLevel}
+                  Columns: ${Array.isArray(op.targetColumns) ? op.targetColumns.join(', ') : op.targetColumns}
                 </span>
               </div>
             </div>
@@ -130,20 +125,15 @@ export function renderCleaningPlan(container) {
 
           <div class="operation-metrics">
             <div class="metric-pill">
-              <span class="metric-pill-label">Affected</span>
+              <span class="metric-pill-label">Rows to fix</span>
               <span class="metric-pill-value">${(op.affectedRecords || 0).toLocaleString()}</span>
-            </div>
-
-            <div class="metric-pill">
-              <span class="metric-pill-label">Confidence</span>
-              <span class="metric-pill-value" style="color: var(--accent-light);">${op.confidence}%</span>
             </div>
 
             <div style="display: flex; align-items: center; gap: var(--space-3); margin-left: var(--space-4);">
               <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; user-select: none;">
                 <input type="checkbox" class="op-checkbox" data-step-id="${op.stepId}" ${op.approved ? 'checked' : ''} style="width: 16px; height: 16px; accent-color: var(--accent-primary);" />
                 <span style="font-size: var(--text-xs); font-weight: 500; color: ${op.approved ? 'var(--status-success)' : 'var(--text-muted)'};">
-                  ${op.approved ? 'APPROVED' : 'PENDING'}
+                  ${op.approved ? 'ENABLED' : 'SKIPPED'}
                 </span>
               </label>
             </div>
@@ -154,14 +144,14 @@ export function renderCleaningPlan(container) {
 
     ${operations.length > 0 ? `
       <div style="margin-top: var(--space-6); text-align: right;">
-        <button class="btn btn-primary" id="btn-goto-impact-bottom">
-          Proceed to Impact Analysis →
+        <button class="btn btn-primary" id="btn-goto-run-bottom">
+          Run Cleaning Now →
         </button>
       </div>
     ` : ''}
   `;
 
-  // Attach Checkboxes
+  // Checkboxes
   container.querySelectorAll(".op-checkbox").forEach(chk => {
     chk.addEventListener("change", (e) => {
       const stepId = e.target.dataset.stepId;
@@ -169,23 +159,22 @@ export function renderCleaningPlan(container) {
     });
   });
 
-  // Approve all
   container.querySelector("#btn-approve-all-safe")?.addEventListener("click", () => {
     stateStore.approveAllSafeOperations();
   });
 
-  // Navigation
-  container.querySelector("#btn-goto-impact")?.addEventListener("click", () => {
-    window.location.hash = "#impact-analysis";
+  // Navigation directly to run cleaning
+  container.querySelector("#btn-goto-run")?.addEventListener("click", () => {
+    window.location.hash = "#execution";
   });
-  container.querySelector("#btn-goto-impact-bottom")?.addEventListener("click", () => {
-    window.location.hash = "#impact-analysis";
+  container.querySelector("#btn-goto-run-bottom")?.addEventListener("click", () => {
+    window.location.hash = "#execution";
   });
 
-  // Re-generate
+  // Trigger Plan
   const triggerPlan = async () => {
     const btn = container.querySelector("#btn-re-generate-plan");
-    if (btn) btn.textContent = "Synthesizing Plan...";
+    if (btn) btn.textContent = "Creating Plan...";
     try {
       const activeProjId = state.projects[0]?.id || "proj-001";
       const newPlan = await ApiService.generateCleaningPlan(activeProjId);

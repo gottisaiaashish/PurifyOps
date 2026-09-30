@@ -270,5 +270,14 @@ export const ApiService = {
       method: "POST",
       body: JSON.stringify(settingsPayload)
     });
+  },
+
+  // --- AI Assistant / Help ---
+  async askAiHelper(prompt, context = {}) {
+    const res = await request("/ai-helper", {
+      method: "POST",
+      body: JSON.stringify({ prompt, context })
+    });
+    return res ? res.reply : "AI Helper is currently ready to answer your data questions.";
   }
 };

@@ -1,105 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PurifyOps | Agentic Data Cleaning & Quality Operations (PNG6)</title>
-  <meta name="description" content="PurifyOps: Autonomous enterprise data profiling, semantic constraint inference, and reversible test-driven data cleaning pipelines with information loss calculation.">
-  
-  <!-- Design System & Tokens -->
-  <link rel="stylesheet" href="css/tokens.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/views.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PurifyOps — Simple & Smart Data Cleaning</title>
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Design System CSS -->
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/views.css" />
 </head>
-<body>
-  <div class="app-container">
-    <!-- Sidebar Navigation -->
+<body class="theme-dark">
+  <div class="app-layout">
+    <!-- Left Navigation Sidebar -->
     <aside class="app-sidebar">
-      <div class="sidebar-header">
+      <div class="brand-header">
         <div class="brand-icon">PO</div>
         <div class="brand-details">
           <span class="brand-title">PurifyOps</span>
-          <span class="brand-subtitle">STATEMENT ID: PNG6</span>
+          <span class="brand-subtitle">Data Cleaning Platform</span>
         </div>
       </div>
 
       <nav class="sidebar-nav">
-        <div class="nav-section-title">Core Management</div>
-        <a href="#dashboard" class="nav-item" data-route="dashboard">
+        <div class="nav-section-title">Home</div>
+        <a href="#dashboard" class="nav-item active" data-route="dashboard">
           <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-          Dashboard
+          Overview
         </a>
         <a href="#projects" class="nav-item" data-route="projects">
           <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-          Projects Directory
+          Projects
         </a>
         <a href="#create-project" class="nav-item" data-route="create-project">
           <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          Create Project
-        </a>
-        <a href="#upload-dataset" class="nav-item" data-route="upload-dataset">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-          Upload Dataset
+          New Project
         </a>
 
-        <div class="nav-section-title">Active Cleaning Pipeline</div>
-        <a href="#dataset-overview" class="nav-item" data-route="dataset-overview">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-          Dataset Overview
-        </a>
-        <a href="#data-profile" class="nav-item" data-route="data-profile">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-          Data Profile
+        <div class="nav-section-title">Clean Your Data (5 Steps)</div>
+        <a href="#upload-dataset" class="nav-item" data-route="upload-dataset">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          1. Upload File
         </a>
         <a href="#issues" class="nav-item" data-route="issues">
           <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          Issues Detected
+          2. Errors & Issues
           <span class="nav-badge danger" id="sidebar-issues-badge" style="display: none;">0</span>
         </a>
         <a href="#cleaning-plan" class="nav-item" data-route="cleaning-plan">
           <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-          Cleaning Plan (DAG)
-        </a>
-        <a href="#impact-analysis" class="nav-item" data-route="impact-analysis">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
-          Impact & Entropy
-        </a>
-        <a href="#review-approval" class="nav-item" data-route="review-approval">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          Review & Approval
-        </a>
-        <a href="#validation" class="nav-item" data-route="validation">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          Test Validation
+          3. Cleaning Plan
         </a>
         <a href="#execution" class="nav-item" data-route="execution">
           <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          Worker Execution
+          4. Run Cleaning
         </a>
         <a href="#results" class="nav-item" data-route="results">
           <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          Results & Metrics
+          5. Clean Output & Download
         </a>
 
-        <div class="nav-section-title">Lineage & Governance</div>
+        <div class="nav-section-title">Deep Dive & Safety</div>
+        <a href="#dataset-overview" class="nav-item" data-route="dataset-overview">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Data Summary
+        </a>
+        <a href="#data-profile" class="nav-item" data-route="data-profile">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          Column Details
+        </a>
+        <a href="#impact-analysis" class="nav-item" data-route="impact-analysis">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
+          Safety & Risk Analysis
+        </a>
+        <a href="#review-approval" class="nav-item" data-route="review-approval">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Duplicate Records Review
+        </a>
+        <a href="#validation" class="nav-item" data-route="validation">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Pre-Cleaning Tests
+        </a>
         <a href="#audit-history" class="nav-item" data-route="audit-history">
           <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          Audit Ledger & Revert
+          Change History & Undo
         </a>
         <a href="#settings" class="nav-item" data-route="settings">
           <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-          System Settings
+          Settings
         </a>
       </nav>
 
       <div class="sidebar-footer">
         <div class="system-status-indicator">
           <div class="status-dot"></div>
-          <span>Polars Worker Node-04 Online</span>
+          <span>Engine Online</span>
         </div>
-        <div style="font-size: 10px; color: var(--text-muted); margin-top: 4px; font-family: var(--font-mono);">
-          Sandboxed • Level 1 MVP
+        <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">
+          Safe & Reversible Cleaning
         </div>
       </div>
     </aside>
@@ -117,95 +121,52 @@
         </div>
 
         <div class="topbar-right">
+          <!-- AI Assistant Help Trigger Button -->
+          <button class="btn-ai-helper" id="btn-open-ai-helper">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+            Ask AI Helper
+          </button>
           <div class="topbar-badge">
-            <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-light);"></span>
-            Claude 3.5 Sonnet Agent Ready
+            <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--status-success);"></span>
+            OpenAI Ready
           </div>
-          <div class="avatar-badge" title="Data Engineer (admin)">DE</div>
+          <div class="avatar-badge" title="User">User</div>
         </div>
       </header>
 
-      <!-- Pipeline Stepper Track -->
+      <!-- Streamlined 5-Step Pipeline Stepper Track -->
       <nav class="pipeline-stepper" id="pipeline-stepper">
-        <div class="stepper-stage active" data-step="dashboard">
+        <div class="stepper-stage active" data-step="upload-dataset">
           <span class="stepper-number">1</span>
-          <span>Dashboard</span>
-        </div>
-        <span class="stepper-separator">→</span>
-
-        <div class="stepper-stage" data-step="create-project">
-          <span class="stepper-number">2</span>
-          <span>Create Project</span>
-        </div>
-        <span class="stepper-separator">→</span>
-
-        <div class="stepper-stage" data-step="upload-dataset">
-          <span class="stepper-number">3</span>
-          <span>Upload Dataset</span>
-        </div>
-        <span class="stepper-separator">→</span>
-
-        <div class="stepper-stage" data-step="dataset-overview">
-          <span class="stepper-number">4</span>
-          <span>Overview</span>
-        </div>
-        <span class="stepper-separator">→</span>
-
-        <div class="stepper-stage" data-step="data-profile">
-          <span class="stepper-number">5</span>
-          <span>Profile</span>
+          <span>Upload</span>
         </div>
         <span class="stepper-separator">→</span>
 
         <div class="stepper-stage" data-step="issues">
-          <span class="stepper-number">6</span>
-          <span>Issues</span>
+          <span class="stepper-number">2</span>
+          <span>Errors & Issues</span>
         </div>
         <span class="stepper-separator">→</span>
 
         <div class="stepper-stage" data-step="cleaning-plan">
-          <span class="stepper-number">7</span>
+          <span class="stepper-number">3</span>
           <span>Cleaning Plan</span>
         </div>
         <span class="stepper-separator">→</span>
 
-        <div class="stepper-stage" data-step="impact-analysis">
-          <span class="stepper-number">8</span>
-          <span>Impact & Loss</span>
-        </div>
-        <span class="stepper-separator">→</span>
-
-        <div class="stepper-stage" data-step="review-approval">
-          <span class="stepper-number">9</span>
-          <span>Review</span>
-        </div>
-        <span class="stepper-separator">→</span>
-
-        <div class="stepper-stage" data-step="validation">
-          <span class="stepper-number">10</span>
-          <span>Validation</span>
-        </div>
-        <span class="stepper-separator">→</span>
-
         <div class="stepper-stage" data-step="execution">
-          <span class="stepper-number">11</span>
-          <span>Execution</span>
+          <span class="stepper-number">4</span>
+          <span>Run Cleaning</span>
         </div>
         <span class="stepper-separator">→</span>
 
         <div class="stepper-stage" data-step="results">
-          <span class="stepper-number">12</span>
-          <span>Results</span>
-        </div>
-        <span class="stepper-separator">→</span>
-
-        <div class="stepper-stage" data-step="audit-history">
-          <span class="stepper-number">13</span>
-          <span>Audit</span>
+          <span class="stepper-number">5</span>
+          <span>Download Clean Data</span>
         </div>
       </nav>
 
-      <!-- Viewport containing all 15 views -->
+      <!-- Viewport containing views -->
       <section class="page-viewport">
         <div id="view-dashboard" class="view-container"></div>
         <div id="view-projects" class="view-container"></div>
@@ -225,6 +186,37 @@
       </section>
     </main>
   </div>
+
+  <!-- AI Assistant Slide-Out Drawer -->
+  <div id="ai-drawer" class="ai-drawer">
+    <div class="ai-drawer-header">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span class="ai-badge">OpenAI</span>
+        <h3 style="margin: 0; font-size: 15px; font-weight: 600; color: var(--text-primary);">Data Assistant</h3>
+      </div>
+      <button id="ai-drawer-close" style="background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 16px;">✕</button>
+    </div>
+    <div class="ai-drawer-body" id="ai-drawer-messages">
+      <div class="ai-message bot">
+Hello! I am your AI Data Assistant powered by OpenAI.
+Ask me anything about your dataset, what issues were found, or how to clean them.
+You can ask in English or Tenglish!
+      </div>
+      <div class="ai-quick-prompts">
+        <button class="ai-chip" data-prompt="What issues were found in this dataset?">What issues were found?</button>
+        <button class="ai-chip" data-prompt="How do I clean this data safely?">How to clean safely?</button>
+        <button class="ai-chip" data-prompt="Why are there duplicate records?">Why duplicate records?</button>
+        <button class="ai-chip" data-prompt="E dataset lo unna issues ni Tenglish lo explain chey">Tenglish lo explain chey</button>
+      </div>
+    </div>
+    <div class="ai-drawer-footer">
+      <div class="ai-input-group">
+        <input type="text" id="ai-drawer-input" placeholder="Type your question here (English / Tenglish)..." />
+        <button id="ai-drawer-send" class="btn btn-primary btn-sm">Ask</button>
+      </div>
+    </div>
+  </div>
+  <div id="ai-drawer-backdrop" class="ai-drawer-backdrop"></div>
 
   <!-- Toast Container -->
   <div class="toast-container" id="toast-container"></div>
