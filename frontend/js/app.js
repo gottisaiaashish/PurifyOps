@@ -5,6 +5,7 @@
 
 import { stateStore } from "./services/stateManager.js";
 import { ApiService } from "./services/apiService.js";
+import { initGradientWaves } from "./components/gradientWaves.js";
 import { renderDashboard } from "./views/dashboardView.js";
 import { renderProjects } from "./views/projectsView.js";
 import { renderCreateProject } from "./views/createProjectView.js";
@@ -247,6 +248,11 @@ function initApp() {
   });
 
   initAiDrawer();
+  try {
+    initGradientWaves("gradient-waves-canvas");
+  } catch (e) {
+    console.warn("GradientWaves background init skipped:", e);
+  }
 
   const initialHash = window.location.hash.replace("#", "") || "dashboard";
   navigateTo(initialHash);

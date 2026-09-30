@@ -17,7 +17,10 @@
   <link rel="stylesheet" href="css/views.css" />
 </head>
 <body class="theme-dark">
-  <div class="app-container">
+  <!-- Fixed WebGL Raymarched Background Canvas (React Bits GradientWaves) -->
+  <canvas id="gradient-waves-canvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; opacity: 0.40; transition: opacity 0.5s ease;"></canvas>
+
+  <div class="app-container" style="position: relative; z-index: 1;">
     <!-- Left Navigation Sidebar -->
     <aside class="app-sidebar">
       <div class="sidebar-header">
