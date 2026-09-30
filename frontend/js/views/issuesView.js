@@ -1,6 +1,6 @@
 /**
  * View 2: Data Health & Issues Detected
- * Executive-Grade Business Impact Analysis & Live Data Evidence Inspector
+ * Real-time Data Quality & Anomaly Analysis (Zero Hardcoded Mock Data)
  */
 import { stateStore } from "../services/stateManager.js";
 import { ApiService } from "../services/apiService.js";
@@ -8,76 +8,55 @@ import { ApiService } from "../services/apiService.js";
 let isSyncingIssues = false;
 let currentFilter = "all";
 
-// Business Impact & Evidence Knowledge Base
-const BUSINESS_METRICS_MAP = {
-  "Possible Duplicate": {
-    dept: "Sales & CRM Ops",
-    businessImpact: "Duplicate Marketing Spend & Billing Collisions",
-    financialRisk: "High Risk — $8,400 est. quarterly outbound marketing waste & skewed customer lifetime value (LTV)",
-    severityColor: "var(--status-danger)",
-    evidence: [
-      { id: "10002", name: "Vihaan Muller", original: "vihaan.muller16@gmail.com (+49 30 105030)", fix: "Merge: Retain Active profile, archive duplicate row #11045", reason: "Identical email across 2 records" },
-      { id: "10012", name: "Sai Martinez", original: "sai.martinez18@gmail.com (+91 91334 89921)", fix: "Merge: Retain Hyderabad location & consolidate spend", reason: "Exact email & name collision" },
-      { id: "10022", name: "Diya Singh", original: "diya.singh58@gmail.com (Singapore)", fix: "Merge: Consolidate Silver tier history into unified ID", reason: "Double entry from web signup" }
-    ]
-  },
-  "Invalid Emails": {
-    dept: "Customer Communications & Growth",
-    businessImpact: "High Email Bounce Rate (~6.1%) & Domain Blacklist Risk",
-    financialRisk: "Critical Risk — ISP spam flagging; undelivered invoices and critical transactional notices",
-    severityColor: "var(--status-danger)",
-    evidence: [
-      { id: "10001", name: "Linda Santos", original: "linda.santos87_at_gmail.com", fix: "linda.santos87@gmail.com", reason: "Substituted '_at_' separator with valid RFC '@' token" },
-      { id: "10020", name: "James Smith", original: "james.smith34_at_gmail.com", fix: "james.smith34@gmail.com", reason: "Converted non-standard token to standard RFC-5322" },
-      { id: "10024", name: "Mary Patel", original: "mary.patel81_at_gmail.com", fix: "mary.patel81@gmail.com", reason: "Repaired domain connector syntax" },
-      { id: "10046", name: "John Jones", original: "john.jones33_at_gmail.com", fix: "john.jones33@gmail.com", reason: "Sanitized corporate outreach address" }
-    ]
-  },
-  "Missing Values": {
-    dept: "Finance & Regional Logistics",
-    businessImpact: "Distorted Cohort Revenue & Broken Regional Logistics",
-    financialRisk: "Moderate Risk — 80 customer records fail automated tax calculations and regional routing",
-    severityColor: "var(--status-warning)",
-    evidence: [
-      { id: "10003", name: "James Silva", original: "Annual_Revenue: [BLANK]", fix: "$142,500 (Demographic Cohort Median)", reason: "Imputed based on Platinum tier & Bengaluru tech cohort" },
-      { id: "10011", name: "Susan Martinez", original: "Postal_Code: 'N/A'", fix: "018989 (Regional Default)", reason: "Inferred from Country 'SG' and City 'Singapore'" },
-      { id: "10025", name: "Ananya Mehta", original: "Annual_Revenue: [BLANK]", fix: "$68,400 (Cohort Median)", reason: "Imputed based on Bronze tier median revenue" },
-      { id: "10040", name: "Mary Sharma", original: "Annual_Revenue: [BLANK]", fix: "$165,200 (Cohort Median)", reason: "Imputed based on US Seattle Gold customer segment" }
-    ]
-  },
-  "Phone Format Inconsistency": {
-    dept: "Support & SMS Notifications",
-    businessImpact: "Automated SMS / WhatsApp Dispatch Failure",
-    financialRisk: "Moderate Risk — Telecom providers reject non-E.164 strings; high dropoff in customer alerts",
-    severityColor: "var(--accent-light)",
-    evidence: [
-      { id: "10008", name: "Aadhya Chen", original: "+1 (555) 987-3185", fix: "+15559873185", reason: "Standardized US national format into ITU E.164" },
-      { id: "10027", name: "Thomas Santos", original: "4157709", fix: "+914157709", reason: "Prepended India (+91) dialing context" },
-      { id: "10043", name: "David Santos", original: "+1 (555) 535-8005", fix: "+15555358005", reason: "Stripped local parentheses & spaces" }
-    ]
-  },
-  "Potential Anomalies": {
-    dept: "Executive Reporting & Risk",
-    businessImpact: "Skewed Executive Dashboards & Distorted Financial Models",
-    financialRisk: "Critical Risk — Extreme outliers (Age: 142) and negative balances corrupt board reporting metrics",
-    severityColor: "var(--status-danger)",
-    evidence: [
-      { id: "10015", name: "Jennifer Patel", original: "Age: 142 years", fix: "Clamped to 48 years (Median)", reason: "Extreme physical impossibility (Age > 110)" },
-      { id: "10039", name: "Elizabeth Chen", original: "Age: 142 years", fix: "Clamped to 44 years (Median)", reason: "Extreme physical impossibility (Age > 110)" },
-      { id: "10412", name: "Marcus Webb", original: "Revenue: -$14,500.00", fix: "$0.00 (Domain Baseline)", reason: "Negative monetary entries violate revenue accounting" }
-    ]
-  }
-};
-
 export function renderIssues(container) {
   const state = stateStore.getState();
-  const issues = state.issues || [];
   const dataset = state.activeDataset || {};
-  const datasetName = dataset.name || "Customer_Master.csv";
-  const recordsCount = dataset.recordsCount || 1045;
+  const issues = state.issues || [];
+
+  const isDatasetLoaded = dataset.name && dataset.name !== "No Dataset Loaded" && (dataset.recordsCount > 0 || issues.length > 0);
+  const datasetName = dataset.name || "No Dataset Loaded";
+  const recordsCount = dataset.recordsCount || 0;
+
+  // If no dataset is uploaded, show clean empty state
+  if (!isDatasetLoaded) {
+    container.innerHTML = `
+      <!-- Page Header -->
+      <div class="page-header">
+        <div class="page-title-group">
+          <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: 4px;">
+            <span class="badge badge-neutral">Step 2 of 5</span>
+            <span style="font-size: var(--text-xs); color: var(--text-muted); font-family: var(--font-mono);">Awaiting Upload</span>
+          </div>
+          <h1>Data Health & Business Issues</h1>
+          <p class="page-description">Executive analysis of data anomalies, business impact, and concrete sample records requiring automated purification.</p>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-primary" id="btn-goto-upload-header">← Step 1: Upload Dataset</button>
+        </div>
+      </div>
+
+      <!-- Empty State Card -->
+      <div class="empty-state" style="text-align: center; padding: 64px 24px; background: rgba(18, 20, 32, 0.45); border: 1px dashed var(--border-subtle); border-radius: var(--radius-md); margin-top: var(--space-6);">
+        <div style="font-size: 40px; margin-bottom: 16px;">📂</div>
+        <h2 style="font-size: var(--text-xl); font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">No Active Dataset Loaded</h2>
+        <p style="color: var(--text-muted); font-size: var(--text-sm); max-width: 520px; margin: 0 auto 24px auto;">
+          Please upload a CSV, XLSX, TSV, or JSON file in Step 1. Once uploaded, PurifyOps will analyze column distributions, detect anomalies, and calculate quality metrics dynamically.
+        </p>
+        <button class="btn btn-primary" id="btn-goto-upload-empty">Upload Your Data File (Step 1) →</button>
+      </div>
+    `;
+
+    container.querySelector("#btn-goto-upload-header")?.addEventListener("click", () => {
+      window.location.hash = "#upload-dataset";
+    });
+    container.querySelector("#btn-goto-upload-empty")?.addEventListener("click", () => {
+      window.location.hash = "#upload-dataset";
+    });
+    return;
+  }
 
   // Auto-sync if issues are empty for an active dataset
-  if (issues.length === 0 && datasetName !== "No Dataset Loaded" && !isSyncingIssues) {
+  if (issues.length === 0 && !isSyncingIssues) {
     isSyncingIssues = true;
     ApiService.syncStateWithBackend().then(synced => {
       isSyncingIssues = false;
@@ -99,6 +78,11 @@ export function renderIssues(container) {
   const anomalyCount = anomalyIssues.reduce((sum, i) => sum + (i.affectedRecords || 1), 0);
 
   const totalAffectedRecords = issues.reduce((sum, i) => sum + (i.affectedRecords || 0), 0);
+  const healthScore = dataset.qualityScore || Math.max(0, Math.min(100, 100 - (issues.length * 8)));
+
+  // Dynamic risk calculation based on actual records
+  const financialRiskEstimate = totalAffectedRecords > 0 ? `$${(totalAffectedRecords * 25).toLocaleString()} / Quarter` : "$0 / Quarter";
+  const hoursSavedEstimate = totalAffectedRecords > 0 ? `~${(totalAffectedRecords * 0.015).toFixed(1)} Engineering Hrs` : "0 Hrs";
 
   // Apply active category filter
   let filteredIssues = issues;
@@ -119,7 +103,7 @@ export function renderIssues(container) {
     <div class="page-header">
       <div class="page-title-group">
         <div style="display: flex; align-items: center; gap: var(--space-2); margin-bottom: 4px;">
-          <span class="badge badge-high">Step 2 of 5</span>
+          <span class="badge badge-low">Step 2 of 5</span>
           <span style="font-size: var(--text-xs); color: var(--text-muted); font-family: var(--font-mono);">${datasetName} (${recordsCount.toLocaleString()} rows)</span>
         </div>
         <h1>Data Health & Business Issues</h1>
@@ -141,7 +125,7 @@ export function renderIssues(container) {
         <div style="border-right: 1px solid var(--border-subtle); padding-right: 20px;">
           <div style="font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); font-weight: 600;">Overall Data Health Score</div>
           <div style="display: flex; align-items: baseline; gap: 8px; margin: 6px 0;">
-            <span style="font-size: 32px; font-weight: 800; color: var(--text-primary);">58</span>
+            <span style="font-size: 32px; font-weight: 800; color: var(--text-primary);">${healthScore}</span>
             <span style="font-size: var(--text-base); color: var(--text-muted);">/ 100</span>
           </div>
           <div style="font-size: var(--text-xs); color: var(--text-secondary); line-height: 1.4;">
@@ -151,12 +135,12 @@ export function renderIssues(container) {
 
         <!-- Financial & Operational Risk -->
         <div style="border-right: 1px solid var(--border-subtle); padding-right: 20px;">
-          <div style="font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); font-weight: 600;">Financial & Operational Risk</div>
+          <div style="font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); font-weight: 600;">Estimated Operational Risk</div>
           <div style="font-size: var(--text-lg); font-weight: 700; color: var(--text-primary); margin: 6px 0;">
-            $38,500 / Quarter
+            ${financialRiskEstimate}
           </div>
           <div style="font-size: var(--text-xs); color: var(--text-muted); line-height: 1.4;">
-            Bounced campaigns, duplicate sales calls, & corrupted billing.
+            Estimated downstream impact of ${totalAffectedRecords.toLocaleString()} corrupted entries.
           </div>
         </div>
 
@@ -164,10 +148,10 @@ export function renderIssues(container) {
         <div style="border-right: 1px solid var(--border-subtle); padding-right: 20px;">
           <div style="font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); font-weight: 600;">Corrupted Scope</div>
           <div style="font-size: var(--text-lg); font-weight: 700; color: var(--text-primary); margin: 6px 0;">
-            ${totalAffectedRecords.toLocaleString()} Issues Found
+            ${totalAffectedRecords.toLocaleString()} Records
           </div>
           <div style="font-size: var(--text-xs); color: var(--text-muted); line-height: 1.4;">
-            Across 5 distinct quality dimensions in ${datasetName}.
+            Across ${issues.length} detected anomaly categories in ${datasetName}.
           </div>
         </div>
 
@@ -175,10 +159,10 @@ export function renderIssues(container) {
         <div>
           <div style="font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); font-weight: 600;">PurifyOps Time Saved</div>
           <div style="font-size: var(--text-lg); font-weight: 700; color: var(--accent-light); margin: 6px 0;">
-            ~14.5 Engineering Hrs
+            ${hoursSavedEstimate}
           </div>
           <div style="font-size: var(--text-xs); color: var(--text-muted); line-height: 1.4;">
-            Replaces manual SQL scripts and spreadsheet cleaning.
+            Replaces manual scripts & spreadsheet data cleaning.
           </div>
         </div>
 
@@ -193,7 +177,7 @@ export function renderIssues(container) {
         </div>
         <div class="metric-value">${duplicateCount.toLocaleString()}</div>
         <div class="metric-meta">
-          <span class="metric-indicator neutral">●</span> ${duplicateIssues.length} cluster rule(s) • CRM collision
+          <span class="metric-indicator neutral">●</span> ${duplicateIssues.length} rule(s) detected
         </div>
       </div>
 
@@ -203,7 +187,7 @@ export function renderIssues(container) {
         </div>
         <div class="metric-value">${formatCount.toLocaleString()}</div>
         <div class="metric-meta">
-          <span class="metric-indicator neutral">●</span> 6.1% bounce rate • ISP blacklist risk
+          <span class="metric-indicator neutral">●</span> ${formatIssues.length} syntax rule(s)
         </div>
       </div>
 
@@ -213,7 +197,7 @@ export function renderIssues(container) {
         </div>
         <div class="metric-value">${missingCount.toLocaleString()}</div>
         <div class="metric-meta">
-          <span class="metric-indicator neutral">●</span> Breaks revenue analytics & postal routing
+          <span class="metric-indicator neutral">●</span> ${missingIssues.length} completeness rule(s)
         </div>
       </div>
 
@@ -223,7 +207,7 @@ export function renderIssues(container) {
         </div>
         <div class="metric-value">${anomalyCount.toLocaleString()}</div>
         <div class="metric-meta">
-          <span class="metric-indicator neutral">●</span> Negative revenue & impossible ages (142 yrs)
+          <span class="metric-indicator neutral">●</span> ${anomalyIssues.length} range rule(s)
         </div>
       </div>
     </div>
@@ -236,7 +220,7 @@ export function renderIssues(container) {
           All Issues (${issues.length})
         </button>
         <button class="btn btn-sm ${currentFilter === 'high' ? 'btn-primary' : 'btn-outline'}" data-filter-btn="high">
-          Critical / High (3)
+          Critical / High (${issues.filter(i => i.severity === 'Critical' || i.severity === 'High').length})
         </button>
         <button class="btn btn-sm ${currentFilter === 'duplicates' ? 'btn-primary' : 'btn-outline'}" data-filter-btn="duplicates">
           Duplicates (${duplicateCount})
@@ -258,20 +242,14 @@ export function renderIssues(container) {
     <div style="display: flex; flex-direction: column; gap: var(--space-4);" id="issues-list">
       ${filteredIssues.length === 0 ? `
         <div class="card" style="text-align: center; padding: 48px 24px; background: var(--bg-surface-elevated); border: 1px dashed var(--border-subtle); border-radius: var(--radius-md);">
-          <h3 style="font-size: var(--text-lg); color: var(--text-primary); margin-bottom: 8px;">No Issues Matching Filter</h3>
+          <h3 style="font-size: var(--text-lg); color: var(--text-primary); margin-bottom: 8px;">No Issues Found Under Filter</h3>
           <p style="color: var(--text-muted); font-size: var(--text-sm); margin-bottom: 16px;">
-            No anomalies found under this specific category filter.
+            No anomalies match the currently selected category filter.
           </p>
           <button class="btn btn-outline" data-filter-btn="all">Reset to All Issues</button>
         </div>
       ` : filteredIssues.map(iss => {
-        const meta = BUSINESS_METRICS_MAP[iss.type] || {
-          dept: "Data Governance",
-          businessImpact: "Data Inconsistency & Reporting Discrepancy",
-          financialRisk: "Unstandardized entries impact downstream workflows",
-          severityColor: "var(--accent-light)",
-          evidence: []
-        };
+        const evidenceRows = Array.isArray(iss.evidence) ? iss.evidence : (Array.isArray(iss.sample_records) ? iss.sample_records : []);
 
         return `
           <div class="metric-card" style="border-left: 3px solid var(--accent-primary); padding: 20px 24px;">
@@ -280,10 +258,10 @@ export function renderIssues(container) {
             <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
               <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
                 <h3 style="font-size: var(--text-md); font-weight: 700; color: var(--text-primary); margin: 0;">
-                  ${iss.type}
+                  ${iss.type || "Data Anomaly"}
                 </h3>
                 <span style="font-size: var(--text-xs); color: var(--text-muted); font-weight: 500;">
-                  • ${iss.category}
+                  • ${iss.category || "Validation Rule"}
                 </span>
               </div>
               <div style="display: flex; align-items: center; gap: 12px;">
@@ -293,36 +271,26 @@ export function renderIssues(container) {
               </div>
             </div>
 
-            <!-- Business Risk & Problem Explanation Box -->
+            <!-- Problem Explanation Box -->
             <div style="background: rgba(18, 20, 32, 0.6); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 12px 16px; margin: 12px 0;">
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                <div>
-                  <div style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--text-muted); letter-spacing: 0.05em; margin-bottom: 4px;">
-                    Technical Diagnosis
-                  </div>
-                  <div style="font-size: var(--text-sm); color: var(--text-primary); line-height: 1.5;">
-                    ${iss.explanation}
-                  </div>
+              <div>
+                <div style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--text-muted); letter-spacing: 0.05em; margin-bottom: 4px;">
+                  Technical Diagnosis
                 </div>
-                <div>
-                  <div style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--text-muted); letter-spacing: 0.05em; margin-bottom: 4px;">
-                    Business Risk
-                  </div>
-                  <div style="font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.5; font-weight: 500;">
-                    ${meta.businessImpact}: ${meta.financialRisk}
-                  </div>
+                <div style="font-size: var(--text-sm); color: var(--text-primary); line-height: 1.5;">
+                  ${iss.explanation || "Data anomaly identified during automated pipeline profiling."}
                 </div>
               </div>
             </div>
 
-            <!-- Evidence Inspector / Live Bad Data Table -->
-            ${meta.evidence && meta.evidence.length > 0 ? `
+            <!-- Evidence Inspector / Live Bad Data Table (Only if real API samples exist) -->
+            ${evidenceRows.length > 0 ? `
               <div style="margin-top: 14px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                   <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; color: var(--accent-light);">
-                    Concrete Data Evidence (Sample Records):
+                    Sample Affected Records:
                   </span>
-                  <span style="font-size: 11px; color: var(--text-muted);">Autonomous fix preview</span>
+                  <span style="font-size: 11px; color: var(--text-muted);">Real dataset sample</span>
                 </div>
 
                 <div style="overflow-x: auto; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); background: var(--bg-surface);">
@@ -330,28 +298,24 @@ export function renderIssues(container) {
                     <thead>
                       <tr style="background: rgba(30, 41, 59, 0.4); border-bottom: 1px solid var(--border-subtle);">
                         <th style="padding: 8px 12px; color: var(--text-muted); font-weight: 600;">Row ID</th>
-                        <th style="padding: 8px 12px; color: var(--text-muted); font-weight: 600;">Customer</th>
                         <th style="padding: 8px 12px; color: var(--text-secondary); font-weight: 600;">Current Value in CSV</th>
-                        <th style="padding: 8px 12px; color: var(--accent-light); font-weight: 600;">PurifyOps Cleaned Output</th>
-                        <th style="padding: 8px 12px; color: var(--text-muted); font-weight: 600;">Action Rationale</th>
+                        <th style="padding: 8px 12px; color: var(--accent-light); font-weight: 600;">PurifyOps Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      ${meta.evidence.map(ev => `
+                      ${evidenceRows.map(ev => `
                         <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.03);">
-                          <td style="padding: 8px 12px; font-family: var(--font-mono); color: var(--accent-light); font-weight: 600;">#${ev.id}</td>
-                          <td style="padding: 8px 12px; font-weight: 500; color: var(--text-primary);">${ev.name}</td>
+                          <td style="padding: 8px 12px; font-family: var(--font-mono); color: var(--accent-light); font-weight: 600;">#${ev.id || ev.row_id || '1'}</td>
                           <td style="padding: 8px 12px; font-family: var(--font-mono); color: var(--text-secondary);">
                             <span style="display: inline-block; padding: 2px 6px; border-radius: 3px; background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border-subtle);">
-                              ${ev.original}
+                              ${ev.original || ev.value || 'Corrupted'}
                             </span>
                           </td>
                           <td style="padding: 8px 12px; font-family: var(--font-mono); color: var(--accent-light);">
                             <span style="display: inline-block; padding: 2px 6px; border-radius: 3px; background: rgba(99, 102, 241, 0.12); border: 1px solid rgba(99, 102, 241, 0.3);">
-                              ${ev.fix}
+                              ${ev.fix || ev.suggested_action || 'Clean'}
                             </span>
                           </td>
-                          <td style="padding: 8px 12px; color: var(--text-muted);">${ev.reason}</td>
                         </tr>
                       `).join('')}
                     </tbody>
@@ -385,7 +349,7 @@ export function renderIssues(container) {
           Ready to review the autonomous cleaning plan?
         </div>
         <div style="font-size: var(--text-xs); color: var(--text-muted);">
-          Inspect all 5 DAG operations, turn individual rules on or off, and approve execution.
+          Inspect DAG operations, turn individual rules on or off, and approve execution.
         </div>
       </div>
       <div style="display: flex; gap: 12px;">
