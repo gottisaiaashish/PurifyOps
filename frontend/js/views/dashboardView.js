@@ -3,6 +3,7 @@
  * Clean, user-friendly language & professional layout (Zero emojis/jargon)
  */
 import { stateStore } from "../services/stateManager.js";
+import { ApiService } from "../services/apiService.js";
 
 export function renderDashboard(container) {
   const state = stateStore.getState();
@@ -142,9 +143,15 @@ export function renderDashboard(container) {
               </td>
               <td style="color: var(--text-muted); font-size: var(--text-xs);">${p.lastUpdated}</td>
               <td>
-                <button class="btn btn-outline btn-sm btn-open-pipeline" data-project-id="${p.id}">
-                  Open →
-                </button>
+                <div style="display: flex; gap: 6px; align-items: center;">
+                  <button class="btn btn-outline btn-sm btn-open-pipeline" data-project-id="${p.id}">
+                    Open →
+                  </button>
+                  <button class="btn btn-danger btn-sm btn-delete-dash-proj" data-id="${p.id}" data-name="${p.name}">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                    Delete
+                  </button>
+                </div>
               </td>
             </tr>
           `).join('')}
@@ -172,6 +179,20 @@ export function renderDashboard(container) {
   container.querySelectorAll(".btn-open-pipeline").forEach(btn => {
     btn.addEventListener("click", () => {
       window.location.hash = "#issues";
+    });
+  });
+
+  // Delete dashboard project handler
+  container.querySelectorAll(".btn-delete-dash-proj").forEach(btn => {
+    btn.addEventListener("click", async () => {
+      const id = btn.getAttribute("data-id");
+      const name = btn.getAttribute("data-name");
+      if (confirm(`Are you sure you want to permanently delete project "${name}" from the database?`)) {
+        btn.disabled = true;
+        btn.textContent = "Deleting...";
+        await ApiService.deleteProject(id);
+        renderDashboard(container);
+      }
     });
   });
 }

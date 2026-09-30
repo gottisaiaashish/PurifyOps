@@ -56,6 +56,24 @@ export const ApiService = {
     return stateStore.createProject(projectData);
   },
 
+  async deleteProject(projectId) {
+    await request(`/projects/${projectId}`, {
+      method: "DELETE"
+    });
+    stateStore.state.projects = stateStore.state.projects.filter(
+      (p) => String(p.id) !== String(projectId)
+    );
+    if (stateStore.state.activeProjectId === projectId) {
+      const remaining = stateStore.state.projects[0];
+      if (remaining) {
+        stateStore.setActiveProject(remaining.id);
+      }
+    }
+    stateStore.saveState();
+    stateStore.emit("state:changed", stateStore.state);
+    return true;
+  },
+
   async uploadDataset(file, progressCallback) {
     const projectId = "proj-001";
     const formData = new FormData();

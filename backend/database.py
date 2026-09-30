@@ -151,6 +151,30 @@ class Database:
     def get_projects(self) -> List[Dict[str, Any]]:
         return self.state["projects"]
 
+    def delete_project(self, project_id: str) -> bool:
+        """Deletes a project and all associated datasets, plans, and logs from DB."""
+        initial_len = len(self.state["projects"])
+        self.state["projects"] = [p for p in self.state["projects"] if str(p.get("id")) != str(project_id)]
+        
+        self.state["datasets"].pop(project_id, None)
+        self.state["plans"].pop(project_id, None)
+        self.state["review_pairs"].pop(project_id, None)
+        self.state["validations"].pop(project_id, None)
+        self.state["audit_history"].pop(project_id, None)
+        self.state["execution_logs"].pop(project_id, None)
+        self.state["results"].pop(project_id, None)
+        
+        if self.mongo_db is not None:
+            try:
+                self.mongo_db.projects.delete_one({"id": project_id})
+                self.mongo_db.datasets.delete_one({"id": project_id})
+                self.mongo_db.plans.delete_one({"id": project_id})
+            except Exception as e:
+                print(f"[PurifyOps Database] MongoDB delete error: {e}")
+                
+        self.save()
+        return len(self.state["projects"]) < initial_len
+
     def create_project(self, project_data: Dict[str, Any]) -> Dict[str, Any]:
         proj_id = f"proj-{datetime.now().strftime('%M%S')}"
         project = {

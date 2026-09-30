@@ -66,6 +66,16 @@ def create_project(payload: ProjectCreate):
     return proj
 
 
+@app.delete("/api/v1/projects/{project_id}")
+def delete_project(project_id: str):
+    deleted = db.delete_project(project_id)
+    if not deleted:
+        # Fallback: remove from projects list if present
+        db.state["projects"] = [p for p in db.state["projects"] if str(p.get("id")) != str(project_id)]
+        db.save()
+    return {"status": "success", "message": f"Project {project_id} deleted successfully"}
+
+
 @app.post("/api/v1/projects/{project_id}/upload")
 async def upload_dataset(project_id: str, file: UploadFile = File(...)):
     filename = file.filename or "uploaded_dataset.csv"
