@@ -365,8 +365,16 @@ def ai_helper(payload: Dict[str, Any]):
         except Exception as e:
             err_msg = str(e)
             print(f"[AI Helper Error] OpenAI call failed: {err_msg}")
+            if "429" in err_msg or "Too Many Requests" in err_msg:
+                user_friendly = (
+                    "⚠️ OpenAI API Quota Exceeded (HTTP 429: Too Many Requests)\n\n"
+                    "Server లో ఉన్న OpenAI API Key ది Quota / Usage limit అయిపోయింది.\n"
+                    "దయచేసి వర్కింగ్ OpenAI API Key ని **Settings** పేజీలో ఎంటర్ చేయండి."
+                )
+            else:
+                user_friendly = f"⚠️ OpenAI API Error: {err_msg}.\n\nPlease check your OpenAI API key in Settings."
             return {
-                "reply": f"⚠️ OpenAI API Error: {err_msg}.\n\nPlease check your OpenAI API key in Settings or add `OPENAI_API_KEY` to server environment variables.",
+                "reply": user_friendly,
                 "model": "System Alert"
             }
 
