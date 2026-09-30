@@ -126,9 +126,9 @@ export function initGradientWaves(canvasId = "gradient-waves-canvas", options = 
   if (!canvas) return;
 
   const config = {
-    horizonColor: "#090d16",
-    waveColor: "#0284c7",
-    crestColor: "#38bdf8",
+    horizonColor: "#0b0c10",
+    waveColor: "#4338ca",
+    crestColor: "#818cf8",
     speed: 0.35,
     amplitude: 2.5,
     waveScale: 0.6,
@@ -141,7 +141,7 @@ export function initGradientWaves(canvasId = "gradient-waves-canvas", options = 
     fogDepth: 16,
     steps: 60.0,
     brightness: 1.05,
-    opacity: 0.75,
+    opacity: 0.65,
     grain: true,
     grainIntensity: 0.04,
     parallaxStrength: 0.4,
