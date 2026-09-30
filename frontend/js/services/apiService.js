@@ -711,9 +711,10 @@ export const ApiService = {
 
   // --- AI Assistant / Help ---
   async askAiHelper(prompt, context = {}) {
+    const settingsKey = stateStore.getState().settings?.openaiApiKey || "";
     const res = await request("/ai-helper", {
       method: "POST",
-      body: JSON.stringify({ prompt, context })
+      body: JSON.stringify({ prompt, context, apiKey: settingsKey })
     });
     return res ? res.reply : "AI Helper is currently ready to answer your data questions.";
   }

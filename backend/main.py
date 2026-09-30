@@ -315,24 +315,28 @@ def ai_helper(payload: Dict[str, Any]):
         raise HTTPException(status_code=400, detail="Prompt is required")
     
     context = payload.get("context", {})
-    dataset_name = context.get("datasetName", "Dataset")
+    dataset_name = context.get("datasetName", "")
     issues_summary = context.get("issuesSummary", "")
     columns_summary = context.get("columnsSummary", "")
+    provided_key = payload.get("apiKey", "")
 
     from agent_planner import get_openai_api_key
     import urllib.request
     import json
 
-    api_key = get_openai_api_key()
+    api_key = get_openai_api_key(provided_key)
     system_msg = (
-        "You are PurifyOps Data Assistant, an expert AI that helps non-technical users clean and understand their data. "
-        "Explain data quality problems, duplicate detection, and cleaning steps in very simple, friendly, easy-to-understand words. "
-        "Never use heavy jargon like 'Shannon entropy' or 'vectorized SIMD'. Instead use simple words like 'data risk', 'safety score', 'speed'. "
-        "If the user asks in Tenglish (Telugu written in English script), reply in natural, friendly Tenglish. "
-        "Keep your response concise (3-5 short bullet points or a short paragraph) and practical."
+        "You are PurifyOps Data & General Assistant, an intelligent AI that helps users clean data, answer questions, and provide guidance. "
+        "Answer the user's question directly and accurately. "
+        "If the user asks general questions (e.g. general knowledge, who someone is, science, coding), answer them clearly and helpfully. "
+        "If the user asks about data cleaning, explain in simple, friendly terms. "
+        "If the user asks in Tenglish (Telugu in English script), reply in natural, friendly Tenglish. "
+        "Keep your response clear, concise, and helpful."
     )
 
-    user_content = f"Dataset: {dataset_name}\nColumns: {columns_summary}\nDetected Issues: {issues_summary}\n\nUser Question: {prompt}"
+    user_content = f"User Question: {prompt}"
+    if dataset_name and dataset_name != "No Dataset Loaded":
+        user_content = f"Active Dataset Context:\nDataset Name: {dataset_name}\nColumns: {columns_summary}\nDetected Issues: {issues_summary}\n\nUser Question: {prompt}"
 
     if api_key:
         try:
@@ -342,8 +346,8 @@ def ai_helper(payload: Dict[str, Any]):
                     {"role": "system", "content": system_msg},
                     {"role": "user", "content": user_content}
                 ],
-                "temperature": 0.3,
-                "max_tokens": 400
+                "temperature": 0.4,
+                "max_tokens": 450
             }).encode("utf-8")
 
             req = urllib.request.Request(
@@ -359,18 +363,23 @@ def ai_helper(payload: Dict[str, Any]):
                 reply = res_body["choices"][0]["message"]["content"]
                 return {"reply": reply, "model": "OpenAI GPT-4o-mini"}
         except Exception as e:
-            print(f"[AI Helper Error] OpenAI call failed: {e}")
+            err_msg = str(e)
+            print(f"[AI Helper Error] OpenAI call failed: {err_msg}")
+            return {
+                "reply": f"⚠️ OpenAI API Error: {err_msg}.\n\nPlease check your OpenAI API key in Settings or add `OPENAI_API_KEY` to server environment variables.",
+                "model": "System Alert"
+            }
 
-    # Friendly Intelligent Fallback
+    # Intelligent Fallback when OpenAI key is missing
     q_lower = prompt.lower()
     if "duplicate" in q_lower or "duplicates" in q_lower:
         reply = (
             "Duplicates jaragataniki main reasons:\n"
-            "1. Same person customer ID or email to different times enter ayyi undochu.\n"
+            "1. Same person customer ID or email multiple times enter ayyi undochu.\n"
             "2. Name spelling lo slight differences (like John vs Jon).\n\n"
             "Solution: Manam Entity Resolution dwara safe ga Golden Record select chesi merge chestham."
         )
-    elif "safe" in q_lower or "delete" in q_lower or "revert" in q_lower:
+    elif "safe" in q_lower or "delete" in q_lower or "revert" in q_lower or "undo" in q_lower:
         reply = (
             "Yes, 100% safe! PurifyOps lo mee original data eppudu delete avvadhu.\n"
             "Manam prathi change ki oka snapshot create chestham, meeku emaina nachakunte single click tho Rollback/Undo cheskovachu."
@@ -384,13 +393,12 @@ def ai_helper(payload: Dict[str, Any]):
         )
     else:
         reply = (
-            f"Mee dataset '{dataset_name}' gurinchi:\n"
-            "- Upload aina data ni analyze chesi missing values & wrong formats ni detect chesam.\n"
-            "- Cleaning Plan run cheste high accuracy tho clean data ready avthundi.\n"
-            "- Ee data ni clean chesi Excel/CSV format lo download cheskovachu."
+            f"💡 Note: OpenAI API Key config avvaledu. General AI questions (like '{prompt}') live ga answer cheyaniki "
+            "**Settings** లో మీ OpenAI API Key పంపండి లేదా Server ENV లో `OPENAI_API_KEY` నీ set చేయండి.\n\n"
+            "PurifyOps Data Cleaning గురించి ఏమైనా సందేహాలు ఉంటే అడగవచ్చు!"
         )
 
-    return {"reply": reply, "model": "PurifyOps Assistant"}
+    return {"reply": reply, "model": "PurifyOps Assistant (Offline Mode)"}
 
 
 # --- Results & Audit ---

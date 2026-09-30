@@ -9,8 +9,11 @@ import urllib.request
 from typing import List, Dict, Any
 
 
-def get_openai_api_key() -> str:
-    key = os.environ.get("OPENAI_API_KEY", "")
+def get_openai_api_key(provided_key: str = "") -> str:
+    if provided_key and provided_key.strip():
+        return provided_key.strip()
+
+    key = os.environ.get("OPENAI_API_KEY", "").strip()
     if key:
         return key
 
@@ -21,9 +24,21 @@ def get_openai_api_key() -> str:
             with open(env_file, "r", encoding="utf-8") as f:
                 for line in f:
                     if line.startswith("OPENAI_API_KEY="):
-                        return line.strip().split("=", 1)[1]
+                        val = line.strip().split("=", 1)[1].strip().strip('"').strip("'")
+                        if val:
+                            return val
         except Exception:
             pass
+
+    # Check DB settings
+    try:
+        from database import db
+        settings_key = db.state.get("settings", {}).get("openaiApiKey", "")
+        if settings_key and settings_key.strip():
+            return settings_key.strip()
+    except Exception:
+        pass
+
     return ""
 
 
