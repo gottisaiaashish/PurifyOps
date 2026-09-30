@@ -39,10 +39,11 @@ body {
   width: var(--sidebar-width);
   min-width: var(--sidebar-width);
   max-width: var(--sidebar-width);
-  background-color: rgba(15, 23, 42, 0.88);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-right: 1px solid rgba(51, 65, 85, 0.6);
+  background: rgba(11, 12, 18, 0.55);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -202,10 +203,10 @@ body {
 /* Top Navigation Bar */
 .topbar {
   height: var(--header-height);
-  background-color: rgba(15, 23, 42, 0.82);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+  background: rgba(11, 12, 18, 0.45);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -223,16 +224,19 @@ body {
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  background: var(--bg-primary);
-  border: 1px solid var(--border-subtle);
+  background: rgba(18, 20, 32, 0.60);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.10);
   padding: 6px var(--space-3);
   border-radius: var(--radius-sm);
   cursor: pointer;
-  transition: border-color var(--transition-fast);
+  transition: all var(--transition-fast);
 }
 
 .project-selector:hover {
-  border-color: var(--border-medium);
+  border-color: rgba(129, 140, 248, 0.4);
+  background: rgba(26, 29, 44, 0.75);
 }
 
 .project-label {
@@ -283,8 +287,10 @@ body {
 
 /* Pipeline Stepper Bar (Journey Tracker) */
 .pipeline-stepper {
-  background-color: #0b1120;
-  border-bottom: 1px solid var(--border-subtle);
+  background: rgba(10, 11, 17, 0.40);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
   padding: 0 var(--space-6);
   display: flex;
   align-items: center;

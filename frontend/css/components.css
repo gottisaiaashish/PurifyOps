@@ -104,6 +104,50 @@
   font-size: var(--text-xs);
 }
 
+/* ==========================================================================
+   Frosted Glassmorphism UI Engine
+   ========================================================================== */
+
+.metric-card,
+.table-wrapper,
+.quality-score-panel,
+.dimensions-panel,
+.dropzone-container,
+.operation-card,
+.modal-dialog,
+.ai-drawer,
+.hero-banner,
+.empty-state,
+.issues-executive-card,
+.view-card {
+  background: rgba(18, 20, 32, 0.45) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.09) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35), inset 0 1px 0 0 rgba(255, 255, 255, 0.08) !important;
+  border-radius: var(--radius-md) !important;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+.metric-card:hover,
+.table-wrapper:hover,
+.operation-card:hover,
+.hero-banner:hover,
+.dropzone-container:hover {
+  border-color: rgba(129, 140, 248, 0.45) !important;
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45), 0 0 24px rgba(99, 102, 241, 0.18), inset 0 1px 0 0 rgba(255, 255, 255, 0.16) !important;
+}
+
+.hero-banner {
+  padding: var(--space-6);
+  margin-bottom: var(--space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.18) 0%, rgba(168, 85, 247, 0.12) 100%), rgba(18, 20, 32, 0.50) !important;
+}
+
 /* Metric / Stat Cards */
 .metrics-grid {
   display: grid;
@@ -113,9 +157,6 @@
 }
 
 .metric-card {
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
   padding: var(--space-4);
   display: flex;
   flex-direction: column;
@@ -270,7 +311,7 @@
 }
 
 .enterprise-table th {
-  background-color: rgba(15, 23, 42, 0.95);
+  background-color: rgba(12, 14, 22, 0.40);
   color: var(--text-muted);
   font-weight: 600;
   font-size: 11px;
@@ -289,7 +330,7 @@
 }
 
 .enterprise-table tr:hover td {
-  background-color: rgba(30, 41, 59, 0.4);
+  background-color: rgba(99, 102, 241, 0.12);
 }
 
 .enterprise-table tr:last-child td {
