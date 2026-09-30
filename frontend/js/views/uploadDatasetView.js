@@ -55,31 +55,7 @@ export function renderUploadDataset(container) {
         </div>
       </div>
 
-      <!-- File Settings -->
-      <div class="settings-content-card" style="margin: 24px 0;">
-        <h4 style="font-size: var(--text-sm); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 12px;">
-          Optional Upload Options
-        </h4>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-          <div>
-            <label class="form-label">Treated as Blank / Missing</label>
-            <input type="text" class="form-input" id="null-tokens" value="NA, N/A, null, NULL, -, None" />
-            <span style="font-size: 11px; color: var(--text-muted); margin-top: 4px; display: block;">
-              Tokens treated as empty cells.
-            </span>
-          </div>
-          <div>
-            <label class="form-label">Scan Depth</label>
-            <select class="form-select" id="sample-strategy">
-              <option value="full">Check Every Row (Recommended)</option>
-              <option value="head">Check First 50,000 Rows</option>
-            </select>
-            <span style="font-size: 11px; color: var(--text-muted); margin-top: 4px; display: block;">
-              Full scan checks every row for errors and duplicates.
-            </span>
-          </div>
-        </div>
-      </div>
+
 
       <div style="display: flex; justify-content: flex-end; gap: 12px;">
         <button class="btn btn-outline" id="btn-back-projects">Back to Projects</button>
