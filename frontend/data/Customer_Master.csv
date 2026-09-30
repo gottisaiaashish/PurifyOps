@@ -1,0 +1,1046 @@
+Customer_ID,First_Name,Last_Name,Email,Phone,Age,Annual_Revenue,Country_Code,City,Postal_Code,Account_Status,Signup_Date,Loyalty_Tier
+10001,Linda,Santos,linda.santos87_at_gmail.com,+49 30 275053,43,214264.18,SG,Singapore,018989,Active,2023-08-15,Silver
+10002,Vihaan,Muller,vihaan.muller16@gmail.com,+49 30 105030,55,216202.0,SG,Singapore,018989,Active,2021-03-22,Gold
+10003,James,Silva,james.silva38@gmail.com,+91 99468 46921,47,,IN,Bengaluru,560001,Active,2021-01-04,Platinum
+10004,David,Schmidt,david.schmidt42@gmail.com,+91 91073 77601,55,29007.89,IN,Hyderabad,500001,Active,2023-01-07,Platinum
+10005,Li,Mehta,li.mehta13@gmail.com,+44 20 7735 9108,48,141429.4,GB,Birmingham,B1 1BB,Pending,2020-04-24,Standard
+10006,Elizabeth,Rodriguez,elizabeth.rodriguez19@gmail.com,+49 30 304294,38,206630.59,DE,Berlin,10115,Active,2021-06-08,Bronze
+10007,Jennifer,Yang,jennifer.yang38@gmail.com,+44 20 7914 9848,53,115336.54,GB,Manchester,M1 1AE,Active,2022-01-08,Bronze
+10008,Aadhya,Chen,aadhya.chen11@gmail.com,+1 (555) 987-3185,40,79492.91,US,New York,10001,Active,2022-05-06,Gold
+10009,Jessica,Mehta,jessica.mehta57@gmail.com,+44 20 7777 7930,26,183865.32,GB,Birmingham,B1 1BB,Active,2020-07-08,Platinum
+10010,Ming,Rodriguez,ming.rodriguez32@gmail.com,+44 20 7688 2444,23,228739.5,GB,London,EC1A 1BB,Inactive,2021-03-07,Gold
+10011,Susan,Martinez,susan.martinez36@gmail.com,+49 30 771898,44,133868.43,SG,Singapore,N/A,Active,2021-09-14,Bronze
+10012,Sai,Martinez,sai.martinez18@gmail.com,+91 91334 89921,47,110282.85,IN,Hyderabad,500001,Pending,2020-12-16,Silver
+10013,John,Silva,john.silva91@gmail.com,+91 93287 56491,26,71323.47,IN,Chennai,600001,Active,2022-04-20,Bronze
+10014,Vivaan,Muller,vivaan.muller27@gmail.com,+44 20 7806 9734,62,181074.91,GB,London,EC1A 1BB,Suspended,2021-10-14,Standard
+10015,Jennifer,Patel,jennifer.patel66@gmail.com,+1 (555) 236-9804,142,169725.43,US,Seattle,98101,Pending,2023-08-12,Gold
+10016,Wei,Sharma,wei.sharma96@gmail.com,+1 (555) 532-2383,28,67167.5,US,San Francisco,94105,Active,2022-04-16,Platinum
+10017,Aarav,Zhang,aarav.zhang42@gmail.com,+49 30 840171,46,240466.95,SG,Singapore,049318,Active,2021-04-12,Standard
+10018,Li,Singh,li.singh54@gmail.com,+1 (555) 434-3833,32,178630.05,US,San Francisco,94105,Active,2020-06-10,Silver
+10019,Diya,Mehta,diya.mehta49@gmail.com,+44 20 7697 8974,25,93302.22,GB,London,EC1A 1BB,Active,2023-05-11,Silver
+10020,James,Smith,james.smith34_at_gmail.com,+1 (555) 658-5051,36,248610.76,US,New York,10001,Suspended,2022-01-16,Standard
+10021,Aarav,Patel,aarav.patel71@gmail.com,+1 (555) 406-7007,52,48091.76,US,Seattle,98101,Active,2022-12-04,Gold
+10022,Diya,Singh,diya.singh58@gmail.com,+49 30 273891,22,96620.4,SG,Singapore,018989,Active,2020-08-16,Silver
+10023,Jennifer,Jones,jennifer.jones78@gmail.com,+1 (555) 847-6236,37,25546.9,US,Chicago,60601,Active,2021-03-17,Gold
+10024,Mary,Patel,mary.patel81_at_gmail.com,+49 30 427799,38,208718.35,SG,Singapore,049318,Inactive,2023-11-22,Gold
+10025,Ananya,Mehta,ananya.mehta77@gmail.com,+49 30 993044,43,,SG,Singapore,018989,Active,2020-02-21,Bronze
+10026,Vihaan,Mehta,vihaan.mehta35@gmail.com,+49 30 611560,45,41791.47,SG,Singapore,018989,Active,2021-12-04,Standard
+10027,Thomas,Santos,thomas.santos99@gmail.com,4157709,44,96808.66,IN,Chennai,600001,Suspended,2023-05-23,Bronze
+10028,Ananya,Johnson,ananya.johnson79@gmail.com,+91 94587 92726,28,37207.87,IN,Hyderabad,500001,Active,2020-01-06,Standard
+10029,Charles,Smith,charles.smith22@gmail.com,+44 20 7642 5986,36,65942.32,GB,London,EC1A 1BB,Suspended,2021-11-19,Gold
+10030,Richard,Schmidt,richard.schmidt75@gmail.com,+44 20 7634 7605,51,40343.16,GB,London,EC1A 1BB,Active,2023-01-02,Bronze
+10031,Barbara,Yang,barbara.yang78@gmail.com,+1 (555) 543-1597,34,128109.14,US,Chicago,60601,Active,2022-03-21,Standard
+10032,Aditya,Schmidt,aditya.schmidt34@gmail.com,+1 (555) 687-5201,55,186152.37,US,Seattle,98101,Active,2021-05-12,Platinum
+10033,Sai,Reddy,sai.reddy64@gmail.com,+44 20 7486 1475,65,79121.86,GB,London,EC1A 1BB,Suspended,2021-05-11,Platinum
+10034,Mary,Jones,mary.jones95@gmail.com,+49 30 503394,25,173493.71,DE,Munich,80331,Inactive,2020-07-17,Bronze
+10035,Navya,Chen,navya.chen13@gmail.com,+49 30 742747,65,241519.69,SG,Singapore,049318,Pending,2021-08-13,Platinum
+10036,Arjun,Liu,arjun.liu24@gmail.com,+49 30 545992,33,78108.32,DE,Frankfurt,60311,Inactive,2021-07-08,Standard
+10037,Ananya,Gupta,ananya.gupta88@gmail.com,+91 90962 65572,61,123089.38,IN,Delhi,110001,Active,2021-11-01,Bronze
+10038,Susan,Rao,susan.rao78@gmail.com,+49 30 776202,64,183212.77,SG,Singapore,049318,Active,2020-07-17,Silver
+10039,Elizabeth,Chen,elizabeth.chen54@gmail.com,+49 30 901822,142,77873.04,DE,Frankfurt,60311,Active,2021-06-26,Bronze
+10040,Mary,Sharma,mary.sharma52@gmail.com,+1 (555) 793-7161,55,,US,Seattle,98101,Pending,2023-08-23,Gold
+10041,Sofia,Johnson,sofia.johnson26@gmail.com,+44 20 7173 5454,49,195264.46,GB,Birmingham,B1 1BB,Active,2022-05-20,Gold
+10042,Ying,Davis,ying.davis72@gmail.com,+44 20 7440 4055,60,234206.76,GB,Manchester,M1 1AE,Suspended,2022-09-01,Silver
+10043,David,Santos,david.santos85@gmail.com,+1 (555) 535-8005,28,226361.07,US,Seattle,98101,Active,2023-02-10,Gold
+10044,Karen,Chen,karen.chen63@gmail.com,+49 30 275901,42,184603.01,DE,Frankfurt,60311,Active,2020-02-07,Silver
+10045,Aarav,Liu,aarav.liu24@gmail.com,+49 30 323828,22,165319.97,SG,Singapore,049318,Inactive,2022-08-07,Silver
+10046,John,Jones,john.jones33_at_gmail.com,+49 30 742649,27,221187.17,SG,Singapore,049318,Active,2020-12-24,Bronze
+10047,William,Liu,william.liu11@gmail.com,+91 99193 88060,58,107052.59,IN,Delhi,110001,Active,2020-09-07,Standard
+10048,Ying,Miller,ying.miller92@gmail.com,+49 30 460836,62,216964.13,DE,Hamburg,20095,Active,2021-09-15,Bronze
+10049,Patricia,Jones,patricia.jones28@gmail.com,+1 (555) 445-1481,42,224269.91,US,Austin,N/A,Active,2020-06-12,Bronze
+10050,Ananya,Nair,ananya.nair33_at_gmail.com,+49 30 503872,23,107942.03,DE,Berlin,10115,Active,2023-01-11,Platinum
+10051,Diya,Chen,diya.chen42@gmail.com,+49 30 784928,50,226196.88,DE,Hamburg,20095,Active,2021-08-04,Gold
+10052,Yan,Kumar,yan.kumar17@gmail.com,+44 20 7595 1845,53,35492.98,GB,Manchester,M1 1AE,Pending,2022-02-21,Silver
+10053,Arjun,Verma,arjun.verma63@gmail.com,+1 (555) 300-2739,34,160809.13,US,Austin,78701,Suspended,2022-04-21,Bronze
+10054,Reyansh,Johnson,reyansh.johnson18@gmail.com,+49 30 129719,53,145023.26,DE,Berlin,10115,Pending,2021-03-06,Platinum
+10055,Sofia,Davis,sofia.davis76@gmail.com,+49 30 485781,50,44150.49,SG,Singapore,049318,Active,2022-06-06,Gold
+10056,David,Rodriguez,david.rodriguez31@gmail.com,+44 20 7041 2055,63,112679.25,GB,Edinburgh,EH1 1YZ,Active,2023-02-25,Gold
+10057,Wei,Davis,wei.davis68@gmail.com,+49 30 107893,-3,66559.14,DE,Hamburg,20095,Active,2021-02-19,Platinum
+10058,Ishaan,Sharma,ishaan.sharma65@gmail.com,+44 20 7537 6735,142,194591.98,GB,Edinburgh,EH1 1YZ,Active,2020-08-13,Standard
+10059,Joseph,Verma,joseph.verma30@gmail.com,+49 30 112665,42,123505.62,SG,Singapore,049318,Active,2021-11-20,Gold
+10060,Jessica,Gupta,jessica.gupta64@gmail.com,+91 92832 23981,24,61224.44,IN,Hyderabad,500001,Inactive,2020-04-26,Bronze
+10061,Krishna,Martinez,krishna.martinez61@gmail.com,+49 30 564413,44,86559.39,SG,Singapore,018989,Active,2021-01-02,Standard
+10062,Sofia,Schmidt,sofia.schmidt18@gmail.com,+91 97224 45333,31,189746.19,IN,Bengaluru,560001,Active,2021-04-21,Platinum
+10063,Sai,Reddy,sai.reddy23@gmail.com,+49 30 442895,57,187061.73,DE,Hamburg,20095,Active,2020-05-14,Bronze
+10064,Charles,Garcia,charles.garcia42@gmail.com,+49 30 590750,54,54895.67,DE,Frankfurt,60311,Suspended,2020-08-28,Standard
+10065,Richard,Liu,richard.liu50@gmail.com,+49 30 769433,60,131410.55,SG,Singapore,049318,Pending,2022-10-25,Silver
+10066,Wei,Johnson,wei.johnson14@gmail.com,+91 96388 83736,28,-15000.0,IN,Hyderabad,500001,Active,2021-03-17,Gold
+10067,Ying,Singh,ying.singh40_at_gmail.com,+91 91150 16849,49,224870.73,IN,Chennai,600001,Pending,2022-12-06,Standard
+10068,Navya,Verma,navya.verma39@gmail.com,+1 (555) 441-5392,53,202159.47,US,Seattle,98101,Inactive,2020-01-16,Silver
+10069,Ying,Wang,ying.wang34_at_gmail.com,+49 30 912330,47,158115.72,SG,Singapore,018989,Inactive,2021-12-08,Platinum
+10070,Mary,Schneider,mary.schneider20@gmail.com,+49 30 281169,33,225588.51,SG,Singapore,018989,Pending,2021-11-05,Standard
+10071,Susan,Verma,susan.verma50@gmail.com,+91 99712 54010,32,33715.61,IN,Chennai,600001,Inactive,2022-10-05,Silver
+10072,Jennifer,Johnson,jennifer.johnson34@gmail.com,+44 20 7575 8204,56,211854.08,GB,Manchester,M1 1AE,Active,2020-09-17,Silver
+10073,Hao,Rao,hao.rao61@gmail.com,+91 96977 47300,47,170022.31,IN,Hyderabad,500001,Active,2023-07-25,Gold
+10074,Saanvi,Wang,saanvi.wang78@gmail.com,+44 20 7162 4548,44,56879.97,GB,Manchester,M1 1AE,Active,2022-12-13,Bronze
+10075,Krishna,Davis,krishna.davis74@gmail.com,+91 91386 25961,25,233425.45,IN,Bengaluru,560001,Suspended,2022-08-13,Standard
+10076,Vihaan,Martinez,vihaan.martinez26@gmail.com,+44 20 7454 8817,64,63727.71,GB,Birmingham,B1 1BB,Active,2022-02-03,Silver
+10077,Patricia,Singh,patricia.singh49_at_gmail.com,+91 94650 31313,46,232367.66,IN,Mumbai,400001,Suspended,2023-11-06,Platinum
+10078,Linda,Liu,linda.liu54_at_gmail.com,+91 94000 89466,22,218790.2,IN,Delhi,110001,Inactive,2021-10-27,Silver
+10079,Aadhya,Schmidt,aadhya.schmidt23@gmail.com,+44 20 7508 5688,51,,GB,Manchester,M1 1AE,Suspended,2020-05-06,Gold
+10080,Navya,Patel,navya.patel51@gmail.com,+49 30 827219,53,50450.22,DE,Berlin,10115,Pending,2020-08-03,Gold
+10081,Pari,Yang,pari.yang75@gmail.com,+49 30 528860,30,43984.52,SG,Singapore,049318,Active,2022-11-06,Standard
+10082,Karen,Johnson,karen.johnson92@gmail.com,+49 30 468729,62,228787.18,SG,Singapore,049318,Active,2022-06-04,Silver
+10083,Karen,Rao,karen.rao50@gmail.com,+49 30 670369,63,70798.23,SG,Singapore,049318,Pending,2021-03-27,Platinum
+10084,Robert,Singh,robert.singh30@gmail.com,+91 96172 63653,50,199675.37,IN,Chennai,600001,Active,2022-08-21,Gold
+10085,Ananya,Smith,ananya.smith82@gmail.com,+44 20 7839 7824,26,85385.48,GB,Edinburgh,EH1 1YZ,Active,2023-06-04,Silver
+10086,Arjun,Garcia,arjun.garcia32@gmail.com,+49 30 983995,29,140147.09,SG,Singapore,049318,Active,2022-08-01,Gold
+10087,Ananya,Wang,ananya.wang88@gmail.com,+1 (555) 862-3068,142,147325.89,US,San Francisco,94105,Inactive,2020-02-07,Silver
+10088,Patricia,Chen,patricia.chen51@gmail.com,+91 93560 27076,27,73495.29,IN,Bengaluru,560001,Suspended,2023-06-24,Bronze
+10089,Aarav,Kumar,aarav.kumar99@gmail.com,+49 30 336673,61,96493.06,DE,Munich,80331,Active,2023-01-10,Silver
+10090,Wei,Smith,wei.smith58@gmail.com,+1 (555) 398-1237,49,37678.66,US,Seattle,98101,Active,2021-10-17,Standard
+10091,Isha,Patel,isha.patel37@gmail.com,+44 20 7348 4646,45,239797.8,GB,Birmingham,B1 1BB,Active,2021-01-13,Silver
+10092,Ananya,Smith,ananya.smith98@gmail.com,3721159,49,151136.5,US,Austin,78701,Active,2023-06-06,Gold
+10093,Charles,Brown,charles.brown66@gmail.com,+1 (555) 300-4533,60,206157.75,US,Chicago,60601,Active,2023-03-10,Bronze
+10094,Barbara,Gupta,barbara.gupta21@gmail.com,+1 (555) 269-9892,22,29815.17,US,New York,10001,Active,2023-08-20,Bronze
+10095,Isha,Brown,isha.brown18@gmail.com,+49 30 846512,55,127828.47,DE,Hamburg,20095,Pending,2021-05-25,Silver
+10096,Richard,Smith,richard.smith87@gmail.com,+44 20 7671 6315,39,131844.98,GB,Edinburgh,EH1 1YZ,Active,2021-05-25,Silver
+10097,James,Garcia,james.garcia32@gmail.com,+1 (555) 448-6216,33,36443.86,US,Chicago,60601,Pending,2023-07-09,Gold
+10098,Ananya,Brown,ananya.brown32@gmail.com,+49 30 741999,53,206663.44,SG,Singapore,049318,Inactive,2022-08-11,Bronze
+10099,Richard,Nair,richard.nair80@gmail.com,+1 (555) 486-8994,0,52456.81,US,Seattle,98101,Active,2020-12-13,Bronze
+10100,John,Davis,john.davis56@gmail.com,+49 30 195625,53,149058.06,DE,Hamburg,20095,Active,2020-02-11,Silver
+10101,Susan,Zhang,susan.zhang82@gmail.com,+49 30 986619,32,43718.2,DE,Berlin,10115,Active,2022-01-02,Standard
+10102,Sai,Singh,sai.singh39@gmail.com,+44 20 7558 3956,60,108113.99,GB,London,EC1A 1BB,Suspended,2023-01-01,Bronze
+10103,Sarah,Miller,sarah.miller43@gmail.com,+49 30 648335,54,214754.66,SG,Singapore,049318,Inactive,2023-02-12,Bronze
+10104,Vihaan,Kumar,vihaan.kumar36@gmail.com,+1 (555) 862-4828,142,91430.39,US,Seattle,98101,Active,2022-03-11,Standard
+10105,Mateo,Miller,mateo.miller80@gmail.com,+49 30 227694,31,247261.92,SG,Singapore,049318,Inactive,2021-04-10,Bronze
+10106,Vivaan,Nair,vivaan.nair43@gmail.com,+49 30 976591,56,233812.06,DE,Berlin,10115,Inactive,2023-10-03,Silver
+10107,John,Smith,john.smith69@gmail.com,+49 30 652074,40,29181.24,DE,Hamburg,20095,Active,2023-11-04,Silver
+10108,Avani,Williams,avani.williams99@gmail.com,+91 90882 87971,25,38306.63,IN,Delhi,110001,Active,2021-02-16,Bronze
+10109,Elizabeth,Zhang,elizabeth.zhang18@gmail.com,+49 30 263043,28,139909.9,DE,Berlin,10115,Active,2023-01-05,Gold
+10110,Aditya,Liu,aditya.liu32@gmail.com,+44 20 7301 4324,32,80316.12,GB,Birmingham,B1 1BB,Suspended,2021-08-25,Standard
+10111,William,Gupta,william.gupta57@gmail.com,+49 30 768577,29,49464.46,SG,Singapore,049318,Inactive,2022-10-06,Platinum
+10112,Elizabeth,Verma,elizabeth.verma35@gmail.com,+1 (555) 204-5207,27,223159.71,US,San Francisco,94105,Active,2023-01-10,Standard
+10113,Myra,Muller,myra.muller19@gmail.com,+1 (555) 209-2768,47,-15000.0,US,New York,10001,Inactive,2022-07-22,Platinum
+10114,Jessica,Gupta,jessica.gupta57@gmail.com,+49 30 424714,61,185933.23,SG,Singapore,049318,Pending,2022-05-16,Silver
+10115,Pari,Silva,pari.silva11@gmail.com,+49 30 342524,44,159613.69,SG,Singapore,018989,Inactive,2020-04-22,Silver
+10116,Yan,Smith,yan.smith24@gmail.com,+49 30 762508,64,119935.5,DE,Munich,80331,Active,2022-06-09,Platinum
+10117,Navya,Liu,navya.liu10@gmail.com,+44 20 7312 9777,46,240624.62,GB,Birmingham,B1 1BB,Active,2022-02-25,Standard
+10118,Jessica,Mehta,jessica.mehta37@gmail.com,+1 (555) 337-3139,36,161287.67,US,New York,10001,Suspended,2022-11-07,Gold
+10119,Robert,Santos,robert.santos35@gmail.com,+49 30 196195,57,53462.29,DE,Munich,80331,Active,2021-11-17,Bronze
+10120,Robert,Liu,robert.liu25@gmail.com,+1 (555) 220-7768,27,212049.18,US,New York,10001,Active,2020-11-10,Bronze
+10121,Lucas,Mehta,lucas.mehta97@gmail.com,+49 30 637511,58,-15000.0,SG,Singapore,018989,Inactive,2021-09-12,Standard
+10122,Li,Yang,li.yang74@gmail.com,+49 30 434648,43,36363.76,DE,Frankfurt,60311,Suspended,2020-03-13,Silver
+10123,Michael,Rodriguez,michael.rodriguez47@gmail.com,+1 (555) 589-4435,39,86354.57,US,Chicago,60601,Active,2020-04-07,Bronze
+10124,Reyansh,Davis,reyansh.davis41@gmail.com,+49 30 663338,37,123744.67,SG,Singapore,018989,Inactive,2022-05-10,Gold
+10125,Isha,Rao,isha.rao39@gmail.com,+1 (555) 679-3251,39,56074.07,US,Seattle,98101,Active,2020-12-12,Standard
+10126,Aditya,Miller,aditya.miller58_at_gmail.com,+91 92097 47478,54,64544.05,IN,Bengaluru,560001,Active,2020-05-09,Silver
+10127,Michael,Jones,michael.jones31@gmail.com,+49 30 387086,44,100272.2,SG,Singapore,049318,Active,2021-12-18,Platinum
+10128,Michael,Yang,michael.yang62@gmail.com,+49 30 986493,58,249554.29,DE,Munich,80331,Pending,2021-02-16,Standard
+10129,Ying,Chen,ying.chen60@gmail.com,+1 (555) 710-5210,24,68736.29,US,Austin,78701,Active,2022-08-26,Bronze
+10130,Myra,Sharma,myra.sharma48@gmail.com,+49 30 972909,54,,SG,Singapore,018989,Pending,2020-01-26,Standard
+10131,Aarav,Muller,aarav.muller99@gmail.com,+44 20 7782 4303,49,188628.14,GB,London,EC1A 1BB,Active,2023-10-17,Gold
+10132,Lucas,Verma,lucas.verma29@gmail.com,+91 96202 71387,61,28051.3,IN,Hyderabad,500001,Active,2021-06-16,Silver
+10133,Myra,Patel,myra.patel75@gmail.com,+49 30 823335,34,85713.09,SG,Singapore,049318,Suspended,2021-04-11,Bronze
+10134,Saanvi,Schmidt,saanvi.schmidt86@gmail.com,+49 30 940254,26,69771.24,DE,Hamburg,20095,Active,2021-07-13,Standard
+10135,Robert,Gupta,robert.gupta59@gmail.com,5837038,46,93432.58,GB,Birmingham,B1 1BB,Pending,2020-08-27,Gold
+10136,Isha,Miller,isha.miller84@gmail.com,+49 30 976147,65,-15000.0,DE,Munich,80331,Active,2023-05-14,Platinum
+10137,Susan,Johnson,susan.johnson38@gmail.com,+49 30 913663,30,177923.66,DE,Frankfurt,60311,Inactive,2021-09-09,Platinum
+10138,Ayaan,Chen,ayaan.chen23@gmail.com,+49 30 849835,51,70936.52,DE,Munich,80331,Pending,2022-03-01,Silver
+10139,Pari,Kumar,pari.kumar35@gmail.com,+44 20 7552 5937,36,45631.91,GB,Manchester,M1 1AE,Active,2022-12-19,Silver
+10140,Elizabeth,Verma,elizabeth.verma12@gmail.com,+91 94625 28745,39,84555.92,IN,Chennai,600001,Inactive,2021-08-06,Platinum
+10141,Ishaan,Wang,ishaan.wang13@gmail.com,+1 (555) 523-1954,40,,US,New York,10001,Active,2021-03-08,Platinum
+10142,Ayaan,Martinez,ayaan.martinez78@gmail.com,9826557,27,82672.16,DE,Frankfurt,60311,Inactive,2023-06-02,Gold
+10143,Li,Brown,li.brown27@gmail.com,+49 30 313519,24,133979.53,SG,Singapore,018989,Active,2020-08-16,Standard
+10144,Ming,Chen,ming.chen39@gmail.com,+44 20 7778 2946,41,30311.9,GB,Edinburgh,EH1 1YZ,Active,2020-12-01,Silver
+10145,Yan,Kumar,yan.kumar34@gmail.com,+49 30 270279,62,97293.51,DE,Hamburg,20095,Pending,2022-05-25,Silver
+10146,Lucas,Schneider,lucas.schneider23@gmail.com,+49 30 479442,0,34081.23,DE,Munich,80331,Pending,2020-09-19,Bronze
+10147,Jennifer,Schmidt,jennifer.schmidt82@gmail.com,+49 30 145833,50,80598.37,SG,Singapore,049318,Active,2022-04-12,Platinum
+10148,Jennifer,Johnson,jennifer.johnson62@gmail.com,+1 (555) 496-7973,47,122073.64,US,New York,10001,Inactive,2022-01-13,Gold
+10149,Linda,Chen,linda.chen69@gmail.com,+44 20 7663 3588,33,162392.95,GB,Manchester,M1 1AE,Active,2022-11-07,Silver
+10150,Elizabeth,Martinez,elizabeth.martinez51@gmail.com,+49 30 144824,47,218550.0,DE,Hamburg,20095,Inactive,2021-07-03,Standard
+10151,Ying,Zhang,ying.zhang48@gmail.com,+91 93501 65113,55,56817.4,IN,Bengaluru,560001,Pending,2020-03-03,Silver
+10152,Ananya,Verma,ananya.verma43@gmail.com,+49 30 401789,50,74612.41,SG,Singapore,049318,Suspended,2023-10-14,Silver
+10153,Richard,Martinez,richard.martinez24@gmail.com,+1 (555) 579-7709,26,127595.05,US,Seattle,98101,Pending,2022-10-21,Gold
+10154,Mateo,Schmidt,mateo.schmidt72@gmail.com,+91 98113 81699,49,150755.21,IN,Hyderabad,500001,Suspended,2021-03-13,Bronze
+10155,John,Reddy,john.reddy65@gmail.com,+49 30 934731,32,110315.72,SG,Singapore,018989,Pending,2021-10-03,Standard
+10156,Navya,Silva,navya.silva71@gmail.com,+44 20 7582 9681,29,249546.45,GB,London,EC1A 1BB,Pending,2022-08-01,Standard
+10157,Ananya,Muller,ananya.muller23@gmail.com,+49 30 466244,57,53192.13,DE,Berlin,10115,Active,2022-05-03,Gold
+10158,William,Garcia,william.garcia75@gmail.com,+49 30 470236,55,113299.17,DE,Frankfurt,60311,Active,2021-08-09,Silver
+10159,Arjun,Nair,arjun.nair96@gmail.com,+49 30 962492,43,179482.33,DE,Frankfurt,60311,Pending,2022-04-06,Gold
+10160,Vivaan,Miller,vivaan.miller55@gmail.com,+49 30 583249,56,242498.47,DE,Hamburg,20095,Active,2020-03-06,Platinum
+10161,Isha,Garcia,isha.garcia55@gmail.com,7276762,48,68432.78,US,Chicago,60601,Active,2020-08-25,Gold
+10162,Joseph,Mehta,joseph.mehta76@gmail.com,+49 30 698940,46,169055.45,DE,Berlin,10115,Active,2020-01-07,Bronze
+10163,Avani,Muller,avani.muller97@gmail.com,+44 20 7922 5789,37,97585.91,GB,Birmingham,B1 1BB,Active,2021-07-23,Silver
+10164,Ananya,Garcia,ananya.garcia63@gmail.com,+49 30 242615,46,60165.65,SG,Singapore,049318,Active,2023-09-14,Platinum
+10165,Pari,Brown,pari.brown30@gmail.com,+91 94771 43799,22,235858.83,IN,Chennai,600001,Active,2020-04-09,Standard
+10166,Aditya,Jones,aditya.jones21@gmail.com,+49 30 661708,49,156571.79,DE,Hamburg,20095,Active,2023-02-10,Platinum
+10167,William,Mehta,william.mehta23@gmail.com,+49 30 830969,45,235557.91,DE,Berlin,10115,Active,2023-06-06,Gold
+10168,Jessica,Sharma,jessica.sharma44@gmail.com,+49 30 195128,58,186038.26,DE,Berlin,10115,Active,2022-06-02,Platinum
+10169,Ananya,Rodriguez,ananya.rodriguez99@gmail.com,+1 (555) 245-4178,46,121118.46,US,Chicago,60601,Active,2021-08-22,Platinum
+10170,Navya,Miller,navya.miller16@gmail.com,+1 (555) 502-7024,22,79232.89,US,Chicago,60601,Active,2021-07-13,Standard
+10171,Sofia,Schmidt,sofia.schmidt80@gmail.com,+91 94800 44015,31,152890.28,IN,Bengaluru,560001,Pending,2021-11-10,Gold
+10172,Yan,Singh,yan.singh73@gmail.com,+1 (555) 740-8946,54,97574.68,US,New York,10001,Active,2022-02-25,Bronze
+10173,Thomas,Chen,thomas.chen82@gmail.com,+49 30 257758,65,127919.46,SG,Singapore,049318,Active,2022-01-11,Platinum
+10174,Yan,Nair,yan.nair38@gmail.com,+44 20 7763 2440,38,217696.58,GB,London,EC1A 1BB,Inactive,2021-05-21,Platinum
+10175,Ayaan,Patel,ayaan.patel52@gmail.com,+44 20 7709 4872,41,152261.38,GB,Birmingham,B1 1BB,Pending,2021-05-19,Silver
+10176,Sofia,Yang,sofia.yang46@gmail.com,+49 30 639247,27,74921.48,SG,Singapore,049318,Inactive,2023-04-15,Silver
+10177,Aditya,Schmidt,aditya.schmidt21@gmail.com,+49 30 714593,45,248787.67,SG,Singapore,049318,Active,2021-01-10,Gold
+10178,Sarah,Singh,sarah.singh36@gmail.com,+44 20 7039 3084,64,29727.5,GB,London,EC1A 1BB,Inactive,2022-06-11,Bronze
+10179,John,Johnson,john.johnson57@gmail.com,+44 20 7896 3852,59,93360.92,GB,Edinburgh,EH1 1YZ,Suspended,2020-04-08,Gold
+10180,Isha,Verma,isha.verma12@gmail.com,+1 (555) 516-7540,50,192544.52,US,Chicago,60601,Active,2021-01-07,Silver
+10181,Susan,Verma,susan.verma98@gmail.com,+91 99966 21509,64,216109.58,IN,Chennai,600001,Pending,2022-08-25,Silver
+10182,Hao,Jones,hao.jones93@gmail.com,+44 20 7658 9111,55,145809.78,GB,Manchester,M1 1AE,Suspended,2021-12-26,Platinum
+10183,Li,Chen,li.chen44@gmail.com,+49 30 789937,0,32364.74,SG,Singapore,018989,Pending,2021-06-26,Silver
+10184,Karen,Santos,karen.santos37@gmail.com,+44 20 7932 4682,59,202863.42,GB,London,EC1A 1BB,Pending,2020-12-11,Platinum
+10185,Sarah,Sharma,sarah.sharma68@gmail.com,+91 97401 38493,59,246972.27,IN,Chennai,600001,Active,2020-02-14,Bronze
+10186,Aarav,Silva,aarav.silva35@gmail.com,+44 20 7548 3070,57,198229.55,GB,Birmingham,B1 1BB,Inactive,2023-02-05,Silver
+10187,Lucas,Rao,lucas.rao51@gmail.com,+1 (555) 488-2074,37,162018.48,US,Chicago,60601,Pending,2020-09-28,Bronze
+10188,Navya,Martinez,navya.martinez41@gmail.com,+49 30 476775,45,40841.24,DE,Frankfurt,60311,Pending,2023-07-27,Bronze
+10189,Isha,Miller,isha.miller68@gmail.com,+91 90323 22500,32,115313.54,IN,Chennai,600001,Active,2020-06-01,Standard
+10190,Li,Zhang,li.zhang26@gmail.com,+91 95843 57889,54,215557.09,IN,Hyderabad,500001,Pending,2022-09-14,Gold
+10191,Pari,Davis,pari.davis10@gmail.com,+91 98341 84377,54,57581.9,IN,Hyderabad,500001,Inactive,2020-12-07,Bronze
+10192,Vihaan,Yang,vihaan.yang17@gmail.com,+44 20 7085 2093,25,140890.4,GB,Manchester,M1 1AE,Active,2020-06-20,Silver
+10193,Ying,Kumar,ying.kumar49@gmail.com,+1 (555) 734-7543,38,221019.83,US,Chicago,60601,Inactive,2023-04-14,Silver
+10194,Ayaan,Miller,ayaan.miller29@gmail.com,+44 20 7026 6679,23,,GB,London,EC1A 1BB,Pending,2022-06-20,Silver
+10195,Lucas,Kumar,lucas.kumar40@gmail.com,+44 20 7486 9073,36,207959.5,GB,Manchester,M1 1AE,Active,2023-12-22,Silver
+10196,Richard,Gupta,richard.gupta75@gmail.com,+44 20 7011 4098,29,,GB,Birmingham,B1 1BB,Pending,2023-01-10,Platinum
+10197,Sai,Smith,sai.smith94@gmail.com,+49 30 262581,62,61736.48,SG,Singapore,049318,Active,2022-03-08,Platinum
+10198,James,Mehta,james.mehta32@gmail.com,+1 (555) 741-1154,49,119735.22,US,Austin,78701,Active,2020-08-17,Standard
+10199,Saanvi,Brown,saanvi.brown38@gmail.com,+91 93740 80364,50,121378.77,IN,Bengaluru,560001,Active,2021-01-12,Standard
+10200,David,Yang,david.yang78@gmail.com,+1 (555) 533-9009,23,106687.73,US,Chicago,60601,Pending,2023-04-05,Bronze
+10201,William,Martinez,william.martinez53@gmail.com,1534723,47,233470.26,IN,Chennai,600001,Inactive,2022-10-21,Platinum
+10202,Ananya,Brown,ananya.brown91@gmail.com,6500075,64,50296.81,DE,Hamburg,20095,Active,2023-09-13,Standard
+10203,Avani,Sharma,avani.sharma48@gmail.com,+49 30 501903,28,170548.47,DE,Munich,80331,Suspended,2022-09-01,Standard
+10204,Vihaan,Brown,vihaan.brown84@gmail.com,+49 30 989002,30,174440.29,SG,Singapore,018989,Active,2022-01-15,Platinum
+10205,Richard,Sharma,richard.sharma52@gmail.com,+44 20 7868 1240,44,41388.07,GB,Manchester,M1 1AE,Active,2023-10-26,Platinum
+10206,Thomas,Smith,thomas.smith92@gmail.com,+44 20 7424 3730,53,70835.93,GB,London,EC1A 1BB,Suspended,2020-01-25,Silver
+10207,Pari,Patel,pari.patel28@gmail.com,+1 (555) 895-8935,50,106432.6,US,Seattle,98101,Pending,2020-05-28,Standard
+10208,Ming,Verma,ming.verma86@gmail.com,+91 92748 77367,65,78822.44,IN,Delhi,110001,Suspended,2021-05-22,Gold
+10209,Hao,Williams,hao.williams85@gmail.com,+91 91521 43328,41,169188.45,IN,Bengaluru,560001,Active,2020-05-11,Silver
+10210,Saanvi,Yang,saanvi.yang55@gmail.com,+1 (555) 664-4142,54,124257.47,US,Austin,78701,Inactive,2020-01-07,Gold
+10211,Jennifer,Rodriguez,jennifer.rodriguez50@gmail.com,+44 20 7222 3103,23,174833.34,GB,Birmingham,B1 1BB,Active,2021-12-08,Gold
+10212,Patricia,Rodriguez,patricia.rodriguez28@gmail.com,+91 94006 97034,47,134991.61,IN,Bengaluru,560001,Active,2021-03-08,Platinum
+10213,Saanvi,Garcia,saanvi.garcia35@gmail.com,+49 30 428682,65,26295.31,DE,Berlin,10115,Pending,2021-04-13,Bronze
+10214,Mateo,Santos,mateo.santos96@gmail.com,+49 30 451720,27,163842.34,SG,Singapore,018989,Active,2021-03-18,Standard
+10215,Mary,Williams,mary.williams63@gmail.com,+49 30 629711,29,203500.11,DE,Munich,80331,Inactive,2022-03-20,Bronze
+10216,Sofia,Johnson,sofia.johnson12@gmail.com,+1 (555) 851-6882,25,167164.48,US,Austin,78701,Active,2023-02-22,Bronze
+10217,James,Kumar,james.kumar28@gmail.com,+91 98489 48740,22,236311.35,IN,Mumbai,400001,Suspended,2020-02-15,Platinum
+10218,Camila,Verma,camila.verma12@gmail.com,+91 90604 70363,65,54380.61,IN,Hyderabad,500001,Active,2020-02-01,Standard
+10219,Jennifer,Rodriguez,jennifer.rodriguez19@gmail.com,+91 97010 42077,55,104431.4,IN,Bengaluru,560001,Active,2022-12-14,Silver
+10220,Jennifer,Sharma,jennifer.sharma87_at_gmail.com,+49 30 429328,56,43757.68,SG,Singapore,018989,Active,2023-03-10,Silver
+10221,John,Chen,john.chen39@gmail.com,+1 (555) 394-7622,44,,US,Seattle,98101,Inactive,2023-02-01,Standard
+10222,Diya,Schneider,diya.schneider83@gmail.com,+1 (555) 621-6597,45,200033.02,US,San Francisco,94105,Pending,2021-04-28,Platinum
+10223,Ayaan,Liu,ayaan.liu26@gmail.com,+49 30 803500,42,242071.46,DE,Munich,80331,Pending,2022-02-17,Bronze
+10224,Jessica,Liu,jessica.liu36@gmail.com,+49 30 899472,49,202919.83,DE,Berlin,10115,Pending,2022-09-07,Bronze
+10225,Arjun,Gupta,arjun.gupta99_at_gmail.com,+44 20 7756 9526,27,166888.75,GB,Edinburgh,EH1 1YZ,Suspended,2023-04-09,Platinum
+10226,Reyansh,Yang,reyansh.yang80@gmail.com,+1 (555) 510-5849,42,228358.54,US,Seattle,98101,Suspended,2020-05-04,Silver
+10227,Camila,Martinez,camila.martinez33@gmail.com,+1 (555) 374-2633,27,167830.55,US,Austin,78701,Suspended,2023-02-02,Silver
+10228,Vivaan,Williams,vivaan.williams66@gmail.com,+49 30 976602,23,212467.57,SG,Singapore,018989,Active,2022-12-20,Standard
+10229,Ming,Muller,ming.muller97@gmail.com,+91 90328 93218,29,,IN,Bengaluru,560001,Pending,2021-10-27,Gold
+10230,Jessica,Santos,jessica.santos46@gmail.com,+91 98918 58758,22,155341.5,IN,Mumbai,400001,Active,2020-02-18,Platinum
+10231,Arjun,Rao,arjun.rao96@gmail.com,+44 20 7077 3944,62,156884.46,GB,Edinburgh,EH1 1YZ,Inactive,2020-08-21,Bronze
+10232,Ying,Patel,ying.patel92@gmail.com,+1 (555) 339-9746,55,171159.55,US,Austin,78701,Active,2020-11-07,Silver
+10233,Camila,Brown,camila.brown65_at_gmail.com,+49 30 334427,49,165319.16,SG,Singapore,049318,Active,2021-01-04,Platinum
+10234,Ananya,Davis,ananya.davis33@gmail.com,+91 94124 35636,47,52867.55,IN,Chennai,600001,Active,2020-08-07,Silver
+10235,Aditya,Nair,aditya.nair82@gmail.com,+91 94834 22039,45,182461.42,IN,Chennai,600001,Active,2023-05-25,Silver
+10236,John,Silva,john.silva18@gmail.com,7664043,36,46780.55,DE,Hamburg,20095,Active,2023-10-20,Bronze
+10237,David,Wang,david.wang33@gmail.com,+1 (555) 497-6292,64,51063.49,US,Chicago,60601,Suspended,2020-08-05,Silver
+10238,John,Reddy,john.reddy92_at_gmail.com,+44 20 7623 9965,26,32033.07,GB,London,EC1A 1BB,Suspended,2022-08-07,Gold
+10239,Yan,Gupta,yan.gupta64@gmail.com,+91 96138 73224,64,,IN,Hyderabad,500001,Pending,2020-05-17,Standard
+10240,John,Santos,john.santos73@gmail.com,+49 30 585634,26,186616.37,DE,Berlin,N/A,Active,2021-10-18,Platinum
+10241,Diya,Nair,diya.nair20@gmail.com,+91 93081 29544,59,197543.85,IN,Mumbai,400001,Suspended,2023-11-13,Bronze
+10242,Sai,Mehta,sai.mehta92@gmail.com,+44 20 7204 3176,44,118552.49,GB,London,EC1A 1BB,Suspended,2022-02-09,Standard
+10243,Sai,Johnson,sai.johnson77@gmail.com,+49 30 666478,60,32126.53,DE,Hamburg,20095,Active,2023-12-20,Silver
+10244,Vihaan,Garcia,vihaan.garcia75@gmail.com,+1 (555) 834-3879,22,244504.19,US,Austin,78701,Pending,2021-07-25,Bronze
+10245,James,Rodriguez,james.rodriguez11@gmail.com,+49 30 650392,61,105185.38,DE,Munich,80331,Inactive,2023-09-05,Gold
+10246,Reyansh,Liu,reyansh.liu54@gmail.com,+1 (555) 269-6599,39,149459.27,US,San Francisco,94105,Suspended,2021-12-18,Standard
+10247,John,Smith,john.smith22@gmail.com,+49 30 676153,26,45330.86,SG,Singapore,018989,Active,2021-10-14,Bronze
+10248,Ming,Martinez,ming.martinez70@gmail.com,+91 90413 81696,64,223219.14,IN,Mumbai,400001,Suspended,2022-09-15,Standard
+10249,Ishaan,Sharma,ishaan.sharma63@gmail.com,+49 30 303971,42,65800.21,SG,Singapore,018989,Active,2020-06-19,Gold
+10250,Aadhya,Schmidt,aadhya.schmidt36@gmail.com,+49 30 192364,29,186696.46,DE,Hamburg,20095,Active,2021-06-21,Silver
+10251,Karen,Johnson,karen.johnson31@gmail.com,+49 30 992550,35,,SG,Singapore,018989,Active,2020-02-09,Bronze
+10252,John,Silva,john.silva72@gmail.com,+1 (555) 932-3603,33,-15000.0,US,Seattle,98101,Pending,2021-03-13,Platinum
+10253,Vihaan,Zhang,vihaan.zhang35@gmail.com,+49 30 449686,48,246682.71,DE,Berlin,10115,Inactive,2020-02-06,Standard
+10254,Myra,Yang,myra.yang52@gmail.com,+49 30 695580,22,103682.99,DE,Berlin,10115,Active,2022-09-02,Platinum
+10255,Joseph,Yang,joseph.yang12@gmail.com,+44 20 7987 6114,27,181978.25,GB,Manchester,M1 1AE,Inactive,2020-03-03,Platinum
+10256,Ming,Chen,ming.chen70@gmail.com,+49 30 316103,33,60663.13,SG,Singapore,049318,Inactive,2022-06-26,Platinum
+10257,Ying,Wang,ying.wang65_at_gmail.com,+49 30 820365,36,43436.35,SG,Singapore,049318,Inactive,2023-11-16,Standard
+10258,Ananya,Verma,ananya.verma12@gmail.com,+44 20 7399 1936,33,202356.24,GB,London,EC1A 1BB,Inactive,2023-08-03,Silver
+10259,Isha,Schmidt,isha.schmidt80@gmail.com,+49 30 951771,64,239819.44,SG,Singapore,049318,Inactive,2021-05-25,Standard
+10260,Aditya,Liu,aditya.liu66@gmail.com,+49 30 177873,42,203197.51,DE,Munich,80331,Suspended,2021-11-17,Bronze
+10261,Aditya,Davis,aditya.davis43@gmail.com,+1 (555) 658-1905,25,108558.88,US,Austin,78701,Active,2020-11-14,Gold
+10262,Pari,Santos,pari.santos61_at_gmail.com,+44 20 7450 2368,29,142181.62,GB,Birmingham,B1 1BB,Inactive,2022-09-17,Gold
+10263,Pari,Verma,pari.verma54@gmail.com,+91 91664 94584,46,241086.29,IN,Mumbai,400001,Inactive,2023-06-28,Standard
+10264,Ishaan,Mehta,ishaan.mehta82@gmail.com,+49 30 743504,50,249619.85,DE,Hamburg,20095,Active,2020-10-12,Bronze
+10265,Ming,Martinez,ming.martinez13@gmail.com,+49 30 159122,55,208765.57,DE,Munich,N/A,Active,2021-07-20,Gold
+10266,Pari,Rao,pari.rao63@gmail.com,+49 30 421745,58,206749.9,SG,Singapore,018989,Active,2022-01-20,Gold
+10267,John,Mehta,john.mehta20@gmail.com,+91 95621 35213,58,39492.2,IN,Chennai,600001,Active,2021-07-03,Bronze
+10268,James,Patel,james.patel14@gmail.com,9220610,55,101896.6,GB,London,EC1A 1BB,Pending,2020-02-22,Gold
+10269,Thomas,Johnson,thomas.johnson68@gmail.com,+1 (555) 681-7325,41,46490.17,US,New York,10001,Active,2022-01-18,Standard
+10270,Mateo,Silva,mateo.silva75@gmail.com,+49 30 985695,29,184312.36,SG,Singapore,018989,Active,2022-02-27,Platinum
+10271,Mateo,Liu,mateo.liu38@gmail.com,+49 30 359644,27,77779.93,SG,Singapore,049318,Active,2021-12-05,Silver
+10272,Diya,Reddy,diya.reddy53@gmail.com,+49 30 596586,55,118092.15,DE,Hamburg,20095,Active,2022-12-27,Silver
+10273,Mary,Williams,mary.williams68@gmail.com,+49 30 151858,42,119015.4,SG,Singapore,049318,Active,2022-04-23,Standard
+10274,Elizabeth,Smith,elizabeth.smith53_at_gmail.com,+1 (555) 349-4822,22,156191.58,US,Austin,78701,Pending,2020-11-08,Platinum
+10275,David,Wang,david.wang12@gmail.com,+44 20 7449 7251,47,32992.18,GB,London,EC1A 1BB,Active,2020-06-17,Standard
+10276,Wei,Gupta,wei.gupta69@gmail.com,+44 20 7207 7578,32,212228.91,GB,Edinburgh,EH1 1YZ,Active,2023-03-09,Bronze
+10277,Saanvi,Zhang,saanvi.zhang38@gmail.com,+91 93202 91671,40,210113.31,IN,Hyderabad,500001,Inactive,2020-08-26,Silver
+10278,Charles,Schneider,charles.schneider89_at_gmail.com,+44 20 7712 2658,35,112584.56,GB,Edinburgh,EH1 1YZ,Active,2020-10-01,Gold
+10279,Richard,Schmidt,richard.schmidt39@gmail.com,+91 92691 78609,56,62690.11,IN,Delhi,110001,Pending,2023-01-12,Silver
+10280,Robert,Miller,robert.miller94@gmail.com,+49 30 429866,32,110830.88,SG,Singapore,049318,Suspended,2020-08-04,Gold
+10281,Richard,Garcia,richard.garcia72@gmail.com,+1 (555) 874-9959,55,223355.05,US,Seattle,98101,Inactive,2021-11-04,Bronze
+10282,Aditya,Miller,aditya.miller58@gmail.com,+1 (555) 279-7812,39,171130.01,US,Seattle,98101,Suspended,2023-04-19,Platinum
+10283,Aditya,Santos,aditya.santos33@gmail.com,+49 30 867555,59,203480.64,DE,Hamburg,20095,Active,2021-11-05,Gold
+10284,Richard,Singh,richard.singh79@gmail.com,+49 30 327803,42,119145.33,SG,Singapore,049318,Suspended,2021-11-07,Gold
+10285,Camila,Patel,camila.patel82@gmail.com,+91 94789 28175,61,67028.3,IN,Chennai,600001,Suspended,2023-07-14,Silver
+10286,Patricia,Schneider,patricia.schneider68@gmail.com,+1 (555) 997-8337,34,101713.84,US,Chicago,60601,Pending,2020-07-01,Platinum
+10287,Arjun,Verma,arjun.verma65@gmail.com,+49 30 622716,45,106561.63,SG,Singapore,049318,Pending,2020-03-28,Platinum
+10288,Li,Nair,li.nair33@gmail.com,+49 30 623437,36,234321.62,DE,Hamburg,20095,Active,2022-12-25,Silver
+10289,Patricia,Miller,patricia.miller29@gmail.com,+49 30 757778,36,112566.44,SG,Singapore,018989,Active,2022-09-25,Bronze
+10290,Isha,Garcia,isha.garcia20@gmail.com,+44 20 7902 6874,27,72897.56,GB,London,N/A,Suspended,2020-03-07,Bronze
+10291,Karen,Gupta,karen.gupta69@gmail.com,+49 30 207086,29,126533.19,DE,Berlin,10115,Active,2023-10-11,Gold
+10292,Yan,Wang,yan.wang27@gmail.com,+91 92090 93789,41,156480.66,IN,Mumbai,400001,Pending,2021-10-25,Silver
+10293,Ishaan,Zhang,ishaan.zhang97@gmail.com,+44 20 7495 8322,44,45532.17,GB,London,EC1A 1BB,Inactive,2021-12-10,Gold
+10294,Aarav,Singh,aarav.singh96@gmail.com,+49 30 118126,36,94096.47,DE,Munich,80331,Active,2020-06-14,Standard
+10295,Vivaan,Garcia,vivaan.garcia31_at_gmail.com,+49 30 800007,35,93446.29,SG,Singapore,049318,Inactive,2020-06-04,Standard
+10296,Reyansh,Kumar,reyansh.kumar57@gmail.com,+49 30 710736,31,45501.41,SG,Singapore,049318,Pending,2021-10-26,Gold
+10297,Richard,Nair,richard.nair64@gmail.com,+1 (555) 611-3459,35,46421.11,US,San Francisco,94105,Inactive,2021-09-21,Platinum
+10298,Ayaan,Martinez,ayaan.martinez35@gmail.com,+1 (555) 996-1295,44,67331.03,US,Chicago,60601,Inactive,2021-05-09,Platinum
+10299,Richard,Nair,richard.nair10@gmail.com,+1 (555) 619-3218,24,163503.81,US,San Francisco,94105,Active,2020-01-14,Silver
+10300,Saanvi,Schneider,saanvi.schneider69@gmail.com,+1 (555) 987-9889,57,81412.37,US,Seattle,98101,Pending,2022-05-15,Standard
+10301,David,Patel,david.patel57@gmail.com,+49 30 697261,34,192992.64,DE,Hamburg,20095,Pending,2020-12-08,Bronze
+10302,Charles,Schmidt,charles.schmidt47@gmail.com,+91 99665 37201,65,,IN,Chennai,600001,Inactive,2021-09-23,Standard
+10303,Joseph,Johnson,joseph.johnson27@gmail.com,+49 30 642023,50,85720.0,SG,Singapore,049318,Active,2020-01-19,Gold
+10304,Richard,Miller,richard.miller98@gmail.com,+91 95874 75057,49,114111.09,IN,Hyderabad,500001,Inactive,2022-11-17,Bronze
+10305,Jennifer,Liu,jennifer.liu88@gmail.com,4449755,52,193049.4,DE,Berlin,10115,Suspended,2021-08-20,Bronze
+10306,Elizabeth,Zhang,elizabeth.zhang77@gmail.com,+49 30 670431,58,218192.15,SG,Singapore,018989,Pending,2022-11-13,Platinum
+10307,William,Schmidt,william.schmidt15@gmail.com,+91 98783 37078,27,156586.28,IN,Delhi,110001,Inactive,2023-06-07,Silver
+10308,Linda,Williams,linda.williams58@gmail.com,+91 93543 41416,23,221358.45,IN,Mumbai,400001,Pending,2020-08-09,Bronze
+10309,Krishna,Smith,krishna.smith50@gmail.com,+44 20 7314 5457,51,220775.84,GB,London,EC1A 1BB,Active,2022-07-07,Platinum
+10310,Hao,Brown,hao.brown75@gmail.com,+44 20 7017 5776,40,233576.78,GB,Manchester,M1 1AE,Pending,2023-10-28,Bronze
+10311,Barbara,Gupta,barbara.gupta95@gmail.com,+49 30 598361,60,130863.12,SG,Singapore,N/A,Active,2022-02-16,Bronze
+10312,David,Wang,david.wang20@gmail.com,+1 (555) 429-2754,56,211312.55,US,Seattle,98101,Pending,2020-02-10,Silver
+10313,Aarav,Santos,aarav.santos86@gmail.com,+91 97347 69035,25,222002.12,IN,Bengaluru,560001,Inactive,2021-08-27,Platinum
+10314,Camila,Rodriguez,camila.rodriguez49@gmail.com,+44 20 7323 9993,39,153896.85,GB,London,EC1A 1BB,Active,2022-08-08,Silver
+10315,Vivaan,Reddy,vivaan.reddy13@gmail.com,+44 20 7439 2365,25,108987.07,GB,Birmingham,B1 1BB,Pending,2021-09-11,Gold
+10316,Jessica,Verma,jessica.verma72@gmail.com,+49 30 851824,29,58155.1,SG,Singapore,018989,Active,2020-09-22,Silver
+10317,Aadhya,Silva,aadhya.silva35@gmail.com,+49 30 742855,44,199466.51,SG,Singapore,018989,Active,2020-06-16,Platinum
+10318,Li,Singh,li.singh52@gmail.com,+49 30 265008,52,,SG,Singapore,018989,Inactive,2022-03-26,Platinum
+10319,Ying,Brown,ying.brown80@gmail.com,+91 95881 73876,62,221015.08,IN,Hyderabad,500001,Active,2020-09-02,Standard
+10320,Charles,Garcia,charles.garcia88@gmail.com,+1 (555) 759-6211,47,190805.08,US,San Francisco,94105,Pending,2020-02-15,Gold
+10321,Elizabeth,Schmidt,elizabeth.schmidt17@gmail.com,+91 96381 94644,46,48989.35,IN,Bengaluru,560001,Pending,2021-10-05,Standard
+10322,Jessica,Sharma,jessica.sharma41@gmail.com,+91 95144 20536,30,157315.64,IN,Mumbai,400001,Pending,2021-06-21,Gold
+10323,Robert,Santos,robert.santos42_at_gmail.com,+1 (555) 353-1342,37,32179.61,US,Austin,78701,Inactive,2022-10-24,Standard
+10324,Lucas,Verma,lucas.verma75@gmail.com,+44 20 7606 4509,56,36017.18,GB,London,EC1A 1BB,Active,2020-09-02,Platinum
+10325,Ming,Rao,ming.rao99@gmail.com,+91 92128 22595,25,184652.82,IN,Bengaluru,560001,Pending,2021-08-12,Gold
+10326,Mary,Brown,mary.brown76_at_gmail.com,+44 20 7102 7942,24,61554.14,GB,Manchester,M1 1AE,Active,2021-03-13,Silver
+10327,Yan,Martinez,yan.martinez46@gmail.com,+49 30 517398,32,163238.67,SG,Singapore,018989,Active,2023-01-10,Bronze
+10328,Myra,Singh,myra.singh18@gmail.com,+49 30 499235,25,113930.5,DE,Berlin,10115,Active,2022-07-01,Gold
+10329,Susan,Schmidt,susan.schmidt53@gmail.com,+44 20 7044 9403,25,215305.17,GB,Birmingham,B1 1BB,Inactive,2023-10-24,Silver
+10330,Mary,Rodriguez,mary.rodriguez66@gmail.com,+49 30 591461,41,,SG,Singapore,049318,Suspended,2022-05-11,Platinum
+10331,Barbara,Zhang,barbara.zhang44@gmail.com,+1 (555) 808-8979,39,41927.85,US,Austin,78701,Pending,2021-03-02,Standard
+10332,Ananya,Schneider,ananya.schneider37@gmail.com,+49 30 873878,38,59185.39,DE,Berlin,10115,Pending,2020-03-21,Standard
+10333,Wei,Rao,wei.rao93@gmail.com,+91 90914 66380,48,112170.2,IN,Chennai,600001,Pending,2020-10-26,Standard
+10334,Mary,Yang,mary.yang19@gmail.com,+44 20 7983 1064,45,200029.22,GB,Manchester,M1 1AE,Inactive,2022-07-04,Silver
+10335,Sarah,Mehta,sarah.mehta82@gmail.com,+91 96012 21355,63,185090.59,IN,Bengaluru,560001,Active,2022-10-07,Gold
+10336,Elizabeth,Zhang,elizabeth.zhang85@gmail.com,+49 30 748162,42,172549.21,DE,Frankfurt,60311,Inactive,2023-01-13,Platinum
+10337,Ishaan,Garcia,ishaan.garcia34@gmail.com,+49 30 376870,45,43208.69,SG,Singapore,049318,Active,2022-12-04,Silver
+10338,Elizabeth,Schmidt,elizabeth.schmidt35@gmail.com,+49 30 289824,57,49693.7,DE,Munich,80331,Suspended,2021-11-16,Standard
+10339,Aditya,Chen,aditya.chen94@gmail.com,+44 20 7049 3200,25,158233.72,GB,Birmingham,B1 1BB,Active,2022-02-05,Gold
+10340,Aadhya,Smith,aadhya.smith90@gmail.com,+49 30 424786,64,181419.63,SG,Singapore,049318,Inactive,2022-11-10,Gold
+10341,Karen,Kumar,karen.kumar52@gmail.com,+49 30 737380,-3,63658.72,DE,Munich,80331,Suspended,2021-03-06,Silver
+10342,Sarah,Jones,sarah.jones79@gmail.com,+91 97950 61147,57,43266.78,IN,Mumbai,400001,Inactive,2021-11-06,Platinum
+10343,Richard,Muller,richard.muller99@gmail.com,+91 95510 66690,62,146207.8,IN,Hyderabad,500001,Active,2021-01-16,Gold
+10344,Thomas,Smith,thomas.smith12@gmail.com,+49 30 116165,60,225491.8,SG,Singapore,018989,Pending,2020-07-04,Silver
+10345,Ying,Silva,ying.silva13@gmail.com,+1 (555) 440-1137,29,180080.46,US,New York,10001,Pending,2022-09-25,Bronze
+10346,Sai,Schmidt,sai.schmidt64_at_gmail.com,+44 20 7786 3314,41,79355.33,GB,Manchester,M1 1AE,Active,2023-03-13,Standard
+10347,Ananya,Muller,ananya.muller72@gmail.com,+49 30 989784,24,134308.47,SG,Singapore,018989,Inactive,2021-02-26,Silver
+10348,Elizabeth,Brown,elizabeth.brown44@gmail.com,+49 30 749138,65,234010.7,DE,Hamburg,20095,Pending,2021-11-06,Platinum
+10349,Barbara,Schmidt,barbara.schmidt52@gmail.com,+91 90687 28601,47,41510.88,IN,Mumbai,400001,Active,2023-02-14,Silver
+10350,Michael,Miller,michael.miller11@gmail.com,+49 30 236506,55,87066.49,DE,Frankfurt,60311,Active,2022-08-16,Platinum
+10351,Aditya,Schneider,aditya.schneider42@gmail.com,+49 30 616299,33,,SG,Singapore,018989,Active,2020-12-12,Gold
+10352,Avani,Williams,avani.williams40@gmail.com,+49 30 946617,24,200857.7,SG,Singapore,018989,Active,2021-03-16,Silver
+10353,Jessica,Zhang,jessica.zhang29@gmail.com,+49 30 978639,51,235563.2,SG,Singapore,018989,Active,2022-09-23,Standard
+10354,Krishna,Rodriguez,krishna.rodriguez39@gmail.com,+49 30 815636,61,32081.1,DE,Munich,80331,Active,2022-01-07,Gold
+10355,Mary,Chen,mary.chen21@gmail.com,+44 20 7345 7213,39,49423.59,GB,London,EC1A 1BB,Active,2020-01-10,Standard
+10356,Aadhya,Reddy,aadhya.reddy56@gmail.com,+44 20 7641 6071,46,227893.04,GB,London,EC1A 1BB,Active,2023-12-06,Silver
+10357,Ayaan,Rao,ayaan.rao54@gmail.com,+49 30 376484,51,248254.71,SG,Singapore,018989,Active,2021-09-27,Bronze
+10358,Pari,Sharma,pari.sharma16@gmail.com,+49 30 784299,59,37333.49,SG,Singapore,018989,Pending,2023-03-17,Bronze
+10359,Avani,Brown,avani.brown62@gmail.com,+49 30 314059,58,69629.32,SG,Singapore,049318,Active,2022-02-24,Standard
+10360,Barbara,Yang,barbara.yang14@gmail.com,2934181,46,177969.5,SG,Singapore,018989,Active,2020-11-26,Silver
+10361,Jessica,Schmidt,jessica.schmidt35@gmail.com,+1 (555) 934-9108,49,194121.65,US,San Francisco,94105,Pending,2020-02-02,Bronze
+10362,Wei,Sharma,wei.sharma34@gmail.com,+1 (555) 287-9469,56,171324.99,US,Seattle,98101,Inactive,2022-12-02,Silver
+10363,Diya,Santos,diya.santos72@gmail.com,+91 91460 45198,31,185955.3,IN,Mumbai,400001,Active,2023-03-02,Platinum
+10364,Arjun,Nair,arjun.nair39@gmail.com,+44 20 7939 9903,22,33430.08,GB,Edinburgh,EH1 1YZ,Active,2022-10-06,Standard
+10365,Wei,Williams,wei.williams96@gmail.com,+44 20 7852 9352,65,161509.63,GB,London,EC1A 1BB,Pending,2021-03-22,Platinum
+10366,Ananya,Santos,ananya.santos81@gmail.com,+1 (555) 738-9550,22,244837.45,US,San Francisco,94105,Active,2022-10-14,Gold
+10367,Jennifer,Martinez,jennifer.martinez78@gmail.com,+49 30 503332,25,118217.9,DE,Frankfurt,60311,Active,2023-10-08,Standard
+10368,Li,Yang,li.yang72@gmail.com,+44 20 7087 2823,33,216603.25,GB,London,EC1A 1BB,Active,2022-02-15,Silver
+10369,Linda,Verma,linda.verma72@gmail.com,+91 95174 15013,29,77383.44,IN,Bengaluru,560001,Active,2023-10-09,Platinum
+10370,Yan,Rodriguez,yan.rodriguez74@gmail.com,+49 30 635579,57,192445.17,DE,Frankfurt,60311,Inactive,2023-01-02,Standard
+10371,Ayaan,Rao,ayaan.rao58@gmail.com,+1 (555) 650-4795,51,181452.11,US,Seattle,98101,Active,2023-01-11,Bronze
+10372,Sai,Verma,sai.verma61@gmail.com,+49 30 719512,42,51557.05,SG,Singapore,049318,Active,2022-01-28,Platinum
+10373,John,Singh,john.singh37@gmail.com,+49 30 891351,34,178322.23,DE,Berlin,10115,Pending,2022-06-12,Platinum
+10374,Mateo,Wang,mateo.wang66_at_gmail.com,+1 (555) 984-9238,31,80575.59,US,Chicago,60601,Suspended,2021-11-26,Silver
+10375,Avani,Sharma,avani.sharma43@gmail.com,+49 30 243142,40,121879.14,DE,Berlin,10115,Inactive,2021-11-19,Silver
+10376,Yan,Chen,yan.chen15@gmail.com,+1 (555) 597-6277,62,205706.0,US,San Francisco,94105,Active,2021-01-12,Silver
+10377,Michael,Silva,michael.silva70@gmail.com,+49 30 328720,63,67130.89,SG,Singapore,049318,Active,2020-09-15,Standard
+10378,Barbara,Martinez,barbara.martinez85@gmail.com,+49 30 423663,42,112127.76,DE,Hamburg,20095,Inactive,2022-09-24,Gold
+10379,Krishna,Miller,krishna.miller62@gmail.com,+91 95893 73100,49,67220.09,IN,Mumbai,400001,Inactive,2020-03-25,Bronze
+10380,Karen,Wang,karen.wang63@gmail.com,+1 (555) 273-3448,59,190231.49,US,Austin,78701,Active,2022-07-04,Silver
+10381,Joseph,Garcia,joseph.garcia83@gmail.com,+44 20 7811 2484,44,109222.25,GB,London,EC1A 1BB,Pending,2020-08-14,Bronze
+10382,Joseph,Brown,joseph.brown29@gmail.com,+44 20 7160 8606,55,114405.32,GB,Edinburgh,EH1 1YZ,Active,2021-09-02,Bronze
+10383,Sai,Reddy,sai.reddy96@gmail.com,6533290,61,185497.47,US,Seattle,98101,Suspended,2023-04-11,Platinum
+10384,Vivaan,Muller,vivaan.muller22_at_gmail.com,+44 20 7911 4849,51,139262.22,GB,London,EC1A 1BB,Active,2023-07-03,Silver
+10385,Lucas,Santos,lucas.santos38@gmail.com,+91 99608 43588,29,162791.05,IN,Delhi,110001,Suspended,2021-04-15,Silver
+10386,Sai,Zhang,sai.zhang59@gmail.com,+49 30 881150,64,224840.71,DE,Berlin,10115,Active,2022-03-10,Silver
+10387,David,Rodriguez,david.rodriguez90@gmail.com,+49 30 835901,42,137749.2,DE,Munich,80331,Suspended,2020-04-01,Standard
+10388,Thomas,Brown,thomas.brown87@gmail.com,+91 91086 32733,56,122883.9,IN,Delhi,110001,Inactive,2022-12-27,Gold
+10389,Susan,Davis,susan.davis81@gmail.com,+91 98811 43818,43,218567.18,IN,Bengaluru,560001,Active,2023-10-23,Bronze
+10390,Michael,Sharma,michael.sharma22@gmail.com,+1 (555) 528-6718,39,89127.68,US,Chicago,60601,Pending,2021-01-13,Gold
+10391,William,Silva,william.silva62@gmail.com,+49 30 563353,46,91296.37,DE,Frankfurt,60311,Active,2021-09-18,Gold
+10392,Yan,Verma,yan.verma34@gmail.com,+91 95462 55992,38,34567.75,IN,Mumbai,400001,Pending,2020-09-20,Silver
+10393,Mary,Smith,mary.smith45@gmail.com,+91 92113 16453,41,227395.66,IN,Delhi,110001,Suspended,2022-09-25,Platinum
+10394,Camila,Johnson,camila.johnson92@gmail.com,+49 30 554582,33,105834.6,SG,Singapore,018989,Active,2021-04-17,Bronze
+10395,Mateo,Sharma,mateo.sharma56@gmail.com,+44 20 7042 1520,51,79371.17,GB,Manchester,M1 1AE,Inactive,2022-09-01,Bronze
+10396,Michael,Smith,michael.smith86@gmail.com,+44 20 7727 6105,48,29839.28,GB,Edinburgh,N/A,Inactive,2021-08-21,Platinum
+10397,Sai,Wang,sai.wang44@gmail.com,+44 20 7008 8253,58,229058.69,GB,London,EC1A 1BB,Inactive,2021-03-06,Platinum
+10398,Susan,Rodriguez,susan.rodriguez46@gmail.com,+49 30 783446,57,228749.57,DE,Berlin,10115,Pending,2021-10-28,Silver
+10399,Sai,Schneider,sai.schneider75@gmail.com,+49 30 811799,37,205844.88,SG,Singapore,018989,Active,2022-05-05,Platinum
+10400,Isha,Garcia,isha.garcia20@gmail.com,+44 20 7525 1213,23,87151.16,GB,London,EC1A 1BB,Suspended,2020-03-15,Gold
+10401,Ming,Rodriguez,ming.rodriguez99@gmail.com,+49 30 932473,37,,SG,Singapore,049318,Active,2020-02-28,Gold
+10402,Vihaan,Sharma,vihaan.sharma21@gmail.com,+44 20 7008 6274,41,48193.38,GB,Manchester,M1 1AE,Active,2023-08-15,Gold
+10403,Karen,Martinez,karen.martinez66@gmail.com,+91 97748 36068,50,230070.56,IN,Mumbai,400001,Active,2023-08-13,Bronze
+10404,Robert,Chen,robert.chen37@gmail.com,+49 30 697119,48,160944.69,SG,Singapore,018989,Active,2023-01-03,Platinum
+10405,Aadhya,Yang,aadhya.yang87@gmail.com,+44 20 7032 1048,40,222729.84,GB,Manchester,M1 1AE,Active,2020-01-09,Platinum
+10406,Robert,Liu,robert.liu50@gmail.com,+1 (555) 568-6293,33,133695.23,US,Chicago,60601,Pending,2023-04-24,Gold
+10407,William,Martinez,william.martinez92@gmail.com,+91 96137 10638,25,246601.01,IN,Delhi,110001,Active,2021-01-06,Gold
+10408,Ming,Patel,ming.patel93@gmail.com,+49 30 744496,54,176965.66,DE,Berlin,10115,Active,2020-11-20,Gold
+10409,Ying,Smith,ying.smith28@gmail.com,1045739,37,91841.31,GB,London,EC1A 1BB,Active,2021-11-03,Silver
+10410,Jessica,Mehta,jessica.mehta56@gmail.com,+44 20 7208 2010,50,54494.73,GB,Birmingham,B1 1BB,Active,2020-04-08,Standard
+10411,Ayaan,Martinez,ayaan.martinez30@gmail.com,+1 (555) 443-8216,54,128685.04,US,New York,10001,Inactive,2022-10-27,Platinum
+10412,Li,Davis,li.davis99@gmail.com,+91 90057 62589,39,181853.51,IN,Bengaluru,560001,Active,2022-10-16,Platinum
+10413,Yan,Jones,yan.jones77@gmail.com,+91 91161 80935,63,112429.87,IN,Hyderabad,500001,Active,2020-02-11,Gold
+10414,Sofia,Davis,sofia.davis53@gmail.com,+44 20 7376 1309,64,176678.67,GB,Manchester,M1 1AE,Suspended,2021-10-14,Silver
+10415,William,Sharma,william.sharma26@gmail.com,4588936,64,194441.6,IN,Mumbai,400001,Active,2023-03-10,Bronze
+10416,Jennifer,Brown,jennifer.brown28@gmail.com,+44 20 7935 4127,60,73349.75,GB,Edinburgh,EH1 1YZ,Inactive,2020-01-18,Gold
+10417,Krishna,Rao,krishna.rao40@gmail.com,+44 20 7451 4693,44,249235.72,GB,Birmingham,B1 1BB,Active,2023-10-21,Silver
+10418,Isha,Kumar,isha.kumar41@gmail.com,+49 30 286633,57,106707.11,DE,Berlin,10115,Active,2020-02-09,Silver
+10419,Hao,Rodriguez,hao.rodriguez56@gmail.com,+49 30 994815,58,135837.11,SG,Singapore,018989,Inactive,2020-05-21,Standard
+10420,Aditya,Kumar,aditya.kumar48@gmail.com,+44 20 7066 4175,40,,GB,Edinburgh,EH1 1YZ,Pending,2023-11-04,Gold
+10421,Avani,Mehta,avani.mehta53@gmail.com,+49 30 763563,35,112149.71,SG,Singapore,018989,Inactive,2020-10-04,Gold
+10422,Isha,Sharma,isha.sharma44@gmail.com,+49 30 457196,28,163134.99,SG,Singapore,049318,Suspended,2023-04-20,Gold
+10423,Barbara,Rao,barbara.rao57@gmail.com,+49 30 785073,57,239897.43,SG,Singapore,049318,Suspended,2020-12-03,Bronze
+10424,William,Mehta,william.mehta12@gmail.com,+44 20 7151 5479,26,47292.52,GB,Edinburgh,EH1 1YZ,Inactive,2022-03-19,Gold
+10425,Susan,Reddy,susan.reddy66@gmail.com,+49 30 804319,58,224593.87,SG,Singapore,018989,Inactive,2021-11-15,Silver
+10426,Isha,Martinez,isha.martinez35@gmail.com,+91 99292 87160,36,71278.56,IN,Hyderabad,500001,Active,2021-06-21,Gold
+10427,Ying,Reddy,ying.reddy20@gmail.com,+1 (555) 386-7874,65,188741.29,US,Chicago,60601,Active,2022-11-16,Bronze
+10428,Ming,Schmidt,ming.schmidt83@gmail.com,+1 (555) 248-8498,56,45622.76,US,Austin,78701,Active,2021-09-20,Standard
+10429,Isha,Muller,isha.muller40_at_gmail.com,+49 30 641476,30,125389.74,SG,Singapore,018989,Active,2020-05-15,Platinum
+10430,Michael,Patel,michael.patel39@gmail.com,+91 90671 39505,34,99058.29,IN,Delhi,N/A,Pending,2022-08-12,Gold
+10431,Diya,Garcia,diya.garcia58@gmail.com,+49 30 715136,62,166467.04,DE,Frankfurt,60311,Active,2020-02-23,Silver
+10432,Elizabeth,Kumar,elizabeth.kumar13@gmail.com,2007922,23,239754.66,DE,Hamburg,20095,Active,2021-10-18,Bronze
+10433,Susan,Sharma,susan.sharma51@gmail.com,+49 30 652359,53,182593.93,SG,Singapore,049318,Active,2020-06-11,Gold
+10434,Aditya,Sharma,aditya.sharma68@gmail.com,+1 (555) 961-5943,42,74153.64,US,Chicago,60601,Inactive,2021-06-19,Standard
+10435,Richard,Mehta,richard.mehta64@gmail.com,+44 20 7000 5894,37,147234.57,GB,Birmingham,B1 1BB,Active,2021-01-18,Standard
+10436,Michael,Verma,michael.verma52_at_gmail.com,+91 99276 11763,52,128567.15,IN,Hyderabad,500001,Inactive,2021-06-03,Gold
+10437,Vihaan,Williams,vihaan.williams90@gmail.com,+49 30 385998,47,237034.36,SG,Singapore,049318,Suspended,2020-12-13,Platinum
+10438,Ming,Johnson,ming.johnson85@gmail.com,+49 30 666739,59,141397.9,DE,Munich,80331,Suspended,2021-05-04,Gold
+10439,Ayaan,Zhang,ayaan.zhang34@gmail.com,3921666,65,106357.52,DE,Berlin,10115,Active,2023-02-16,Silver
+10440,Michael,Liu,michael.liu25@gmail.com,+44 20 7732 7935,59,108981.47,GB,Manchester,N/A,Active,2023-12-10,Standard
+10441,Ishaan,Zhang,ishaan.zhang45@gmail.com,+91 99864 81458,23,168605.9,IN,Mumbai,400001,Suspended,2022-11-27,Standard
+10442,Patricia,Silva,patricia.silva78@gmail.com,9159924,65,138296.34,GB,Birmingham,B1 1BB,Active,2023-11-19,Bronze
+10443,Vivaan,Zhang,vivaan.zhang64@gmail.com,+49 30 448515,46,,SG,Singapore,049318,Active,2022-08-04,Gold
+10444,Linda,Liu,linda.liu74@gmail.com,+91 91886 96615,24,206264.78,IN,Chennai,600001,Inactive,2023-08-17,Bronze
+10445,Barbara,Mehta,barbara.mehta59@gmail.com,+44 20 7625 4089,53,136335.92,GB,London,EC1A 1BB,Active,2020-09-14,Silver
+10446,Reyansh,Mehta,reyansh.mehta71@gmail.com,+91 95105 33303,34,29395.25,IN,Bengaluru,560001,Active,2023-01-27,Platinum
+10447,Camila,Muller,camila.muller82@gmail.com,+1 (555) 776-3075,24,223699.31,US,Seattle,98101,Active,2023-09-10,Standard
+10448,Aadhya,Williams,aadhya.williams12@gmail.com,+49 30 387349,56,158589.1,DE,Berlin,10115,Pending,2022-06-07,Bronze
+10449,Myra,Brown,myra.brown17@gmail.com,+1 (555) 442-5460,37,-15000.0,US,Austin,78701,Inactive,2023-11-21,Gold
+10450,Camila,Gupta,camila.gupta11@gmail.com,+1 (555) 610-2633,26,154305.98,US,San Francisco,94105,Pending,2020-06-21,Silver
+10451,William,Miller,william.miller21@gmail.com,+91 98755 94321,55,39471.76,IN,Chennai,600001,Suspended,2023-05-26,Gold
+10452,Vihaan,Kumar,vihaan.kumar17@gmail.com,+49 30 255024,64,140352.31,DE,Hamburg,20095,Active,2022-06-16,Silver
+10453,Ying,Garcia,ying.garcia93@gmail.com,+49 30 119896,43,45936.94,DE,Hamburg,20095,Active,2021-05-20,Platinum
+10454,David,Schmidt,david.schmidt52@gmail.com,+44 20 7624 1876,43,160794.57,GB,Edinburgh,EH1 1YZ,Active,2022-05-01,Bronze
+10455,Linda,Zhang,linda.zhang75@gmail.com,+49 30 941916,30,36376.04,DE,Berlin,10115,Active,2023-02-24,Gold
+10456,Susan,Miller,susan.miller41@gmail.com,+44 20 7028 1930,35,240367.52,GB,Manchester,M1 1AE,Active,2023-07-14,Standard
+10457,Jessica,Johnson,jessica.johnson33@gmail.com,+49 30 985949,56,70431.78,SG,Singapore,018989,Active,2023-11-21,Gold
+10458,Arjun,Liu,arjun.liu85@gmail.com,+91 98570 65395,51,141639.28,IN,Hyderabad,500001,Active,2023-10-23,Gold
+10459,Vihaan,Miller,vihaan.miller67@gmail.com,+91 94434 43975,60,224284.11,IN,Delhi,110001,Suspended,2020-04-27,Silver
+10460,William,Schmidt,william.schmidt78_at_gmail.com,+49 30 935571,63,28487.19,SG,Singapore,049318,Inactive,2020-12-02,Bronze
+10461,Linda,Muller,linda.muller90@gmail.com,+91 97702 23783,43,67569.84,IN,Mumbai,400001,Active,2022-12-17,Standard
+10462,Isha,Yang,isha.yang72@gmail.com,+44 20 7201 9615,23,94031.22,GB,Manchester,M1 1AE,Active,2023-01-23,Standard
+10463,Navya,Nair,navya.nair57@gmail.com,+44 20 7804 5496,25,52981.66,GB,Birmingham,N/A,Active,2022-09-17,Standard
+10464,Aarav,Brown,aarav.brown13@gmail.com,+49 30 122164,56,38212.01,SG,Singapore,049318,Pending,2022-11-11,Silver
+10465,Michael,Schmidt,michael.schmidt21@gmail.com,+49 30 860843,53,52951.95,DE,Frankfurt,60311,Inactive,2020-12-06,Platinum
+10466,Myra,Singh,myra.singh69@gmail.com,+49 30 991338,35,56180.12,DE,Frankfurt,60311,Active,2020-05-25,Silver
+10467,Aarav,Zhang,aarav.zhang85@gmail.com,+49 30 799923,58,231704.8,DE,Frankfurt,60311,Pending,2020-05-25,Standard
+10468,Mary,Mehta,mary.mehta90@gmail.com,+49 30 161611,23,117111.15,DE,Munich,80331,Inactive,2023-11-04,Platinum
+10469,William,Davis,william.davis80@gmail.com,+1 (555) 526-6051,54,83940.46,US,Chicago,60601,Inactive,2023-08-26,Standard
+10470,Hao,Reddy,hao.reddy17@gmail.com,+49 30 796942,24,246087.13,SG,Singapore,049318,Suspended,2020-02-22,Silver
+10471,Yan,Reddy,yan.reddy86@gmail.com,+91 90339 72033,52,88614.41,IN,Bengaluru,560001,Inactive,2020-08-21,Standard
+10472,Ananya,Kumar,ananya.kumar18@gmail.com,7079938,30,245151.75,DE,Frankfurt,60311,Suspended,2020-03-17,Platinum
+10473,Barbara,Mehta,barbara.mehta33@gmail.com,+49 30 701463,58,38763.39,DE,Berlin,N/A,Suspended,2023-07-09,Silver
+10474,Navya,Chen,navya.chen77@gmail.com,+91 91712 15281,31,153040.18,IN,Mumbai,400001,Inactive,2020-05-20,Gold
+10475,Arjun,Martinez,arjun.martinez24@gmail.com,+44 20 7580 9295,22,223575.68,GB,Manchester,M1 1AE,Inactive,2021-02-23,Platinum
+10476,Li,Patel,li.patel67@gmail.com,+49 30 419534,31,239314.96,SG,Singapore,018989,Inactive,2023-09-13,Gold
+10477,Vihaan,Zhang,vihaan.zhang39@gmail.com,+49 30 813007,50,211935.85,DE,Hamburg,20095,Suspended,2020-01-19,Gold
+10478,Jennifer,Liu,jennifer.liu91@gmail.com,+44 20 7638 8141,51,241302.26,GB,Manchester,M1 1AE,Active,2022-12-28,Standard
+10479,Avani,Davis,avani.davis94@gmail.com,+91 94793 97715,54,199207.85,IN,Bengaluru,560001,Active,2022-07-16,Bronze
+10480,Aditya,Mehta,aditya.mehta45@gmail.com,+49 30 180898,57,89511.92,SG,Singapore,018989,Suspended,2020-04-18,Standard
+10481,Thomas,Silva,thomas.silva85@gmail.com,+49 30 406475,41,213436.15,DE,Berlin,10115,Pending,2022-10-28,Gold
+10482,Lucas,Silva,lucas.silva61@gmail.com,+1 (555) 287-8428,43,155791.27,US,San Francisco,94105,Inactive,2021-10-02,Bronze
+10483,Ayaan,Chen,ayaan.chen18@gmail.com,+1 (555) 418-3363,59,241546.2,US,Austin,78701,Active,2022-03-19,Platinum
+10484,Reyansh,Silva,reyansh.silva86@gmail.com,+49 30 213419,40,201177.28,DE,Munich,80331,Active,2023-08-04,Platinum
+10485,Thomas,Mehta,thomas.mehta75@gmail.com,+44 20 7292 9976,24,53853.71,GB,London,EC1A 1BB,Active,2023-12-02,Standard
+10486,Vivaan,Gupta,vivaan.gupta76@gmail.com,+44 20 7914 5071,35,,GB,Manchester,M1 1AE,Active,2020-07-27,Bronze
+10487,Saanvi,Santos,saanvi.santos88@gmail.com,+1 (555) 589-2639,26,150576.12,US,Austin,78701,Active,2020-01-09,Bronze
+10488,Aadhya,Zhang,aadhya.zhang57@gmail.com,+1 (555) 466-7516,28,135012.63,US,New York,10001,Inactive,2020-03-22,Silver
+10489,Elizabeth,Schmidt,elizabeth.schmidt79@gmail.com,+44 20 7439 2320,-3,64845.86,GB,Edinburgh,EH1 1YZ,Active,2020-01-20,Bronze
+10490,Saanvi,Brown,saanvi.brown91@gmail.com,+91 92897 28326,46,43126.73,IN,Chennai,600001,Suspended,2022-04-05,Platinum
+10491,Jessica,Reddy,jessica.reddy93@gmail.com,+1 (555) 983-3320,51,93999.85,US,New York,10001,Active,2023-08-16,Standard
+10492,Karen,Wang,karen.wang80@gmail.com,+49 30 922878,37,221267.0,DE,Hamburg,20095,Pending,2022-07-03,Platinum
+10493,Wei,Kumar,wei.kumar60_at_gmail.com,+49 30 742662,43,45891.22,SG,Singapore,049318,Pending,2023-04-19,Gold
+10494,Sofia,Chen,sofia.chen67@gmail.com,+91 97262 98145,56,45303.43,IN,Bengaluru,560001,Active,2021-07-02,Gold
+10495,Diya,Reddy,diya.reddy56@gmail.com,+49 30 771281,62,198138.09,SG,Singapore,049318,Pending,2022-04-25,Platinum
+10496,Patricia,Nair,patricia.nair72@gmail.com,+49 30 765688,44,156631.87,DE,Munich,80331,Active,2021-08-06,Gold
+10497,Patricia,Yang,patricia.yang64@gmail.com,+44 20 7002 9392,34,234995.46,GB,Birmingham,B1 1BB,Active,2021-08-08,Gold
+10498,Li,Brown,li.brown73@gmail.com,+44 20 7753 4920,40,246300.51,GB,Manchester,M1 1AE,Active,2020-02-27,Platinum
+10499,Navya,Jones,navya.jones40_at_gmail.com,+44 20 7312 2959,56,27559.42,GB,London,EC1A 1BB,Active,2023-08-06,Silver
+10500,Aadhya,Rao,aadhya.rao98_at_gmail.com,+49 30 381420,43,56399.96,DE,Frankfurt,60311,Suspended,2023-08-17,Gold
+10501,Ananya,Nair,ananya.nair81@gmail.com,3118797,64,123698.13,IN,Hyderabad,500001,Suspended,2021-07-12,Silver
+10502,Sarah,Williams,sarah.williams27@gmail.com,+1 (555) 385-6178,53,93778.24,US,San Francisco,94105,Active,2023-12-21,Standard
+10503,Camila,Martinez,camila.martinez67@gmail.com,+1 (555) 476-2582,25,132049.5,US,Chicago,60601,Pending,2022-05-17,Standard
+10504,Wei,Verma,wei.verma65@gmail.com,+1 (555) 763-3241,62,226467.56,US,New York,10001,Active,2020-11-24,Platinum
+10505,Avani,Reddy,avani.reddy96@gmail.com,+49 30 834509,56,125601.06,SG,Singapore,018989,Active,2021-06-23,Standard
+10506,Arjun,Wang,arjun.wang54@gmail.com,+49 30 238325,142,36412.73,SG,Singapore,018989,Active,2022-09-26,Bronze
+10507,Richard,Schneider,richard.schneider35@gmail.com,+49 30 237014,42,117936.02,SG,Singapore,018989,Active,2020-07-09,Standard
+10508,Yan,Jones,yan.jones40@gmail.com,+49 30 787907,37,183677.53,DE,Berlin,10115,Active,2022-12-11,Bronze
+10509,Barbara,Johnson,barbara.johnson98@gmail.com,5088315,34,197382.17,IN,Chennai,600001,Inactive,2021-05-14,Platinum
+10510,Charles,Garcia,charles.garcia27@gmail.com,+44 20 7521 9612,29,96922.12,GB,Birmingham,B1 1BB,Active,2021-07-26,Gold
+10511,Ananya,Nair,ananya.nair20@gmail.com,+44 20 7154 6070,29,67467.51,GB,Birmingham,B1 1BB,Inactive,2021-04-20,Gold
+10512,Myra,Davis,myra.davis75@gmail.com,+44 20 7028 2350,43,187236.14,GB,Edinburgh,EH1 1YZ,Active,2020-11-12,Silver
+10513,John,Santos,john.santos24@gmail.com,+44 20 7170 5662,39,237845.54,GB,London,EC1A 1BB,Active,2023-04-08,Silver
+10514,Ying,Kumar,ying.kumar24@gmail.com,+49 30 153626,60,198462.57,SG,Singapore,018989,Inactive,2023-05-17,Platinum
+10515,Thomas,Patel,thomas.patel27@gmail.com,+1 (555) 929-3512,62,180910.44,US,San Francisco,94105,Pending,2022-09-15,Platinum
+10516,Thomas,Sharma,thomas.sharma50@gmail.com,8631287,30,199432.02,SG,Singapore,018989,Pending,2023-08-19,Standard
+10517,Camila,Garcia,camila.garcia74@gmail.com,+44 20 7532 2654,55,170101.21,GB,Manchester,N/A,Suspended,2023-01-04,Gold
+10518,Ishaan,Yang,ishaan.yang15@gmail.com,+91 99058 40751,62,35331.25,IN,Hyderabad,500001,Active,2021-08-19,Silver
+10519,Jennifer,Miller,jennifer.miller74@gmail.com,9376758,24,158969.56,GB,Edinburgh,EH1 1YZ,Active,2021-02-16,Bronze
+10520,Barbara,Muller,barbara.muller45@gmail.com,+1 (555) 790-9854,58,57303.92,US,Chicago,60601,Active,2020-06-06,Standard
+10521,Susan,Santos,susan.santos94@gmail.com,+91 91079 85631,62,234169.59,IN,Bengaluru,560001,Inactive,2023-06-23,Silver
+10522,Linda,Zhang,linda.zhang83@gmail.com,+49 30 744113,47,150294.94,DE,Munich,80331,Pending,2020-05-05,Gold
+10523,Diya,Miller,diya.miller36@gmail.com,+49 30 212989,54,43321.98,DE,Frankfurt,60311,Active,2023-09-25,Gold
+10524,Sai,Jones,sai.jones96@gmail.com,+49 30 461056,28,56653.69,SG,Singapore,018989,Active,2020-10-08,Platinum
+10525,Robert,Jones,robert.jones46@gmail.com,+1 (555) 572-6743,46,121504.41,US,Chicago,60601,Active,2023-12-26,Standard
+10526,Thomas,Davis,thomas.davis66@gmail.com,+49 30 182871,43,167655.82,SG,Singapore,049318,Active,2022-01-14,Silver
+10527,Hao,Miller,hao.miller77_at_gmail.com,+91 91831 54237,27,143934.86,IN,Hyderabad,500001,Active,2021-05-08,Standard
+10528,Isha,Miller,isha.miller64@gmail.com,+91 96704 99566,47,142612.99,IN,Hyderabad,500001,Pending,2023-07-24,Bronze
+10529,Sofia,Smith,sofia.smith54@gmail.com,+91 95851 59756,53,104582.18,IN,Hyderabad,500001,Pending,2023-10-28,Gold
+10530,William,Liu,william.liu20@gmail.com,+49 30 213676,27,237547.49,SG,Singapore,018989,Suspended,2022-10-27,Gold
+10531,Diya,Johnson,diya.johnson33@gmail.com,5612982,34,44005.28,DE,Hamburg,20095,Active,2020-12-28,Standard
+10532,Charles,Gupta,charles.gupta48@gmail.com,+1 (555) 972-6401,32,60141.12,US,New York,10001,Active,2020-12-07,Standard
+10533,Reyansh,Wang,reyansh.wang96@gmail.com,+49 30 223349,51,155286.41,SG,Singapore,049318,Inactive,2022-02-24,Gold
+10534,Linda,Verma,linda.verma59@gmail.com,+49 30 587199,25,96485.18,SG,Singapore,018989,Inactive,2020-06-16,Gold
+10535,Krishna,Santos,krishna.santos77@gmail.com,+91 93119 26953,39,147044.33,IN,Delhi,110001,Active,2023-10-03,Gold
+10536,Navya,Yang,navya.yang89@gmail.com,+49 30 545554,43,160775.74,SG,Singapore,049318,Active,2021-09-09,Bronze
+10537,Diya,Patel,diya.patel23@gmail.com,+49 30 578685,31,116904.85,DE,Munich,80331,Suspended,2022-12-18,Gold
+10538,Pari,Silva,pari.silva83@gmail.com,+49 30 943479,47,34718.32,DE,Munich,80331,Pending,2020-07-11,Standard
+10539,Mateo,Rao,mateo.rao67@gmail.com,7944589,64,52419.08,IN,Mumbai,400001,Active,2020-12-22,Gold
+10540,Isha,Smith,isha.smith89@gmail.com,+1 (555) 780-4672,31,-15000.0,US,Chicago,60601,Active,2023-08-06,Standard
+10541,Mary,Kumar,mary.kumar26@gmail.com,9768258,47,68795.25,US,San Francisco,94105,Active,2021-08-17,Bronze
+10542,Krishna,Chen,krishna.chen48@gmail.com,+1 (555) 759-5191,22,79431.91,US,Chicago,60601,Suspended,2021-05-03,Bronze
+10543,William,Rao,william.rao76@gmail.com,+49 30 122444,30,178569.97,SG,Singapore,018989,Active,2021-03-15,Bronze
+10544,Arjun,Santos,arjun.santos70@gmail.com,+1 (555) 714-8484,52,133328.65,US,Seattle,98101,Pending,2022-11-03,Standard
+10545,Myra,Silva,myra.silva37@gmail.com,+44 20 7106 5820,64,51476.02,GB,London,EC1A 1BB,Pending,2022-07-07,Gold
+10546,Reyansh,Reddy,reyansh.reddy75@gmail.com,+1 (555) 268-7751,25,236186.29,US,New York,10001,Active,2021-07-22,Platinum
+10547,Elizabeth,Gupta,elizabeth.gupta94@gmail.com,+91 97509 63538,49,245111.48,IN,Mumbai,400001,Suspended,2022-06-04,Gold
+10548,James,Martinez,james.martinez91_at_gmail.com,+91 93340 71016,32,214937.36,IN,Mumbai,400001,Suspended,2022-05-15,Bronze
+10549,Ishaan,Santos,ishaan.santos26@gmail.com,+49 30 161226,55,106459.24,DE,Hamburg,20095,Active,2023-05-13,Platinum
+10550,Susan,Liu,susan.liu89@gmail.com,+1 (555) 772-8501,28,176482.59,US,Chicago,60601,Suspended,2023-04-17,Silver
+10551,Camila,Williams,camila.williams50@gmail.com,+1 (555) 985-7271,61,182901.46,US,Austin,78701,Active,2023-11-04,Bronze
+10552,Hao,Kumar,hao.kumar26@gmail.com,+49 30 310907,36,57296.6,DE,Berlin,10115,Suspended,2023-07-02,Platinum
+10553,Sarah,Gupta,sarah.gupta81@gmail.com,+49 30 830744,28,87360.55,DE,Munich,80331,Active,2023-01-18,Bronze
+10554,James,Sharma,james.sharma51@gmail.com,+1 (555) 741-9589,51,103879.4,US,San Francisco,94105,Active,2023-03-25,Silver
+10555,Myra,Jones,myra.jones89@gmail.com,+49 30 494533,23,151071.19,DE,Hamburg,20095,Pending,2023-01-04,Gold
+10556,Arjun,Zhang,arjun.zhang74@gmail.com,+49 30 158585,36,229182.7,DE,Berlin,10115,Active,2020-11-19,Bronze
+10557,Ananya,Schmidt,ananya.schmidt18@gmail.com,+49 30 171634,58,46236.8,SG,Singapore,049318,Active,2022-12-09,Standard
+10558,Camila,Johnson,camila.johnson31@gmail.com,+1 (555) 844-8816,38,219272.39,US,New York,10001,Inactive,2020-05-28,Standard
+10559,Wei,Nair,wei.nair32@gmail.com,+44 20 7386 1240,28,223287.51,GB,Birmingham,B1 1BB,Inactive,2021-05-08,Standard
+10560,Joseph,Johnson,joseph.johnson67@gmail.com,+49 30 712261,57,39155.36,SG,Singapore,018989,Pending,2021-07-02,Silver
+10561,William,Chen,william.chen87@gmail.com,+49 30 329335,47,,SG,Singapore,049318,Active,2021-04-26,Standard
+10562,Reyansh,Patel,reyansh.patel36@gmail.com,+91 98863 98348,27,188907.27,IN,Chennai,600001,Inactive,2023-05-24,Standard
+10563,Michael,Chen,michael.chen97_at_gmail.com,+49 30 364636,59,219733.82,DE,Munich,80331,Active,2021-01-11,Bronze
+10564,Yan,Martinez,yan.martinez94@gmail.com,+49 30 853720,25,52517.18,DE,Munich,80331,Inactive,2021-12-23,Silver
+10565,Avani,Rao,avani.rao81@gmail.com,+49 30 944292,44,113397.06,DE,Frankfurt,60311,Inactive,2020-12-26,Gold
+10566,Reyansh,Singh,reyansh.singh18@gmail.com,+49 30 733836,56,68714.83,SG,Singapore,N/A,Active,2022-09-07,Silver
+10567,Ishaan,Davis,ishaan.davis28@gmail.com,+1 (555) 646-5752,36,25559.27,US,Chicago,60601,Inactive,2023-01-10,Gold
+10568,Ananya,Verma,ananya.verma69@gmail.com,+91 95439 80228,31,33927.17,IN,Mumbai,400001,Suspended,2020-05-18,Platinum
+10569,Ayaan,Nair,ayaan.nair23@gmail.com,+91 98094 75629,29,239235.89,IN,Bengaluru,560001,Active,2023-08-05,Bronze
+10570,Vivaan,Williams,vivaan.williams53@gmail.com,+44 20 7526 7019,31,69852.31,GB,Manchester,M1 1AE,Suspended,2021-02-12,Platinum
+10571,Ming,Martinez,ming.martinez85@gmail.com,+91 94126 73819,62,173038.44,IN,Hyderabad,500001,Pending,2021-10-25,Platinum
+10572,Lucas,Muller,lucas.muller15_at_gmail.com,+91 93516 97045,45,120793.54,IN,Mumbai,400001,Pending,2022-03-14,Gold
+10573,Aarav,Smith,aarav.smith16@gmail.com,+49 30 650886,58,122151.65,SG,Singapore,049318,Suspended,2023-07-21,Silver
+10574,Mateo,Rao,mateo.rao92@gmail.com,+44 20 7599 7713,49,116061.14,GB,Birmingham,B1 1BB,Inactive,2020-05-01,Gold
+10575,Jessica,Davis,jessica.davis78@gmail.com,+49 30 440372,54,126659.59,DE,Berlin,10115,Inactive,2023-09-25,Platinum
+10576,Hao,Reddy,hao.reddy78@gmail.com,+1 (555) 405-1650,52,57295.51,US,Austin,78701,Inactive,2021-08-23,Standard
+10577,Ananya,Rodriguez,ananya.rodriguez61@gmail.com,+91 99493 77097,34,233753.31,IN,Delhi,110001,Active,2022-10-14,Silver
+10578,Sofia,Gupta,sofia.gupta84@gmail.com,+49 30 693399,55,218245.01,DE,Frankfurt,60311,Active,2023-05-04,Silver
+10579,Barbara,Gupta,barbara.gupta80@gmail.com,+1 (555) 413-8176,38,196556.85,US,Chicago,60601,Pending,2023-02-07,Silver
+10580,Yan,Muller,yan.muller91@gmail.com,6695557,23,166530.48,SG,Singapore,049318,Active,2022-01-13,Gold
+10581,Mary,Gupta,mary.gupta24@gmail.com,+1 (555) 497-5299,42,147759.79,US,Chicago,60601,Inactive,2020-10-03,Silver
+10582,Navya,Sharma,navya.sharma87@gmail.com,+49 30 771942,57,62712.88,DE,Berlin,10115,Active,2022-07-11,Standard
+10583,Krishna,Sharma,krishna.sharma47@gmail.com,+1 (555) 656-8101,50,,US,New York,10001,Pending,2023-01-18,Platinum
+10584,Vivaan,Schneider,vivaan.schneider92@gmail.com,+44 20 7953 7371,37,172296.91,GB,Edinburgh,EH1 1YZ,Pending,2020-02-24,Silver
+10585,Reyansh,Mehta,reyansh.mehta72@gmail.com,+49 30 524691,63,,DE,Frankfurt,60311,Active,2022-02-20,Gold
+10586,Ming,Silva,ming.silva74@gmail.com,+91 91622 32102,64,42982.02,IN,Bengaluru,560001,Active,2023-02-25,Gold
+10587,Aarav,Kumar,aarav.kumar82@gmail.com,4109048,32,54610.09,DE,Berlin,10115,Active,2023-11-23,Bronze
+10588,William,Johnson,william.johnson76@gmail.com,3727173,38,87698.2,SG,Singapore,049318,Active,2023-11-15,Standard
+10589,Michael,Kumar,michael.kumar65@gmail.com,+44 20 7319 1782,52,63913.2,GB,London,EC1A 1BB,Active,2022-05-17,Silver
+10590,Jennifer,Singh,jennifer.singh11@gmail.com,2011708,50,171413.51,SG,Singapore,049318,Suspended,2022-08-12,Bronze
+10591,Pari,Yang,pari.yang75_at_gmail.com,+44 20 7180 5583,65,76473.1,GB,Birmingham,B1 1BB,Inactive,2021-11-09,Bronze
+10592,Isha,Wang,isha.wang20@gmail.com,+1 (555) 463-3964,59,121500.53,US,Seattle,98101,Pending,2021-03-26,Standard
+10593,Richard,Patel,richard.patel70@gmail.com,+49 30 799211,25,43886.54,SG,Singapore,018989,Active,2021-01-10,Silver
+10594,Thomas,Chen,thomas.chen87@gmail.com,+1 (555) 896-9242,27,77797.73,US,Seattle,98101,Active,2020-12-14,Platinum
+10595,Richard,Reddy,richard.reddy43@gmail.com,+1 (555) 758-8837,47,197726.05,US,San Francisco,94105,Pending,2023-05-21,Gold
+10596,Wei,Nair,wei.nair67@gmail.com,+91 91105 83179,27,66321.15,IN,Mumbai,400001,Active,2022-01-19,Silver
+10597,Michael,Martinez,michael.martinez14@gmail.com,+1 (555) 994-7675,38,157044.41,US,San Francisco,94105,Active,2022-01-10,Gold
+10598,Richard,Santos,richard.santos65_at_gmail.com,+1 (555) 518-3206,35,216038.31,US,Austin,78701,Active,2021-02-06,Gold
+10599,James,Jones,james.jones55@gmail.com,+49 30 121114,58,201292.1,SG,Singapore,049318,Inactive,2023-07-21,Silver
+10600,Isha,Nair,isha.nair87@gmail.com,+44 20 7540 7479,61,133008.05,GB,Birmingham,B1 1BB,Inactive,2023-06-21,Gold
+10601,Ayaan,Brown,ayaan.brown27@gmail.com,+49 30 141111,41,89966.79,SG,Singapore,018989,Active,2021-01-18,Gold
+10602,Aadhya,Liu,aadhya.liu96@gmail.com,+49 30 618688,-3,144810.75,DE,Munich,80331,Inactive,2020-12-20,Silver
+10603,Hao,Miller,hao.miller55@gmail.com,+44 20 7627 1052,50,77966.17,GB,Manchester,M1 1AE,Active,2021-12-10,Platinum
+10604,Ananya,Kumar,ananya.kumar47@gmail.com,+44 20 7901 1734,36,,GB,Edinburgh,EH1 1YZ,Active,2020-03-07,Platinum
+10605,Charles,Nair,charles.nair25@gmail.com,+49 30 497180,48,38177.09,SG,Singapore,049318,Pending,2023-05-21,Standard
+10606,Saanvi,Mehta,saanvi.mehta93@gmail.com,+49 30 969438,26,62045.85,DE,Frankfurt,60311,Active,2020-03-09,Platinum
+10607,Robert,Schneider,robert.schneider59@gmail.com,+49 30 838287,48,86562.94,SG,Singapore,049318,Active,2021-03-28,Bronze
+10608,Yan,Kumar,yan.kumar56@gmail.com,+44 20 7606 3671,33,249004.34,GB,Manchester,M1 1AE,Active,2021-09-18,Standard
+10609,Li,Brown,li.brown88@gmail.com,+91 99906 48709,22,67509.6,IN,Hyderabad,500001,Active,2020-06-08,Silver
+10610,Barbara,Santos,barbara.santos54@gmail.com,+1 (555) 373-1989,34,168460.47,US,San Francisco,94105,Inactive,2022-12-06,Gold
+10611,Pari,Mehta,pari.mehta93@gmail.com,+49 30 344596,23,211003.9,DE,Munich,80331,Active,2021-05-18,Platinum
+10612,David,Nair,david.nair74@gmail.com,+49 30 226669,51,189403.27,SG,Singapore,018989,Active,2021-01-07,Standard
+10613,Isha,Miller,isha.miller67@gmail.com,8693579,43,70494.16,US,San Francisco,94105,Pending,2022-07-19,Standard
+10614,Hao,Rodriguez,hao.rodriguez37@gmail.com,+91 98697 61263,27,42652.77,IN,Mumbai,400001,Suspended,2020-06-18,Gold
+10615,Camila,Schmidt,camila.schmidt15@gmail.com,+49 30 967116,43,136030.2,DE,Munich,80331,Active,2020-11-05,Standard
+10616,Sofia,Wang,sofia.wang75@gmail.com,+91 96560 25262,57,57675.17,IN,Chennai,600001,Suspended,2020-01-25,Silver
+10617,Linda,Schmidt,linda.schmidt26@gmail.com,+49 30 161546,41,106203.97,DE,Berlin,10115,Active,2022-01-24,Platinum
+10618,William,Nair,william.nair54@gmail.com,+44 20 7022 3887,60,130174.67,GB,Manchester,M1 1AE,Pending,2023-02-01,Standard
+10619,Thomas,Schneider,thomas.schneider59@gmail.com,+91 90382 22834,53,124929.13,IN,Mumbai,400001,Pending,2021-11-17,Bronze
+10620,Aadhya,Yang,aadhya.yang78@gmail.com,+1 (555) 220-6251,28,237226.75,US,Chicago,60601,Inactive,2021-07-22,Standard
+10621,David,Silva,david.silva27@gmail.com,+49 30 229775,52,29169.09,SG,Singapore,018989,Pending,2021-08-19,Bronze
+10622,Michael,Silva,michael.silva77@gmail.com,+49 30 677710,31,89483.91,SG,Singapore,049318,Active,2023-06-03,Bronze
+10623,Aarav,Sharma,aarav.sharma63@gmail.com,+91 95308 55160,23,,IN,Hyderabad,500001,Active,2021-06-20,Bronze
+10624,David,Smith,david.smith50@gmail.com,+91 93926 54144,31,71442.97,IN,Bengaluru,560001,Active,2021-07-03,Bronze
+10625,David,Gupta,david.gupta82@gmail.com,+49 30 756203,44,127690.94,SG,Singapore,049318,Active,2023-09-15,Silver
+10626,Patricia,Davis,patricia.davis74@gmail.com,3399539,34,52425.47,IN,Delhi,110001,Active,2021-06-28,Bronze
+10627,Arjun,Gupta,arjun.gupta96@gmail.com,+49 30 301187,28,245711.33,DE,Frankfurt,60311,Pending,2022-10-26,Platinum
+10628,William,Kumar,william.kumar16_at_gmail.com,+44 20 7640 1943,54,182458.48,GB,Edinburgh,EH1 1YZ,Suspended,2022-04-21,Bronze
+10629,Joseph,Schneider,joseph.schneider29@gmail.com,+49 30 251030,39,139838.74,DE,Munich,80331,Suspended,2021-08-23,Silver
+10630,Reyansh,Liu,reyansh.liu50@gmail.com,+91 98769 47641,55,112767.29,IN,Mumbai,400001,Suspended,2022-01-08,Gold
+10631,Pari,Sharma,pari.sharma95@gmail.com,+44 20 7707 5960,55,147461.39,GB,Edinburgh,EH1 1YZ,Active,2020-05-15,Bronze
+10632,Jessica,Muller,jessica.muller52@gmail.com,+91 96926 45634,26,114041.86,IN,Chennai,600001,Active,2022-12-22,Standard
+10633,Mary,Smith,mary.smith67@gmail.com,+49 30 272695,24,171081.33,SG,Singapore,049318,Suspended,2020-02-10,Standard
+10634,Joseph,Silva,joseph.silva95@gmail.com,+1 (555) 922-5782,142,201746.3,US,Austin,78701,Pending,2022-08-01,Standard
+10635,Barbara,Nair,barbara.nair12@gmail.com,+49 30 788714,23,67600.11,SG,Singapore,018989,Pending,2022-03-17,Silver
+10636,Ananya,Rodriguez,ananya.rodriguez91@gmail.com,+91 90720 55164,0,104839.18,IN,Bengaluru,560001,Active,2020-04-09,Silver
+10637,Wei,Silva,wei.silva23@gmail.com,+49 30 839661,58,76344.93,SG,Singapore,049318,Suspended,2023-06-02,Platinum
+10638,James,Nair,james.nair66@gmail.com,+44 20 7780 4909,36,,GB,Manchester,M1 1AE,Pending,2023-03-25,Platinum
+10639,Krishna,Singh,krishna.singh95@gmail.com,+91 92341 16664,53,217492.99,IN,Mumbai,400001,Active,2023-04-26,Silver
+10640,Charles,Sharma,charles.sharma82@gmail.com,+1 (555) 642-4114,-3,26562.71,US,New York,10001,Pending,2020-09-08,Standard
+10641,Richard,Wang,richard.wang44@gmail.com,+49 30 199495,57,75163.33,SG,Singapore,049318,Inactive,2022-07-22,Gold
+10642,Sai,Singh,sai.singh18@gmail.com,+49 30 871365,54,33916.48,DE,Berlin,10115,Suspended,2023-05-05,Platinum
+10643,Arjun,Zhang,arjun.zhang10@gmail.com,+1 (555) 871-2170,26,225786.05,US,Chicago,60601,Pending,2022-04-11,Gold
+10644,Lucas,Silva,lucas.silva37_at_gmail.com,+91 92568 82198,31,51286.09,IN,Bengaluru,560001,Pending,2021-11-28,Standard
+10645,Karen,Mehta,karen.mehta65@gmail.com,+91 93923 13233,42,237715.83,IN,Hyderabad,500001,Active,2023-07-20,Bronze
+10646,Robert,Nair,robert.nair63@gmail.com,+44 20 7861 2488,36,234288.79,GB,London,EC1A 1BB,Suspended,2020-03-21,Standard
+10647,Sofia,Verma,sofia.verma98@gmail.com,+91 94169 88437,62,58405.0,IN,Delhi,110001,Active,2021-07-03,Bronze
+10648,Vivaan,Singh,vivaan.singh79@gmail.com,+44 20 7075 7769,46,187377.5,GB,Birmingham,B1 1BB,Active,2023-11-17,Bronze
+10649,Myra,Gupta,myra.gupta94@gmail.com,+49 30 787033,53,159919.19,DE,Berlin,10115,Suspended,2023-11-16,Platinum
+10650,Richard,Brown,richard.brown82@gmail.com,1318173,65,110191.13,IN,Chennai,600001,Active,2023-07-17,Gold
+10651,Wei,Rodriguez,wei.rodriguez44@gmail.com,+49 30 412022,22,82792.11,DE,Berlin,10115,Pending,2022-06-21,Standard
+10652,Ming,Brown,ming.brown57@gmail.com,+49 30 839526,64,129359.23,DE,Berlin,10115,Pending,2021-11-18,Platinum
+10653,William,Sharma,william.sharma55@gmail.com,+49 30 145865,30,117182.02,DE,Frankfurt,60311,Active,2022-09-05,Gold
+10654,Saanvi,Garcia,saanvi.garcia86@gmail.com,+1 (555) 420-6182,59,84684.11,US,Seattle,98101,Active,2023-12-15,Standard
+10655,Thomas,Rodriguez,thomas.rodriguez24@gmail.com,+91 94100 58243,27,89021.29,IN,Chennai,600001,Suspended,2023-06-18,Gold
+10656,Michael,Verma,michael.verma20@gmail.com,+49 30 950127,52,175751.41,DE,Hamburg,20095,Active,2020-12-19,Bronze
+10657,Charles,Muller,charles.muller86@gmail.com,+49 30 647770,0,62047.75,SG,Singapore,049318,Pending,2023-01-01,Gold
+10658,Li,Jones,li.jones30@gmail.com,+49 30 570200,61,176437.14,SG,Singapore,018989,Suspended,2023-02-19,Gold
+10659,Ming,Zhang,ming.zhang78_at_gmail.com,+49 30 463005,55,176971.31,SG,Singapore,049318,Active,2022-08-01,Standard
+10660,Vihaan,Brown,vihaan.brown47@gmail.com,+91 97880 27093,58,192187.04,IN,Mumbai,400001,Active,2023-11-23,Standard
+10661,Camila,Wang,camila.wang58@gmail.com,+91 99406 29140,38,102042.97,IN,Bengaluru,560001,Suspended,2023-06-07,Standard
+10662,Ayaan,Mehta,ayaan.mehta91@gmail.com,+49 30 690693,61,243286.37,SG,Singapore,N/A,Inactive,2022-01-06,Silver
+10663,Charles,Yang,charles.yang66@gmail.com,+49 30 756191,55,72141.46,SG,Singapore,018989,Active,2021-10-23,Standard
+10664,Mateo,Brown,mateo.brown91@gmail.com,+49 30 266171,36,118727.49,DE,Munich,80331,Suspended,2023-04-10,Platinum
+10665,Ayaan,Sharma,ayaan.sharma95@gmail.com,+49 30 425524,33,141235.48,SG,Singapore,049318,Inactive,2023-09-15,Bronze
+10666,Myra,Kumar,myra.kumar96@gmail.com,+49 30 337456,42,234452.95,SG,Singapore,049318,Active,2023-10-20,Silver
+10667,Diya,Schmidt,diya.schmidt59@gmail.com,+44 20 7892 1050,42,216508.88,GB,Edinburgh,EH1 1YZ,Inactive,2023-02-01,Standard
+10668,Linda,Rodriguez,linda.rodriguez38@gmail.com,+1 (555) 927-4369,56,-15000.0,US,Austin,78701,Inactive,2021-05-19,Silver
+10669,Mateo,Liu,mateo.liu70@gmail.com,+49 30 689790,22,218717.93,SG,Singapore,018989,Active,2023-03-28,Silver
+10670,Richard,Garcia,richard.garcia40@gmail.com,+1 (555) 920-9834,47,249750.62,US,New York,10001,Inactive,2020-07-03,Gold
+10671,Charles,Schneider,charles.schneider92@gmail.com,+49 30 398378,22,147721.26,SG,Singapore,049318,Suspended,2022-05-17,Bronze
+10672,Navya,Rao,navya.rao57@gmail.com,+1 (555) 716-4301,58,56621.11,US,Seattle,98101,Active,2023-09-07,Bronze
+10673,Thomas,Sharma,thomas.sharma69@gmail.com,+49 30 703687,51,69116.55,DE,Frankfurt,60311,Pending,2020-02-01,Gold
+10674,Charles,Schmidt,charles.schmidt40@gmail.com,+49 30 536215,22,189723.07,DE,Frankfurt,60311,Pending,2021-01-08,Silver
+10675,Jennifer,Garcia,jennifer.garcia96@gmail.com,+44 20 7860 2277,57,197041.31,GB,Manchester,M1 1AE,Inactive,2023-07-20,Silver
+10676,Michael,Davis,michael.davis45@gmail.com,+44 20 7877 6246,49,99070.57,GB,London,EC1A 1BB,Suspended,2023-10-11,Platinum
+10677,Lucas,Rodriguez,lucas.rodriguez44@gmail.com,+44 20 7266 4999,42,203167.63,GB,Manchester,M1 1AE,Active,2023-04-01,Silver
+10678,Vihaan,Reddy,vihaan.reddy92@gmail.com,+1 (555) 351-3645,23,182913.69,US,Seattle,98101,Active,2023-06-23,Standard
+10679,William,Liu,william.liu87@gmail.com,+91 96539 81836,27,28797.54,IN,Delhi,110001,Suspended,2023-04-15,Bronze
+10680,Richard,Singh,richard.singh29@gmail.com,+91 96309 48821,54,,IN,Mumbai,400001,Inactive,2020-07-20,Standard
+10681,Aarav,Garcia,aarav.garcia39@gmail.com,+49 30 553137,53,125713.59,DE,Berlin,10115,Suspended,2023-07-07,Silver
+10682,Jennifer,Schneider,jennifer.schneider24_at_gmail.com,+91 91309 59019,22,126474.03,IN,Hyderabad,500001,Active,2022-04-24,Platinum
+10683,Camila,Nair,camila.nair84_at_gmail.com,+49 30 905860,53,77244.19,DE,Hamburg,20095,Inactive,2023-07-14,Bronze
+10684,Hao,Davis,hao.davis61@gmail.com,+1 (555) 411-6108,62,55914.08,US,San Francisco,94105,Active,2022-11-01,Silver
+10685,Elizabeth,Schmidt,elizabeth.schmidt65@gmail.com,+49 30 758471,60,64685.33,DE,Frankfurt,60311,Pending,2022-08-19,Gold
+10686,Karen,Schmidt,karen.schmidt66@gmail.com,+44 20 7894 7091,49,207273.06,GB,Edinburgh,EH1 1YZ,Active,2023-04-03,Standard
+10687,Isha,Williams,isha.williams79@gmail.com,+44 20 7039 2832,63,77489.12,GB,London,N/A,Pending,2021-08-18,Gold
+10688,Mateo,Chen,mateo.chen30@gmail.com,+1 (555) 693-8026,28,-15000.0,US,New York,10001,Active,2022-10-01,Standard
+10689,Ananya,Martinez,ananya.martinez95@gmail.com,+1 (555) 800-3987,42,202863.39,US,New York,10001,Suspended,2021-12-21,Standard
+10690,Diya,Verma,diya.verma90@gmail.com,+49 30 486749,43,243158.59,SG,Singapore,049318,Suspended,2022-11-09,Silver
+10691,Aditya,Silva,aditya.silva16@gmail.com,+49 30 107369,40,229363.21,SG,Singapore,018989,Pending,2023-10-12,Bronze
+10692,Karen,Wang,karen.wang45@gmail.com,+49 30 590525,42,92248.58,SG,Singapore,049318,Active,2021-06-10,Standard
+10693,Diya,Silva,diya.silva29@gmail.com,+44 20 7309 5480,60,132571.0,GB,London,EC1A 1BB,Suspended,2021-08-26,Silver
+10694,Arjun,Martinez,arjun.martinez32@gmail.com,+49 30 285006,55,73429.18,SG,Singapore,018989,Active,2023-02-07,Standard
+10695,Yan,Schneider,yan.schneider29@gmail.com,3081090,43,223224.46,US,Seattle,98101,Active,2022-02-10,Bronze
+10696,Jennifer,Gupta,jennifer.gupta79@gmail.com,+44 20 7868 5504,64,-15000.0,GB,London,EC1A 1BB,Active,2022-06-16,Bronze
+10697,Ayaan,Miller,ayaan.miller51@gmail.com,+1 (555) 881-8666,43,236916.1,US,San Francisco,94105,Active,2021-05-27,Gold
+10698,Elizabeth,Sharma,elizabeth.sharma47@gmail.com,+44 20 7695 5833,46,154838.38,GB,Edinburgh,EH1 1YZ,Active,2020-06-28,Gold
+10699,Camila,Williams,camila.williams91@gmail.com,+44 20 7326 8202,24,151768.4,GB,London,EC1A 1BB,Active,2023-02-14,Platinum
+10700,Charles,Mehta,charles.mehta30_at_gmail.com,+91 95279 97076,42,169717.56,IN,Mumbai,400001,Suspended,2020-09-12,Platinum
+10701,Barbara,Smith,barbara.smith15@gmail.com,+44 20 7327 3932,35,189972.39,GB,Birmingham,B1 1BB,Inactive,2021-04-14,Silver
+10702,Aditya,Williams,aditya.williams77@gmail.com,+49 30 646718,51,162604.56,SG,Singapore,018989,Pending,2021-06-11,Bronze
+10703,Sai,Schneider,sai.schneider86@gmail.com,+44 20 7458 2993,52,236218.4,GB,Edinburgh,EH1 1YZ,Active,2023-07-08,Bronze
+10704,Arjun,Williams,arjun.williams14@gmail.com,+91 92341 63913,64,27206.35,IN,Chennai,600001,Inactive,2023-12-17,Gold
+10705,Wei,Zhang,wei.zhang23@gmail.com,+49 30 900240,59,,DE,Frankfurt,60311,Active,2021-01-17,Silver
+10706,Hao,Sharma,hao.sharma69@gmail.com,+91 99969 17264,61,125462.59,IN,Chennai,600001,Active,2023-05-14,Gold
+10707,Richard,Verma,richard.verma38@gmail.com,+44 20 7007 4763,22,171454.34,GB,Edinburgh,EH1 1YZ,Inactive,2022-08-18,Bronze
+10708,Mateo,Verma,mateo.verma59@gmail.com,+44 20 7743 9401,36,144006.72,GB,Edinburgh,EH1 1YZ,Pending,2020-01-17,Gold
+10709,Avani,Schneider,avani.schneider88@gmail.com,+44 20 7910 4688,50,77456.42,GB,Birmingham,B1 1BB,Active,2021-09-16,Bronze
+10710,Elizabeth,Singh,elizabeth.singh19@gmail.com,+1 (555) 285-6437,38,57751.99,US,Chicago,60601,Inactive,2021-05-01,Gold
+10711,Sarah,Sharma,sarah.sharma22@gmail.com,+49 30 868482,57,179614.96,SG,Singapore,049318,Active,2022-06-13,Standard
+10712,Aarav,Schneider,aarav.schneider37@gmail.com,+91 94188 70273,37,,IN,Bengaluru,560001,Suspended,2023-03-04,Platinum
+10713,John,Yang,john.yang63@gmail.com,+49 30 285124,44,,SG,Singapore,018989,Inactive,2023-08-16,Bronze
+10714,Camila,Williams,camila.williams94@gmail.com,+49 30 974677,33,221603.78,SG,Singapore,018989,Active,2022-10-21,Gold
+10715,Ying,Miller,ying.miller51@gmail.com,+49 30 997370,44,171914.65,DE,Munich,80331,Active,2023-10-21,Silver
+10716,Elizabeth,Mehta,elizabeth.mehta54@gmail.com,+49 30 510808,34,88158.12,DE,Frankfurt,60311,Inactive,2021-03-09,Bronze
+10717,Mateo,Schneider,mateo.schneider41@gmail.com,+49 30 743931,45,244700.68,DE,Munich,80331,Pending,2023-06-04,Standard
+10718,Avani,Williams,avani.williams56@gmail.com,+44 20 7437 6618,33,,GB,London,EC1A 1BB,Suspended,2021-08-10,Gold
+10719,Charles,Jones,charles.jones11@gmail.com,+91 94860 80763,61,57176.93,IN,Hyderabad,500001,Active,2021-09-13,Platinum
+10720,Ayaan,Muller,ayaan.muller88@gmail.com,+49 30 615367,40,,SG,Singapore,049318,Inactive,2020-09-25,Platinum
+10721,Yan,Davis,yan.davis11@gmail.com,+49 30 974368,63,204112.82,DE,Frankfurt,60311,Pending,2023-10-01,Bronze
+10722,Ananya,Verma,ananya.verma97@gmail.com,+91 94726 12061,29,29470.9,IN,Delhi,110001,Active,2021-10-20,Standard
+10723,Hao,Schmidt,hao.schmidt19@gmail.com,+49 30 310171,37,53706.74,DE,Munich,80331,Active,2020-05-22,Gold
+10724,Ananya,Wang,ananya.wang11@gmail.com,+1 (555) 247-5789,52,58930.9,US,New York,10001,Suspended,2020-11-06,Bronze
+10725,Pari,Williams,pari.williams56@gmail.com,+49 30 724860,28,26679.24,SG,Singapore,049318,Inactive,2020-06-20,Platinum
+10726,Pari,Smith,pari.smith70@gmail.com,+49 30 506135,35,72838.01,DE,Berlin,10115,Active,2021-11-22,Gold
+10727,Mateo,Liu,mateo.liu45@gmail.com,8406932,27,217275.12,US,Chicago,60601,Active,2020-10-14,Silver
+10728,Camila,Patel,camila.patel13@gmail.com,+49 30 142267,35,138686.47,DE,Hamburg,20095,Active,2020-05-02,Standard
+10729,John,Smith,john.smith35@gmail.com,+91 95701 79488,64,86495.22,IN,Delhi,110001,Pending,2022-03-12,Bronze
+10730,Saanvi,Garcia,saanvi.garcia69@gmail.com,+49 30 433789,23,148980.73,SG,Singapore,018989,Active,2023-09-24,Standard
+10731,Patricia,Chen,patricia.chen57@gmail.com,3766442,33,106169.21,GB,Birmingham,B1 1BB,Active,2021-01-23,Gold
+10732,Richard,Chen,richard.chen68_at_gmail.com,+49 30 278969,40,122781.14,SG,Singapore,049318,Active,2021-09-01,Bronze
+10733,Hao,Silva,hao.silva95@gmail.com,+49 30 841606,23,47268.07,DE,Munich,80331,Inactive,2023-04-01,Platinum
+10734,Li,Liu,li.liu44@gmail.com,+49 30 305279,48,98811.76,DE,Frankfurt,60311,Active,2020-06-11,Standard
+10735,Ishaan,Zhang,ishaan.zhang17@gmail.com,+49 30 471709,38,39792.05,SG,Singapore,018989,Pending,2022-11-28,Gold
+10736,Arjun,Martinez,arjun.martinez32@gmail.com,+91 99460 78750,23,112818.83,IN,Bengaluru,560001,Inactive,2021-05-21,Platinum
+10737,Saanvi,Chen,saanvi.chen34@gmail.com,+91 95181 53554,48,34675.95,IN,Hyderabad,500001,Pending,2021-12-13,Bronze
+10738,Mary,Muller,mary.muller12_at_gmail.com,+49 30 435429,61,233704.51,DE,Berlin,10115,Pending,2021-09-01,Standard
+10739,John,Davis,john.davis37@gmail.com,+1 (555) 695-2736,39,188355.17,US,San Francisco,94105,Active,2020-02-20,Gold
+10740,Mateo,Rao,mateo.rao83@gmail.com,+1 (555) 299-5224,28,66138.19,US,New York,10001,Suspended,2021-08-22,Standard
+10741,Isha,Nair,isha.nair61@gmail.com,+49 30 585374,25,122786.38,DE,Hamburg,20095,Active,2023-06-12,Standard
+10742,Pari,Jones,pari.jones63_at_gmail.com,+49 30 846189,30,199620.35,SG,Singapore,049318,Active,2021-11-06,Bronze
+10743,Karen,Davis,karen.davis99@gmail.com,+49 30 728408,65,179636.86,SG,Singapore,018989,Active,2023-01-17,Standard
+10744,Barbara,Nair,barbara.nair67@gmail.com,+91 95298 49770,49,100083.1,IN,Delhi,110001,Active,2020-12-16,Standard
+10745,Jessica,Smith,jessica.smith33@gmail.com,+44 20 7175 2313,25,95156.68,GB,Manchester,M1 1AE,Inactive,2021-11-24,Bronze
+10746,John,Singh,john.singh62@gmail.com,+49 30 987925,46,146887.55,DE,Munich,80331,Active,2021-02-24,Gold
+10747,Patricia,Chen,patricia.chen47@gmail.com,+1 (555) 969-5261,58,39823.15,US,Chicago,60601,Active,2022-06-08,Silver
+10748,Mary,Schneider,mary.schneider81@gmail.com,+1 (555) 606-9739,64,26670.19,US,Seattle,98101,Pending,2020-11-07,Platinum
+10749,Camila,Garcia,camila.garcia46@gmail.com,+49 30 543663,25,151465.32,SG,Singapore,049318,Active,2020-02-01,Silver
+10750,Charles,Johnson,charles.johnson29@gmail.com,+49 30 598098,32,174825.78,DE,Munich,80331,Pending,2020-09-05,Gold
+10751,Ayaan,Brown,ayaan.brown25@gmail.com,+44 20 7472 8080,42,139442.25,GB,Birmingham,B1 1BB,Suspended,2022-07-21,Platinum
+10752,Arjun,Sharma,arjun.sharma24_at_gmail.com,+44 20 7584 8392,50,215722.53,GB,Edinburgh,EH1 1YZ,Active,2023-03-16,Platinum
+10753,Yan,Patel,yan.patel86@gmail.com,+44 20 7729 3605,30,243924.01,GB,Birmingham,B1 1BB,Pending,2021-01-24,Bronze
+10754,Ayaan,Sharma,ayaan.sharma95@gmail.com,+49 30 717022,27,85839.72,SG,Singapore,049318,Active,2023-06-08,Standard
+10755,Myra,Yang,myra.yang25@gmail.com,+91 94521 55475,32,103559.76,IN,Delhi,110001,Inactive,2020-08-15,Bronze
+10756,Wei,Mehta,wei.mehta38@gmail.com,+49 30 679911,54,28649.28,SG,Singapore,018989,Inactive,2023-12-28,Gold
+10757,Camila,Muller,camila.muller40@gmail.com,+49 30 919093,47,245122.4,SG,Singapore,018989,Inactive,2022-12-07,Bronze
+10758,Hao,Johnson,hao.johnson83_at_gmail.com,+49 30 605851,31,125154.34,DE,Berlin,10115,Suspended,2021-12-24,Silver
+10759,Sofia,Smith,sofia.smith13@gmail.com,+49 30 798248,32,216974.11,SG,Singapore,018989,Active,2022-07-13,Bronze
+10760,David,Smith,david.smith15@gmail.com,+44 20 7807 9937,62,242643.44,GB,London,EC1A 1BB,Suspended,2021-04-03,Silver
+10761,Ishaan,Rodriguez,ishaan.rodriguez67@gmail.com,+49 30 809834,65,149150.57,DE,Frankfurt,60311,Inactive,2021-03-25,Bronze
+10762,Hao,Wang,hao.wang55@gmail.com,+49 30 529891,34,238164.2,DE,Berlin,10115,Suspended,2023-02-26,Silver
+10763,Mary,Rao,mary.rao10@gmail.com,+44 20 7600 2069,39,113781.51,GB,Edinburgh,EH1 1YZ,Suspended,2023-11-04,Standard
+10764,Lucas,Smith,lucas.smith26@gmail.com,+49 30 304453,40,185131.08,DE,Frankfurt,60311,Suspended,2021-04-05,Gold
+10765,Ying,Muller,ying.muller53@gmail.com,+1 (555) 218-8242,57,82566.72,US,New York,10001,Pending,2022-09-05,Silver
+10766,Navya,Jones,navya.jones77@gmail.com,+49 30 702694,39,,DE,Hamburg,20095,Pending,2022-07-07,Platinum
+10767,Arjun,Wang,arjun.wang97@gmail.com,5456243,56,117130.97,IN,Bengaluru,560001,Active,2021-04-10,Silver
+10768,Krishna,Chen,krishna.chen69@gmail.com,+49 30 175847,25,47324.69,SG,Singapore,018989,Active,2020-06-04,Bronze
+10769,Aditya,Patel,aditya.patel94@gmail.com,+49 30 869002,27,155884.07,SG,Singapore,049318,Suspended,2021-10-04,Bronze
+10770,Robert,Miller,robert.miller97@gmail.com,+91 92902 29036,61,138789.68,IN,Delhi,110001,Active,2023-01-22,Bronze
+10771,Elizabeth,Singh,elizabeth.singh46@gmail.com,+44 20 7688 5460,33,73851.0,GB,Edinburgh,EH1 1YZ,Active,2020-12-25,Bronze
+10772,Linda,Smith,linda.smith71@gmail.com,+44 20 7403 4783,49,90445.6,GB,Birmingham,B1 1BB,Active,2023-05-10,Standard
+10773,Sai,Brown,sai.brown58@gmail.com,+49 30 906142,33,87159.83,DE,Berlin,10115,Active,2020-09-18,Gold
+10774,Ming,Smith,ming.smith73@gmail.com,+49 30 927042,52,131031.38,DE,Frankfurt,60311,Suspended,2020-08-15,Bronze
+10775,Isha,Smith,isha.smith57@gmail.com,+91 97034 85118,64,128829.59,IN,Mumbai,400001,Suspended,2022-08-14,Standard
+10776,Sofia,Jones,sofia.jones59@gmail.com,+1 (555) 329-8723,58,188620.78,US,New York,10001,Suspended,2023-03-24,Platinum
+10777,Camila,Singh,camila.singh43@gmail.com,+49 30 757899,36,70080.11,SG,Singapore,018989,Active,2021-07-15,Platinum
+10778,Jennifer,Rodriguez,jennifer.rodriguez66@gmail.com,+1 (555) 747-9868,22,64131.02,US,San Francisco,94105,Active,2020-02-17,Bronze
+10779,Pari,Rao,pari.rao80@gmail.com,+49 30 339717,31,124597.01,SG,Singapore,018989,Suspended,2023-09-10,Silver
+10780,Charles,Martinez,charles.martinez67@gmail.com,+44 20 7047 5843,26,101608.9,GB,Birmingham,B1 1BB,Suspended,2022-09-13,Platinum
+10781,Robert,Schmidt,robert.schmidt13@gmail.com,+44 20 7876 3075,29,,GB,Edinburgh,EH1 1YZ,Pending,2022-12-17,Bronze
+10782,Saanvi,Yang,saanvi.yang60@gmail.com,+49 30 873595,30,,DE,Munich,80331,Suspended,2021-03-11,Bronze
+10783,Ayaan,Yang,ayaan.yang70@gmail.com,+91 96819 65719,61,25077.61,IN,Hyderabad,500001,Suspended,2022-12-05,Silver
+10784,Lucas,Rodriguez,lucas.rodriguez84@gmail.com,+49 30 724010,46,168197.45,DE,Hamburg,20095,Pending,2023-04-08,Platinum
+10785,Diya,Patel,diya.patel16@gmail.com,+1 (555) 783-9783,24,125802.22,US,Seattle,98101,Active,2023-11-24,Standard
+10786,Pari,Davis,pari.davis27@gmail.com,+44 20 7261 5422,33,178614.18,GB,Manchester,M1 1AE,Active,2020-09-08,Silver
+10787,Lucas,Williams,lucas.williams81@gmail.com,+44 20 7532 9802,25,50153.39,GB,Manchester,M1 1AE,Inactive,2022-04-28,Silver
+10788,Ying,Brown,ying.brown33@gmail.com,+1 (555) 201-1381,55,137109.29,US,San Francisco,94105,Active,2023-09-04,Standard
+10789,Navya,Muller,navya.muller96@gmail.com,6859025,23,238572.71,US,Austin,78701,Active,2021-01-17,Silver
+10790,Navya,Miller,navya.miller19@gmail.com,+91 95140 58920,64,41718.11,IN,Delhi,110001,Suspended,2023-10-03,Standard
+10791,Jennifer,Rao,jennifer.rao25@gmail.com,+49 30 802206,34,65432.73,DE,Munich,80331,Active,2023-08-18,Bronze
+10792,Reyansh,Schmidt,reyansh.schmidt32@gmail.com,+49 30 805119,41,37997.14,SG,Singapore,049318,Active,2020-09-22,Standard
+10793,Karen,Liu,karen.liu49@gmail.com,+44 20 7950 9015,36,209448.57,GB,Edinburgh,EH1 1YZ,Suspended,2022-01-25,Platinum
+10794,Diya,Brown,diya.brown10@gmail.com,+91 96577 73934,58,198324.55,IN,Hyderabad,500001,Active,2023-08-28,Silver
+10795,Saanvi,Liu,saanvi.liu92@gmail.com,+44 20 7231 5578,24,51098.04,GB,London,EC1A 1BB,Active,2020-07-07,Bronze
+10796,Yan,Miller,yan.miller34@gmail.com,+1 (555) 864-8122,39,174458.81,US,New York,10001,Pending,2023-12-01,Gold
+10797,Ying,Williams,ying.williams38@gmail.com,+91 94578 44849,27,109153.92,IN,Delhi,110001,Active,2020-12-13,Standard
+10798,Vivaan,Schmidt,vivaan.schmidt96@gmail.com,+1 (555) 938-7563,39,70501.32,US,Austin,78701,Active,2021-09-04,Bronze
+10799,Ying,Sharma,ying.sharma50@gmail.com,+1 (555) 880-5206,-3,33884.97,US,New York,10001,Suspended,2022-04-03,Platinum
+10800,John,Chen,john.chen59@gmail.com,+49 30 170143,45,94689.05,DE,Berlin,10115,Suspended,2023-02-07,Platinum
+10801,Vihaan,Johnson,vihaan.johnson25@gmail.com,+91 95777 22934,59,26117.69,IN,Delhi,N/A,Active,2020-06-09,Gold
+10802,Robert,Garcia,robert.garcia34@gmail.com,+49 30 892998,47,-15000.0,DE,Hamburg,20095,Active,2021-04-22,Standard
+10803,Ananya,Schneider,ananya.schneider22@gmail.com,+49 30 650209,49,79063.22,SG,Singapore,049318,Active,2020-03-27,Standard
+10804,Reyansh,Singh,reyansh.singh13@gmail.com,+91 95138 80728,39,,IN,Chennai,600001,Inactive,2022-07-25,Platinum
+10805,Diya,Schmidt,diya.schmidt67@gmail.com,+1 (555) 605-3183,51,36334.59,US,Austin,78701,Pending,2022-02-20,Platinum
+10806,Diya,Verma,diya.verma15@gmail.com,+49 30 547831,30,80687.72,SG,Singapore,049318,Inactive,2022-12-11,Standard
+10807,Avani,Silva,avani.silva43@gmail.com,+91 93724 86904,28,229781.35,IN,Hyderabad,500001,Inactive,2022-08-11,Bronze
+10808,Yan,Schmidt,yan.schmidt22@gmail.com,+44 20 7459 5665,48,103973.93,GB,London,EC1A 1BB,Suspended,2022-10-02,Gold
+10809,Hao,Yang,hao.yang75@gmail.com,+49 30 586128,65,196341.06,SG,Singapore,049318,Active,2022-02-12,Silver
+10810,Pari,Schmidt,pari.schmidt25@gmail.com,+1 (555) 539-6268,65,111573.05,US,New York,10001,Active,2023-08-24,Gold
+10811,Thomas,Johnson,thomas.johnson95@gmail.com,+91 90848 36011,60,100461.29,IN,Hyderabad,500001,Suspended,2021-03-27,Gold
+10812,Aadhya,Smith,aadhya.smith86@gmail.com,+44 20 7676 1018,32,234156.33,GB,Birmingham,B1 1BB,Inactive,2023-03-07,Standard
+10813,James,Williams,james.williams56_at_gmail.com,+49 30 848325,36,95122.6,DE,Munich,80331,Active,2021-01-01,Bronze
+10814,Ying,Schmidt,ying.schmidt91@gmail.com,+1 (555) 533-1821,44,125905.49,US,New York,10001,Active,2023-08-02,Platinum
+10815,Aadhya,Schneider,aadhya.schneider76@gmail.com,+1 (555) 853-8784,28,81905.95,US,Seattle,98101,Inactive,2023-06-04,Standard
+10816,Wei,Wang,wei.wang51@gmail.com,+1 (555) 397-5411,23,35065.58,US,Seattle,N/A,Inactive,2022-03-09,Platinum
+10817,Camila,Santos,camila.santos73@gmail.com,+49 30 648236,45,134701.96,DE,Munich,80331,Inactive,2021-04-04,Standard
+10818,Camila,Schmidt,camila.schmidt97@gmail.com,+49 30 712800,26,151525.27,SG,Singapore,018989,Active,2022-06-01,Bronze
+10819,Elizabeth,Santos,elizabeth.santos37@gmail.com,+91 97253 17681,51,138420.01,IN,Bengaluru,560001,Pending,2020-11-22,Silver
+10820,Mary,Gupta,mary.gupta42@gmail.com,+91 99148 88575,63,180430.65,IN,Mumbai,400001,Active,2023-05-14,Silver
+10821,Richard,Martinez,richard.martinez75@gmail.com,+49 30 923850,49,184393.57,SG,Singapore,018989,Active,2022-06-06,Standard
+10822,Thomas,Kumar,thomas.kumar76@gmail.com,+44 20 7095 6718,54,78022.64,GB,Birmingham,B1 1BB,Suspended,2022-03-08,Gold
+10823,Krishna,Singh,krishna.singh18@gmail.com,+49 30 187412,61,147717.3,SG,Singapore,018989,Pending,2022-11-12,Silver
+10824,Aadhya,Chen,aadhya.chen97@gmail.com,+91 98617 70271,34,187623.47,IN,Mumbai,400001,Pending,2020-06-06,Bronze
+10825,Sai,Johnson,sai.johnson79@gmail.com,+91 98479 67317,52,223446.45,IN,Bengaluru,560001,Active,2022-02-09,Standard
+10826,Richard,Gupta,richard.gupta88@gmail.com,+1 (555) 232-3748,23,70181.82,US,Chicago,60601,Active,2020-07-05,Gold
+10827,Jessica,Garcia,jessica.garcia89@gmail.com,+49 30 664519,54,,SG,Singapore,018989,Pending,2020-12-10,Standard
+10828,Elizabeth,Nair,elizabeth.nair61_at_gmail.com,+49 30 824625,35,129216.77,DE,Hamburg,20095,Pending,2022-12-18,Bronze
+10829,Susan,Martinez,susan.martinez47@gmail.com,+91 96447 84779,54,,IN,Hyderabad,500001,Active,2022-02-27,Bronze
+10830,Vihaan,Brown,vihaan.brown41@gmail.com,+49 30 937106,0,191860.7,SG,Singapore,018989,Active,2023-11-07,Gold
+10831,Li,Garcia,li.garcia74@gmail.com,+49 30 349970,33,201182.18,DE,Berlin,10115,Active,2023-02-05,Standard
+10832,Isha,Rodriguez,isha.rodriguez22@gmail.com,+1 (555) 235-5908,36,183304.23,US,San Francisco,94105,Pending,2021-10-22,Standard
+10833,Linda,Sharma,linda.sharma96@gmail.com,+49 30 737630,34,119527.17,DE,Munich,80331,Active,2021-05-17,Platinum
+10834,Mary,Brown,mary.brown25@gmail.com,+49 30 556177,41,73067.64,DE,Frankfurt,60311,Active,2022-12-17,Platinum
+10835,Ananya,Nair,ananya.nair74@gmail.com,+49 30 365146,45,48962.54,SG,Singapore,049318,Active,2021-06-02,Gold
+10836,Ming,Schmidt,ming.schmidt24@gmail.com,+44 20 7923 7452,63,-15000.0,GB,London,EC1A 1BB,Inactive,2021-07-01,Standard
+10837,Avani,Rao,avani.rao85@gmail.com,+49 30 903139,34,,SG,Singapore,018989,Active,2021-12-02,Platinum
+10838,Sofia,Brown,sofia.brown64@gmail.com,7936743,56,69023.71,DE,Munich,80331,Pending,2021-04-15,Silver
+10839,Vihaan,Schmidt,vihaan.schmidt57@gmail.com,+91 93050 35703,47,169985.38,IN,Chennai,600001,Suspended,2023-12-05,Standard
+10840,Navya,Santos,navya.santos48@gmail.com,+44 20 7661 5535,56,172709.84,GB,Edinburgh,EH1 1YZ,Active,2020-06-12,Gold
+10841,Ayaan,Silva,ayaan.silva26@gmail.com,+91 92655 58103,65,163476.73,IN,Mumbai,400001,Active,2023-08-03,Gold
+10842,Michael,Patel,michael.patel56@gmail.com,+49 30 431074,22,246649.38,DE,Munich,80331,Active,2023-02-18,Bronze
+10843,Susan,Schmidt,susan.schmidt20@gmail.com,+49 30 247720,32,60587.36,DE,Frankfurt,60311,Suspended,2020-02-16,Platinum
+10844,Navya,Martinez,navya.martinez30@gmail.com,+1 (555) 407-6274,62,137251.66,US,Austin,78701,Inactive,2022-09-11,Silver
+10845,Karen,Schneider,karen.schneider17@gmail.com,+1 (555) 337-8100,24,249252.47,US,New York,10001,Active,2023-05-24,Silver
+10846,Mary,Martinez,mary.martinez12@gmail.com,+1 (555) 558-8847,45,156954.11,US,New York,10001,Suspended,2020-05-21,Platinum
+10847,Ishaan,Brown,ishaan.brown64@gmail.com,+49 30 986436,22,168968.43,DE,Hamburg,20095,Pending,2021-11-04,Gold
+10848,Yan,Miller,yan.miller60@gmail.com,+1 (555) 903-9629,49,91622.4,US,Austin,78701,Active,2022-05-12,Gold
+10849,Lucas,Reddy,lucas.reddy28@gmail.com,+49 30 264214,58,129081.44,DE,Munich,80331,Active,2021-12-08,Platinum
+10850,Joseph,Williams,joseph.williams45@gmail.com,+91 95816 42702,43,36955.37,IN,Delhi,110001,Active,2021-11-12,Bronze
+10851,Barbara,Martinez,barbara.martinez11@gmail.com,+1 (555) 361-2602,45,137157.69,US,Seattle,98101,Active,2021-08-28,Gold
+10852,Diya,Chen,diya.chen70@gmail.com,+49 30 262579,53,180501.1,SG,Singapore,018989,Active,2020-08-06,Platinum
+10853,Yan,Verma,yan.verma27@gmail.com,+49 30 593748,33,174047.72,DE,Berlin,10115,Suspended,2021-03-01,Platinum
+10854,David,Rao,david.rao43@gmail.com,+91 98920 19144,57,112521.47,IN,Hyderabad,500001,Active,2020-06-22,Platinum
+10855,Navya,Martinez,navya.martinez95@gmail.com,4909785,52,152789.29,SG,Singapore,049318,Active,2020-08-16,Platinum
+10856,Karen,Davis,karen.davis98@gmail.com,+91 95000 73695,46,131205.71,IN,Chennai,600001,Inactive,2022-04-01,Platinum
+10857,Jennifer,Wang,jennifer.wang22@gmail.com,+44 20 7630 2379,34,114324.54,GB,Edinburgh,EH1 1YZ,Active,2022-11-02,Bronze
+10858,Ming,Rodriguez,ming.rodriguez54@gmail.com,+49 30 313673,43,135458.81,SG,Singapore,049318,Active,2021-01-13,Standard
+10859,Reyansh,Schneider,reyansh.schneider34@gmail.com,+1 (555) 932-8719,24,109495.76,US,Chicago,60601,Pending,2022-07-21,Platinum
+10860,Linda,Mehta,linda.mehta92@gmail.com,+91 93551 98822,34,41945.64,IN,Chennai,600001,Active,2020-03-01,Silver
+10861,Aadhya,Kumar,aadhya.kumar22@gmail.com,+1 (555) 883-9044,29,159682.45,US,Seattle,98101,Active,2023-12-10,Gold
+10862,Elizabeth,Williams,elizabeth.williams17@gmail.com,+91 93610 38639,30,42414.41,IN,Chennai,600001,Suspended,2022-08-06,Bronze
+10863,Vihaan,Brown,vihaan.brown87@gmail.com,+91 92027 89359,56,34789.29,IN,Hyderabad,N/A,Inactive,2021-10-12,Bronze
+10864,Avani,Davis,avani.davis38@gmail.com,+49 30 290124,61,90239.11,SG,Singapore,018989,Active,2021-07-02,Platinum
+10865,Sai,Mehta,sai.mehta86@gmail.com,+49 30 209978,61,101181.09,DE,Hamburg,20095,Inactive,2022-08-11,Gold
+10866,Li,Reddy,li.reddy34@gmail.com,+91 91035 60834,65,86583.5,IN,Chennai,600001,Active,2023-03-09,Silver
+10867,Diya,Chen,diya.chen42@gmail.com,+1 (555) 243-6250,60,218790.36,US,New York,10001,Suspended,2023-03-19,Silver
+10868,Mary,Gupta,mary.gupta17@gmail.com,+44 20 7326 8374,37,112029.37,GB,London,EC1A 1BB,Active,2022-09-02,Silver
+10869,Aadhya,Williams,aadhya.williams29@gmail.com,+44 20 7931 5720,50,121837.24,GB,Birmingham,B1 1BB,Active,2020-06-18,Platinum
+10870,Aditya,Rao,aditya.rao75@gmail.com,+1 (555) 388-3857,33,231462.7,US,San Francisco,94105,Active,2023-03-28,Platinum
+10871,Vivaan,Patel,vivaan.patel92@gmail.com,+49 30 889691,42,77526.2,DE,Frankfurt,60311,Active,2020-05-25,Bronze
+10872,Mateo,Santos,mateo.santos97@gmail.com,+1 (555) 887-5166,45,40999.97,US,Seattle,98101,Active,2022-11-04,Standard
+10873,Ying,Martinez,ying.martinez38@gmail.com,+91 93400 47531,44,45085.67,IN,Hyderabad,500001,Active,2021-08-26,Silver
+10874,Michael,Schmidt,michael.schmidt15@gmail.com,+44 20 7495 1787,22,95929.12,GB,Manchester,M1 1AE,Pending,2022-09-12,Gold
+10875,Pari,Martinez,pari.martinez56@gmail.com,+91 95225 11052,53,223949.08,IN,Bengaluru,560001,Active,2023-10-15,Platinum
+10876,Li,Patel,li.patel25@gmail.com,7255308,55,194100.09,IN,Mumbai,400001,Inactive,2021-10-05,Bronze
+10877,Wei,Yang,wei.yang88@gmail.com,+1 (555) 513-8695,51,36057.84,US,New York,10001,Active,2023-01-02,Bronze
+10878,Arjun,Liu,arjun.liu37_at_gmail.com,+44 20 7008 9160,53,81000.24,GB,Edinburgh,EH1 1YZ,Active,2022-02-22,Gold
+10879,Richard,Garcia,richard.garcia54@gmail.com,+49 30 657186,65,44810.24,SG,Singapore,018989,Suspended,2022-07-06,Silver
+10880,Lucas,Mehta,lucas.mehta65_at_gmail.com,+49 30 553649,31,124573.04,SG,Singapore,018989,Inactive,2023-12-27,Gold
+10881,Elizabeth,Schmidt,elizabeth.schmidt29@gmail.com,+91 98836 15037,35,72955.3,IN,Bengaluru,560001,Active,2021-10-01,Bronze
+10882,Mateo,Silva,mateo.silva60@gmail.com,+44 20 7623 2290,48,229706.04,GB,Edinburgh,EH1 1YZ,Suspended,2020-10-05,Standard
+10883,Lucas,Patel,lucas.patel29@gmail.com,+49 30 289766,47,235912.43,SG,Singapore,049318,Active,2023-07-24,Bronze
+10884,Navya,Kumar,navya.kumar61@gmail.com,+1 (555) 975-9136,43,242781.26,US,San Francisco,94105,Pending,2020-02-09,Gold
+10885,Vivaan,Williams,vivaan.williams12@gmail.com,+1 (555) 986-4066,43,216239.42,US,Chicago,60601,Active,2023-03-24,Silver
+10886,Arjun,Davis,arjun.davis18_at_gmail.com,+49 30 456716,62,33690.2,SG,Singapore,049318,Active,2021-11-14,Standard
+10887,Susan,Mehta,susan.mehta65@gmail.com,+91 99811 13384,55,54039.19,IN,Hyderabad,500001,Suspended,2022-10-18,Silver
+10888,Saanvi,Smith,saanvi.smith34@gmail.com,+91 95916 62786,27,36975.81,IN,Hyderabad,N/A,Active,2022-06-09,Silver
+10889,Mateo,Gupta,mateo.gupta58@gmail.com,+44 20 7075 5979,23,199007.58,GB,Edinburgh,EH1 1YZ,Pending,2022-05-19,Silver
+10890,Richard,Yang,richard.yang61@gmail.com,+1 (555) 466-8846,53,166385.76,US,Seattle,98101,Active,2020-08-25,Platinum
+10891,Robert,Johnson,robert.johnson45@gmail.com,+49 30 808407,32,101538.21,SG,Singapore,018989,Suspended,2023-12-01,Bronze
+10892,Ming,Davis,ming.davis61@gmail.com,+49 30 674817,45,79257.62,SG,Singapore,049318,Active,2021-06-20,Platinum
+10893,Elizabeth,Johnson,elizabeth.johnson26@gmail.com,+44 20 7816 6464,64,241438.14,GB,Edinburgh,EH1 1YZ,Active,2022-02-10,Platinum
+10894,Pari,Rodriguez,pari.rodriguez95@gmail.com,+44 20 7634 8216,30,149590.72,GB,Birmingham,B1 1BB,Pending,2023-08-28,Silver
+10895,William,Yang,william.yang70@gmail.com,+44 20 7316 7767,47,121811.09,GB,Birmingham,B1 1BB,Inactive,2020-07-20,Silver
+10896,Thomas,Rodriguez,thomas.rodriguez87@gmail.com,+44 20 7987 5276,25,80258.49,GB,Edinburgh,EH1 1YZ,Suspended,2023-02-18,Gold
+10897,Krishna,Sharma,krishna.sharma43@gmail.com,6085160,47,235423.91,US,Seattle,98101,Inactive,2022-02-16,Platinum
+10898,David,Kumar,david.kumar23@gmail.com,+1 (555) 295-1255,35,153155.89,US,San Francisco,94105,Active,2021-05-27,Platinum
+10899,Pari,Martinez,pari.martinez63@gmail.com,+44 20 7878 2200,36,228809.46,GB,Manchester,M1 1AE,Pending,2023-12-15,Platinum
+10900,Barbara,Martinez,barbara.martinez13@gmail.com,+49 30 280040,54,129436.77,SG,Singapore,049318,Inactive,2022-01-22,Gold
+10901,Vihaan,Garcia,vihaan.garcia84@gmail.com,+1 (555) 976-8373,43,,US,Chicago,60601,Active,2021-08-09,Platinum
+10902,Camila,Zhang,camila.zhang73@gmail.com,+44 20 7331 3607,51,59424.93,GB,Birmingham,B1 1BB,Inactive,2022-10-18,Gold
+10903,Yan,Johnson,yan.johnson93@gmail.com,+91 96679 86276,26,-15000.0,IN,Chennai,600001,Inactive,2020-05-15,Gold
+10904,Saanvi,Chen,saanvi.chen26@gmail.com,+91 93336 84631,25,141843.85,IN,Bengaluru,560001,Active,2022-04-02,Platinum
+10905,Mateo,Brown,mateo.brown53@gmail.com,+44 20 7834 4781,45,180933.77,GB,Manchester,M1 1AE,Active,2020-09-08,Bronze
+10906,Karen,Martinez,karen.martinez70@gmail.com,+49 30 794940,38,209206.41,SG,Singapore,018989,Inactive,2021-07-11,Platinum
+10907,Richard,Martinez,richard.martinez47@gmail.com,+91 96657 39615,27,82263.25,IN,Delhi,110001,Pending,2021-03-05,Bronze
+10908,Sai,Martinez,sai.martinez42_at_gmail.com,+49 30 981606,63,201244.49,SG,Singapore,018989,Active,2022-10-18,Platinum
+10909,Aadhya,Yang,aadhya.yang43_at_gmail.com,+49 30 469360,33,174299.5,DE,Munich,80331,Suspended,2022-04-03,Platinum
+10910,Sarah,Kumar,sarah.kumar14@gmail.com,+49 30 438258,61,104794.33,SG,Singapore,049318,Active,2021-08-14,Standard
+10911,Isha,Zhang,isha.zhang22@gmail.com,+91 94469 30100,41,101799.53,IN,Delhi,110001,Active,2022-03-28,Gold
+10912,Vivaan,Rodriguez,vivaan.rodriguez91@gmail.com,+49 30 717223,33,197551.28,SG,Singapore,049318,Active,2020-02-20,Platinum
+10913,Sai,Mehta,sai.mehta27@gmail.com,+1 (555) 779-2964,37,35422.47,US,New York,10001,Active,2020-10-27,Silver
+10914,Camila,Nair,camila.nair52@gmail.com,+1 (555) 763-2909,22,66596.43,US,Seattle,98101,Inactive,2020-02-25,Platinum
+10915,Ishaan,Johnson,ishaan.johnson81@gmail.com,+49 30 103069,43,,SG,Singapore,049318,Active,2020-05-17,Platinum
+10916,Michael,Reddy,michael.reddy66@gmail.com,+49 30 472751,58,135826.92,DE,Berlin,10115,Active,2022-02-15,Platinum
+10917,John,Santos,john.santos76_at_gmail.com,+49 30 820974,27,180954.88,SG,Singapore,049318,Active,2021-05-25,Bronze
+10918,Linda,Singh,linda.singh65@gmail.com,+91 92243 36875,48,72635.69,IN,Mumbai,400001,Active,2022-05-15,Silver
+10919,Mateo,Sharma,mateo.sharma74@gmail.com,+49 30 667861,52,206741.18,SG,Singapore,018989,Suspended,2023-10-02,Gold
+10920,Sai,Schneider,sai.schneider91@gmail.com,+91 99625 33821,23,189063.44,IN,Mumbai,400001,Inactive,2022-03-01,Gold
+10921,Yan,Rao,yan.rao63@gmail.com,+91 91582 35788,64,25731.62,IN,Delhi,110001,Suspended,2021-05-07,Silver
+10922,Susan,Santos,susan.santos27@gmail.com,+49 30 153337,65,111642.52,SG,Singapore,018989,Inactive,2022-08-22,Standard
+10923,Robert,Liu,robert.liu87@gmail.com,+1 (555) 732-2831,31,189075.55,US,Seattle,98101,Pending,2020-02-11,Gold
+10924,Krishna,Schneider,krishna.schneider54@gmail.com,+1 (555) 295-4687,41,198272.48,US,San Francisco,94105,Inactive,2021-04-23,Platinum
+10925,Robert,Miller,robert.miller90@gmail.com,+44 20 7329 5476,50,194472.77,GB,Edinburgh,EH1 1YZ,Active,2021-05-14,Standard
+10926,Mateo,Reddy,mateo.reddy73@gmail.com,+49 30 260267,42,79041.63,SG,Singapore,049318,Active,2021-09-28,Bronze
+10927,Mary,Martinez,mary.martinez81@gmail.com,+49 30 878290,55,122153.15,SG,Singapore,N/A,Active,2022-04-13,Bronze
+10928,Sofia,Wang,sofia.wang98@gmail.com,+49 30 152928,42,194648.77,SG,Singapore,018989,Active,2023-06-05,Silver
+10929,Diya,Rao,diya.rao45@gmail.com,+44 20 7819 9451,42,192984.78,GB,Edinburgh,EH1 1YZ,Inactive,2021-10-11,Gold
+10930,Ming,Wang,ming.wang68@gmail.com,+49 30 560625,29,60980.12,SG,Singapore,049318,Suspended,2020-03-06,Standard
+10931,Wei,Muller,wei.muller65@gmail.com,+44 20 7182 9739,37,94199.54,GB,Edinburgh,EH1 1YZ,Pending,2023-10-27,Platinum
+10932,Yan,Williams,yan.williams60@gmail.com,+49 30 656684,36,153316.84,SG,Singapore,049318,Suspended,2021-07-22,Standard
+10933,James,Schneider,james.schneider58_at_gmail.com,+1 (555) 904-2517,28,130368.57,US,New York,10001,Inactive,2020-10-09,Platinum
+10934,Thomas,Kumar,thomas.kumar76_at_gmail.com,+49 30 207930,31,156217.9,SG,Singapore,049318,Active,2020-10-04,Bronze
+10935,Ananya,Smith,ananya.smith88@gmail.com,+1 (555) 755-6039,26,124439.73,US,Seattle,98101,Pending,2021-05-03,Silver
+10936,William,Yang,william.yang48@gmail.com,+49 30 826512,38,62615.51,DE,Hamburg,20095,Pending,2020-03-09,Bronze
+10937,Richard,Kumar,richard.kumar71@gmail.com,+1 (555) 362-3586,59,86971.29,US,Chicago,60601,Suspended,2022-10-20,Platinum
+10938,Michael,Kumar,michael.kumar11@gmail.com,+44 20 7721 1293,30,70098.64,GB,Birmingham,B1 1BB,Suspended,2023-09-17,Platinum
+10939,Aarav,Wang,aarav.wang49@gmail.com,+44 20 7013 2396,52,,GB,Birmingham,B1 1BB,Active,2021-04-12,Standard
+10940,Ananya,Sharma,ananya.sharma66@gmail.com,+49 30 767871,50,90237.36,DE,Hamburg,20095,Inactive,2022-12-24,Gold
+10941,Joseph,Rao,joseph.rao85@gmail.com,+91 92964 49920,60,32225.32,IN,Mumbai,400001,Active,2022-07-14,Standard
+10942,Hao,Schneider,hao.schneider86@gmail.com,+91 91356 52656,29,128143.37,IN,Delhi,110001,Active,2022-07-03,Silver
+10943,Ananya,Reddy,ananya.reddy48@gmail.com,+49 30 127335,34,32590.62,SG,Singapore,018989,Suspended,2023-09-15,Platinum
+10944,Li,Davis,li.davis22@gmail.com,+44 20 7455 4355,41,169046.0,GB,Manchester,M1 1AE,Pending,2023-09-27,Platinum
+10945,Joseph,Wang,joseph.wang47@gmail.com,+49 30 333643,56,37804.99,SG,Singapore,018989,Inactive,2021-03-17,Silver
+10946,Camila,Mehta,camila.mehta94@gmail.com,+44 20 7660 9364,34,112221.59,GB,Edinburgh,EH1 1YZ,Active,2020-06-16,Gold
+10947,Wei,Yang,wei.yang96@gmail.com,+44 20 7131 8028,32,193526.18,GB,London,EC1A 1BB,Inactive,2023-04-15,Silver
+10948,Charles,Brown,charles.brown21@gmail.com,+91 99809 15657,51,38512.74,IN,Mumbai,400001,Active,2023-06-11,Silver
+10949,Camila,Smith,camila.smith34@gmail.com,+49 30 906547,47,165761.88,SG,Singapore,N/A,Active,2021-06-11,Bronze
+10950,Myra,Smith,myra.smith95@gmail.com,+49 30 555891,61,189394.69,SG,Singapore,049318,Active,2022-11-06,Platinum
+10951,Avani,Liu,avani.liu61@gmail.com,+49 30 894294,23,82334.32,DE,Hamburg,20095,Pending,2022-08-27,Gold
+10952,James,Gupta,james.gupta72@gmail.com,+91 99091 43314,38,218692.5,IN,Hyderabad,500001,Pending,2023-12-06,Bronze
+10953,Jennifer,Smith,jennifer.smith80@gmail.com,+1 (555) 898-2295,58,189439.67,US,New York,10001,Active,2022-06-02,Standard
+10954,Patricia,Singh,patricia.singh20@gmail.com,+91 98681 55812,31,169789.49,IN,Mumbai,N/A,Active,2020-03-05,Standard
+10955,Mateo,Mehta,mateo.mehta38@gmail.com,+44 20 7570 2484,34,29647.9,GB,Manchester,M1 1AE,Suspended,2023-01-16,Silver
+10956,Ishaan,Nair,ishaan.nair30@gmail.com,+91 98145 55295,55,116461.78,IN,Hyderabad,500001,Active,2020-12-10,Bronze
+10957,Elizabeth,Sharma,elizabeth.sharma35@gmail.com,+49 30 853006,33,143957.14,SG,Singapore,049318,Active,2022-05-22,Silver
+10958,Arjun,Rao,arjun.rao73@gmail.com,+49 30 390954,31,91837.92,SG,Singapore,049318,Suspended,2022-09-23,Gold
+10959,Robert,Miller,robert.miller52@gmail.com,+49 30 888049,45,76793.68,SG,Singapore,049318,Inactive,2021-07-02,Platinum
+10960,Ming,Garcia,ming.garcia80@gmail.com,+91 91251 96225,35,228323.79,IN,Bengaluru,560001,Suspended,2023-09-13,Silver
+10961,Jessica,Silva,jessica.silva74@gmail.com,+91 99898 35436,58,61407.59,IN,Hyderabad,500001,Suspended,2023-04-21,Gold
+10962,Patricia,Patel,patricia.patel69_at_gmail.com,+91 91602 15674,61,107808.81,IN,Delhi,110001,Active,2022-05-01,Silver
+10963,Arjun,Rodriguez,arjun.rodriguez68@gmail.com,+49 30 324775,62,189563.51,DE,Munich,80331,Suspended,2020-10-14,Platinum
+10964,Sarah,Yang,sarah.yang27@gmail.com,+49 30 978183,53,103183.3,SG,Singapore,049318,Active,2023-09-21,Standard
+10965,Ananya,Wang,ananya.wang20@gmail.com,+1 (555) 503-2763,32,109310.61,US,Chicago,60601,Active,2023-11-15,Standard
+10966,Avani,Wang,avani.wang69@gmail.com,+49 30 630447,49,148909.85,DE,Berlin,10115,Pending,2020-12-08,Gold
+10967,Ayaan,Liu,ayaan.liu61@gmail.com,+49 30 823899,48,212901.56,DE,Hamburg,20095,Active,2021-11-18,Gold
+10968,James,Chen,james.chen74@gmail.com,+1 (555) 430-8281,52,79089.55,US,San Francisco,94105,Pending,2023-12-22,Bronze
+10969,Aadhya,Reddy,aadhya.reddy34@gmail.com,+44 20 7048 9639,51,,GB,Manchester,M1 1AE,Active,2022-11-06,Platinum
+10970,Aditya,Schneider,aditya.schneider97@gmail.com,8154156,35,203176.19,IN,Delhi,110001,Suspended,2021-01-12,Platinum
+10971,Aarav,Nair,aarav.nair89@gmail.com,+49 30 767279,26,190972.97,DE,Berlin,10115,Suspended,2022-12-26,Gold
+10972,Michael,Rao,michael.rao88@gmail.com,+49 30 703069,30,170198.3,DE,Frankfurt,60311,Active,2021-06-15,Gold
+10973,Sai,Sharma,sai.sharma79@gmail.com,+49 30 131835,54,216169.14,SG,Singapore,049318,Active,2020-10-05,Platinum
+10974,Sarah,Liu,sarah.liu25@gmail.com,+91 91134 16161,62,73830.16,IN,Hyderabad,500001,Active,2023-09-28,Gold
+10975,Michael,Rao,michael.rao61@gmail.com,+91 91290 40706,59,240522.85,IN,Chennai,600001,Active,2022-04-18,Platinum
+10976,Barbara,Johnson,barbara.johnson77@gmail.com,+44 20 7842 5725,65,136301.14,GB,London,EC1A 1BB,Pending,2020-02-20,Bronze
+10977,Aditya,Johnson,aditya.johnson48@gmail.com,+49 30 672277,28,91035.11,SG,Singapore,049318,Pending,2023-12-12,Platinum
+10978,Lucas,Johnson,lucas.johnson54@gmail.com,+91 93788 76927,42,225280.83,IN,Bengaluru,560001,Suspended,2020-05-28,Gold
+10979,Aadhya,Chen,aadhya.chen11@gmail.com,+49 30 610165,36,177960.04,DE,Berlin,10115,Active,2020-08-18,Platinum
+10980,Thomas,Nair,thomas.nair34@gmail.com,+1 (555) 284-4076,45,56604.09,US,New York,10001,Inactive,2023-09-27,Platinum
+10981,Susan,Chen,susan.chen28@gmail.com,+44 20 7168 8243,58,79591.9,GB,Manchester,M1 1AE,Inactive,2023-07-15,Silver
+10982,Charles,Schneider,charles.schneider74@gmail.com,+49 30 466703,27,149953.76,DE,Hamburg,20095,Active,2022-10-07,Platinum
+10983,Yan,Davis,yan.davis81@gmail.com,+1 (555) 893-9854,48,74923.22,US,New York,10001,Active,2020-05-24,Gold
+10984,Elizabeth,Davis,elizabeth.davis19@gmail.com,+49 30 167856,35,62396.55,SG,Singapore,049318,Active,2020-07-10,Platinum
+10985,Mary,Davis,mary.davis37@gmail.com,+44 20 7520 5076,-3,32892.69,GB,Manchester,M1 1AE,Pending,2022-06-13,Platinum
+10986,Thomas,Schneider,thomas.schneider68@gmail.com,+91 99273 28861,32,77891.03,IN,Bengaluru,560001,Active,2022-07-09,Gold
+10987,Navya,Wang,navya.wang60@gmail.com,+44 20 7248 4299,22,84734.14,GB,Edinburgh,EH1 1YZ,Active,2023-03-25,Platinum
+10988,Aadhya,Rodriguez,aadhya.rodriguez39@gmail.com,+1 (555) 934-5099,26,97346.37,US,Chicago,60601,Active,2022-12-02,Platinum
+10989,Mateo,Silva,mateo.silva66@gmail.com,+1 (555) 800-4894,40,219718.88,US,Seattle,98101,Pending,2023-06-11,Gold
+10990,Ananya,Gupta,ananya.gupta58@gmail.com,+91 96586 61862,29,201483.01,IN,Delhi,110001,Pending,2022-09-23,Bronze
+10991,Patricia,Patel,patricia.patel70@gmail.com,+1 (555) 337-5868,45,236499.57,US,Chicago,60601,Active,2021-05-26,Bronze
+10992,Yan,Gupta,yan.gupta34@gmail.com,+1 (555) 781-5958,36,170525.46,US,San Francisco,94105,Active,2022-04-08,Platinum
+10993,Reyansh,Garcia,reyansh.garcia56@gmail.com,+44 20 7490 4763,59,208161.01,GB,Birmingham,B1 1BB,Suspended,2023-10-26,Silver
+10994,Krishna,Verma,krishna.verma52@gmail.com,+49 30 832706,30,136176.31,DE,Munich,80331,Active,2023-08-05,Standard
+10995,Jessica,Jones,jessica.jones48@gmail.com,+49 30 728297,43,145598.43,SG,Singapore,018989,Active,2022-01-15,Standard
+10996,James,Verma,james.verma77@gmail.com,+49 30 489692,47,141858.19,SG,Singapore,049318,Pending,2021-11-12,Gold
+10997,Susan,Schneider,susan.schneider42@gmail.com,+49 30 794289,61,108472.06,DE,Munich,80331,Pending,2020-04-03,Gold
+10998,Li,Nair,li.nair82@gmail.com,7495497,35,248666.28,GB,London,EC1A 1BB,Active,2021-06-13,Silver
+10999,Aditya,Kumar,aditya.kumar86@gmail.com,+44 20 7708 5373,25,32977.98,GB,London,EC1A 1BB,Active,2022-11-18,Gold
+11000,Karen,Liu,karen.liu48@gmail.com,+1 (555) 867-1473,26,249546.19,US,Seattle,98101,Active,2022-10-21,Bronze
+11001,Hao,Johnson,hao.johnson83_at_gmail.com,4930605851,31,125154.34,DE,Berlin,10115,Suspended,2021-12-24,Silver
+11002,JENNIFER,Schneider,jennifer.schneider24_at_gmail.com,+91 91309 59019,22,126474.03,IN,Hyderabad,500001,Active,2022-04-24,Platinum
+11003,Ying,Smith,ying.smith28@gmail.com,1045739,37,91841.31,GB,London,EC1A 1BB,Active,2021-11-03,Silver
+11004,ROBERT,Nair,robert.nair63@gmail.com,+44 20 7861 2488,36,234288.79,GB,London,EC1A 1BB,Suspended,2020-03-21,Standard
+11005,AVANI,Rao,avani.rao81@gmail.com,+49 30 944292,44,113397.06,DE,Frankfurt,60311,Inactive,2020-12-26,Gold
+11006,ISHA,Sharma,isha.sharma44@gmail.com,+49 30 457196,28,163134.99,SG,Singapore,049318,Suspended,2023-04-20,Gold
+11007,Sofia,Gupta,sofia.gupta84@gmail.com,4930693399,55,218245.01,DE,Frankfurt,60311,Active,2023-05-04,Silver
+11008,Lucas,Santos,lucas.santos38@gmail.com,919960843588,29,162791.05,IN,Delhi,110001,Suspended,2021-04-15,Silver
+11009,Sofia,Yang,sofia.yang46@gmail.com,+49 30 639247,27,,SG,Singapore,049318,Inactive,2023-04-15,Silver
+11010,Pari,Santos,pari.santos61_at_gmail.com,442074502368,29,142181.62,GB,Birmingham,B1 1BB,Inactive,2022-09-17,Gold
+11011,Thomas,Brown,thomas.brown87@gmail.com,+91 91086 32733,56,,IN,Delhi,110001,Inactive,2022-12-27,Gold
+11012,James,Mehta,james.mehta32@gmail.com,1(555)7411154,49,119735.22,US,Austin,78701,Active,2020-08-17,Standard
+11013,Ayaan,Zhang,ayaan.zhang34@gmail.com,3921666,65,106357.52,DE,Berlin,10115,Active,2023-02-16,Silver
+11014,YING,Chen,ying.chen60@gmail.com,+1 (555) 710-5210,24,68736.29,US,Austin,78701,Active,2022-08-26,Bronze
+11015,ANANYA,Nair,ananya.nair20@gmail.com,+44 20 7154 6070,29,67467.51,GB,Birmingham,B1 1BB,Inactive,2021-04-20,Gold
+11016,Ayaan,Chen,ayaan.chen23@gmail.com,+49 30 849835,51,,DE,Munich,80331,Pending,2022-03-01,Silver
+11017,ARJUN,Zhang,arjun.zhang10@gmail.com,+1 (555) 871-2170,26,225786.05,US,Chicago,60601,Pending,2022-04-11,Gold
+11018,Wei,Smith,wei.smith58@gmail.com,+1 (555) 398-1237,49,,US,Seattle,98101,Active,2021-10-17,Standard
+11019,Reyansh,Singh,reyansh.singh18@gmail.com,4930733836,56,68714.83,SG,Singapore,N/A,Active,2022-09-07,Silver
+11020,ADITYA,Schneider,aditya.schneider42@gmail.com,+49 30 616299,33,,SG,Singapore,018989,Active,2020-12-12,Gold
+11021,Susan,Rodriguez,susan.rodriguez46@gmail.com,4930783446,57,228749.57,DE,Berlin,10115,Pending,2021-10-28,Silver
+11022,JAMES,Patel,james.patel14@gmail.com,9220610,55,101896.6,GB,London,EC1A 1BB,Pending,2020-02-22,Gold
+11023,Charles,Yang,charles.yang66@gmail.com,4930756191,55,72141.46,SG,Singapore,018989,Active,2021-10-23,Standard
+11024,Reyansh,Singh,reyansh.singh18@gmail.com,4930733836,56,68714.83,SG,Singapore,N/A,Active,2022-09-07,Silver
+11025,MYRA,Silva,myra.silva37@gmail.com,+44 20 7106 5820,64,51476.02,GB,London,EC1A 1BB,Pending,2022-07-07,Gold
+11026,Ananya,Gupta,ananya.gupta88@gmail.com,+91 90962 65572,61,,IN,Delhi,110001,Active,2021-11-01,Bronze
+11027,SUSAN,Verma,susan.verma50@gmail.com,+91 99712 54010,32,33715.61,IN,Chennai,600001,Inactive,2022-10-05,Silver
+11028,Pari,Davis,pari.davis10@gmail.com,+91 98341 84377,54,,IN,Hyderabad,500001,Inactive,2020-12-07,Bronze
+11029,ISHA,Martinez,isha.martinez35@gmail.com,+91 99292 87160,36,71278.56,IN,Hyderabad,500001,Active,2021-06-21,Gold
+11030,Wei,Kumar,wei.kumar60_at_gmail.com,+49 30 742662,43,,SG,Singapore,049318,Pending,2023-04-19,Gold
+11031,AVANI,Williams,avani.williams99@gmail.com,+91 90882 87971,25,38306.63,IN,Delhi,110001,Active,2021-02-16,Bronze
+11032,ISHA,Patel,isha.patel37@gmail.com,+44 20 7348 4646,45,239797.8,GB,Birmingham,B1 1BB,Active,2021-01-13,Silver
+11033,Saanvi,Schmidt,saanvi.schmidt86@gmail.com,+49 30 940254,26,,DE,Hamburg,20095,Active,2021-07-13,Standard
+11034,Ming,Chen,ming.chen39@gmail.com,+44 20 7778 2946,41,,GB,Edinburgh,EH1 1YZ,Active,2020-12-01,Silver
+11035,WILLIAM,Kumar,william.kumar16_at_gmail.com,+44 20 7640 1943,54,182458.48,GB,Edinburgh,EH1 1YZ,Suspended,2022-04-21,Bronze
+11036,Arjun,Zhang,arjun.zhang74@gmail.com,4930158585,36,229182.7,DE,Berlin,10115,Active,2020-11-19,Bronze
+11037,WILLIAM,Silva,william.silva62@gmail.com,+49 30 563353,46,91296.37,DE,Frankfurt,60311,Active,2021-09-18,Gold
+11038,Michael,Rodriguez,michael.rodriguez47@gmail.com,1(555)5894435,39,86354.57,US,Chicago,60601,Active,2020-04-07,Bronze
+11039,CHARLES,Martinez,charles.martinez67@gmail.com,+44 20 7047 5843,26,101608.9,GB,Birmingham,B1 1BB,Suspended,2022-09-13,Platinum
+11040,AADHYA,Zhang,aadhya.zhang57@gmail.com,+1 (555) 466-7516,28,135012.63,US,New York,10001,Inactive,2020-03-22,Silver
+11041,Krishna,Davis,krishna.davis74@gmail.com,+91 91386 25961,25,,IN,Bengaluru,560001,Suspended,2022-08-13,Standard
+11042,Diya,Brown,diya.brown10@gmail.com,+91 96577 73934,58,,IN,Hyderabad,500001,Active,2023-08-28,Silver
+11043,Ananya,Garcia,ananya.garcia63@gmail.com,4930242615,46,60165.65,SG,Singapore,049318,Active,2023-09-14,Platinum
+11044,Diya,Mehta,diya.mehta49@gmail.com,+44 20 7697 8974,25,,GB,London,EC1A 1BB,Active,2023-05-11,Silver
+11045,DIYA,Singh,diya.singh58@gmail.com,+49 30 273891,22,96620.4,SG,Singapore,018989,Active,2020-08-16,Silver

@@ -42,6 +42,26 @@ export function renderUploadDataset(container) {
         </div>
       </div>
 
+      <!-- Quick 1-Click Benchmark Demo Loader -->
+      <div style="margin-top: 16px; padding: 14px 20px; background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.25); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(59, 130, 246, 0.18); display: flex; align-items: center; justify-content: center; color: var(--accent-light);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <div>
+            <div style="font-weight: 600; font-size: var(--text-sm); color: var(--text-primary);">
+              Enterprise Benchmark: Customer_Master.csv (1,045 rows)
+            </div>
+            <div style="font-size: var(--text-xs); color: var(--text-muted);">
+              Pre-built test file with duplicate customer clusters, RFC syntax errors, blank cells & boundary anomalies.
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-secondary" id="btn-load-sample-csv" style="white-space: nowrap; font-weight: 600; border-color: rgba(59, 130, 246, 0.4);">
+          ⚡ Load Sample Dataset
+        </button>
+      </div>
+
       <!-- Upload Progress Container (Hidden by default) -->
       <div id="upload-progress-card" class="metric-card" style="display: none; margin: 24px 0;">
         <div class="metric-card-header">
@@ -140,6 +160,39 @@ export function renderUploadDataset(container) {
       return;
     }
     await uploadRealFile(selectedFile);
+  });
+
+  container.querySelector("#btn-load-sample-csv")?.addEventListener("click", async () => {
+    progressCard.style.display = "block";
+    uploadFilename.textContent = "Loading Customer_Master.csv (1,045 rows)";
+    progressBar.style.width = "25%";
+    pctBadge.textContent = "25%";
+    pctBadge.className = "badge badge-low";
+    statusMsg.textContent = "Fetching 1,045-row benchmark dataset...";
+
+    try {
+      progressBar.style.width = "50%";
+      pctBadge.textContent = "50%";
+      statusMsg.textContent = "Scanning columns, finding empty values, duplicate records, and RFC errors...";
+
+      await ApiService.loadDemoDataset((p) => {
+        progressBar.style.width = `${p}%`;
+        pctBadge.textContent = `${p}%`;
+      });
+
+      progressBar.style.width = "100%";
+      pctBadge.textContent = "100%";
+      pctBadge.className = "badge badge-success";
+      statusMsg.textContent = "Dataset loaded and issues profiled successfully!";
+
+      setTimeout(() => {
+        window.location.hash = "#issues";
+      }, 500);
+    } catch (e) {
+      pctBadge.textContent = "Failed";
+      pctBadge.className = "badge badge-critical";
+      statusMsg.textContent = `Error loading demo dataset: ${e.message}`;
+    }
   });
 
   container.querySelector("#btn-back-projects")?.addEventListener("click", () => {

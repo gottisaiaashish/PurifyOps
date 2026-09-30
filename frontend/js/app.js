@@ -250,6 +250,13 @@ function initApp() {
 
   const initialHash = window.location.hash.replace("#", "") || "dashboard";
   navigateTo(initialHash);
+
+  // Auto-sync active state with live backend (Render API)
+  ApiService.syncStateWithBackend().then(synced => {
+    if (synced) {
+      navigateTo(currentRoute);
+    }
+  });
 }
 
 if (document.readyState === "loading") {

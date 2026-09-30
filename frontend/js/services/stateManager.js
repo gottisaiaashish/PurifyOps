@@ -7,11 +7,13 @@ import { INITIAL_DATA } from "../data/mockData.js";
 
 class StateManager {
   constructor() {
-    this.storageKey = "purifyops_clean_v2";
+    this.storageKey = "purifyops_clean_v4";
     this.listeners = new Map();
-    // Clear legacy mock caches
+    // Clear legacy corrupted caches
     try {
       localStorage.removeItem("purifyops_clean_v1");
+      localStorage.removeItem("purifyops_clean_v2");
+      localStorage.removeItem("purifyops_clean_v3");
       localStorage.removeItem("agentic_cleaner_state");
     } catch (_) {}
     this.state = this.loadState();
@@ -21,7 +23,12 @@ class StateManager {
     try {
       const saved = localStorage.getItem(this.storageKey);
       if (saved) {
-        return JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+        // Guard against corrupted state where Customer_Master is active but issues array is empty
+        if (parsed.activeDataset?.name && (!parsed.issues || parsed.issues.length === 0)) {
+          return JSON.parse(JSON.stringify(INITIAL_DATA));
+        }
+        return parsed;
       }
     } catch (e) {
       console.warn("Failed to load local storage state, using mock default.", e);

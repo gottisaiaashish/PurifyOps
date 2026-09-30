@@ -3,11 +3,25 @@
  * User-friendly language & clean professional styling (Zero emojis/jargon)
  */
 import { stateStore } from "../services/stateManager.js";
+import { ApiService } from "../services/apiService.js";
+
+let isSyncingIssues = false;
 
 export function renderIssues(container) {
   const state = stateStore.getState();
   const issues = state.issues || [];
   const datasetName = state.activeDataset && state.activeDataset.name ? state.activeDataset.name : "No Dataset Loaded";
+
+  // If a dataset is loaded but issues are empty, auto-sync from server once
+  if (issues.length === 0 && datasetName !== "No Dataset Loaded" && !isSyncingIssues) {
+    isSyncingIssues = true;
+    ApiService.syncStateWithBackend().then(synced => {
+      isSyncingIssues = false;
+      if (synced) {
+        renderIssues(container);
+      }
+    });
+  }
 
   const duplicateIssues = issues.filter(i => (i.category || "").toLowerCase().includes("duplicate") || (i.type || "").toLowerCase().includes("duplicate"));
   const duplicateCount = duplicateIssues.reduce((sum, i) => sum + (i.affectedRecords || 1), 0);
@@ -90,17 +104,22 @@ export function renderIssues(container) {
     <div style="display: flex; flex-direction: column; gap: var(--space-4);" id="issues-list">
       ${issues.length === 0 ? `
         <div class="card" style="text-align: center; padding: 48px 24px; background: var(--bg-surface-elevated); border: 1px dashed var(--border-subtle); border-radius: var(--radius-md);">
-          <h3 style="font-size: var(--text-lg); color: var(--text-primary); margin-bottom: 8px;">No Issues Detected</h3>
+          <h3 style="font-size: var(--text-lg); color: var(--text-primary); margin-bottom: 8px;">
+            ${datasetName === "No Dataset Loaded" ? "No File Loaded Yet" : "Scan Dataset for Issues"}
+          </h3>
           <p style="color: var(--text-muted); max-width: 480px; margin: 0 auto 20px; font-size: var(--text-sm);">
             ${datasetName === "No Dataset Loaded" 
-              ? "No file has been uploaded yet. Upload your CSV or Excel file to check for data errors."
-              : "Great news! This dataset is completely clean with zero detected errors."}
+              ? "Upload your messy CSV, Excel spreadsheet, or load the benchmark customer dataset to detect data quality errors."
+              : `Dataset <strong>${datasetName}</strong> is loaded. Click below to analyze columns, detect duplicates, and extract formatting errors.`}
           </p>
-          ${datasetName === "No Dataset Loaded" ? `
-            <a href="#upload-dataset" class="btn btn-primary" style="display: inline-block;">Upload Your File</a>
-          ` : `
-            <a href="#cleaning-plan" class="btn btn-primary" style="display: inline-block;">Go to Cleaning Plan</a>
-          `}
+          <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+            ${datasetName === "No Dataset Loaded" ? `
+              <a href="#upload-dataset" class="btn btn-primary">Go to Step 1: Upload File</a>
+            ` : `
+              <button class="btn btn-primary" id="btn-scan-issues-manual">⚡ Scan & Profile Issues</button>
+              <a href="#upload-dataset" class="btn btn-outline">Upload Different File</a>
+            `}
+          </div>
         </div>
       ` : issues.map(iss => `
         <div class="metric-card" style="border-left: 4px solid ${iss.severity === 'Critical' ? 'var(--status-danger)' : iss.severity === 'High' ? '#f97316' : 'var(--status-warning)'};">
@@ -156,5 +175,17 @@ export function renderIssues(container) {
   });
   container.querySelector("#btn-goto-plan-bottom")?.addEventListener("click", () => {
     window.location.hash = "#cleaning-plan";
+  });
+  container.querySelector("#btn-scan-issues-manual")?.addEventListener("click", async () => {
+    const btn = container.querySelector("#btn-scan-issues-manual");
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = "Scanning...";
+    }
+    const synced = await ApiService.syncStateWithBackend();
+    if (!synced) {
+      await ApiService.loadDemoDataset();
+    }
+    renderIssues(container);
   });
 }

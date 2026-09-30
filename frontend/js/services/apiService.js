@@ -176,6 +176,16 @@ export const ApiService = {
           stateStore.state.issues = detectedIssues;
         }
         if (datasetInfo.profiles) stateStore.state.columnsProfile = datasetInfo.profiles;
+        if (datasetInfo.impact) stateStore.state.impactAnalysis = datasetInfo.impact;
+
+        // Fetch cleaning plan from server
+        try {
+          const planData = await request(`/projects/${projectId}/plan`);
+          if (planData && planData.operations) {
+            stateStore.state.cleaningPlan = planData;
+          }
+        } catch (_) {}
+
         // Reset results comparison since new data was imported
         stateStore.state.resultsComparison = {
           beforeQualityScore: datasetInfo.qualityScore || 58,
@@ -214,6 +224,30 @@ export const ApiService = {
     };
     if (detectedIssues.length > 0) {
       stateStore.state.issues = detectedIssues;
+      // Client-side fallback cleaning plan
+      stateStore.state.cleaningPlan = {
+        planId: `plan-${Date.now()}`,
+        datasetId: projectId,
+        generatedAt: "Just now",
+        agentModel: "PurifyOps Autonomous DAG Planner",
+        totalRecordsAffected: detectedIssues.reduce((sum, i) => sum + (i.affectedRecords || 0), 0),
+        estimatedRuntimeSeconds: 2.8,
+        overallEntropyLoss: 0.04,
+        operations: detectedIssues.map((iss, idx) => ({
+          stepId: idx + 1,
+          title: `Sanitize & Fix ${iss.type}`,
+          actionType: iss.category,
+          targetColumns: iss.affectedColumns || [],
+          reason: iss.explanation,
+          affectedRecords: iss.affectedRecords || 0,
+          confidence: 96,
+          estimatedImpact: iss.severity,
+          informationLossLevel: "Low",
+          entropyDelta: 0.02,
+          isReversible: true,
+          approved: true
+        }))
+      };
     }
     // Crucial: reset results comparison for new file
     stateStore.state.resultsComparison = {
@@ -230,6 +264,55 @@ export const ApiService = {
     stateStore.saveState();
     stateStore.emit("state:changed", stateStore.state);
     return stateStore.state.activeDataset;
+  },
+
+  async syncStateWithBackend(projectId = "proj-001") {
+    try {
+      const overview = await request(`/projects/${projectId}/overview`);
+      if (overview && overview.name && overview.name !== "No Dataset Loaded") {
+        stateStore.state.activeDataset = overview;
+        if (overview.issues && overview.issues.length > 0) {
+          stateStore.state.issues = overview.issues;
+        }
+        if (overview.profiles && overview.profiles.length > 0) {
+          stateStore.state.columnsProfile = overview.profiles;
+        }
+        if (overview.impact) {
+          stateStore.state.impactAnalysis = overview.impact;
+        }
+
+        const plan = await request(`/projects/${projectId}/plan`);
+        if (plan && plan.operations && plan.operations.length > 0) {
+          stateStore.state.cleaningPlan = plan;
+        }
+
+        const projects = await request("/projects");
+        if (projects && projects.length > 0) {
+          stateStore.state.projects = projects;
+        }
+
+        stateStore.saveState();
+        stateStore.emit("state:changed", stateStore.state);
+        return true;
+      }
+    } catch (e) {
+      console.warn("[ApiService] syncStateWithBackend skipped:", e);
+    }
+    return false;
+  },
+
+  async loadDemoDataset(progressCallback) {
+    try {
+      if (progressCallback) progressCallback(15);
+      const res = await fetch("data/Customer_Master.csv");
+      if (!res.ok) throw new Error("Could not fetch demo dataset");
+      const blob = await res.blob();
+      const file = new File([blob], "Customer_Master.csv", { type: "text/csv" });
+      return await this.uploadDataset(file, progressCallback);
+    } catch (e) {
+      console.error("Failed to load demo dataset:", e);
+      throw e;
+    }
   },
 
   async getDatasetOverview(projectId = "proj-001") {
