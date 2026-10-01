@@ -320,11 +320,13 @@ def ai_helper(payload: Dict[str, Any]):
     columns_summary = context.get("columnsSummary", "")
     provided_key = payload.get("apiKey", "")
 
-    from agent_planner import get_openai_api_key
+    from agent_planner import get_gemini_api_key, get_openai_api_key
     import urllib.request
     import json
 
-    api_key = get_openai_api_key(provided_key)
+    gemini_key = get_gemini_api_key(provided_key)
+    openai_key = get_openai_api_key(provided_key)
+
     system_msg = (
         "You are PurifyOps Data & General Assistant, an intelligent AI that helps users clean data, answer questions, and provide guidance. "
         "Answer the user's question directly and accurately. "
@@ -338,7 +340,45 @@ def ai_helper(payload: Dict[str, Any]):
     if dataset_name and dataset_name != "No Dataset Loaded":
         user_content = f"Active Dataset Context:\nDataset Name: {dataset_name}\nColumns: {columns_summary}\nDetected Issues: {issues_summary}\n\nUser Question: {prompt}"
 
-    if api_key:
+    # Priority 1: Google Gemini API
+    if gemini_key:
+        try:
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={gemini_key}"
+            payload = {
+                "contents": [
+                    {
+                        "parts": [{"text": f"{system_msg}\n\n{user_content}"}]
+                    }
+                ],
+                "generationConfig": {
+                    "temperature": 0.4,
+                    "maxOutputTokens": 600
+                }
+            }
+            req = urllib.request.Request(
+                url,
+                data=json.dumps(payload).encode("utf-8"),
+                headers={"Content-Type": "application/json"}
+            )
+            with urllib.request.urlopen(req, timeout=12) as response:
+                res_body = json.loads(response.read().decode("utf-8"))
+                candidates = res_body.get("candidates", [])
+                if candidates and "content" in candidates[0]:
+                    parts = candidates[0]["content"].get("parts", [])
+                    if parts and "text" in parts[0]:
+                        reply = parts[0]["text"].strip()
+                        return {"reply": reply, "model": "Google Gemini 1.5 Flash"}
+        except Exception as e:
+            err_msg = str(e)
+            print(f"[AI Helper Error] Gemini API call failed: {err_msg}")
+            if "429" in err_msg or "RESOURCE_EXHAUSTED" in err_msg:
+                return {
+                    "reply": "⚠️ Gemini API Quota Exceeded (HTTP 429). Please check your Gemini API Key in Settings.",
+                    "model": "System Alert"
+                }
+
+    # Priority 2: OpenAI API
+    if openai_key:
         try:
             req_data = json.dumps({
                 "model": "gpt-4o-mini",
@@ -354,7 +394,7 @@ def ai_helper(payload: Dict[str, Any]):
                 "https://api.openai.com/v1/chat/completions",
                 data=req_data,
                 headers={
-                    "Authorization": f"Bearer {api_key}",
+                    "Authorization": f"Bearer {openai_key}",
                     "Content-Type": "application/json"
                 }
             )

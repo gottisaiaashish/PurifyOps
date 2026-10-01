@@ -9,6 +9,39 @@ import urllib.request
 from typing import List, Dict, Any
 
 
+def get_gemini_api_key(provided_key: str = "") -> str:
+    if provided_key and provided_key.strip():
+        return provided_key.strip()
+
+    key = os.environ.get("GEMINI_API_KEY", "").strip() or os.environ.get("GOOGLE_API_KEY", "").strip()
+    if key:
+        return key
+
+    # Check local .env file
+    env_file = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".env")
+    if os.path.exists(env_file):
+        try:
+            with open(env_file, "r", encoding="utf-8") as f:
+                for line in f:
+                    if line.startswith("GEMINI_API_KEY=") or line.startswith("GOOGLE_API_KEY="):
+                        val = line.strip().split("=", 1)[1].strip().strip('"').strip("'")
+                        if val:
+                            return val
+        except Exception:
+            pass
+
+    # Check DB settings
+    try:
+        from database import db
+        settings_key = db.state.get("settings", {}).get("geminiApiKey", "")
+        if settings_key and settings_key.strip():
+            return settings_key.strip()
+    except Exception:
+        pass
+
+    return ""
+
+
 def get_openai_api_key(provided_key: str = "") -> str:
     if provided_key and provided_key.strip():
         return provided_key.strip()
@@ -40,6 +73,49 @@ def get_openai_api_key(provided_key: str = "") -> str:
         pass
 
     return ""
+
+
+def call_gemini_for_dag_insights(issues: List[Dict[str, Any]]) -> Dict[str, str]:
+    """
+    Calls Google Gemini API to generate deep enterprise semantic reasoning for detected issues.
+    """
+    api_key = get_gemini_api_key()
+    if not api_key:
+        return {}
+
+    prompt = (
+        "You are an enterprise AI data engineer for PurifyOps. "
+        "Analyze the following data issues and return ONLY a valid JSON map of issue type to an AI reasoning explanation:\n"
+        + json.dumps([{"type": i["type"], "records": i["affectedRecords"], "columns": i["affectedColumns"]} for i in issues])
+        + "\nReturn only a valid JSON object without markdown code blocks, format: {\"IssueType\": \"AI rationale\"}."
+    )
+
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
+    payload = {
+        "contents": [{"parts": [{"text": prompt}]}],
+        "generationConfig": {"temperature": 0.2, "maxOutputTokens": 450}
+    }
+
+    try:
+        req = urllib.request.Request(
+            url,
+            data=json.dumps(payload).encode("utf-8"),
+            headers={"Content-Type": "application/json"}
+        )
+        with urllib.request.urlopen(req, timeout=6) as response:
+            res_body = json.loads(response.read().decode("utf-8"))
+            candidates = res_body.get("candidates", [])
+            if candidates and "content" in candidates[0]:
+                parts = candidates[0]["content"].get("parts", [])
+                if parts and "text" in parts[0]:
+                    content = parts[0]["text"].strip()
+                    if content.startswith("```"):
+                        content = content.split("\n", 1)[1].rsplit("```", 1)[0].strip()
+                    return json.loads(content)
+    except Exception as e:
+        print(f"[PurifyOps AI Planner] Gemini call error: {e}")
+        return {}
+    return {}
 
 
 def call_openai_for_dag_insights(issues: List[Dict[str, Any]]) -> Dict[str, str]:
@@ -92,10 +168,23 @@ def call_openai_for_dag_insights(issues: List[Dict[str, Any]]) -> Dict[str, str]
 def generate_dag_cleaning_plan(issues: List[Dict[str, Any]], dataset_id: str = "ds-cust-001") -> Dict[str, Any]:
     """
     Synthesizes a Directed Acyclic Graph (DAG) cleaning plan from detected issues.
-    Integrates OpenAI GPT-4o reasoning when API key is active.
+    Integrates Gemini or OpenAI LLM reasoning when API key is active.
     """
-    llm_insights = call_openai_for_dag_insights(issues)
-    has_llm = bool(llm_insights)
+    llm_insights = {}
+    model_label = "PurifyOps Autonomous DAG Planner"
+
+    gemini_key = get_gemini_api_key()
+    openai_key = get_openai_api_key()
+
+    if gemini_key:
+        llm_insights = call_gemini_for_dag_insights(issues)
+        if llm_insights:
+            model_label = "Google Gemini 1.5 Flash / PurifyOps DAG Planner"
+
+    if not llm_insights and openai_key:
+        llm_insights = call_openai_for_dag_insights(issues)
+        if llm_insights:
+            model_label = "OpenAI GPT-4o-mini / PurifyOps DAG Planner"
 
     operations = []
     step_id = 1
@@ -204,8 +293,6 @@ def generate_dag_cleaning_plan(issues: List[Dict[str, Any]], dataset_id: str = "
             total_affected += iss["affectedRecords"]
             total_entropy += 0.002
             step_id += 1
-
-    model_label = "OpenAI GPT-4o / PurifyOps DAG Planner" if has_llm else "PurifyOps Autonomous DAG Planner"
 
     return {
         "planId": f"plan-agent-{uuid.uuid4().hex[:6]}",
