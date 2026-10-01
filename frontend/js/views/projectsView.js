@@ -6,7 +6,7 @@ import { stateStore } from "../services/stateManager.js";
 import { ApiService } from "../services/apiService.js";
 
 export function renderProjects(container) {
-  const projects = stateStore.getState().projects;
+  const projects = stateStore.getState().projects || [];
 
   container.innerHTML = `
     <div class="page-header">

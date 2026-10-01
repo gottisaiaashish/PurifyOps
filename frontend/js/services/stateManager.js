@@ -26,10 +26,6 @@ class StateManager {
       const saved = localStorage.getItem(this.storageKey);
       if (saved) {
         const parsed = JSON.parse(saved);
-        // Guard against corrupted state where Customer_Master is active but issues array is empty
-        if (parsed.activeDataset?.name && (!parsed.issues || parsed.issues.length === 0)) {
-          return JSON.parse(JSON.stringify(INITIAL_DATA));
-        }
         return {
           ...INITIAL_DATA,
           ...parsed,
@@ -40,7 +36,7 @@ class StateManager {
         };
       }
     } catch (e) {
-      console.warn("Failed to load local storage state, using mock default.", e);
+      console.warn("Failed to load local storage state, using default.", e);
     }
     // Deep clone initial data
     return JSON.parse(JSON.stringify(INITIAL_DATA));
