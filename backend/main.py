@@ -328,12 +328,11 @@ def ai_helper(payload: Dict[str, Any]):
     openai_key = get_openai_api_key(provided_key)
 
     system_msg = (
-        "You are PurifyOps Data & General Assistant, an intelligent AI that helps users clean data, answer questions, and provide guidance. "
-        "Answer the user's question directly and accurately. "
-        "If the user asks general questions (e.g. general knowledge, who someone is, science, coding), answer them clearly and helpfully. "
-        "If the user asks about data cleaning, explain in simple, friendly terms. "
+        "You are PurifyOps AI Data Assistant. "
+        "Answer directly, concisely, and impressively in 2-3 short sentences max. "
+        "DO NOT use raw markdown asterisks (like **bold** or **text**). Keep formatting clean, plain, and easy to read. "
         "If the user asks in Tenglish (Telugu in English script), reply in natural, friendly Tenglish. "
-        "Keep your response clear, concise, and helpful."
+        "Keep your answer super sharp and impressive."
     )
 
     user_content = f"User Question: {prompt}"
@@ -350,8 +349,8 @@ def ai_helper(payload: Dict[str, Any]):
                 }
             ],
             "generationConfig": {
-                "temperature": 0.4,
-                "maxOutputTokens": 600
+                "temperature": 0.3,
+                "maxOutputTokens": 300
             }
         }
         for m_name in models:
@@ -368,7 +367,7 @@ def ai_helper(payload: Dict[str, Any]):
                     if candidates and "content" in candidates[0]:
                         parts = candidates[0]["content"].get("parts", [])
                         if parts and "text" in parts[0]:
-                            reply = parts[0]["text"].strip()
+                            reply = parts[0]["text"].strip().replace("*", "")
                             return {"reply": reply, "model": f"Google Gemini ({m_name})"}
             except Exception as e:
                 print(f"[AI Helper Error] Gemini model '{m_name}' failed: {e}")
@@ -383,8 +382,8 @@ def ai_helper(payload: Dict[str, Any]):
                     {"role": "system", "content": system_msg},
                     {"role": "user", "content": user_content}
                 ],
-                "temperature": 0.4,
-                "max_tokens": 450
+                "temperature": 0.3,
+                "max_tokens": 300
             }).encode("utf-8")
 
             req = urllib.request.Request(
@@ -397,7 +396,7 @@ def ai_helper(payload: Dict[str, Any]):
             )
             with urllib.request.urlopen(req, timeout=12) as response:
                 res_body = json.loads(response.read().decode("utf-8"))
-                reply = res_body["choices"][0]["message"]["content"]
+                reply = res_body["choices"][0]["message"]["content"].strip().replace("*", "")
                 return {"reply": reply, "model": "OpenAI GPT-4o-mini"}
         except Exception as e:
             err_msg = str(e)
