@@ -373,7 +373,7 @@ def ai_helper(payload: Dict[str, Any]):
             print(f"[AI Helper Error] Gemini API call failed: {err_msg}")
             if "429" in err_msg or "RESOURCE_EXHAUSTED" in err_msg:
                 return {
-                    "reply": "⚠️ Gemini API Quota Exceeded (HTTP 429). Please check your Gemini API Key in Settings.",
+                    "reply": "⚠️ Gemini API Quota Exceeded (HTTP 429). Please check your Gemini API Key rate limits on Google AI Studio.",
                     "model": "System Alert"
                 }
 
@@ -408,17 +408,16 @@ def ai_helper(payload: Dict[str, Any]):
             if "429" in err_msg or "Too Many Requests" in err_msg:
                 user_friendly = (
                     "⚠️ OpenAI API Quota Exceeded (HTTP 429: Too Many Requests)\n\n"
-                    "Server లో ఉన్న OpenAI API Key ది Quota / Usage limit అయిపోయింది.\n"
-                    "దయచేసి వర్కింగ్ OpenAI API Key ని **Settings** పేజీలో ఎంటర్ చేయండి."
+                    "Server API Key usage limit reach ayyindi. Please check API account quota."
                 )
             else:
-                user_friendly = f"⚠️ OpenAI API Error: {err_msg}.\n\nPlease check your OpenAI API key in Settings."
+                user_friendly = f"⚠️ OpenAI API Error: {err_msg}."
             return {
                 "reply": user_friendly,
                 "model": "System Alert"
             }
 
-    # Intelligent Fallback when OpenAI key is missing
+    # Intelligent Fallback when API key is missing or offline
     q_lower = prompt.lower()
     if "duplicate" in q_lower or "duplicates" in q_lower:
         reply = (
@@ -441,9 +440,8 @@ def ai_helper(payload: Dict[str, Any]):
         )
     else:
         reply = (
-            f"💡 Note: OpenAI API Key config avvaledu. General AI questions (like '{prompt}') live ga answer cheyaniki "
-            "**Settings** లో మీ OpenAI API Key పంపండి లేదా Server ENV లో `OPENAI_API_KEY` నీ set చేయండి.\n\n"
-            "PurifyOps Data Cleaning గురించి ఏమైనా సందేహాలు ఉంటే అడగవచ్చు!"
+            f"💡 Note: AI Server connects automatically via Server Environment Variables (`GEMINI_API_KEY` / `OPENAI_API_KEY`).\n\n"
+            "PurifyOps Data Cleaning & Data Quality gurinchi edhanna doubts unte adagandi!"
         )
 
     return {"reply": reply, "model": "PurifyOps Assistant (Offline Mode)"}
