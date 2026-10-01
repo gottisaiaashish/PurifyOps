@@ -1,9 +1,10 @@
 /**
- * PurifyOps Android Native Mobile Engine v2
- * - Disables browser-like pull-to-refresh
- * - Eliminates drawer blur completely (crystal clear sharp text & background)
- * - Removes topbar logo as requested (clean native topbar)
- * - Perfect alignments and touch scrolling
+ * PurifyOps Android Native Mobile Engine v3
+ * - Crisp High-Contrast WHITE & CYAN drawer navigation (Zero dimness)
+ * - Rock-solid click navigation for all menu items
+ * - Sleek WHITE 3-lines hamburger menu button
+ * - NO logo in topbar (clean & spacious)
+ * - Zero modifications to website/frontend repository
  */
 (function() {
     'use strict';
@@ -28,7 +29,7 @@
         }
 
         styleEl.innerHTML = `
-            /* --- Android App Native Mobile Theme & Layout --- */
+            /* --- Android App Shell --- */
             html, body {
                 width: 100vw !important;
                 max-width: 100vw !important;
@@ -50,26 +51,26 @@
                 background: #0B0F19 !important;
             }
 
-            /* --- Off-Canvas Drawer Navigation Sidebar (CRYSTAL CLEAR, ZERO BLUR) --- */
+            /* --- Off-Canvas Drawer (HIGH CONTRAST, ZERO DIMNESS, CRISP WHITE) --- */
             .app-sidebar {
                 position: fixed !important;
                 top: 0 !important;
                 left: 0 !important;
                 bottom: 0 !important;
-                width: 295px !important;
+                width: 300px !important;
                 max-width: 86vw !important;
                 height: 100vh !important;
                 z-index: 100000 !important;
                 transform: translateX(-105%) !important;
                 transition: transform 0.28s cubic-bezier(0.32, 0.72, 0, 1) !important;
-                background: #0D1322 !important;
-                background-color: #0D1322 !important;
+                background: #0F172A !important;
+                background-color: #0F172A !important;
                 backdrop-filter: none !important;
                 -webkit-backdrop-filter: none !important;
                 filter: none !important;
                 opacity: 1 !important;
-                box-shadow: 16px 0 45px rgba(0, 0, 0, 0.95) !important;
-                border-right: 1px solid rgba(255, 255, 255, 0.14) !important;
+                box-shadow: 20px 0 50px rgba(0, 0, 0, 0.95) !important;
+                border-right: 1px solid rgba(255, 255, 255, 0.16) !important;
                 overflow-y: auto !important;
                 display: flex !important;
                 flex-direction: column !important;
@@ -79,22 +80,21 @@
                 backdrop-filter: none !important;
                 -webkit-backdrop-filter: none !important;
                 filter: none !important;
-                text-shadow: none !important;
             }
 
             .app-sidebar.mobile-open {
                 transform: translateX(0) !important;
             }
 
-            /* Clean Drawer Header */
+            /* Crisp Drawer Header with White Close Button */
             .sidebar-header {
                 display: flex !important;
                 align-items: center !important;
                 justify-content: space-between !important;
-                padding: 16px 16px !important;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
-                background: #111827 !important;
-                min-height: 60px !important;
+                padding: 16px 18px !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.14) !important;
+                background: #1E293B !important;
+                min-height: 62px !important;
             }
 
             .brand-details {
@@ -104,79 +104,90 @@
 
             .brand-title {
                 color: #FFFFFF !important;
-                font-size: 18px !important;
-                font-weight: 700 !important;
+                font-size: 20px !important;
+                font-weight: 800 !important;
                 letter-spacing: -0.02em !important;
                 opacity: 1 !important;
             }
 
             .btn-close-sidebar {
-                width: 34px !important;
-                height: 34px !important;
+                width: 36px !important;
+                height: 36px !important;
                 border-radius: 9px !important;
-                background: rgba(255, 255, 255, 0.08) !important;
-                border: 1px solid rgba(255, 255, 255, 0.14) !important;
-                color: #E2E8F0 !important;
+                background: rgba(255, 255, 255, 0.12) !important;
+                border: 1px solid rgba(255, 255, 255, 0.22) !important;
+                color: #FFFFFF !important;
                 display: flex !important;
                 align-items: center !important;
                 justify-content: center !important;
                 cursor: pointer !important;
                 flex-shrink: 0 !important;
             }
+            .btn-close-sidebar svg {
+                stroke: #FFFFFF !important;
+            }
             .btn-close-sidebar:active {
-                background: rgba(239, 68, 68, 0.3) !important;
-                color: #EF4444 !important;
+                background: rgba(239, 68, 68, 0.4) !important;
             }
 
-            /* Sharp High-Contrast Sidebar Navigation */
+            /* Bright Cyan Section Titles */
             .sidebar-nav {
-                padding: 12px 10px !important;
+                padding: 14px 12px !important;
                 flex: 1 !important;
-                background: #0D1322 !important;
+                background: #0F172A !important;
             }
 
             .nav-section-title {
                 font-size: 11px !important;
-                color: #94A3B8 !important;
-                font-weight: 700 !important;
-                letter-spacing: 0.08em !important;
+                color: #38BDF8 !important;
+                font-weight: 800 !important;
+                letter-spacing: 0.12em !important;
                 text-transform: uppercase !important;
-                padding: 14px 12px 6px 12px !important;
+                padding: 16px 12px 6px 12px !important;
                 opacity: 1 !important;
             }
 
+            /* Vivid Crisp White Clickable Nav Items */
             .nav-item {
                 display: flex !important;
                 align-items: center !important;
                 gap: 12px !important;
-                padding: 12px 14px !important;
-                margin-bottom: 4px !important;
+                padding: 13px 16px !important;
+                margin-bottom: 5px !important;
                 border-radius: 10px !important;
-                color: #F1F5F9 !important;
-                font-size: 14px !important;
+                color: #FFFFFF !important;
+                font-size: 15px !important;
                 font-weight: 600 !important;
                 opacity: 1 !important;
-                background: transparent !important;
-                transition: all 0.15s ease !important;
+                background: rgba(255, 255, 255, 0.04) !important;
+                border: 1px solid rgba(255, 255, 255, 0.07) !important;
+                transition: all 0.12s ease !important;
+                cursor: pointer !important;
+                user-select: none !important;
+                text-decoration: none !important;
             }
 
-            .nav-item:hover, .nav-item:active {
-                background: rgba(255, 255, 255, 0.08) !important;
-                color: #FFFFFF !important;
+            .nav-item:active {
+                background: rgba(255, 255, 255, 0.15) !important;
+                transform: scale(0.98) !important;
             }
 
             .nav-item.active {
-                background: linear-gradient(90deg, rgba(6, 182, 212, 0.25), rgba(59, 130, 246, 0.15)) !important;
-                color: #38BDF8 !important;
-                font-weight: 600 !important;
-                border-left: 3px solid #06B6D4 !important;
+                background: linear-gradient(90deg, rgba(6, 182, 212, 0.35), rgba(59, 130, 246, 0.20)) !important;
+                color: #FFFFFF !important;
+                font-weight: 700 !important;
+                border: 1px solid rgba(6, 182, 212, 0.6) !important;
+                border-left: 4px solid #06B6D4 !important;
+                box-shadow: 0 0 16px rgba(6, 182, 212, 0.25) !important;
             }
 
             .nav-item .nav-icon {
                 width: 20px !important;
                 height: 20px !important;
                 color: #38BDF8 !important;
+                stroke: #38BDF8 !important;
                 opacity: 1 !important;
+                flex-shrink: 0 !important;
             }
 
             /* Dimmed Backdrop Overlay (No Blur Filter) */
@@ -193,7 +204,7 @@
                 filter: none !important;
                 z-index: 99990 !important;
                 opacity: 0;
-                transition: opacity 0.22s ease;
+                transition: opacity 0.20s ease;
             }
             #purifyops-mobile-backdrop.active {
                 display: block !important;
@@ -212,7 +223,7 @@
                 overflow-x: hidden !important;
             }
 
-            /* --- Clean Topbar (NO LOGO) --- */
+            /* --- Clean Topbar with Sleek White Hamburger --- */
             .topbar {
                 height: 56px !important;
                 min-height: 56px !important;
@@ -222,7 +233,7 @@
                 display: flex !important;
                 align-items: center !important;
                 justify-content: space-between !important;
-                background: rgba(11, 15, 25, 0.95) !important;
+                background: rgba(11, 15, 25, 0.96) !important;
                 border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
                 gap: 8px !important;
                 z-index: 100 !important;
@@ -236,43 +247,47 @@
                 flex: 1 !important;
             }
 
-            /* Clean Native Hamburger Button */
+            /* Sleek WHITE 3-Lines Hamburger Button */
             #purifyops-hamburger-btn {
                 display: flex !important;
                 align-items: center !important;
                 justify-content: center !important;
-                width: 38px !important;
-                height: 38px !important;
-                min-width: 38px !important;
-                border-radius: 9px !important;
-                background: rgba(6, 182, 212, 0.15) !important;
-                border: 1px solid rgba(6, 182, 212, 0.35) !important;
-                color: #38BDF8 !important;
+                width: 40px !important;
+                height: 40px !important;
+                min-width: 40px !important;
+                border-radius: 10px !important;
+                background: rgba(255, 255, 255, 0.12) !important;
+                border: 1px solid rgba(255, 255, 255, 0.25) !important;
+                color: #FFFFFF !important;
                 cursor: pointer !important;
                 flex-shrink: 0 !important;
-                transition: transform 0.15s ease !important;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35) !important;
+                transition: transform 0.12s ease !important;
             }
             #purifyops-hamburger-btn:active {
                 transform: scale(0.92) !important;
-                background: rgba(6, 182, 212, 0.30) !important;
+                background: rgba(255, 255, 255, 0.25) !important;
+            }
+            #purifyops-hamburger-btn svg {
+                stroke: #FFFFFF !important;
             }
 
             .project-selector {
-                padding: 5px 9px !important;
+                padding: 5px 10px !important;
                 max-width: 130px !important;
                 overflow: hidden !important;
                 text-overflow: ellipsis !important;
                 white-space: nowrap !important;
-                background: rgba(255, 255, 255, 0.06) !important;
-                border: 1px solid rgba(255, 255, 255, 0.10) !important;
-                border-radius: 7px !important;
+                background: rgba(255, 255, 255, 0.07) !important;
+                border: 1px solid rgba(255, 255, 255, 0.12) !important;
+                border-radius: 8px !important;
             }
             .project-label {
                 display: none !important;
             }
             .project-name {
                 font-size: 12px !important;
-                color: #CBD5E1 !important;
+                color: #E2E8F0 !important;
                 max-width: 105px !important;
                 overflow: hidden !important;
                 text-overflow: ellipsis !important;
@@ -291,8 +306,8 @@
                 font-weight: 600 !important;
                 border-radius: 8px !important;
                 white-space: nowrap !important;
-                background: linear-gradient(135deg, rgba(6, 182, 212, 0.20), rgba(59, 130, 246, 0.20)) !important;
-                border: 1px solid rgba(6, 182, 212, 0.35) !important;
+                background: linear-gradient(135deg, rgba(6, 182, 212, 0.22), rgba(59, 130, 246, 0.22)) !important;
+                border: 1px solid rgba(6, 182, 212, 0.4) !important;
                 color: #38BDF8 !important;
             }
 
@@ -320,7 +335,7 @@
                 font-size: 11px !important;
             }
 
-            /* --- Page Viewport & Card Content Layout --- */
+            /* --- Page Viewport & Card Layout --- */
             .page-viewport {
                 padding: 14px 12px 40px 12px !important;
                 width: 100vw !important;
@@ -434,14 +449,14 @@
             });
         }
 
-        // 4. Inject Hamburger Button into Topbar (NO LOGO)
+        // 4. Inject WHITE 3-Lines Hamburger Button into Topbar
         var topbarLeft = document.querySelector('.topbar-left');
         if (topbarLeft && !document.getElementById('purifyops-hamburger-btn')) {
             var hamburger = document.createElement('button');
             hamburger.id = 'purifyops-hamburger-btn';
             hamburger.type = 'button';
             hamburger.setAttribute('aria-label', 'Open navigation menu');
-            hamburger.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
+            hamburger.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
             topbarLeft.insertBefore(hamburger, topbarLeft.firstChild);
 
             hamburger.addEventListener('click', function(e) {
@@ -450,7 +465,7 @@
             });
         }
 
-        // Remove any unwanted topbar brand logo
+        // Clean up any old logos from topbar or duplicate headers
         var oldBrand = document.getElementById('purifyops-topbar-brand');
         if (oldBrand) oldBrand.remove();
 
@@ -466,9 +481,10 @@
                 closeBtn.className = 'btn-close-sidebar';
                 closeBtn.type = 'button';
                 closeBtn.setAttribute('aria-label', 'Close menu');
-                closeBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+                closeBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
                 sHeader.appendChild(closeBtn);
-                closeBtn.onclick = function() {
+                closeBtn.onclick = function(e) {
+                    e.stopPropagation();
                     closeSidebar();
                 };
             }
@@ -481,7 +497,7 @@
 
             if (isOpen) {
                 backdrop.classList.add('active');
-                if (canvas) canvas.style.display = 'none'; // prevent GPU blur interference
+                if (canvas) canvas.style.display = 'none'; // prevent GPU dimming/blur
                 if (window.AndroidBridge && window.AndroidBridge.onDrawerStateChanged) {
                     window.AndroidBridge.onDrawerStateChanged(true);
                 }
@@ -504,13 +520,22 @@
             }
         }
 
-        // Auto-close on nav-item clicks
-        var navItems = document.querySelectorAll('.nav-item');
-        navItems.forEach(function(item) {
-            item.onclick = function() {
-                setTimeout(closeSidebar, 100);
-            };
-        });
+        // 6. Direct Capturing Click Listener for 100% Reliable Menu Navigation
+        if (!window.__purifyops_nav_listener) {
+            window.__purifyops_nav_listener = true;
+            document.addEventListener('click', function(e) {
+                var navItem = e.target.closest('.nav-item');
+                if (navItem) {
+                    var href = navItem.getAttribute('href');
+                    var route = navItem.dataset.route;
+                    var target = href || (route ? '#' + route : null);
+                    if (target) {
+                        window.location.hash = target;
+                    }
+                    setTimeout(closeSidebar, 80);
+                }
+            }, true); // Capturing phase executes immediately before anything can block it
+        }
 
         // Route change listener
         if (!window.__purifyops_route_listener) {
