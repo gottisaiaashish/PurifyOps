@@ -267,6 +267,10 @@ export function renderCleaningPlan(container) {
   container.querySelectorAll(".preset-prompt-chip").forEach(chip => {
     chip.addEventListener("click", () => {
       const p = chip.dataset.prompt;
+      if (p) runCustomPrompt(p);
+    });
+  });
+
   container.querySelector("#btn-goto-human-review")?.addEventListener("click", () => {
     window.location.hash = "#review-approval";
   });

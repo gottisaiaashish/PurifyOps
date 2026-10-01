@@ -5,7 +5,7 @@
  */
 import { stateStore } from "../services/stateManager.js";
 import { ApiService } from "../services/apiService.js";
-import { showToast } from "../app.js";
+import { showToast } from "../utils/toast.js";
 
 let activeTab = "human-queue"; // "human-queue" | "duplicates"
 let pendingCorrections = {}; // { [itemId]: { recordId, column, originalValue, verifiedValue, status } }

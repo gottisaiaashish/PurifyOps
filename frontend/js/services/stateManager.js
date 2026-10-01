@@ -7,7 +7,7 @@ import { INITIAL_DATA } from "../data/mockData.js";
 
 class StateManager {
   constructor() {
-    this.storageKey = "purifyops_clean_v7";
+    this.storageKey = "purifyops_clean_v9";
     this.listeners = new Map();
     // Clear legacy corrupted caches
     try {
@@ -16,6 +16,9 @@ class StateManager {
       localStorage.removeItem("purifyops_clean_v3");
       localStorage.removeItem("purifyops_clean_v4");
       localStorage.removeItem("purifyops_clean_v5");
+      localStorage.removeItem("purifyops_clean_v6");
+      localStorage.removeItem("purifyops_clean_v7");
+      localStorage.removeItem("purifyops_clean_v8");
       localStorage.removeItem("agentic_cleaner_state");
     } catch (_) {}
     this.state = this.loadState();
