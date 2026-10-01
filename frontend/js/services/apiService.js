@@ -25,12 +25,15 @@ async function request(endpoint, options = {}) {
     });
     clearTimeout(timeoutId);
     if (!res.ok) {
+      if (res.status === 404) return null;
       throw new Error(`API error ${res.status}: ${res.statusText}`);
     }
     return await res.json();
   } catch (err) {
     clearTimeout(timeoutId);
-    console.warn(`[ApiService] Request to ${endpoint} failed:`, err.message);
+    if (err.name !== "AbortError" && !err.message.includes("404")) {
+      console.warn(`[ApiService] Request to ${endpoint} failed:`, err.message);
+    }
     return null;
   }
 }
