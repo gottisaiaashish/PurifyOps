@@ -15,7 +15,7 @@ for p in [CURRENT_DIR, PARENT_DIR]:
     if p not in sys.path:
         sys.path.insert(0, p)
 
-from profiler import profile_columns, calculate_quality_dimensions, detect_issues
+from profiler import profile_columns, calculate_quality_dimensions, detect_issues, generate_debug_summary
 from agent_planner import generate_dag_cleaning_plan, find_duplicate_candidate_pairs
 from validator import run_validation_suite
 from entropy_engine import analyze_dataset_impact
@@ -210,6 +210,7 @@ class Database:
         profiles = profile_columns(records)
         dims = calculate_quality_dimensions(records, profiles)
         issues = detect_issues(records, profiles)
+        debug_summary = generate_debug_summary(records, issues)
         plan = generate_dag_cleaning_plan(issues, proj_id)
         review_pairs = find_duplicate_candidate_pairs(records)
         validation = run_validation_suite(records)
@@ -225,10 +226,13 @@ class Database:
             "lastAnalyzed": "Just now",
             "qualityScore": dims["overall_score"],
             "dimensions": dims,
+            "debugSummary": debug_summary,
             "profilingSummary": {
                 "totalCells": len(records) * len(profiles),
-                "missingCells": sum(int(p["missingPct"] * len(records) / 100) for p in profiles),
-                "duplicateRows": sum(1 for iss in issues if iss["type"] == "Possible Duplicate"),
+                "missingCells": debug_summary["missing_cells"],
+                "duplicateRows": debug_summary["duplicate_rows"],
+                "invalidValues": debug_summary["invalid_values"],
+                "anomalies": debug_summary["anomalies"],
                 "inferredPrimaryKeys": [p["name"] for p in profiles if "ID" in p["semanticRole"]],
                 "entropyLossIndex": "Low (< 0.05)"
             },

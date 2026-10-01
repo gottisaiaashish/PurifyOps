@@ -212,6 +212,42 @@ export function renderIssues(container) {
       </div>
     </div>
 
+    <!-- Developer & Profiling Debug Information -->
+    <div style="margin-bottom: var(--space-6); background: rgba(15, 23, 42, 0.65); border: 1px solid var(--border-medium); border-radius: var(--radius-md); padding: 20px 24px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 10px;">
+        <div style="font-size: var(--text-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-light); font-family: var(--font-mono);">
+          🛠️ Profiling Engine Debug & Diagnostics
+        </div>
+        <span class="badge badge-neutral" style="font-family: var(--font-mono); font-size: 11px;">Real Dataset Metrics</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; text-align: center;">
+        <div>
+          <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">Rows Scanned</div>
+          <div style="font-size: 20px; font-weight: 700; color: var(--text-primary); font-family: var(--font-mono); margin-top: 4px;">${recordsCount.toLocaleString()}</div>
+        </div>
+        <div>
+          <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">Columns Scanned</div>
+          <div style="font-size: 20px; font-weight: 700; color: var(--text-primary); font-family: var(--font-mono); margin-top: 4px;">${(dataset.columnsCount || (dataset.profiles ? dataset.profiles.length : 0)).toLocaleString()}</div>
+        </div>
+        <div>
+          <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">Missing Cells</div>
+          <div style="font-size: 20px; font-weight: 700; color: var(--accent-light); font-family: var(--font-mono); margin-top: 4px;">${missingCount.toLocaleString()}</div>
+        </div>
+        <div>
+          <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">Duplicate Rows</div>
+          <div style="font-size: 20px; font-weight: 700; color: var(--accent-light); font-family: var(--font-mono); margin-top: 4px;">${duplicateCount.toLocaleString()}</div>
+        </div>
+        <div>
+          <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">Invalid Values</div>
+          <div style="font-size: 20px; font-weight: 700; color: var(--status-warning, #f59e0b); font-family: var(--font-mono); margin-top: 4px;">${formatCount.toLocaleString()}</div>
+        </div>
+        <div>
+          <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">Anomalies</div>
+          <div style="font-size: 20px; font-weight: 700; color: var(--status-danger, #ef4444); font-family: var(--font-mono); margin-top: 4px;">${anomalyCount.toLocaleString()}</div>
+        </div>
+      </div>
+    </div>
+
     <!-- Filter Bar -->
     <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-4); flex-wrap: wrap; gap: 12px;">
       <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">

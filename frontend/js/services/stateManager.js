@@ -7,7 +7,7 @@ import { INITIAL_DATA } from "../data/mockData.js";
 
 class StateManager {
   constructor() {
-    this.storageKey = "purifyops_clean_v6";
+    this.storageKey = "purifyops_clean_v7";
     this.listeners = new Map();
     // Clear legacy corrupted caches
     try {

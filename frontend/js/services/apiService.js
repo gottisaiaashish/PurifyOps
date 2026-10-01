@@ -123,75 +123,171 @@ export const ApiService = {
           parsedRecords.push(row);
         }
 
-        // Detect real issues dynamically from rows
-        let invalidEmails = 0;
-        let emptyCells = 0;
-        let negativeAges = 0;
-        let negativeRevenue = 0;
-        const seenNames = new Set();
-        let duplicateRows = 0;
+        // Detect real issues dynamically from rows using high-precision rules
+        const NULL_SENTINELS = new Set(["", "na", "n/a", "null", "none", "-", "?", "missing", "nan", "nil", "undefined"]);
+        const isNull = (v) => v === null || v === undefined || NULL_SENTINELS.has(String(v).trim().toLowerCase());
 
-        parsedRecords.forEach(r => {
-          const email = (r.Email || "").toLowerCase();
-          if (email && (!email.includes("@") || email.includes("_at_") || !email.includes("."))) invalidEmails++;
-          const name = `${r.First_Name || ""} ${r.Last_Name || ""}`.trim().toLowerCase();
-          if (name) {
-            if (seenNames.has(name)) duplicateRows++;
-            else seenNames.add(name);
-          }
-          if (r.Age && (parseInt(r.Age) < 0 || parseInt(r.Age) > 120)) negativeAges++;
-          if (r.Annual_Revenue && parseFloat(r.Annual_Revenue) < 0) negativeRevenue++;
-          Object.values(r).forEach(v => {
-            if (!v || v === "N/A" || v === "null" || v === "-") emptyCells++;
+        let missingCells = 0;
+        const missingCols = new Set();
+        let invalidEmailCount = 0;
+        let suspiciousEmailCount = 0;
+        let invalidPhoneCount = 0;
+        let outlierCount = 0;
+        const duplicateIndices = new Set();
+
+        const EMAIL_REGEX = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$/;
+        const KNOWN_TYPOS = { "gmial.com": "gmail.com", "gamil.com": "gmail.com", "yaho.com": "yahoo.com", "hotmial.com": "hotmail.com" };
+
+        const seenExact = new Map();
+        const seenEntities = new Map();
+
+        parsedRecords.forEach((r, idx) => {
+          // 1. Missing cells
+          Object.entries(r).forEach(([col, v]) => {
+            if (isNull(v)) {
+              missingCells++;
+              missingCols.add(col);
+            }
           });
+
+          // 2. Email syntax vs typo
+          const email = r.Email || r.email;
+          if (email && !isNull(email)) {
+            const eStr = String(email).trim().toLowerCase();
+            if (!EMAIL_REGEX.test(eStr) || eStr.includes("@@")) {
+              invalidEmailCount++;
+            } else {
+              const parts = eStr.split("@");
+              if (parts[1] && KNOWN_TYPOS[parts[1]]) {
+                suspiciousEmailCount++;
+              }
+            }
+          }
+
+          // 3. Phone validation
+          const phone = r.Phone || r.phone;
+          if (phone && !isNull(phone)) {
+            const pStr = String(phone).trim();
+            if (/[a-zA-Z]/.test(pStr)) {
+              invalidPhoneCount++;
+            } else {
+              const digits = pStr.replace(/[^\d]/g, "");
+              if (digits.length < 7 || digits.length > 15) {
+                invalidPhoneCount++;
+              }
+            }
+          }
+
+          // 4. Age & Revenue Outliers
+          const age = r.Age || r.age;
+          if (age && !isNull(age)) {
+            const ageNum = parseFloat(String(age).replace(/[^\d.-]/g, ""));
+            if (!isNaN(ageNum) && (ageNum < 0 || ageNum > 120)) outlierCount++;
+          }
+          const rev = r.Annual_Revenue || r.annual_revenue || r.Revenue;
+          if (rev && !isNull(rev)) {
+            const revNum = parseFloat(String(rev).replace(/[^\d.-]/g, ""));
+            if (!isNaN(revNum) && revNum < 0) outlierCount++;
+          }
+
+          // 5. Duplicates
+          const rowKey = JSON.stringify(r);
+          if (seenExact.has(rowKey)) {
+            duplicateIndices.add(idx);
+            duplicateIndices.add(seenExact.get(rowKey));
+          } else {
+            seenExact.set(rowKey, idx);
+          }
+
+          const fname = (r.First_Name || "").trim().toLowerCase();
+          const lname = (r.Last_Name || "").trim().toLowerCase();
+          if (fname && lname) {
+            const eKey = `${fname}_${lname}`;
+            if (seenEntities.has(eKey)) {
+              duplicateIndices.add(idx);
+              duplicateIndices.add(seenEntities.get(eKey));
+            } else {
+              seenEntities.set(eKey, idx);
+            }
+          }
         });
 
-        if (duplicateRows > 0) {
+        if (missingCells > 0) {
           detectedIssues.push({
-            id: "iss-dup-01",
-            category: "Duplicates",
-            type: "Duplicate Records",
-            severity: "High",
-            affectedRecords: duplicateRows,
-            affectedColumns: ["First_Name", "Last_Name", "Phone", "Email"],
-            explanation: `Found ${duplicateRows} customer records with matching names or identical contact info across different formatting variations.`,
-            recommendedAction: "Merge duplicate rows and preserve the most recent complete record."
-          });
-        }
-        if (invalidEmails > 0) {
-          detectedIssues.push({
-            id: "iss-fmt-01",
-            category: "Formatting",
-            type: "Invalid Email Syntax",
-            severity: "High",
-            affectedRecords: invalidEmails,
-            affectedColumns: ["Email"],
-            explanation: `Found ${invalidEmails} email addresses with syntax errors like '_at_gmail.com' or missing domains.`,
-            recommendedAction: "Convert '_at_' to '@' and fix standard domain extensions."
-          });
-        }
-        if (negativeAges > 0 || negativeRevenue > 0) {
-          detectedIssues.push({
-            id: "iss-out-01",
-            category: "Outliers",
-            type: "Negative / Outlier Values",
-            severity: "Medium",
-            affectedRecords: negativeAges + negativeRevenue,
-            affectedColumns: ["Age", "Annual_Revenue"],
-            explanation: `Identified invalid negative values (e.g. Age: -3 or 142, Revenue < 0).`,
-            recommendedAction: "Correct negative signs and clip extreme outlier values to acceptable ranges."
-          });
-        }
-        if (emptyCells > 0) {
-          detectedIssues.push({
-            id: "iss-mis-01",
+            id: "iss-001",
+            type: "Missing Values",
             category: "Completeness",
-            type: "Missing / Blank Fields",
             severity: "Medium",
-            affectedRecords: emptyCells,
-            affectedColumns: ["Phone", "City", "Postal_Code"],
-            explanation: `Identified ${emptyCells} blank cells or 'N/A' placeholders across contact and location fields.`,
-            recommendedAction: "Impute missing fields using standard region defaults or mark as Unknown."
+            affectedRecords: missingCells,
+            affected_count: missingCells,
+            affectedColumns: Array.from(missingCols),
+            explanation: `Identified ${missingCells} missing / null cells across dataset.`,
+            recommendedAction: "Impute missing demographic entries via statistical cohort defaults."
+          });
+        }
+        if (invalidEmailCount > 0) {
+          detectedIssues.push({
+            id: "iss-002",
+            type: "Invalid Email Syntax",
+            category: "Format Validity",
+            severity: "High",
+            affectedRecords: invalidEmailCount,
+            affected_count: invalidEmailCount,
+            affectedColumns: ["Email"],
+            explanation: `Found ${invalidEmailCount} email addresses with syntax violations (missing domain extension, double '@').`,
+            recommendedAction: "Correct email syntax errors."
+          });
+        }
+        if (suspiciousEmailCount > 0) {
+          detectedIssues.push({
+            id: "iss-003",
+            type: "Suspicious Email Domain Typo",
+            category: "Domain Validation",
+            severity: "Low",
+            affectedRecords: suspiciousEmailCount,
+            affected_count: suspiciousEmailCount,
+            affectedColumns: ["Email"],
+            explanation: `Found ${suspiciousEmailCount} email addresses with domain typos (e.g. 'gmial.com').`,
+            recommendedAction: "Standardize domain spelling."
+          });
+        }
+        if (invalidPhoneCount > 0) {
+          detectedIssues.push({
+            id: "iss-004",
+            type: "Invalid Phone Number",
+            category: "Standardization",
+            severity: "Medium",
+            affectedRecords: invalidPhoneCount,
+            affected_count: invalidPhoneCount,
+            affectedColumns: ["Phone"],
+            explanation: `Found ${invalidPhoneCount} phone numbers containing invalid text.`,
+            recommendedAction: "Clean non-numeric characters and format to E.164."
+          });
+        }
+        if (outlierCount > 0) {
+          detectedIssues.push({
+            id: "iss-005",
+            type: "Domain Out-of-Bounds",
+            category: "Outliers & Bounds",
+            severity: "Critical",
+            affectedRecords: outlierCount,
+            affected_count: outlierCount,
+            affectedColumns: ["Age", "Annual_Revenue"],
+            explanation: `Found ${outlierCount} domain bounds violations (Age < 0 or > 120, Annual_Revenue < 0).`,
+            recommendedAction: "Clamp out-of-range metrics to valid domain boundaries."
+          });
+        }
+        if (duplicateIndices.size > 0) {
+          detectedIssues.push({
+            id: "iss-006",
+            type: "Duplicate Records",
+            category: "Duplicates",
+            severity: "High",
+            affectedRecords: duplicateIndices.size,
+            affected_count: duplicateIndices.size,
+            affectedColumns: ["First_Name", "Last_Name", "Email", "Phone"],
+            explanation: `Identified ${duplicateIndices.size} duplicate or near-duplicate records.`,
+            recommendedAction: "Deduplicate customer entities."
           });
         }
       }
