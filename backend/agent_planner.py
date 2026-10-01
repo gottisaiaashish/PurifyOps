@@ -120,6 +120,60 @@ def call_gemini_for_dag_insights(issues: List[Dict[str, Any]]) -> Dict[str, str]
     return {}
 
 
+def call_gemini_for_custom_rule(prompt: str) -> Dict[str, Any]:
+    """
+    Calls Google Gemini API to parse natural language rules into structured DAG steps.
+    """
+    api_key = get_gemini_api_key()
+    if not api_key:
+        return {}
+
+    ai_prompt = (
+        "You are PurifyOps AI. Parse this natural language data cleaning instruction: '" + prompt + "'\n"
+        "Return ONLY a valid JSON object with fields:\n"
+        "{\n"
+        '  "title": "Concise rule title",\n'
+        '  "targetColumn": "Column name or Multiple",\n'
+        '  "actionType": "custom_transform",\n'
+        '  "explanation": "1-sentence technical explanation of what this rule does"\n'
+        "}\n"
+        "Return ONLY valid JSON object without markdown fences."
+    )
+
+    models = ["gemini-flash-latest", "gemini-3.8-flash", "gemini-2.5-flash", "gemini-2.0-flash"]
+    payload = {
+        "contents": [{"parts": [{"text": ai_prompt}]}],
+        "generationConfig": {"temperature": 0.2, "maxOutputTokens": 250}
+    }
+
+    for model_name in models:
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={api_key}"
+        try:
+            req = urllib.request.Request(
+                url,
+                data=json.dumps(payload).encode("utf-8"),
+                headers={"Content-Type": "application/json"}
+            )
+            with urllib.request.urlopen(req, timeout=6) as response:
+                res_body = json.loads(response.read().decode("utf-8"))
+                candidates = res_body.get("candidates", [])
+                if candidates and "content" in candidates[0]:
+                    parts = candidates[0]["content"].get("parts", [])
+                    if parts and "text" in parts[0]:
+                        content = parts[0]["text"].strip()
+                        try:
+                            start = content.find("{")
+                            end = content.rfind("}")
+                            if start != -1 and end != -1 and end > start:
+                                return json.loads(content[start:end+1])
+                        except Exception:
+                            pass
+        except Exception as e:
+            print(f"[PurifyOps AI Planner] Custom rule Gemini model '{model_name}' failed: {e}")
+            continue
+    return {}
+
+
 def call_openai_for_dag_insights(issues: List[Dict[str, Any]]) -> Dict[str, str]:
     """
     Calls OpenAI GPT-4o to generate deep enterprise semantic reasoning for detected issues.

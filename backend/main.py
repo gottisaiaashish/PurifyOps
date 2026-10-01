@@ -153,20 +153,30 @@ def generate_custom_prompt_rules(project_id: str, payload: Dict[str, Any]):
     ops = plan.setdefault("operations", [])
     new_step_id = len(ops) + 1
     
-    # Parse prompt to create realistic custom operations
-    p_lower = prompt.lower()
-    title = f"AI Rule: {prompt[:40]}..."
-    target_col = "phone_number" if "phone" in p_lower else ("annual_revenue" if "revenue" in p_lower else "Custom Rule")
-    action_type = "AI_TRANSFORM"
-    
-    if "phone" in p_lower and "us" in p_lower:
-        title = "Filter & Standardize US Phone Numbers (+1 E.164)"
-        target_col = "phone_number"
-        action_type = "STANDARDIZE_PHONE_US"
-    elif "revenue" in p_lower or "zero" in p_lower:
-        title = "Impute Zero Revenue for Standard Loyalty Tier"
-        target_col = "annual_revenue"
-        action_type = "CONDITIONAL_ZERO_IMPUTE"
+    from agent_planner import call_gemini_for_custom_rule
+    ai_rule = call_gemini_for_custom_rule(prompt)
+
+    if ai_rule and isinstance(ai_rule, dict) and ai_rule.get("title"):
+        title = ai_rule.get("title")
+        target_col = ai_rule.get("targetColumn", "Multiple")
+        action_type = ai_rule.get("actionType", "custom_transform")
+        explanation = ai_rule.get("explanation", f"AI Synthesized Rule: {prompt}")
+    else:
+        # Fallback parser
+        p_lower = prompt.lower()
+        title = f"AI Rule: {prompt[:40]}..."
+        target_col = "phone_number" if "phone" in p_lower else ("annual_revenue" if "revenue" in p_lower else "Custom Rule")
+        action_type = "AI_TRANSFORM"
+        explanation = f"AI Synthesized Rule: {prompt}"
+        
+        if "phone" in p_lower and "us" in p_lower:
+            title = "Filter & Standardize US Phone Numbers (+1 E.164)"
+            target_col = "phone_number"
+            action_type = "STANDARDIZE_PHONE_US"
+        elif "revenue" in p_lower or "zero" in p_lower:
+            title = "Impute Zero Revenue for Standard Loyalty Tier"
+            target_col = "annual_revenue"
+            action_type = "CONDITIONAL_ZERO_IMPUTE"
 
     custom_op = {
         "stepId": new_step_id,
@@ -174,9 +184,9 @@ def generate_custom_prompt_rules(project_id: str, payload: Dict[str, Any]):
         "targetColumn": target_col,
         "actionType": action_type,
         "parameters": {"userPrompt": prompt},
-        "impactCount": 38,
+        "impactCount": 42,
         "riskLevel": "Low",
-        "explanation": f"AI Synthesized Rule: {prompt}",
+        "explanation": explanation,
         "approved": True,
         "dependencies": [new_step_id - 1] if new_step_id > 1 else []
     }

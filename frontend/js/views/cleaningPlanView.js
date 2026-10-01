@@ -100,7 +100,7 @@ export function renderCleaningPlan(container) {
           </span>
         </div>
         <span style="font-size: 11px; font-family: var(--font-mono); color: var(--accent-light); font-weight: 500;">
-          ● OpenAI GPT-4o Active
+          ● Google Gemini AI Active
         </span>
       </div>
 
