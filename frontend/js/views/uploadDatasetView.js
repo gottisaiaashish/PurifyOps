@@ -33,7 +33,7 @@ export function renderUploadDataset(container) {
         <p style="font-size: var(--text-sm); color: var(--text-muted); max-width: 460px; margin: 0 auto 16px;" id="dropzone-sub">
           Supported formats: CSV, Excel (.xlsx), TSV, and JSON files.
         </p>
-        <input type="file" id="file-input" style="display: none;" accept=".csv,.tsv,.xlsx,.xls,.parquet,.json" />
+        <input type="file" id="file-input" aria-label="Upload Dataset File" style="display: none;" accept=".csv,.tsv,.xlsx,.xls,.parquet,.json" />
         <div style="font-size: var(--text-xs); color: var(--text-muted); font-family: var(--font-mono);">
           CSV • EXCEL (.XLSX) • TSV • JSON
         </div>

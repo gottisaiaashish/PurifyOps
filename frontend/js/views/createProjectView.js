@@ -36,19 +36,19 @@ export function renderCreateProject(container) {
             <label class="form-label">Data Format <span style="color: var(--status-danger)">*</span></label>
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 8px;">
               <label class="source-card active" data-source="csv" style="padding: 16px; border: 1px solid var(--border-medium); border-radius: var(--radius-sm); text-align: center; cursor: pointer;">
-                <input type="radio" name="sourceType" value="csv" checked style="display: none;" />
+                <input type="radio" name="sourceType" value="csv" aria-label="CSV File Format" checked style="display: none;" />
                 <div style="font-weight: 600; font-size: var(--text-sm);">CSV File</div>
                 <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">.csv spreadsheet</div>
               </label>
 
               <label class="source-card" data-source="excel" style="padding: 16px; border: 1px solid var(--border-medium); border-radius: var(--radius-sm); text-align: center; cursor: pointer;">
-                <input type="radio" name="sourceType" value="excel" style="display: none;" />
+                <input type="radio" name="sourceType" value="excel" aria-label="Excel Spreadsheet Format" style="display: none;" />
                 <div style="font-weight: 600; font-size: var(--text-sm);">Excel Spreadsheet</div>
                 <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">.xlsx / .xls</div>
               </label>
 
               <label class="source-card" data-source="database" style="padding: 16px; border: 1px solid var(--border-medium); border-radius: var(--radius-sm); text-align: center; cursor: pointer;">
-                <input type="radio" name="sourceType" value="database" style="display: none;" />
+                <input type="radio" name="sourceType" value="database" aria-label="Database or JSON Format" style="display: none;" />
                 <div style="font-weight: 600; font-size: var(--text-sm);">Database / JSON</div>
                 <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">SQL or JSON format</div>
               </label>
