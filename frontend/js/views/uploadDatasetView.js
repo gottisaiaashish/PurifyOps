@@ -18,6 +18,9 @@ export function renderUploadDataset(container) {
         <p class="page-description">Upload your CSV, TSV, or Excel spreadsheet to find and fix errors automatically.</p>
       </div>
       <div class="page-actions">
+        <button class="btn btn-secondary" id="btn-load-test-csv">
+          ⚡ Load Test CSV (png6_test_messy_customer_data.csv)
+        </button>
         <button class="btn btn-outline" id="btn-browse-file">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           Select File From Computer
@@ -37,6 +40,16 @@ export function renderUploadDataset(container) {
         <div style="font-size: var(--text-xs); color: var(--text-muted); font-family: var(--font-mono);">
           CSV • EXCEL (.XLSX) • TSV • JSON
         </div>
+      </div>
+
+      <!-- Quick Test Banner -->
+      <div style="margin: 16px 0; padding: 12px 16px; background: rgba(147, 51, 234, 0.1); border: 1px solid rgba(147, 51, 234, 0.3); border-radius: var(--radius-sm); display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size: var(--text-xs); color: var(--text-secondary);">
+          Want to test data profiling immediately? Load the built-in test customer CSV dataset with 23 rows.
+        </span>
+        <button class="btn btn-primary btn-sm" id="btn-quick-load-test-csv">
+          ⚡ Load Test CSV
+        </button>
       </div>
 
 
@@ -107,6 +120,41 @@ export function renderUploadDataset(container) {
     dropzoneTitle.innerHTML = `Selected: <span style="color: var(--accent-light);">${file.name}</span>`;
     dropzoneSub.innerHTML = `File size: <strong>${(file.size / (1024 * 1024)).toFixed(2)} MB</strong>. Click "Check Data & Find Issues" below to proceed.`;
   }
+
+  const handleTestCsvLoad = async () => {
+    const csvContent = `Customer_ID,First_Name,Last_Name,Email,Phone,Age,City,Annual_Revenue
+1001,Rahul,Kumar,rahul@gmail.com,+919876543210,21.0,Hyderabad,45000.0
+1002,Rahul,Kumar,rahul@gmail.com,+919876543210,21.0,,
+1003,Arjun,Reddy,,9876543211,30,Hyderabad,60000.0
+1004,Kiran,Kumar,kiran@gmail.com,9876543213,-5,Chennai,40000.0
+1005,Sneha,Rao,sneha@yahoo.com,,27,Hyderabad,52000.0
+1006,Anjali,Sharma,anjali@gmail,9876543212,25,Bangalore,50000.0
+1007,Ravi,Teja,ravi@outlook.com,9876543215,35,Hyderabad,
+1008,Suresh,Rao,suresh@@gmail.com,9876543214,40,Mumbai,75000.0
+1009,Aman,Sharma,aman@gmail.com,9876543218,150,Delhi,65000.0
+1010,Lakshmi,Devi,lakshmi@gmail.com,abcd,29,Hyderabad,48000.0
+1011,Naveen,Singh,naveen@gmail.com,9876543219,32,Pune,-5000.0
+1012,Divya,Verma,divya@gmail.com,9876543220,26,,58000.0
+1013,Pooja,Hegde,pooja@gmail.com,9876543221,31,Hyderabad,70000.0
+1014,Pooja,Hegde,pooja@gmail.com,9876543221,31,Hyderabad,70000.0
+1015,Priya,Dharshini,priya@gmial.com,9876543222,24,Chennai,46000.0
+1016,Harish,Kalyan,harish@gmail.com,9876543223,,Bangalore,53000.0
+1017,Meena,Kumari,meena@gmail.com,9876543224,33,Hyderabad,62000.0
+1018,Meena,Kumari,meena@gmail.com,9876543224,33,Hyderabad,62000.0
+1019,Vijay,Devarakonda,vijay@gmail.com,9876543225,34,Hyderabad,85000.0
+1020,Rashmika,Mandanna,rashmika@gmail.com,9876543226,28,Bangalore,90000.0
+1021,Samantha,Ruth,samantha@gmail.com,9876543227,35,Chennai,95000.0
+1022,Nani,Ghanta,nani@gmail.com,9876543228,38,Hyderabad,78000.0
+1023,Prabhas,Raju,prabhas@gmail.com,9876543229,42,Hyderabad,120000.0`;
+
+    const blob = new Blob([csvContent], { type: "text/csv" });
+    const file = new File([blob], "png6_test_messy_customer_data.csv", { type: "text/csv" });
+    setFile(file);
+    await uploadRealFile(file);
+  };
+
+  container.querySelector("#btn-load-test-csv")?.addEventListener("click", handleTestCsvLoad);
+  container.querySelector("#btn-quick-load-test-csv")?.addEventListener("click", handleTestCsvLoad);
 
   container.querySelector("#btn-start-profiling")?.addEventListener("click", async () => {
     if (!selectedFile) {
