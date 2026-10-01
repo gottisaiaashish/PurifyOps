@@ -192,9 +192,10 @@ export const ApiService = {
           });
         }
       }
-    } catch (e) {
-      console.warn("Client CSV parsing failed:", e);
     }
+  } catch (e) {
+    console.warn("Client CSV parsing failed:", e);
+  }
 
     if (cb) cb(50);
 
