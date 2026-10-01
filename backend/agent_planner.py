@@ -90,31 +90,33 @@ def call_gemini_for_dag_insights(issues: List[Dict[str, Any]]) -> Dict[str, str]
         + "\nReturn only a valid JSON object without markdown code blocks, format: {\"IssueType\": \"AI rationale\"}."
     )
 
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
+    models = ["gemini-flash-latest", "gemini-3.8-flash", "gemini-2.5-flash", "gemini-2.0-flash"]
     payload = {
         "contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {"temperature": 0.2, "maxOutputTokens": 450}
     }
 
-    try:
-        req = urllib.request.Request(
-            url,
-            data=json.dumps(payload).encode("utf-8"),
-            headers={"Content-Type": "application/json"}
-        )
-        with urllib.request.urlopen(req, timeout=6) as response:
-            res_body = json.loads(response.read().decode("utf-8"))
-            candidates = res_body.get("candidates", [])
-            if candidates and "content" in candidates[0]:
-                parts = candidates[0]["content"].get("parts", [])
-                if parts and "text" in parts[0]:
-                    content = parts[0]["text"].strip()
-                    if content.startswith("```"):
-                        content = content.split("\n", 1)[1].rsplit("```", 1)[0].strip()
-                    return json.loads(content)
-    except Exception as e:
-        print(f"[PurifyOps AI Planner] Gemini call error: {e}")
-        return {}
+    for model_name in models:
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={api_key}"
+        try:
+            req = urllib.request.Request(
+                url,
+                data=json.dumps(payload).encode("utf-8"),
+                headers={"Content-Type": "application/json"}
+            )
+            with urllib.request.urlopen(req, timeout=6) as response:
+                res_body = json.loads(response.read().decode("utf-8"))
+                candidates = res_body.get("candidates", [])
+                if candidates and "content" in candidates[0]:
+                    parts = candidates[0]["content"].get("parts", [])
+                    if parts and "text" in parts[0]:
+                        content = parts[0]["text"].strip()
+                        if content.startswith("```"):
+                            content = content.split("\n", 1)[1].rsplit("```", 1)[0].strip()
+                        return json.loads(content)
+        except Exception as e:
+            print(f"[PurifyOps AI Planner] Gemini model '{model_name}' attempt failed: {e}")
+            continue
     return {}
 
 

@@ -342,40 +342,37 @@ def ai_helper(payload: Dict[str, Any]):
 
     # Priority 1: Google Gemini API
     if gemini_key:
-        try:
-            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={gemini_key}"
-            payload = {
-                "contents": [
-                    {
-                        "parts": [{"text": f"{system_msg}\n\n{user_content}"}]
-                    }
-                ],
-                "generationConfig": {
-                    "temperature": 0.4,
-                    "maxOutputTokens": 600
+        models = ["gemini-flash-latest", "gemini-3.8-flash", "gemini-2.5-flash", "gemini-2.0-flash"]
+        payload = {
+            "contents": [
+                {
+                    "parts": [{"text": f"{system_msg}\n\n{user_content}"}]
                 }
+            ],
+            "generationConfig": {
+                "temperature": 0.4,
+                "maxOutputTokens": 600
             }
-            req = urllib.request.Request(
-                url,
-                data=json.dumps(payload).encode("utf-8"),
-                headers={"Content-Type": "application/json"}
-            )
-            with urllib.request.urlopen(req, timeout=12) as response:
-                res_body = json.loads(response.read().decode("utf-8"))
-                candidates = res_body.get("candidates", [])
-                if candidates and "content" in candidates[0]:
-                    parts = candidates[0]["content"].get("parts", [])
-                    if parts and "text" in parts[0]:
-                        reply = parts[0]["text"].strip()
-                        return {"reply": reply, "model": "Google Gemini 1.5 Flash"}
-        except Exception as e:
-            err_msg = str(e)
-            print(f"[AI Helper Error] Gemini API call failed: {err_msg}")
-            if "429" in err_msg or "RESOURCE_EXHAUSTED" in err_msg:
-                return {
-                    "reply": "⚠️ Gemini API Quota Exceeded (HTTP 429). Please check your Gemini API Key rate limits on Google AI Studio.",
-                    "model": "System Alert"
-                }
+        }
+        for m_name in models:
+            try:
+                url = f"https://generativelanguage.googleapis.com/v1beta/models/{m_name}:generateContent?key={gemini_key}"
+                req = urllib.request.Request(
+                    url,
+                    data=json.dumps(payload).encode("utf-8"),
+                    headers={"Content-Type": "application/json"}
+                )
+                with urllib.request.urlopen(req, timeout=12) as response:
+                    res_body = json.loads(response.read().decode("utf-8"))
+                    candidates = res_body.get("candidates", [])
+                    if candidates and "content" in candidates[0]:
+                        parts = candidates[0]["content"].get("parts", [])
+                        if parts and "text" in parts[0]:
+                            reply = parts[0]["text"].strip()
+                            return {"reply": reply, "model": f"Google Gemini ({m_name})"}
+            except Exception as e:
+                print(f"[AI Helper Error] Gemini model '{m_name}' failed: {e}")
+                continue
 
     # Priority 2: OpenAI API
     if openai_key:
