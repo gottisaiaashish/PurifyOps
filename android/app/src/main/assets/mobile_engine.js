@@ -1,9 +1,11 @@
 /**
- * PurifyOps Android Native Mobile Engine
- * Enforces mobile-first responsive alignments, native drawer, and logo branding.
- * Zero changes to backend or web repository.
+ * PurifyOps Android Native Mobile Engine v2
+ * - Disables browser-like pull-to-refresh
+ * - Eliminates drawer blur completely (crystal clear sharp text & background)
+ * - Removes topbar logo as requested (clean native topbar)
+ * - Perfect alignments and touch scrolling
  */
-(function(logoBase64) {
+(function() {
     'use strict';
 
     try {
@@ -26,7 +28,7 @@
         }
 
         styleEl.innerHTML = `
-            /* --- Android App Native Mobile Theme & Alignments --- */
+            /* --- Android App Native Mobile Theme & Layout --- */
             html, body {
                 width: 100vw !important;
                 max-width: 100vw !important;
@@ -34,8 +36,8 @@
                 background-color: #0B0F19 !important;
                 margin: 0 !important;
                 padding: 0 !important;
-                -webkit-tap-highlight-color: transparent;
-                -webkit-font-smoothing: antialiased;
+                -webkit-tap-highlight-color: transparent !important;
+                -webkit-font-smoothing: antialiased !important;
             }
 
             .app-container, .app-layout {
@@ -48,127 +50,136 @@
                 background: #0B0F19 !important;
             }
 
-            /* --- Off-Canvas Drawer Navigation Sidebar --- */
+            /* --- Off-Canvas Drawer Navigation Sidebar (CRYSTAL CLEAR, ZERO BLUR) --- */
             .app-sidebar {
                 position: fixed !important;
                 top: 0 !important;
                 left: 0 !important;
                 bottom: 0 !important;
-                width: 290px !important;
-                max-width: 85vw !important;
+                width: 295px !important;
+                max-width: 86vw !important;
                 height: 100vh !important;
-                z-index: 99999 !important;
+                z-index: 100000 !important;
                 transform: translateX(-105%) !important;
                 transition: transform 0.28s cubic-bezier(0.32, 0.72, 0, 1) !important;
-                background: #0B0F19 !important;
-                box-shadow: 16px 0 40px rgba(0, 0, 0, 0.92) !important;
-                border-right: 1px solid rgba(255, 255, 255, 0.12) !important;
+                background: #0D1322 !important;
+                background-color: #0D1322 !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                filter: none !important;
+                opacity: 1 !important;
+                box-shadow: 16px 0 45px rgba(0, 0, 0, 0.95) !important;
+                border-right: 1px solid rgba(255, 255, 255, 0.14) !important;
                 overflow-y: auto !important;
                 display: flex !important;
                 flex-direction: column !important;
+            }
+
+            .app-sidebar * {
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                filter: none !important;
+                text-shadow: none !important;
             }
 
             .app-sidebar.mobile-open {
                 transform: translateX(0) !important;
             }
 
-            /* Custom Drawer Header with 4th Image Logo & Close Button */
-            .sidebar-mobile-header {
+            /* Clean Drawer Header */
+            .sidebar-header {
                 display: flex !important;
                 align-items: center !important;
                 justify-content: space-between !important;
-                padding: 16px 16px 14px 16px !important;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.10) !important;
+                padding: 16px 16px !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
                 background: #111827 !important;
+                min-height: 60px !important;
             }
 
-            .sidebar-mobile-brand {
+            .brand-details {
                 display: flex !important;
-                align-items: center !important;
-                gap: 10px !important;
+                flex-direction: column !important;
             }
 
-            .sidebar-mobile-brand img {
-                width: 34px !important;
-                height: 34px !important;
-                border-radius: 8px !important;
-                object-fit: cover !important;
-                box-shadow: 0 0 12px rgba(6, 182, 212, 0.4) !important;
-            }
-
-            .sidebar-mobile-title {
-                font-size: 16px !important;
+            .brand-title {
+                color: #FFFFFF !important;
+                font-size: 18px !important;
                 font-weight: 700 !important;
-                color: #F8FAFC !important;
-                letter-spacing: -0.01em !important;
-            }
-
-            .sidebar-mobile-subtitle {
-                font-size: 10px !important;
-                color: #06B6D4 !important;
-                font-weight: 600 !important;
-                text-transform: uppercase !important;
-                letter-spacing: 0.06em !important;
+                letter-spacing: -0.02em !important;
+                opacity: 1 !important;
             }
 
             .btn-close-sidebar {
-                width: 32px !important;
-                height: 32px !important;
-                border-radius: 8px !important;
+                width: 34px !important;
+                height: 34px !important;
+                border-radius: 9px !important;
                 background: rgba(255, 255, 255, 0.08) !important;
-                border: 1px solid rgba(255, 255, 255, 0.12) !important;
-                color: #94A3B8 !important;
+                border: 1px solid rgba(255, 255, 255, 0.14) !important;
+                color: #E2E8F0 !important;
                 display: flex !important;
                 align-items: center !important;
                 justify-content: center !important;
                 cursor: pointer !important;
+                flex-shrink: 0 !important;
             }
             .btn-close-sidebar:active {
-                background: rgba(239, 68, 68, 0.25) !important;
+                background: rgba(239, 68, 68, 0.3) !important;
                 color: #EF4444 !important;
             }
 
-            /* High Contrast Sidebar Navigation Items */
+            /* Sharp High-Contrast Sidebar Navigation */
             .sidebar-nav {
                 padding: 12px 10px !important;
                 flex: 1 !important;
+                background: #0D1322 !important;
             }
 
             .nav-section-title {
                 font-size: 11px !important;
-                color: #64748B !important;
+                color: #94A3B8 !important;
                 font-weight: 700 !important;
                 letter-spacing: 0.08em !important;
                 text-transform: uppercase !important;
-                padding: 12px 12px 6px 12px !important;
+                padding: 14px 12px 6px 12px !important;
+                opacity: 1 !important;
             }
 
             .nav-item {
                 display: flex !important;
                 align-items: center !important;
                 gap: 12px !important;
-                padding: 11px 14px !important;
-                margin-bottom: 3px !important;
+                padding: 12px 14px !important;
+                margin-bottom: 4px !important;
                 border-radius: 10px !important;
-                color: #CBD5E1 !important;
+                color: #F1F5F9 !important;
                 font-size: 14px !important;
-                font-weight: 500 !important;
+                font-weight: 600 !important;
+                opacity: 1 !important;
+                background: transparent !important;
                 transition: all 0.15s ease !important;
             }
 
             .nav-item:hover, .nav-item:active {
-                background: rgba(255, 255, 255, 0.06) !important;
-                color: #F8FAFC !important;
+                background: rgba(255, 255, 255, 0.08) !important;
+                color: #FFFFFF !important;
             }
 
             .nav-item.active {
-                background: linear-gradient(90deg, rgba(6, 182, 212, 0.20), rgba(59, 130, 246, 0.10)) !important;
+                background: linear-gradient(90deg, rgba(6, 182, 212, 0.25), rgba(59, 130, 246, 0.15)) !important;
                 color: #38BDF8 !important;
                 font-weight: 600 !important;
                 border-left: 3px solid #06B6D4 !important;
             }
 
-            /* Dimmed Backdrop Overlay */
+            .nav-item .nav-icon {
+                width: 20px !important;
+                height: 20px !important;
+                color: #38BDF8 !important;
+                opacity: 1 !important;
+            }
+
+            /* Dimmed Backdrop Overlay (No Blur Filter) */
             #purifyops-mobile-backdrop {
                 display: none;
                 position: fixed;
@@ -176,12 +187,13 @@
                 left: 0;
                 right: 0;
                 bottom: 0;
-                background: rgba(3, 7, 18, 0.75);
-                backdrop-filter: blur(4px);
-                -webkit-backdrop-filter: blur(4px);
-                z-index: 99990;
+                background: rgba(3, 7, 18, 0.70) !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                filter: none !important;
+                z-index: 99990 !important;
                 opacity: 0;
-                transition: opacity 0.25s ease;
+                transition: opacity 0.22s ease;
             }
             #purifyops-mobile-backdrop.active {
                 display: block !important;
@@ -200,7 +212,7 @@
                 overflow-x: hidden !important;
             }
 
-            /* --- Clean Top Navigation Bar --- */
+            /* --- Clean Topbar (NO LOGO) --- */
             .topbar {
                 height: 56px !important;
                 min-height: 56px !important;
@@ -219,12 +231,12 @@
             .topbar-left {
                 display: flex !important;
                 align-items: center !important;
-                gap: 8px !important;
+                gap: 10px !important;
                 min-width: 0 !important;
                 flex: 1 !important;
             }
 
-            /* Native Hamburger Button */
+            /* Clean Native Hamburger Button */
             #purifyops-hamburger-btn {
                 display: flex !important;
                 align-items: center !important;
@@ -245,30 +257,9 @@
                 background: rgba(6, 182, 212, 0.30) !important;
             }
 
-            /* Topbar Logo and App Name */
-            .topbar-app-brand {
-                display: flex !important;
-                align-items: center !important;
-                gap: 7px !important;
-                margin-right: 4px !important;
-                flex-shrink: 0 !important;
-            }
-            .topbar-app-brand img {
-                width: 24px !important;
-                height: 24px !important;
-                border-radius: 6px !important;
-                object-fit: cover !important;
-            }
-            .topbar-app-brand span {
-                font-size: 15px !important;
-                font-weight: 700 !important;
-                color: #F8FAFC !important;
-                letter-spacing: -0.01em !important;
-            }
-
             .project-selector {
-                padding: 4px 8px !important;
-                max-width: 110px !important;
+                padding: 5px 9px !important;
+                max-width: 130px !important;
                 overflow: hidden !important;
                 text-overflow: ellipsis !important;
                 white-space: nowrap !important;
@@ -280,9 +271,9 @@
                 display: none !important;
             }
             .project-name {
-                font-size: 11px !important;
+                font-size: 12px !important;
                 color: #CBD5E1 !important;
-                max-width: 90px !important;
+                max-width: 105px !important;
                 overflow: hidden !important;
                 text-overflow: ellipsis !important;
             }
@@ -369,7 +360,7 @@
                 margin-top: 4px !important;
             }
 
-            /* Responsive 2-Column Equal Grid for Action Buttons */
+            /* 2-Column Equal Grid for Action Buttons */
             .page-actions {
                 width: 100% !important;
                 display: grid !important;
@@ -443,10 +434,9 @@
             });
         }
 
-        // 4. Inject Hamburger Button & Logo into Topbar
+        // 4. Inject Hamburger Button into Topbar (NO LOGO)
         var topbarLeft = document.querySelector('.topbar-left');
         if (topbarLeft && !document.getElementById('purifyops-hamburger-btn')) {
-            // Hamburger button
             var hamburger = document.createElement('button');
             hamburger.id = 'purifyops-hamburger-btn';
             hamburger.type = 'button';
@@ -458,55 +448,46 @@
                 e.stopPropagation();
                 toggleSidebar();
             });
-
-            // App Brand Logo with 4th image
-            if (logoBase64 && !document.getElementById('purifyops-topbar-brand')) {
-                var brandEl = document.createElement('div');
-                brandEl.id = 'purifyops-topbar-brand';
-                brandEl.className = 'topbar-app-brand';
-                brandEl.innerHTML = '<img src="data:image/png;base64,' + logoBase64 + '" alt="PurifyOps Logo" /><span>PurifyOps</span>';
-                topbarLeft.insertBefore(brandEl, hamburger.nextSibling);
-            }
         }
 
-        // 5. Enhance Sidebar Header with 4th Image Logo & Close Button
-        var sidebar = document.querySelector('.app-sidebar');
-        if (sidebar && !document.getElementById('sidebar-mobile-header')) {
-            var sHeader = document.createElement('div');
-            sHeader.id = 'sidebar-mobile-header';
-            sHeader.className = 'sidebar-mobile-header';
-            sHeader.innerHTML = `
-                <div class="sidebar-mobile-brand">
-                    <img src="data:image/png;base64,` + logoBase64 + `" alt="PurifyOps Logo" />
-                    <div>
-                        <div class="sidebar-mobile-title">PurifyOps</div>
-                        <div class="sidebar-mobile-subtitle">Smart Data Cleaning</div>
-                    </div>
-                </div>
-                <button type="button" class="btn-close-sidebar" aria-label="Close menu">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                </button>
-            `;
-            sidebar.insertBefore(sHeader, sidebar.firstChild);
+        // Remove any unwanted topbar brand logo
+        var oldBrand = document.getElementById('purifyops-topbar-brand');
+        if (oldBrand) oldBrand.remove();
 
-            var closeBtn = sHeader.querySelector('.btn-close-sidebar');
-            if (closeBtn) {
-                closeBtn.addEventListener('click', function() {
+        var oldMobileHeader = document.getElementById('sidebar-mobile-header');
+        if (oldMobileHeader) oldMobileHeader.remove();
+
+        // 5. Add Close Button to existing Sidebar Header
+        var sidebar = document.querySelector('.app-sidebar');
+        if (sidebar) {
+            var sHeader = sidebar.querySelector('.sidebar-header');
+            if (sHeader && !sHeader.querySelector('.btn-close-sidebar')) {
+                var closeBtn = document.createElement('button');
+                closeBtn.className = 'btn-close-sidebar';
+                closeBtn.type = 'button';
+                closeBtn.setAttribute('aria-label', 'Close menu');
+                closeBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+                sHeader.appendChild(closeBtn);
+                closeBtn.onclick = function() {
                     closeSidebar();
-                });
+                };
             }
         }
 
         function toggleSidebar() {
             if (!sidebar) return;
             var isOpen = sidebar.classList.toggle('mobile-open');
+            var canvas = document.getElementById('gradient-waves-canvas');
+
             if (isOpen) {
                 backdrop.classList.add('active');
+                if (canvas) canvas.style.display = 'none'; // prevent GPU blur interference
                 if (window.AndroidBridge && window.AndroidBridge.onDrawerStateChanged) {
                     window.AndroidBridge.onDrawerStateChanged(true);
                 }
             } else {
                 backdrop.classList.remove('active');
+                if (canvas) canvas.style.display = 'block';
                 if (window.AndroidBridge && window.AndroidBridge.onDrawerStateChanged) {
                     window.AndroidBridge.onDrawerStateChanged(false);
                 }
@@ -516,6 +497,8 @@
         function closeSidebar() {
             if (sidebar) sidebar.classList.remove('mobile-open');
             if (backdrop) backdrop.classList.remove('active');
+            var canvas = document.getElementById('gradient-waves-canvas');
+            if (canvas) canvas.style.display = 'block';
             if (window.AndroidBridge && window.AndroidBridge.onDrawerStateChanged) {
                 window.AndroidBridge.onDrawerStateChanged(false);
             }
@@ -540,4 +523,4 @@
     } catch (e) {
         console.error("PurifyOps Mobile Engine Error:", e);
     }
-})(%LOGO_BASE64%);
+})();

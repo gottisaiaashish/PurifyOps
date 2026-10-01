@@ -86,9 +86,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadAssets() {
         try {
-            val logoB64 = assets.open("purifyops_logo_b64.txt").bufferedReader().use { it.readText().trim() }
-            val jsTemplate = assets.open("mobile_engine.js").bufferedReader().use { it.readText() }
-            mobileEngineScript = jsTemplate.replace("%LOGO_BASE64%", "\"$logoB64\"")
+            mobileEngineScript = assets.open("mobile_engine.js").bufferedReader().use { it.readText() }
             Log.d(TAG, "Loaded mobile engine script from assets successfully (size: ${mobileEngineScript.length})")
         } catch (e: Exception) {
             Log.e(TAG, "Failed to load mobile engine assets", e)
@@ -112,8 +110,8 @@ class MainActivity : AppCompatActivity() {
         btnRetry = findViewById(R.id.btnRetry)
         btnSwitchUrl = findViewById(R.id.btnSwitchUrl)
 
-        swipeRefreshLayout.setColorSchemeResources(R.color.primary, R.color.accent_blue)
-        swipeRefreshLayout.setProgressBackgroundColorSchemeResource(R.color.surface_dark)
+        // Disable pull-to-refresh reload completely so the app feels 100% native
+        swipeRefreshLayout.isEnabled = false
     }
 
     private fun setupBackNavigation() {
