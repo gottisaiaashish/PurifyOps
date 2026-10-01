@@ -125,7 +125,7 @@ export function renderUploadDataset(container) {
     pctBadge.textContent = "15%";
 
     try {
-      const activeProjId = stateStore.getState().projects[0]?.id || "proj-001";
+      const activeProjId = stateStore.getState().activeProjectId || stateStore.getState().projects[0]?.id || "proj-001";
       await ApiService.uploadDatasetFile(activeProjId, file, pct => {
         progressBar.style.width = `${pct}%`;
         pctBadge.textContent = `${pct}%`;

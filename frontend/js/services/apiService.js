@@ -79,19 +79,35 @@ export const ApiService = {
     return true;
   },
 
-  async uploadDataset(file, progressCallback) {
-    const projectId = "proj-001";
-    const formData = new FormData();
-    formData.append("file", file);
+  async uploadDataset(projectIdOrFile, fileOrCallback, progressCallback) {
+    let projectId = "proj-001";
+    let file = null;
+    let cb = null;
 
-    if (progressCallback) progressCallback(25);
+    if (typeof projectIdOrFile === "string") {
+      projectId = projectIdOrFile;
+      file = fileOrCallback;
+      cb = progressCallback;
+    } else {
+      file = projectIdOrFile;
+      cb = fileOrCallback;
+      projectId = stateStore.getState().activeProjectId || stateStore.getState().projects[0]?.id || "proj-001";
+    }
+
+    const formData = new FormData();
+    if (file) {
+      formData.append("file", file);
+    }
+
+    if (cb) cb(25);
 
     // Read and parse CSV client-side so data is immediately available
     let parsedRecords = [];
     let parsedHeaders = [];
     let detectedIssues = [];
     try {
-      const text = await file.text();
+      if (file) {
+        const text = await file.text();
       const lines = text.split(/\r?\n/).filter(l => l.trim().length > 0);
       if (lines.length > 0) {
         parsedHeaders = lines[0].split(",").map(h => h.trim().replace(/^["']|["']$/g, ""));
@@ -180,7 +196,7 @@ export const ApiService = {
       console.warn("Client CSV parsing failed:", e);
     }
 
-    if (progressCallback) progressCallback(50);
+    if (cb) cb(50);
 
     // Try server API upload
     try {
@@ -188,10 +204,10 @@ export const ApiService = {
         method: "POST",
         body: formData
       });
-      if (progressCallback) progressCallback(85);
+      if (cb) cb(85);
       if (res.ok) {
         const datasetInfo = await res.json();
-        if (progressCallback) progressCallback(100);
+        if (cb) cb(100);
         stateStore.state.activeDataset = datasetInfo;
         if (datasetInfo.issues && datasetInfo.issues.length > 0) {
           stateStore.state.issues = datasetInfo.issues;
@@ -225,12 +241,12 @@ export const ApiService = {
     }
 
     // Client fallback with real parsed records & issues
-    if (progressCallback) progressCallback(100);
+    if (cb) cb(100);
     const initialScore = Math.max(35, Math.min(75, 100 - (detectedIssues.length * 12)));
     stateStore.state.activeDataset = {
       id: `ds-${Date.now()}`,
-      name: file.name,
-      fileSize: `${(file.size / (1024 * 1024)).toFixed(2)} MB`,
+      name: file ? file.name : "uploaded_dataset.csv",
+      fileSize: file ? `${(file.size / (1024 * 1024)).toFixed(2)} MB` : "0 MB",
       recordsCount: parsedRecords.length || 1045,
       columnsCount: parsedHeaders.length || 13,
       uploadedAt: "Just now",
@@ -287,6 +303,10 @@ export const ApiService = {
     stateStore.saveState();
     stateStore.emit("state:changed", stateStore.state);
     return stateStore.state.activeDataset;
+  },
+
+  async uploadDatasetFile(projectId, file, progressCallback) {
+    return this.uploadDataset(projectId, file, progressCallback);
   },
 
   async syncStateWithBackend(projectId = "proj-001") {
