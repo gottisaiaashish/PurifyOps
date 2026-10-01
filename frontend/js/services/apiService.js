@@ -12,20 +12,25 @@ const API_BASE = isLocalhost
   : "https://purifyops.onrender.com/api/v1";
 
 async function request(endpoint, options = {}) {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 45000);
   try {
     const res = await fetch(`${API_BASE}${endpoint}`, {
       headers: {
         "Content-Type": "application/json",
         ...options.headers
       },
+      signal: controller.signal,
       ...options
     });
+    clearTimeout(timeoutId);
     if (!res.ok) {
       throw new Error(`API error ${res.status}: ${res.statusText}`);
     }
     return await res.json();
   } catch (err) {
-    console.warn(`[ApiService] Request to ${endpoint} failed, falling back to local store:`, err.message);
+    clearTimeout(timeoutId);
+    console.warn(`[ApiService] Request to ${endpoint} failed:`, err.message);
     return null;
   }
 }
@@ -711,11 +716,13 @@ export const ApiService = {
 
   // --- AI Assistant / Help ---
   async askAiHelper(prompt, context = {}) {
-    const settingsKey = stateStore.getState().settings?.openaiApiKey || "";
     const res = await request("/ai-helper", {
       method: "POST",
-      body: JSON.stringify({ prompt, context, apiKey: settingsKey })
+      body: JSON.stringify({ prompt, context })
     });
-    return res ? res.reply : "AI Helper is currently ready to answer your data questions.";
+    if (res && res.reply) {
+      return res.reply;
+    }
+    return "⚠️ Connecting to AI Server... (Server is waking up from cold-start, please try again in 5 seconds)";
   }
 };
