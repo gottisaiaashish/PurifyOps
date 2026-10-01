@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">PurifyOps</string>
+    <string name="default_url">https://purifyops-frontend.vercel.app</string>
+    <string name="emulator_local_url">http://10.0.2.2:5500</string>
+    <string name="retry">Retry</string>
+    <string name="offline_message">Unable to load PurifyOps. Check your internet connection or backend server.</string>
+</resources>
