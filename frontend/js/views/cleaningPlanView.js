@@ -39,6 +39,9 @@ export function renderCleaningPlan(container) {
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
           ${operations.length > 0 ? 'Re-create Plan' : 'Generate Cleaning Plan'}
         </button>
+        <button class="btn btn-outline" id="btn-goto-human-review">
+          📋 Human Review Queue
+        </button>
         <button class="btn btn-primary" id="btn-goto-run">
           Run Cleaning Now →
         </button>
@@ -264,7 +267,10 @@ export function renderCleaningPlan(container) {
   container.querySelectorAll(".preset-prompt-chip").forEach(chip => {
     chip.addEventListener("click", () => {
       const p = chip.dataset.prompt;
-      if (p) runCustomPrompt(p);
-    });
+  container.querySelector("#btn-goto-human-review")?.addEventListener("click", () => {
+    window.location.hash = "#review-approval";
+  });
+  container.querySelector("#btn-goto-run")?.addEventListener("click", () => {
+    window.location.hash = "#execution";
   });
 }

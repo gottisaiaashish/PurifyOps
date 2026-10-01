@@ -25,106 +25,54 @@ def calculate_hash(records: List[Dict[str, Any]]) -> str:
     return "sha256:" + hashlib.sha256(serialized.encode("utf-8")).hexdigest()[:10] + "...4a"
 
 
-def clean_single_record(r: Dict[str, Any], idx: int) -> Dict[str, Any]:
+def clean_single_record(r: Dict[str, Any], idx: int, human_corrections: Dict[str, Any] = None) -> Dict[str, Any]:
     cleaned_r = copy.deepcopy(r)
+    human_corrections = human_corrections or {}
 
+    row_id = str(r.get("Customer_ID") or r.get("id") or f"Row-{idx + 1}")
     fname = str(r.get("First_Name") or r.get("first_name") or "").strip()
     lname = str(r.get("Last_Name") or r.get("last_name") or "").strip()
 
-    # 1. Clean Email
+    # 1. Clean Email (Syntax & domain typos only - NO arbitrary fake email creation)
     email = r.get("Email") or r.get("email")
-    if is_null_val(email):
-        if fname and lname:
-            email = f"{fname.lower()}.{lname.lower()}@verified-domain.com"
-        elif fname:
-            email = f"{fname.lower()}@verified-domain.com"
-        else:
-            email = f"customer_{idx + 1}@verified-domain.com"
-    else:
-        email = str(email).strip().lower()
-        email = email.replace("@@", "@")
-        email = re.sub(r"\.\.+", ".", email)
-        if email.endswith("@gmail"):
-            email += ".com"
-        if email.endswith("@yahoo"):
-            email += ".com"
-        if email.endswith("@hotmail"):
-            email += ".com"
-        email = email.replace("@gmial.com", "@gmail.com")
-        email = email.replace("@gamil.com", "@gmail.com")
-        email = email.replace("@yaho.com", "@yahoo.com")
-        email = email.replace("_at_", "@")
+    if not is_null_val(email):
+        e_str = str(email).strip().lower()
+        e_str = e_str.replace("@@", "@")
+        e_str = re.sub(r"\.\.+", ".", e_str)
+        if e_str.endswith("@gmail"): e_str += ".com"
+        if e_str.endswith("@yahoo"): e_str += ".com"
+        if e_str.endswith("@hotmail"): e_str += ".com"
+        e_str = e_str.replace("@gmial.com", "@gmail.com")
+        e_str = e_str.replace("@gamil.com", "@gmail.com")
+        e_str = e_str.replace("@yaho.com", "@yahoo.com")
+        e_str = e_str.replace("_at_", "@")
+        if "Email" in cleaned_r: cleaned_r["Email"] = e_str
+        elif "email" in cleaned_r: cleaned_r["email"] = e_str
 
-    if "Email" in cleaned_r: cleaned_r["Email"] = email
-    elif "email" in cleaned_r: cleaned_r["email"] = email
-    else: cleaned_r["Email"] = email
-
-    # 2. Clean Phone
+    # 2. Clean Phone (Formatting digits only - NO dummy phone creation)
     phone = r.get("Phone") or r.get("phone")
-    if is_null_val(phone) or re.search(r"[a-zA-Z]", str(phone)):
-        phone = "+91 9876543210"
-    else:
+    if not is_null_val(phone) and not re.search(r"[a-zA-Z]", str(phone)):
         p_str = str(phone).strip()
         digits = re.sub(r"\D", "", p_str)
         if len(digits) == 10:
-            phone = f"+91 {digits}"
-        elif len(digits) == 12 and digits.startswith("91"):
-            phone = f"+91 {digits[2:]}"
-        elif 7 <= len(digits) <= 15:
-            phone = f"+91 {digits[-10:]}"
-        else:
-            phone = "+91 9876543210"
+            formatted_phone = f"+91 {digits}"
+            if "Phone" in cleaned_r: cleaned_r["Phone"] = formatted_phone
+            elif "phone" in cleaned_r: cleaned_r["phone"] = formatted_phone
 
-    if "Phone" in cleaned_r: cleaned_r["Phone"] = phone
-    elif "phone" in cleaned_r: cleaned_r["phone"] = phone
-    else: cleaned_r["Phone"] = phone
-
-    # 3. Clean Age
-    age = r.get("Age") or r.get("age")
-    if is_null_val(age):
-        age = "28"
-    else:
-        try:
-            age_num = float(str(age).replace("$", "").replace(",", "").strip())
-            if age_num < 0 or age_num > 120:
-                age = "28"
-            else:
-                age = str(int(round(age_num)))
-        except ValueError:
-            age = "28"
-
-    if "Age" in cleaned_r: cleaned_r["Age"] = age
-    elif "age" in cleaned_r: cleaned_r["age"] = age
-    else: cleaned_r["Age"] = age
-
-    # 4. Clean Annual Revenue
-    rev = r.get("Annual_Revenue") or r.get("annual_revenue") or r.get("Revenue")
-    if is_null_val(rev):
-        rev = "50000.00"
-    else:
-        try:
-            rev_num = float(str(rev).replace("$", "").replace(",", "").strip())
-            if rev_num < 0:
-                rev = "50000.00"
-            else:
-                rev = f"{rev_num:.2f}"
-        except ValueError:
-            rev = "50000.00"
-
-    if "Annual_Revenue" in cleaned_r: cleaned_r["Annual_Revenue"] = rev
-    elif "annual_revenue" in cleaned_r: cleaned_r["annual_revenue"] = rev
-    else: cleaned_r["Annual_Revenue"] = rev
-
-    # 5. Clean City
+    # 3. Clean City Casing
     city = r.get("City") or r.get("city")
-    if is_null_val(city):
-        city = "Hyderabad"
-    else:
-        city = str(city).strip().title()
+    if not is_null_val(city):
+        city_str = str(city).strip().title()
+        if "City" in cleaned_r: cleaned_r["City"] = city_str
+        elif "city" in cleaned_r: cleaned_r["city"] = city_str
 
-    if "City" in cleaned_r: cleaned_r["City"] = city
-    elif "city" in cleaned_r: cleaned_r["city"] = city
-    else: cleaned_r["City"] = city
+    # Apply Verified Human Corrections (Strictly targeting single column without modifying adjacent fields)
+    for key, val in human_corrections.items():
+        # key format: "Row-4_Age" or "Kiran Kumar_Age" or "iss-005"
+        if row_id in key or (fname and fname.lower() in key.lower()):
+            for col in ["Age", "age", "Annual_Revenue", "annual_revenue", "Revenue", "Phone", "phone", "Email", "email", "City", "city"]:
+                if col in key and col in cleaned_r:
+                    cleaned_r[col] = str(val)
 
     return cleaned_r
 

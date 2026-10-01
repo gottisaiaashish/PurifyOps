@@ -193,109 +193,232 @@ class StateManager {
     this.emit("state:changed", this.state);
   }
 
-  cleanRecordRow(r, idx) {
+  cleanRecordRow(r, idx, humanCorrections = {}) {
     const NULL_SENTINELS = new Set(["", "na", "n/a", "null", "none", "-", "?", "missing", "nan", "nil", "undefined"]);
     const isNull = (v) => v === null || v === undefined || NULL_SENTINELS.has(String(v).trim().toLowerCase());
 
     const cleanedRow = { ...r };
     const fname = String(r.First_Name || r.first_name || "").trim();
     const lname = String(r.Last_Name || r.last_name || "").trim();
+    const rowId = String(r.Customer_ID || r.id || `Row-${idx + 1}`);
 
-    // 1. Clean Email
+    // 1. Clean Email (Deterministic syntax & domain typos only)
     let email = r.Email || r.email || "";
-    if (isNull(email)) {
-      if (fname && lname) {
-        email = `${fname.toLowerCase()}.${lname.toLowerCase()}@verified-domain.com`;
-      } else if (fname) {
-        email = `${fname.toLowerCase()}@verified-domain.com`;
-      } else {
-        email = `customer_${idx + 1}@verified-domain.com`;
-      }
-    } else {
-      email = String(email).trim().toLowerCase();
-      email = email.replace("@@", "@").replace(/\.\./g, ".");
-      if (email.endsWith("@gmail")) email += ".com";
-      if (email.endsWith("@yahoo")) email += ".com";
-      if (email.endsWith("@hotmail")) email += ".com";
-      if (email.includes("@gmial.com")) email = email.replace("@gmial.com", "@gmail.com");
-      if (email.includes("@gamil.com")) email = email.replace("@gamil.com", "@gmail.com");
-      if (email.includes("@yaho.com")) email = email.replace("@yaho.com", "@yahoo.com");
-      if (email.includes("_at_")) email = email.replace("_at_", "@");
+    if (!isNull(email)) {
+      let eStr = String(email).trim().toLowerCase();
+      eStr = eStr.replace("@@", "@").replace(/\.\./g, ".");
+      if (eStr.endsWith("@gmail")) eStr += ".com";
+      if (eStr.endsWith("@yahoo")) eStr += ".com";
+      if (eStr.endsWith("@hotmail")) eStr += ".com";
+      if (eStr.includes("@gmial.com")) eStr = eStr.replace("@gmial.com", "@gmail.com");
+      if (eStr.includes("@gamil.com")) eStr = eStr.replace("@gamil.com", "@gmail.com");
+      if (eStr.includes("@yaho.com")) eStr = eStr.replace("@yaho.com", "@yahoo.com");
+      if (eStr.includes("_at_")) eStr = eStr.replace("_at_", "@");
+      if ("Email" in cleanedRow) cleanedRow.Email = eStr;
+      if ("email" in cleanedRow) cleanedRow.email = eStr;
     }
-    if ("Email" in cleanedRow) cleanedRow.Email = email;
-    if ("email" in cleanedRow) cleanedRow.email = email;
 
-    // 2. Clean Phone
+    // 2. Clean Phone (Deterministic digit formatting only)
     let phone = r.Phone || r.phone || "";
-    if (isNull(phone) || /[a-zA-Z]/.test(String(phone))) {
-      phone = "+91 9876543210";
-    } else {
+    if (!isNull(phone) && !/[a-zA-Z]/.test(String(phone))) {
       let pStr = String(phone).trim();
       let digits = pStr.replace(/[^\d]/g, "");
       if (digits.length === 10) {
-        phone = `+91 ${digits}`;
-      } else if (digits.length === 12 && digits.startsWith("91")) {
-        phone = `+91 ${digits.slice(2)}`;
-      } else if (digits.length >= 7 && digits.length <= 15) {
-        phone = `+91 ${digits.slice(-10)}`;
-      } else {
-        phone = "+91 9876543210";
+        const formatted = `+91 ${digits}`;
+        if ("Phone" in cleanedRow) cleanedRow.Phone = formatted;
+        if ("phone" in cleanedRow) cleanedRow.phone = formatted;
       }
     }
-    if ("Phone" in cleanedRow) cleanedRow.Phone = phone;
-    if ("phone" in cleanedRow) cleanedRow.phone = phone;
 
-    // 3. Clean Age
-    let age = r.Age || r.age;
-    if (isNull(age)) {
-      age = "28";
-    } else {
-      let ageNum = parseFloat(String(age).replace(/[^\d.-]/g, ""));
-      if (isNaN(ageNum) || ageNum < 0 || ageNum > 120) {
-        age = "28";
-      } else {
-        age = String(Math.round(ageNum));
-      }
-    }
-    if ("Age" in cleanedRow) cleanedRow.Age = age;
-    if ("age" in cleanedRow) cleanedRow.age = age;
-
-    // 4. Clean Annual Revenue
-    let rev = r.Annual_Revenue || r.annual_revenue || r.Revenue;
-    if (isNull(rev)) {
-      rev = "50000.00";
-    } else {
-      let revNum = parseFloat(String(rev).replace(/[^\d.-]/g, ""));
-      if (isNaN(revNum) || revNum < 0) {
-        rev = "50000.00";
-      } else {
-        rev = revNum.toFixed(2);
-      }
-    }
-    if ("Annual_Revenue" in cleanedRow) cleanedRow.Annual_Revenue = rev;
-    if ("annual_revenue" in cleanedRow) cleanedRow.annual_revenue = rev;
-
-    // 5. Clean City
+    // 3. Clean City Casing
     let city = r.City || r.city;
-    if (isNull(city)) {
-      city = "Hyderabad";
-    } else {
-      city = String(city).trim();
-      city = city.charAt(0).toUpperCase() + city.slice(1).toLowerCase();
+    if (!isNull(city)) {
+      const cStr = String(city).trim();
+      const formattedCity = cStr.charAt(0).toUpperCase() + cStr.slice(1).toLowerCase();
+      if ("City" in cleanedRow) cleanedRow.City = formattedCity;
+      if ("city" in cleanedRow) cleanedRow.city = formattedCity;
     }
-    if ("City" in cleanedRow) cleanedRow.City = city;
-    if ("city" in cleanedRow) cleanedRow.city = city;
+
+    // Apply Verified Human Corrections (Strictly single column target)
+    Object.entries(humanCorrections).forEach(([key, value]) => {
+      if (key.includes(rowId) || (fname && key.toLowerCase().includes(fname.toLowerCase()))) {
+        for (const col of ["Age", "age", "Annual_Revenue", "annual_revenue", "Revenue", "Phone", "phone", "Email", "email", "City", "city"]) {
+          if (key.includes(col) && col in cleanedRow) {
+            cleanedRow[col] = String(value);
+          }
+        }
+      }
+    });
 
     return cleanedRow;
   }
 
-  transformDatasetRecords(rawRecords) {
+  getHumanReviewQueue() {
+    const dataset = this.state.activeDataset || {};
+    const rawRows = dataset.rawRecords || [];
+    const NULL_SENTINELS = new Set(["", "na", "n/a", "null", "none", "-", "?", "missing", "nan", "nil", "undefined"]);
+    const isNull = (v) => v === null || v === undefined || NULL_SENTINELS.has(String(v).trim().toLowerCase());
+
+    const queue = [];
+    rawRows.forEach((r, idx) => {
+      const rowId = String(r.Customer_ID || r.id || `Row-${idx + 1}`);
+      const custName = `${r.First_Name || ''} ${r.Last_Name || ''}`.trim() || `Customer ${idx + 1}`;
+
+      // Check Age out-of-bounds / missing
+      const age = r.Age || r.age;
+      if (!isNull(age)) {
+        const ageNum = parseFloat(String(age).replace(/[^\d.-]/g, ""));
+        if (!isNaN(ageNum) && ageNum < 0) {
+          queue.push({
+            id: `hr-age-${rowId}`,
+            rowId,
+            custName,
+            column: "Age",
+            currentValue: String(age),
+            issueType: "Negative Age Violation",
+            reason: `Age cannot be negative (${age})`,
+            aiRecommendation: "Contact customer or verify identity source for true age",
+            confidence: "Insufficient Evidence (Requires Human Entry)",
+            evidence: "Value -5 breaks human demographic constraints [0-120]",
+            verifiedValue: "",
+            status: "PENDING"
+          });
+        } else if (!isNaN(ageNum) && ageNum > 120) {
+          queue.push({
+            id: `hr-age-high-${rowId}`,
+            rowId,
+            custName,
+            column: "Age",
+            currentValue: String(age),
+            issueType: "Unrealistic Age Outlier",
+            reason: `Age exceeds maximum human boundary (${age})`,
+            aiRecommendation: "Verify actual customer date of birth",
+            confidence: "Insufficient Evidence (Requires Human Entry)",
+            evidence: "Value 150 exceeds realistic human lifespan",
+            verifiedValue: "",
+            status: "PENDING"
+          });
+        }
+      } else {
+        queue.push({
+          id: `hr-age-missing-${rowId}`,
+          rowId,
+          custName,
+          column: "Age",
+          currentValue: "blank",
+          issueType: "Missing Age Field",
+          reason: "Demographic age cell is empty",
+          aiRecommendation: "Collect age from customer record",
+          confidence: "Insufficient Evidence (Requires Human Entry)",
+          evidence: "Cell is empty / null",
+          verifiedValue: "",
+          status: "PENDING"
+        });
+      }
+
+      // Check Revenue negative / missing
+      const rev = r.Annual_Revenue || r.annual_revenue || r.Revenue;
+      if (!isNull(rev)) {
+        const revNum = parseFloat(String(rev).replace(/[^\d.-]/g, ""));
+        if (!isNaN(revNum) && revNum < 0) {
+          queue.push({
+            id: `hr-rev-${rowId}`,
+            rowId,
+            custName,
+            column: "Annual_Revenue",
+            currentValue: String(rev),
+            issueType: "Negative Revenue Violation",
+            reason: `Annual revenue cannot be negative (${rev})`,
+            aiRecommendation: "Verify billing records or accounting ledger",
+            confidence: "Insufficient Evidence (Requires Human Entry)",
+            evidence: "Financial bounds violation (< $0)",
+            verifiedValue: "",
+            status: "PENDING"
+          });
+        }
+      } else {
+        queue.push({
+          id: `hr-rev-missing-${rowId}`,
+          rowId,
+          custName,
+          column: "Annual_Revenue",
+          currentValue: "blank",
+          issueType: "Missing Revenue Metric",
+          reason: "Revenue cell is blank",
+          aiRecommendation: "Verify financial tier from billing statement",
+          confidence: "Insufficient Evidence (Requires Human Entry)",
+          evidence: "Cell is empty / null",
+          verifiedValue: "",
+          status: "PENDING"
+        });
+      }
+
+      // Check Phone non-numeric / missing
+      const phone = r.Phone || r.phone;
+      if (!isNull(phone)) {
+        if (/[a-zA-Z]/.test(String(phone))) {
+          queue.push({
+            id: `hr-phone-${rowId}`,
+            rowId,
+            custName,
+            column: "Phone",
+            currentValue: String(phone),
+            issueType: "Malformed Text Phone Number",
+            reason: `Phone contains non-numeric text ('${phone}')`,
+            aiRecommendation: "Call customer or verify valid phone number",
+            confidence: "Insufficient Evidence (Requires Human Entry)",
+            evidence: "String contains non-digit letters",
+            verifiedValue: "",
+            status: "PENDING"
+          });
+        }
+      } else {
+        queue.push({
+          id: `hr-phone-missing-${rowId}`,
+          rowId,
+          custName,
+          column: "Phone",
+          currentValue: "blank",
+          issueType: "Missing Phone Contact",
+          reason: "Phone number is empty",
+          aiRecommendation: "Request updated phone contact",
+          confidence: "Insufficient Evidence (Requires Human Entry)",
+          evidence: "Cell is empty / null",
+          verifiedValue: "",
+          status: "PENDING"
+        });
+      }
+
+      // Check Email missing
+      const email = r.Email || r.email;
+      if (isNull(email)) {
+        queue.push({
+          id: `hr-email-missing-${rowId}`,
+          rowId,
+          custName,
+          column: "Email",
+          currentValue: "blank",
+          issueType: "Missing Email Address",
+          reason: "Primary communication email is missing",
+          aiRecommendation: "Verify email with customer support team",
+          confidence: "Insufficient Evidence (Requires Human Entry)",
+          evidence: "Cell is empty / null",
+          verifiedValue: "",
+          status: "PENDING"
+        });
+      }
+    });
+
+    return queue;
+  }
+
+  transformDatasetRecords(rawRecords, humanCorrections = {}) {
     if (!rawRecords || rawRecords.length === 0) return [];
     const cleanedList = [];
     const seenEntities = new Set();
 
     rawRecords.forEach((r, idx) => {
-      const cleanedRow = this.cleanRecordRow(r, idx);
+      const cleanedRow = this.cleanRecordRow(r, idx, humanCorrections);
       const fname = (cleanedRow.First_Name || "").toLowerCase();
       const lname = (cleanedRow.Last_Name || "").toLowerCase();
       const email = (cleanedRow.Email || "").toLowerCase();
