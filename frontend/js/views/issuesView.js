@@ -133,14 +133,14 @@ export function renderIssues(container) {
           </div>
         </div>
 
-        <!-- Financial & Operational Risk -->
+        <!-- Data Integrity Status -->
         <div style="border-right: 1px solid var(--border-subtle); padding-right: 20px;">
-          <div style="font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); font-weight: 600;">Estimated Operational Risk</div>
-          <div style="font-size: var(--text-lg); font-weight: 700; color: var(--text-primary); margin: 6px 0;">
-            ${financialRiskEstimate}
+          <div style="font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); font-weight: 600;">Data Integrity Status</div>
+          <div style="font-size: var(--text-lg); font-weight: 700; color: ${healthScore >= 90 ? 'var(--status-success, #10b981)' : 'var(--accent-light)'}; margin: 6px 0;">
+            ${healthScore >= 90 ? "High Integrity" : (healthScore >= 70 ? "Needs Cleaning" : "Action Required")}
           </div>
           <div style="font-size: var(--text-xs); color: var(--text-muted); line-height: 1.4;">
-            Estimated downstream impact of ${totalAffectedRecords.toLocaleString()} corrupted entries.
+            ${issues.length} anomaly category rule(s) detected.
           </div>
         </div>
 
