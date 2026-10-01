@@ -93,7 +93,20 @@ async def upload_dataset(project_id: str, file: UploadFile = File(...)):
 def get_dataset_overview(project_id: str):
     ds = db.state["datasets"].get(project_id) or db.state["datasets"].get("proj-001")
     if not ds:
-        raise HTTPException(status_code=404, detail="Dataset not found")
+        return {
+            "id": f"ds-{project_id}",
+            "name": "No Dataset Loaded",
+            "fileSize": "0 MB",
+            "recordsCount": 0,
+            "columnsCount": 0,
+            "uploadedAt": "--",
+            "lastAnalyzed": "--",
+            "qualityScore": 0,
+            "dimensions": {"completeness": 0, "consistency": 0, "validity": 0, "uniqueness": 0},
+            "profiles": [],
+            "issues": [],
+            "impact": {}
+        }
     return ds
 
 
@@ -101,8 +114,8 @@ def get_dataset_overview(project_id: str):
 def get_column_profiles(project_id: str):
     ds = db.state["datasets"].get(project_id) or db.state["datasets"].get("proj-001")
     if not ds:
-        raise HTTPException(status_code=404, detail="Dataset profile not found")
-    return ds["profiles"]
+        return []
+    return ds.get("profiles", [])
 
 
 # --- Issues & Planning ---
@@ -111,15 +124,18 @@ def get_column_profiles(project_id: str):
 def get_issues(project_id: str):
     ds = db.state["datasets"].get(project_id) or db.state["datasets"].get("proj-001")
     if not ds:
-        raise HTTPException(status_code=404, detail="Issues not found")
-    return ds["issues"]
+        return []
+    return ds.get("issues", [])
 
 
 @app.get("/api/v1/projects/{project_id}/plan")
 def get_cleaning_plan(project_id: str):
     plan = db.state["plans"].get(project_id) or db.state["plans"].get("proj-001")
     if not plan:
-        raise HTTPException(status_code=404, detail="Plan not found")
+        return {
+            "projectId": project_id,
+            "operations": []
+        }
     return plan
 
 
