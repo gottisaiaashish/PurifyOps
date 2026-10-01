@@ -67,14 +67,30 @@ function navigateTo(route) {
 
   // Activate target container and render
   const targetConfig = ROUTES[route];
-  const targetElem = document.getElementById(targetConfig.id);
-  if (targetElem) {
-    targetElem.classList.add("active");
-    try {
-      targetConfig.render(targetElem);
-    } catch (err) {
-      console.error(`[PurifyOps Router Error] Failed to render view '${route}':`, err);
-    }
+  let targetElem = document.getElementById(targetConfig.id);
+  if (!targetElem) {
+    targetElem = document.createElement("div");
+    targetElem.id = targetConfig.id;
+    targetElem.className = "view-container";
+    document.querySelector(".page-viewport")?.appendChild(targetElem);
+  }
+
+  targetElem.classList.add("active");
+  try {
+    targetConfig.render(targetElem);
+  } catch (err) {
+    console.error(`[PurifyOps Router Error] Failed to render view '${route}':`, err);
+    targetElem.innerHTML = `
+      <div class="page-header">
+        <h1>Overview</h1>
+        <p class="page-description">Welcome to PurifyOps Data Cleaning Workspace.</p>
+      </div>
+      <div class="card" style="padding: 32px; text-align: center; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md);">
+        <h3 style="margin-bottom: 8px; font-size: 18px;">Start Cleaning Your Data</h3>
+        <p style="color: var(--text-muted); margin-bottom: 20px;">Upload a CSV or Excel spreadsheet to detect issues and clean records.</p>
+        <button class="btn btn-primary" onclick="window.location.hash='#upload-dataset'">Upload Dataset Now →</button>
+      </div>
+    `;
   }
 
   // Update Sidebar active state
