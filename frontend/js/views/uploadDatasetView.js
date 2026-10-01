@@ -120,27 +120,52 @@ export function renderUploadDataset(container) {
 
   async function uploadRealFile(file) {
     progressCard.style.display = "block";
-    uploadFilename.textContent = `Uploading ${file.name}...`;
+    uploadFilename.textContent = `Analyzing ${file.name}...`;
     progressBar.style.width = "15%";
     pctBadge.textContent = "15%";
+    statusMsg.textContent = "Reading file content...";
+
+    let currentPct = 15;
+    const progressTimer = setInterval(() => {
+      if (currentPct < 90) {
+        currentPct += 5;
+        progressBar.style.width = `${currentPct}%`;
+        pctBadge.textContent = `${currentPct}%`;
+        if (currentPct < 35) {
+          statusMsg.textContent = "Parsing dataset headers and records...";
+        } else if (currentPct < 60) {
+          statusMsg.textContent = "Running automated data profiler...";
+        } else if (currentPct < 80) {
+          statusMsg.textContent = "Validating syntax, phone & domain boundaries...";
+        } else {
+          statusMsg.textContent = "Generating DAG cleaning plan...";
+        }
+      }
+    }, 150);
 
     try {
       const activeProjId = stateStore.getState().activeProjectId || stateStore.getState().projects[0]?.id || "proj-001";
-      await ApiService.uploadDatasetFile(activeProjId, file, pct => {
-        progressBar.style.width = `${pct}%`;
-        pctBadge.textContent = `${pct}%`;
+      await ApiService.uploadDatasetFile(activeProjId, file, (pct, msg) => {
+        if (pct > currentPct) {
+          currentPct = pct;
+          progressBar.style.width = `${pct}%`;
+          pctBadge.textContent = `${pct}%`;
+        }
+        if (msg) statusMsg.textContent = msg;
       });
 
+      clearInterval(progressTimer);
       progressBar.style.width = "100%";
       pctBadge.textContent = "100%";
-      statusMsg.textContent = "File analyzed successfully!";
+      statusMsg.textContent = "Analysis complete! Redirecting to issue report...";
 
       setTimeout(() => {
         window.location.hash = "#issues";
-      }, 400);
+      }, 450);
     } catch (e) {
+      clearInterval(progressTimer);
       console.error("File upload error:", e);
-      statusMsg.textContent = "Error parsing file. Please check format.";
+      statusMsg.textContent = "Error parsing file. Please check file format.";
     }
   }
 

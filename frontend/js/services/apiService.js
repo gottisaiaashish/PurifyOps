@@ -296,7 +296,7 @@ export const ApiService = {
     console.warn("Client CSV parsing failed:", e);
   }
 
-    if (cb) cb(50);
+    if (cb) cb(50, "Sending file to server profiling engine...");
 
     // Try server API upload
     try {
@@ -304,10 +304,10 @@ export const ApiService = {
         method: "POST",
         body: formData
       });
-      if (cb) cb(85);
+      if (cb) cb(85, "Server profiling completed. Structuring results...");
       if (res.ok) {
         const datasetInfo = await res.json();
-        if (cb) cb(100);
+        if (cb) cb(100, "Analysis complete!");
         stateStore.state.activeDataset = datasetInfo;
         if (datasetInfo.issues && datasetInfo.issues.length > 0) {
           stateStore.state.issues = datasetInfo.issues;
