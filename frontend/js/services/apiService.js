@@ -296,7 +296,7 @@ export const ApiService = {
     console.warn("Client CSV parsing failed:", e);
   }
 
-    if (cb) cb(50, "Sending file to server profiling engine...");
+  if (cb) cb(50, "Sending file to server profiling engine...");
 
     // Try server API upload
     try {
