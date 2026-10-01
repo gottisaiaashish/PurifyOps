@@ -22,7 +22,7 @@ export function renderExecution(container) {
         <h1>Clean Your Data</h1>
         <p class="page-description">Apply all selected cleaning fixes to your dataset safely with an automated backup.</p>
       </div>
-      <div class="page-actions">
+      <div class="page-actions" id="exec-page-actions">
         <button class="btn btn-outline" id="btn-back-plan">← Cleaning Plan</button>
         <button class="btn btn-primary" id="btn-trigger-run" ${recordsCount === 0 ? 'disabled' : ''}>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -85,6 +85,19 @@ export function renderExecution(container) {
       </div>
     </div>
 
+    <!-- Completion Success Banner (Hidden initially) -->
+    <div id="exec-completion-card" style="display: none; margin-bottom: 24px; padding: 20px 24px; background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: var(--radius-md); text-align: center;">
+      <h3 style="font-size: var(--text-lg); color: var(--status-success, #10b981); margin-bottom: 6px; font-weight: 700;">
+        ✓ Cleaning Complete & Output Generated!
+      </h3>
+      <p style="color: var(--text-secondary); font-size: var(--text-sm); margin-bottom: 16px;">
+        All transformations applied successfully. Cleaned dataset is ready for instant CSV/Excel export.
+      </p>
+      <button class="btn btn-primary" id="btn-goto-results-banner" style="font-size: var(--text-sm); padding: 10px 24px;">
+        Proceed to Step 5: Download Clean Data →
+      </button>
+    </div>
+
     <!-- Live Execution Status Box -->
     <div class="terminal-window">
       <div class="terminal-header">
@@ -118,6 +131,8 @@ export function renderExecution(container) {
   const substepLabel = container.querySelector("#exec-substep-label");
   const terminal = container.querySelector("#terminal-output");
   const btnResults = container.querySelector("#btn-goto-results");
+  const completionCard = container.querySelector("#exec-completion-card");
+  const pageActions = container.querySelector("#exec-page-actions");
 
   btnRun?.addEventListener("click", () => {
     btnRun.disabled = true;
@@ -157,12 +172,34 @@ export function renderExecution(container) {
         clearInterval(logInterval);
         statusDisplay.textContent = "Completed";
         btnRun.textContent = "✓ Cleaning Completed";
-        substepLabel.textContent = "All fixes applied! Click below to download your clean dataset.";
-        btnResults.style.display = "inline-flex";
+        substepLabel.textContent = "All fixes applied! Redirecting to Step 5...";
+        
+        if (completionCard) completionCard.style.display = "block";
+        if (btnResults) btnResults.style.display = "inline-flex";
 
+        // Add top header proceed button
+        if (pageActions) {
+          pageActions.innerHTML = `
+            <button class="btn btn-outline" id="btn-back-plan">← Cleaning Plan</button>
+            <button class="btn btn-primary" id="btn-goto-results-header">
+              Proceed to Download Clean Data →
+            </button>
+          `;
+          pageActions.querySelector("#btn-goto-results-header")?.addEventListener("click", () => {
+            window.location.hash = "#results";
+          });
+        }
+
+        const activeProjId = stateStore.getState().activeProjectId || "proj-001";
+        ApiService.executeCleaningPipeline(activeProjId).catch(() => {});
         stateStore.completeExecution();
+
+        // Auto navigate to Step 5 (#results) after 1.5 seconds
+        setTimeout(() => {
+          window.location.hash = "#results";
+        }, 1500);
       }
-    }, 600);
+    }, 500);
   });
 
   container.querySelector("#btn-back-plan")?.addEventListener("click", () => {
@@ -172,6 +209,9 @@ export function renderExecution(container) {
     window.location.hash = "#cleaning-plan";
   });
   container.querySelector("#btn-goto-results")?.addEventListener("click", () => {
+    window.location.hash = "#results";
+  });
+  container.querySelector("#btn-goto-results-banner")?.addEventListener("click", () => {
     window.location.hash = "#results";
   });
 }
